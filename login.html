@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>Login - My Garage</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -31,7 +30,7 @@ body {
     background: white;
     padding: 30px;
     width: 90%;
-    max-width: 350px;
+    max-width: 320px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
@@ -44,7 +43,7 @@ h2 {
 input {
     display: block;
     width: 90%;
-    max-width: 280px;
+    max-width: 260px;
     padding: 12px;
     margin: 10px auto;
     border: 1px solid #ccc;
@@ -59,7 +58,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
     width: 90%;
-    max-width: 200px;
+    max-width: 180px;
 }
 
 button:hover {
@@ -78,18 +77,16 @@ button:hover {
 <div class="navbar">My Garage</div>
 
 <div class="container">
-<div class="box">
+    <div class="box">
+        <h2>Login</h2>
 
-<h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
 
-<input type="text" id="username" placeholder="Username">
-<input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
 
-<button onclick="login()">Login</button>
-
-<p id="msg"></p>
-
-</div>
+        <p id="msg"></p>
+    </div>
 </div>
 
 <script>
@@ -97,7 +94,7 @@ function login() {
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
 
-    if(user === "admin" && pass === "1234") {
+    if (user === "admin" && pass === "1234") {
         window.location.href = "index.html";
     } else {
         document.getElementById("msg").innerText = "Wrong username or password";
