@@ -2,167 +2,209 @@
 <html>
 <head>
 <title>Garage Dashboard - My Garage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-       body {
-           font-family: Arial, sans-serif;
-           margin: 0;
-           background: #f5f7fa;
-           text-align: center;
-       }
-       .navbar {
-           background: #1e293b;
-           color: white;
-           padding: 15px;
-           font-size: 20px;
-           text-align: center;
-       }
-       h1 {
-           margin-top: 30px;
-       }
-       .stats {
-           display: flex;
-           justify-content: center;
-           gap: 15px;
-           flex-wrap: wrap;
-           margin: 20px;
-       }
-       .stat-box {
-           background: white;
-           padding: 15px 20px;
-           width: 140px;
-           border-radius: 12px;
-           box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-           font-weight: bold;
-       }
-       .filter-box {
-           margin: 20px;
-       }
-       select {
-           padding: 10px;
-           border-radius: 8px;
-           border: 1px solid #ccc;
-       }
-       .booking {
-           background: white;
-           margin: 15px auto;
-           padding: 20px;
-           width: 360px;
-           border-radius: 15px;
-           box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-           transition: 0.2s;
-       }
-       .booking:hover {
-           transform: scale(1.02);
-       }
-       button {
-           padding: 8px 14px;
-           margin: 5px;
-           border: none;
-           border-radius: 8px;
-           color: white;
-           cursor: pointer;
-       }
-       .accept {
-           background: #10b981;
-       }
-       .reject {
-           background: #ef4444;
-       }
-       .home-btn {
-           display: inline-block;
-           margin-top: 20px;
-           text-decoration: none;
-           color: white;
-           background: #3b82f6;
-           padding: 10px 15px;
-           border-radius: 8px;
-       }
-       .status-badge {
-           color: white;
-           padding: 5px 10px;
-           border-radius: 10px;
-           font-size: 12px;
-       }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+    text-align: center;
+}
+
+.navbar {
+    background: #1e293b;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.stat-box {
+    background: white;
+    padding: 15px 20px;
+    width: 90%;
+    max-width: 140px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-weight: bold;
+}
+
+.filter-box {
+    margin: 20px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 90%;
+    max-width: 220px;
+}
+
+.booking {
+    background: white;
+    margin: 15px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.booking:hover {
+    transform: scale(1.02);
+}
+
+button {
+    padding: 8px 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    width: 90%;
+    max-width: 180px;
+}
+
+.accept {
+    background: #10b981;
+}
+
+.reject {
+    background: #ef4444;
+}
+
+.home-btn {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+    background: #3b82f6;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.status-badge {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
 </style>
 </head>
+
 <body>
+
 <div class="navbar">My Garage</div>
+
 <h1>Garage Dashboard</h1>
+
 <div class="stats">
-<div class="stat-box">Total<br><span id="totalCount">0</span></div>
-<div class="stat-box">Waiting<br><span id="waitingCount">0</span></div>
-<div class="stat-box">Accepted<br><span id="acceptedCount">0</span></div>
-<div class="stat-box">Rejected<br><span id="rejectedCount">0</span></div>
+    <div class="stat-box">Total<br><span id="totalCount">0</span></div>
+    <div class="stat-box">Waiting<br><span id="waitingCount">0</span></div>
+    <div class="stat-box">Accepted<br><span id="acceptedCount">0</span></div>
+    <div class="stat-box">Rejected<br><span id="rejectedCount">0</span></div>
 </div>
+
 <div class="filter-box">
-<label for="statusFilter"><b>Filter by Status:</b></label>
-<select id="statusFilter" onchange="renderBookings()">
-<option value="All">All</option>
-<option value="Waiting">Waiting</option>
-<option value="Accepted">Accepted</option>
-<option value="Rejected">Rejected</option>
-</select>
+    <label for="statusFilter"><b>Filter by Status:</b></label><br><br>
+    <select id="statusFilter" onchange="renderBookings()">
+        <option value="All">All</option>
+        <option value="Waiting">Waiting</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rejected">Rejected</option>
+    </select>
 </div>
+
 <div id="bookingList"></div>
+
 <a class="home-btn" href="index.html">Back to Home</a>
+
 <script>
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
 function getStatusColor(status) {
-   if (status === "Accepted") return "green";
-   if (status === "Rejected") return "red";
-   return "orange";
+    if (status === "Accepted") return "green";
+    if (status === "Rejected") return "red";
+    return "orange";
 }
+
 function updateStats() {
-   let total = bookings.length;
-   let waiting = bookings.filter(b => (b.status || "Waiting") === "Waiting").length;
-   let accepted = bookings.filter(b => (b.status || "Waiting") === "Accepted").length;
-   let rejected = bookings.filter(b => (b.status || "Waiting") === "Rejected").length;
-   document.getElementById("totalCount").innerText = total;
-   document.getElementById("waitingCount").innerText = waiting;
-   document.getElementById("acceptedCount").innerText = accepted;
-   document.getElementById("rejectedCount").innerText = rejected;
+    let total = bookings.length;
+    let waiting = bookings.filter(b => (b.status || "Waiting") === "Waiting").length;
+    let accepted = bookings.filter(b => (b.status || "Waiting") === "Accepted").length;
+    let rejected = bookings.filter(b => (b.status || "Waiting") === "Rejected").length;
+
+    document.getElementById("totalCount").innerText = total;
+    document.getElementById("waitingCount").innerText = waiting;
+    document.getElementById("acceptedCount").innerText = accepted;
+    document.getElementById("rejectedCount").innerText = rejected;
 }
+
 function renderBookings() {
-   let output = "";
-   let selectedStatus = document.getElementById("statusFilter").value;
-   bookings.forEach((b, index) => {
-       let status = b.status || "Waiting";
-       if (selectedStatus === "All" || status === selectedStatus) {
-           let color = getStatusColor(status);
-           let buttons = "";
-           if (status === "Waiting") {
-               buttons = `
-<button class="accept" onclick="updateStatus(${index}, 'Accepted')">Accept</button>
-<button class="reject" onclick="updateStatus(${index}, 'Rejected')">Reject</button>
-               `;
-           }
-           output += `
-<div class="booking">
-<h3>Booking ${index + 1}</h3>
-<p>Garage: ${b.garage}</p>
-<p>Date: ${b.date}</p>
-<p>Status:
-<span class="status-badge" style="background:${color};">
-                           ${status}
-</span>
-</p>
-                   ${buttons}
-</div>
-           `;
-       }
-   });
-   if (output === "") {
-       output = "<p>No bookings found for this status.</p>";
-   }
-   document.getElementById("bookingList").innerHTML = output;
-   updateStats();
+    let output = "";
+    let selectedStatus = document.getElementById("statusFilter").value;
+
+    bookings.forEach((b, index) => {
+        let status = b.status || "Waiting";
+
+        if (selectedStatus === "All" || status === selectedStatus) {
+            let color = getStatusColor(status);
+            let buttons = "";
+
+            if (status === "Waiting") {
+                buttons = `
+                <button class="accept" onclick="updateStatus(${index}, 'Accepted')">Accept</button>
+                <button class="reject" onclick="updateStatus(${index}, 'Rejected')">Reject</button>
+                `;
+            }
+
+            output += `
+            <div class="booking">
+                <h3>Booking ${index + 1}</h3>
+                <p>Garage: ${b.garage}</p>
+                <p>Date: ${b.date}</p>
+                <p>Status:
+                    <span class="status-badge" style="background:${color};">
+                        ${status}
+                    </span>
+                </p>
+                ${buttons}
+            </div>
+            `;
+        }
+    });
+
+    if (output === "") {
+        output = "<p>No bookings found for this status.</p>";
+    }
+
+    document.getElementById("bookingList").innerHTML = output;
+    updateStats();
 }
+
 function updateStatus(index, newStatus) {
-   bookings[index].status = newStatus;
-   localStorage.setItem("bookings", JSON.stringify(bookings));
-   renderBookings();
+    bookings[index].status = newStatus;
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    renderBookings();
 }
+
 renderBookings();
 </script>
+
 </body>
 </html>
