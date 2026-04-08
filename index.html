@@ -1,168 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Garage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f7fa;
-            text-align: center;
-        }
+<title>My Garage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .navbar {
-            background: #1e293b;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            text-align: center;
-            position: relative;
-        }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+    text-align: center;
+}
 
-        .logout-btn {
-            position: absolute;
-            right: 15px;
-            top: 10px;
-            color: white;
-            text-decoration: none;
-            background: #ef4444;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
+.navbar {
+    background: #1e293b;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+}
 
-        .logout-btn:hover {
-            background: #dc2626;
-        }
+.logout-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: white;
+    text-decoration: none;
+    background: #ef4444;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
 
-        h1 {
-            margin-top: 30px;
-        }
+.logout-btn:hover {
+    background: #dc2626;
+}
 
-        .search-box {
-            margin: 20px;
-        }
+h1 {
+    margin-top: 30px;
+}
 
-        input, select {
-            padding: 10px;
-            margin: 5px;
-            width: 200px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+.search-box {
+    margin: 20px;
+}
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            background: #3b82f6;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+input, select {
+    padding: 10px;
+    margin: 5px;
+    width: 90%;
+    max-width: 250px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
 
-        button:hover {
-            background: #2563eb;
-        }
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 90%;
+    max-width: 200px;
+}
 
-        .garage {
-            background: white;
-            margin: 15px auto;
-            padding: 20px;
-            width: 320px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.2s;
-        }
+button:hover {
+    background: #2563eb;
+}
 
-        .garage:hover {
-            transform: scale(1.02);
-        }
+.garage {
+    background: white;
+    margin: 15px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 320px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
 
-        .links {
-            margin-top: 20px;
-        }
+.garage:hover {
+    transform: scale(1.02);
+}
 
-        .links a {
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            background: #10b981;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 5px;
-        }
-    </style>
+.links {
+    margin-top: 20px;
+}
+
+.links a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #10b981;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin: 5px;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="navbar">
-        My Garage
-        <a href="login.html" class="logout-btn">Logout</a>
-    </div>
+<div class="navbar">
+    My Garage
+    <a href="login.html" class="logout-btn">Logout</a>
+</div>
 
-    <h1>Garage Services</h1>
+<h1>Garage Services</h1>
 
-    <div class="search-box">
-        <input type="text" id="search" placeholder="Search garage...">
+<div class="search-box">
+    <input type="text" id="search" placeholder="Search garage...">
 
-        <select id="filter">
-            <option value="all">All Services</option>
-            <option value="oil">Oil Change</option>
-            <option value="repair">Repair</option>
-        </select>
+    <select id="filter">
+        <option value="all">All Services</option>
+        <option value="oil">Oil Change</option>
+        <option value="repair">Repair</option>
+    </select>
 
-        <button onclick="searchGarage()">Search</button>
-    </div>
+    <button onclick="searchGarage()">Search</button>
+</div>
 
-    <div id="results"></div>
+<div id="results"></div>
 
-    <div class="links">
-        <a href="mybookings.html">My Bookings</a>
-        <a href="garage-dashboard.html">Garage Dashboard</a>
-    </div>
+<div class="links">
+    <a href="mybookings.html">My Bookings</a>
+    <a href="garage-dashboard.html">Garage Dashboard</a>
+</div>
 
-    <script>
-        let garages = [
-            {name: "Garage A", service: "oil"},
-            {name: "Garage B", service: "repair"},
-            {name: "Garage C", service: "oil"}
-        ];
+<script>
+let garages = [
+    {name: "Garage A", service: "oil"},
+    {name: "Garage B", service: "repair"},
+    {name: "Garage C", service: "oil"}
+];
 
-        function searchGarage() {
-            let text = document.getElementById("search").value.toLowerCase();
-            let filter = document.getElementById("filter").value;
-            let result = "";
+function searchGarage() {
+    let text = document.getElementById("search").value.toLowerCase();
+    let filter = document.getElementById("filter").value;
+    let result = "";
 
-            garages.forEach(g => {
-                if (
-                    (filter === "all" || g.service === filter) &&
-                    (g.name.toLowerCase().includes(text) ||
-                     g.service.toLowerCase().includes(text))
-                ) {
-                    result += `
-                    <div class="garage">
-                        <h3>${g.name}</h3>
-                        <p>Service: ${g.service}</p>
-                        <button onclick="book('${g.name}')">Book Now</button>
-                    </div>
-                    `;
-                }
-            });
-
-            if (result === "") {
-                result = "<p>No garages found.</p>";
-            }
-
-            document.getElementById("results").innerHTML = result;
+    garages.forEach(g => {
+        if (
+            (filter === "all" || g.service === filter) &&
+            (g.name.toLowerCase().includes(text) ||
+             g.service.toLowerCase().includes(text))
+        ) {
+            result += `
+            <div class="garage">
+                <h3>${g.name}</h3>
+                <p>Service: ${g.service}</p>
+                <button onclick="book('${g.name}')">Book Now</button>
+            </div>
+            `;
         }
+    });
 
-        function book(name) {
-            localStorage.setItem("garage", name);
-            window.location.href = "booking.html";
-        }
+    if (result === "") {
+        result = "<p>No garages found.</p>";
+    }
 
-        window.onload = searchGarage;
-    </script>
+    document.getElementById("results").innerHTML = result;
+}
+
+function book(name) {
+    localStorage.setItem("garage", name);
+    window.location.href = "booking.html";
+}
+
+window.onload = searchGarage;
+</script>
 
 </body>
 </html>
