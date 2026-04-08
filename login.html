@@ -2,81 +2,108 @@
 <html>
 <head>
 <title>Login - My Garage</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-       body {
-           font-family: Arial, sans-serif;
-           margin: 0;
-           background: #f5f7fa;
-       }
-       .navbar {
-           background: #1e293b;
-           color: white;
-           padding: 15px;
-           font-size: 20px;
-           text-align: center;
-       }
-       .container {
-           display: flex;
-           justify-content: center;
-           margin-top: 60px;
-       }
-       .box {
-           background: white;
-           padding: 30px;
-           width: 350px;
-           border-radius: 15px;
-           box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-           text-align: center;
-       }
-       h2 {
-           margin-bottom: 20px;
-       }
-       input {
-           display: block;
-           width: 90%;
-           padding: 12px;
-           margin: 10px auto;
-           border: 1px solid #ccc;
-           border-radius: 8px;
-       }
-       button {
-           padding: 10px 20px;
-           border: none;
-           background: #3b82f6;
-           color: white;
-           border-radius: 8px;
-           cursor: pointer;
-       }
-       button:hover {
-           background: #2563eb;
-       }
-       #msg {
-           margin-top: 15px;
-           color: #d11a2a;
-       }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+}
+
+.navbar {
+    background: #1e293b;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input {
+    display: block;
+    width: 90%;
+    max-width: 280px;
+    padding: 12px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 90%;
+    max-width: 200px;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+#msg {
+    margin-top: 15px;
+    color: #d11a2a;
+}
 </style>
 </head>
+
 <body>
+
 <div class="navbar">My Garage</div>
+
 <div class="container">
 <div class="box">
+
 <h2>Login</h2>
+
 <input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
+
 <button onclick="login()">Login</button>
+
 <p id="msg"></p>
+
 </div>
 </div>
+
 <script>
 function login() {
-   let user = document.getElementById("username").value;
-   let pass = document.getElementById("password").value;
-   if(user === "admin" && pass === "1234") {
-       window.location.href = "index.html";
-   } else {
-       document.getElementById("msg").innerText = "Wrong username or password";
-   }
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user === "admin" && pass === "1234") {
+        window.location.href = "index.html";
+    } else {
+        document.getElementById("msg").innerText = "Wrong username or password";
+    }
 }
 </script>
+
 </body>
 </html>
