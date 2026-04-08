@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booking - My Garage</title>
+<style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            background: #f5f7fa;
+
+            text-align: center;
+
+        }
+
+        .navbar {
+
+            background: #1e293b;
+
+            color: white;
+
+            padding: 15px;
+
+            font-size: 20px;
+
+            text-align: center;
+
+        }
+
+        .container {
+
+            margin-top: 50px;
+
+        }
+
+        .box {
+
+            background: white;
+
+            margin: auto;
+
+            padding: 30px;
+
+            width: 360px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+            transition: 0.2s;
+
+        }
+
+        .box:hover {
+
+            transform: scale(1.02);
+
+        }
+
+        h2 {
+
+            margin-bottom: 20px;
+
+        }
+
+        #garageName {
+
+            margin-bottom: 15px;
+
+            font-size: 20px;
+
+        }
+
+        input {
+
+            padding: 10px;
+
+            margin: 10px;
+
+            width: 220px;
+
+            border-radius: 8px;
+
+            border: 1px solid #ccc;
+
+        }
+
+        button {
+
+            padding: 10px 20px;
+
+            border: none;
+
+            background: #3b82f6;
+
+            color: white;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+        }
+
+        button:hover {
+
+            background: #2563eb;
+
+        }
+
+        .links {
+
+            margin-top: 20px;
+
+        }
+
+        .links a,
+
+        #msg a {
+
+            display: inline-block;
+
+            margin: 8px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: #10b981;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+        }
+
+        #msg {
+
+            margin-top: 15px;
+
+            font-weight: bold;
+
+        }
+</style>
+</head>
+<body>
+<div class="navbar">My Garage</div>
+<div class="container">
+<div class="box">
+<h2>Booking Page</h2>
+<p id="garageName"></p>
+<input type="date" id="date"><br>
+<button type="button" onclick="confirmBooking()">Confirm Booking</button>
+<div class="links">
+<a href="index.html">Back to Home</a>
+</div>
+<p id="msg"></p>
+</div>
+</div>
+<script>
+
+document.getElementById("garageName").innerText =
+
+    "Garage: " + (localStorage.getItem("garage") || "Not selected");
+
+function confirmBooking() {
+
+    let date = document.getElementById("date").value;
+
+    let garage = localStorage.getItem("garage");
+
+    if (!garage) {
+
+        document.getElementById("msg").innerText = "No garage selected.";
+
+        return;
+
+    }
+
+    if (date === "") {
+
+        document.getElementById("msg").innerText = "Choose a date.";
+
+        return;
+
+    }
+
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    bookings.push({
+
+        garage: garage,
+
+        date: date,
+
+        status: "Waiting"
+
+    });
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    window.location.href = "booking-success.html";
+}
+</script>
+</body>
+</html>

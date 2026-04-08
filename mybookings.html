@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Bookings - My Garage</title>
+<style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            background: #f5f7fa;
+
+            text-align: center;
+
+        }
+
+        .navbar {
+
+            background: #1e293b;
+
+            color: white;
+
+            padding: 15px;
+
+            font-size: 20px;
+
+        }
+
+        h1 {
+
+            margin-top: 30px;
+
+        }
+
+        .booking {
+
+            background: white;
+
+            margin: 15px auto;
+
+            padding: 20px;
+
+            width: 320px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+            transition: 0.2s;
+
+        }
+
+        .booking:hover {
+
+            transform: scale(1.02);
+
+        }
+
+        .status {
+
+            color: white;
+
+            padding: 5px 10px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            display: inline-block;
+
+        }
+
+        .buttons {
+
+            margin-top: 20px;
+
+        }
+
+        .buttons a,
+
+        .buttons button {
+
+            display: inline-block;
+
+            margin: 8px;
+
+            text-decoration: none;
+
+            color: white;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+        .home-btn {
+
+            background: #10b981;
+
+        }
+
+        .clear-btn {
+
+            background: #ef4444;
+
+        }
+
+        .clear-btn:hover {
+
+            background: #dc2626;
+
+        }
+</style>
+</head>
+<body>
+<div class="navbar">My Garage</div>
+<h1>My Bookings</h1>
+<div id="bookingList"></div>
+<div class="buttons">
+<a class="home-btn" href="index.html">Back to Home</a>
+<button class="clear-btn" onclick="clearBookings()">Clear All Bookings</button>
+</div>
+<script>
+
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+let output = "";
+
+if (bookings.length === 0) {
+
+    output = "<p>No bookings found.</p>";
+
+} else {
+
+    bookings.forEach((b, index) => {
+
+        let status = b.status || "Waiting";
+
+        let color = "";
+
+        if (status === "Accepted") color = "green";
+
+        else if (status === "Rejected") color = "red";
+
+        else color = "orange";
+
+        output += `
+<div class="booking">
+<h3>Booking ${index + 1}</h3>
+<p>Garage: ${b.garage}</p>
+<p>Date: ${b.date}</p>
+<p>Status:
+<span class="status" style="background:${color};">
+
+                    ${status}
+</span>
+</p>
+</div>
+
+        `;
+
+    });
+
+}
+
+document.getElementById("bookingList").innerHTML = output;
+
+function clearBookings() {
+
+    localStorage.removeItem("bookings");
+
+    location.reload();
+
+}
+</script>
+</body>
+</html>
