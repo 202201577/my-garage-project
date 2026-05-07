@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - My Garage</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+        }
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+            padding: 15px;
+        }
+
+        .box {
+            background: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            background: #3b82f6;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3b82f6;
+        }
+
+        #msg {
+            margin-top: 15px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">My Garage</div>
+
+<div class="container">
+    <div class="box">
+
+        <h2>Create Account</h2>
+
+        <input type="email" id="email" placeholder="Email">
+
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="register()">Register</button>
+
+        <p>Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+        <p id="msg"></p>
+
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="firebase.js"></script>
+
+<script>
+
+function register() {
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+
+    .then(() => {
+
+        alert("Account created successfully");
+
+        window.location.href = "login.html";
+
+    })
+
+    .catch((error) => {
+
+        document.getElementById("msg").innerText = error.message;
+
+    });
+}
+
+</script>
+
+</body>
+</html>
