@@ -108,7 +108,7 @@ button:hover {
 <div class="navbar">
     My Garage
 
-    <a href="login.html" class="logout-btn">
+    <a href="#" class="logout-btn" onclick="logout()">
         Logout
     </a>
 </div>
@@ -237,16 +237,28 @@ function book(name) {
     window.location.href = "booking.html";
 }
 
+function logout() {
+
+    auth.signOut().then(function() {
+
+        localStorage.removeItem("loggedIn");
+
+        window.location.href = "login.html";
+
+    });
+
+}
+
 auth.onAuthStateChanged(function(user) {
 
     if (user) {
 
         let allowedEmails = [
-    "alhanoof.t29@gmail.com",
-    "anwaralhayki55@gmail.com"
-];
+            "alhanoof.t29@gmail.com",
+            "anwaralhayki55@gmail.com"
+        ];
 
-        if (allowedEmails.includes(user.email)) {
+        if (allowedEmails.includes(user.email.toLowerCase())) {
 
             document.getElementById("dashboardLink")
             .style.display = "inline-block";
