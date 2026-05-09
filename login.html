@@ -3,124 +3,262 @@
 <head>
 <title>Login - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
+
 body {
+
     font-family: Arial, sans-serif;
+
     margin: 0;
+
     background: #f5f7fa;
+
 }
 
 .navbar {
+
     background: #1e293b;
+
     color: white;
+
     padding: 15px;
+
     font-size: 20px;
+
     text-align: center;
+
 }
 
 .container {
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     min-height: 80vh;
+
 }
 
 .box {
+
     background: white;
+
     padding: 30px;
+
     width: 90%;
+
     max-width: 320px;
+
     border-radius: 15px;
+
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
     text-align: center;
+
 }
 
 h2 {
+
     margin-bottom: 20px;
+
 }
 
 input {
+
     display: block;
+
     width: 90%;
+
     max-width: 260px;
+
     padding: 12px;
+
     margin: 10px auto;
+
     border: 1px solid #ccc;
+
     border-radius: 8px;
+
 }
 
 button {
-    padding: 10px 20px;
+
+    padding: 12px;
+
     border: none;
+
     background: #3b82f6;
+
     color: white;
+
     border-radius: 8px;
+
     cursor: pointer;
+
     width: 90%;
-    max-width: 180px;
+
+    max-width: 220px;
+
+    font-size: 15px;
+
+    margin-top: 10px;
+
 }
 
 button:hover {
+
     background: #2563eb;
+
+}
+
+.google-btn {
+
+    background: white;
+
+    color: #111;
+
+    border: 1px solid #ccc;
+
+}
+
+.google-btn:hover {
+
+    background: #f3f4f6;
+
 }
 
 #msg {
+
     margin-top: 15px;
+
     color: #d11a2a;
+
 }
 
 .link {
+
     margin-top: 15px;
+
 }
 
 .link a {
+
     text-decoration: none;
+
     color: #2563eb;
+
+}
+
+.or {
+
+    margin: 18px 0;
+
+    color: gray;
+
 }
 </style>
 </head>
-
 <body>
+<div class="navbar">
 
-<div class="navbar">My Garage</div>
-
-<div class="container">
-    <div class="box">
-        <h2>Login</h2>
-
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-
-        <button onclick="login()">Login</button>
-
-        <p id="msg"></p>
-
-        <div class="link">
-            <a href="register.html">Create new account</a>
-        </div>
-    </div>
+    My Garage
 </div>
+<div class="container">
+<div class="box">
+<h2>Login</h2>
+<input type="email"
 
+               id="email"
+
+               placeholder="Email">
+<input type="password"
+
+               id="password"
+
+               placeholder="Password">
+<button onclick="login()">
+
+            Login
+</button>
+<div class="or">OR</div>
+<button class="google-btn"
+
+                onclick="googleLogin()">
+
+            Sign in with Google
+</button>
+<p id="msg"></p>
+<div class="link">
+<a href="register.html">
+
+                Create new account
+</a>
+</div>
+</div>
+</div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="firebase.js"></script>
-
 <script>
+
 function login() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+
+    let email =
+
+    document.getElementById("email").value;
+
+    let password =
+
+    document.getElementById("password").value;
 
     auth.signInWithEmailAndPassword(email, password)
+
     .then(() => {
+
         localStorage.setItem("loggedIn", "true");
+
         window.location.href = "index.html";
+
     })
+
     .catch((error) => {
-        document.getElementById("msg").innerText = error.message;
+
+        document.getElementById("msg").innerText =
+
+        error.message;
+
     });
+
+}
+
+function googleLogin() {
+
+    let provider =
+
+    new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider)
+
+    .then(() => {
+
+        localStorage.setItem("loggedIn", "true");
+
+        window.location.href = "index.html";
+
+    })
+
+    .catch((error) => {
+
+        document.getElementById("msg").innerText =
+
+        error.message;
+
+    });
+
 }
 </script>
-
 </body>
 </html>
+ 
