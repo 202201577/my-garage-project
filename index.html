@@ -5,106 +5,489 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body{margin:0;font-family:Arial,sans-serif;background:#f8f9fa;color:#0f172a}
+body {
 
-.top-bar{background:#07111f;color:white;padding:8px 40px;display:flex;justify-content:space-between;font-size:14px}
+    margin: 0;
 
-.navbar{background:white;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px #ddd;direction:ltr}
+    font-family: Arial, sans-serif;
 
-.logo-section{display:flex;align-items:center;gap:12px}
+    background: #f8f9fa;
 
-.logo{width:90px;height:auto}
+    color: #0f172a;
 
-.brand{font-size:26px;font-weight:bold;color:#0f172a}
+}
 
-.menu-icon{font-size:32px;cursor:pointer;color:#0f172a}
+.navbar {
 
-.main-links{display:flex;gap:25px;align-items:center;direction:rtl}
+    background: white;
 
-.main-links a{text-decoration:none;color:#111827;font-weight:bold}
+    padding: 18px 40px;
 
-.login-btn{background:#dc2626;color:white!important;padding:12px 20px;border-radius:8px}
+    display: flex;
 
-.side-menu{position:fixed;top:0;right:-280px;width:260px;height:100%;background:#07111f;color:white;z-index:999;padding-top:30px;transition:.3s;text-align:right}
+    justify-content: space-between;
 
-.side-menu.open{right:0}
+    align-items: center;
 
-.side-menu img{width:120px;display:block;margin:0 auto 25px;background:white;border-radius:12px;padding:5px}
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
 
-.side-menu a{display:block;color:white;text-decoration:none;padding:16px 30px;font-size:18px;border-bottom:1px solid rgba(255,255,255,.08)}
+    direction: ltr;
 
-.close-btn{position:absolute;left:20px;top:15px;font-size:28px;cursor:pointer}
+    position: sticky;
 
-.hero{background:linear-gradient(rgba(7,17,31,.85),rgba(7,17,31,.85)),url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7");background-size:cover;background-position:center;color:white;text-align:center;padding:100px 20px 120px}
+    top: 0;
 
-.hero h1{font-size:46px;margin:0 0 15px}
+    z-index: 999;
 
-.hero h1 span{color:#ef4444}
+}
 
-.hero p{font-size:20px}
+.logo {
 
-.search-box{background:white;margin:-45px auto 50px;max-width:900px;padding:20px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,.15);display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
+    width: 150px;
 
-input,select{padding:14px;width:260px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+    height: auto;
 
-button{border:none;background:#dc2626;color:white;padding:14px 25px;border-radius:10px;font-size:16px;cursor:pointer}
+    object-fit: contain;
 
-button:hover{background:#b91c1c}
+}
 
-.why{text-align:center;padding:25px}
+.menu-icon {
 
-.features{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin-top:25px}
+    font-size: 34px;
 
-.feature{background:white;width:220px;padding:25px;border-radius:15px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+    cursor: pointer;
 
-.feature div{font-size:35px}
+    color: #0f172a;
 
-.section-title{text-align:center;font-size:34px;margin-top:45px}
+    font-weight: bold;
 
-.garage{background:white;margin:25px auto;padding:22px;width:88%;max-width:1000px;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08);display:flex;gap:30px;align-items:center;text-align:right}
+}
 
-.garage-img{width:320px;border-radius:14px;background:#f8fafc}
+.main-links {
 
-.garage-info{flex:1}
+    display: flex;
 
-.garage-info h3{font-size:30px;margin:0 0 15px}
+    gap: 28px;
 
-.garage-info p{font-size:17px;margin:10px 0}
+    align-items: center;
 
-.action-row{display:flex;gap:15px;flex-wrap:wrap;margin-top:20px}
+    direction: rtl;
 
-.map-btn{border:2px solid #2563eb;color:#2563eb;text-decoration:none;padding:12px 22px;border-radius:10px}
+}
 
-.book-btn{background:#2563eb}
+.main-links a {
 
-.footer{background:#07111f;color:white;text-align:center;padding:25px;margin-top:50px}
+    text-decoration: none;
 
-@media(max-width:800px){
+    color: #111827;
 
-.top-bar,.main-links{display:none}
+    font-weight: bold;
 
-.navbar{padding:12px 20px}
+    font-size: 16px;
 
-.garage{flex-direction:column;text-align:center}
+}
 
-.garage-img{width:100%}
+.main-links a:hover {
 
-.hero h1{font-size:32px}
+    color: #dc2626;
+
+}
+
+.login-btn {
+
+    background: #dc2626;
+
+    color: white !important;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+}
+
+.side-menu {
+
+    position: fixed;
+
+    top: 0;
+
+    right: -290px;
+
+    width: 270px;
+
+    height: 100%;
+
+    background: #07111f;
+
+    color: white;
+
+    z-index: 1000;
+
+    padding-top: 35px;
+
+    transition: 0.3s;
+
+    text-align: right;
+
+}
+
+.side-menu.open {
+
+    right: 0;
+
+}
+
+.side-menu img {
+
+    width: 150px;
+
+    display: block;
+
+    margin: 0 auto 25px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 6px;
+
+}
+
+.side-menu a {
+
+    display: block;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 16px 30px;
+
+    font-size: 18px;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+}
+
+.close-btn {
+
+    position: absolute;
+
+    left: 20px;
+
+    top: 15px;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+.hero {
+
+    background:
+
+    linear-gradient(rgba(7,17,31,.85), rgba(7,17,31,.85)),
+
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 100px 20px 120px;
+
+}
+
+.hero h1 {
+
+    font-size: 46px;
+
+    margin: 0 0 15px;
+
+}
+
+.hero h1 span {
+
+    color: #ef4444;
+
+}
+
+.hero p {
+
+    font-size: 20px;
+
+}
+
+.search-box {
+
+    background: white;
+
+    margin: -45px auto 50px;
+
+    max-width: 900px;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+
+    display: flex;
+
+    gap: 15px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+}
+
+input, select {
+
+    padding: 14px;
+
+    width: 260px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+}
+
+button {
+
+    border: none;
+
+    background: #dc2626;
+
+    color: white;
+
+    padding: 14px 25px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    background: #b91c1c;
+
+}
+
+.why {
+
+    text-align: center;
+
+    padding: 25px;
+
+}
+
+.features {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+
+    margin-top: 25px;
+
+}
+
+.feature {
+
+    background: white;
+
+    width: 220px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.feature div {
+
+    font-size: 35px;
+
+}
+
+.section-title {
+
+    text-align: center;
+
+    font-size: 34px;
+
+    margin-top: 45px;
+
+}
+
+.garage {
+
+    background: white;
+
+    margin: 25px auto;
+
+    padding: 22px;
+
+    width: 88%;
+
+    max-width: 1000px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+
+    display: flex;
+
+    gap: 30px;
+
+    align-items: center;
+
+    text-align: right;
+
+}
+
+.garage-img {
+
+    width: 320px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+}
+
+.garage-info {
+
+    flex: 1;
+
+}
+
+.garage-info h3 {
+
+    font-size: 30px;
+
+    margin: 0 0 15px;
+
+}
+
+.garage-info p {
+
+    font-size: 17px;
+
+    margin: 10px 0;
+
+}
+
+.action-row {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+
+}
+
+.map-btn {
+
+    border: 2px solid #2563eb;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+}
+
+.book-btn {
+
+    background: #2563eb;
+
+}
+
+.footer {
+
+    background: #07111f;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 50px;
+
+}
+
+@media(max-width:800px) {
+
+    .main-links {
+
+        display: none;
+
+    }
+
+    .navbar {
+
+        padding: 15px 20px;
+
+    }
+
+    .logo {
+
+        width: 120px;
+
+    }
+
+    .hero h1 {
+
+        font-size: 32px;
+
+    }
+
+    .garage {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+    .garage-img {
+
+        width: 100%;
+
+    }
 
 }
 </style>
 </head>
 <body>
-<div class="top-bar">
-<div>📍 البحرين | ☎ +973 1234 5678 | ✉ support@mygarage.com</div>
-<div id="topUserLinks">
-<a href="login.html" style="color:white;text-decoration:none;">تسجيل دخول</a>
-</div>
-</div>
 <div class="navbar">
-<div class="logo-section">
+<div>
 <img src="logo.png" class="logo">
-<span class="brand">My Garage</span>
 </div>
 <div class="main-links">
 <a href="register.html">إنشاء حساب</a>
@@ -144,10 +527,26 @@ button:hover{background:#b91c1c}
 <section class="why" id="about">
 <h2>لماذا تختار My Garage؟</h2>
 <div class="features">
-<div class="feature"><div>🛡️</div><h3>كراجات موثوقة</h3><p>كراجات حقيقية ومعلومات واضحة.</p></div>
-<div class="feature"><div>📅</div><h3>حجز سريع وسهل</h3><p>احجز موعدك بخطوات بسيطة.</p></div>
-<div class="feature"><div>📍</div><h3>مواقع واضحة</h3><p>اعرض موقع الكراج بالخريطة.</p></div>
-<div class="feature"><div>🔔</div><h3>متابعة الحجز</h3><p>تابع حالة طلبك بسهولة.</p></div>
+<div class="feature">
+<div>🛡️</div>
+<h3>كراجات موثوقة</h3>
+<p>كراجات حقيقية ومعلومات واضحة.</p>
+</div>
+<div class="feature">
+<div>📅</div>
+<h3>حجز سريع وسهل</h3>
+<p>احجز موعدك بخطوات بسيطة.</p>
+</div>
+<div class="feature">
+<div>📍</div>
+<h3>مواقع واضحة</h3>
+<p>اعرض موقع الكراج بالخريطة.</p>
+</div>
+<div class="feature">
+<div>🔔</div>
+<h3>متابعة الحجز</h3>
+<p>تابع حالة طلبك بسهولة.</p>
+</div>
 </div>
 </section>
 <h2 class="section-title" id="garages">الكراجات المتوفرة</h2>
@@ -167,101 +566,113 @@ let garages = [
 
     {
 
-        name:"Blue Motors Auto Services",
+        name: "Blue Motors Auto Services",
 
-        service:"repair",
+        service: "repair",
 
-        location:"Salmabad",
+        location: "Salmabad",
 
-        rating:"4.2",
+        rating: "4.2",
 
-        phone:"17877197",
+        phone: "17877197",
 
-        hours:"Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
+        hours: "Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
 
-        image:"images(blue-motor).jpeg",
+        image: "images(blue-motor).jpeg",
 
-        map:"https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
-
-    },
-
-    {
-
-        name:"BOSCH Service",
-
-        service:"oil",
-
-        location:"Tubli",
-
-        rating:"4.2",
-
-        phone:"17783888",
-
-        hours:"Sat–Thu 8 AM–5 PM, Friday Closed",
-
-        image:"images(BOSCH-Service).jpeg",
-
-        map:"https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+        map: "https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
 
     },
 
     {
 
-        name:"HOMS GATE",
+        name: "BOSCH Service",
 
-        service:"repair",
+        service: "oil",
 
-        location:"Hamala",
+        location: "Tubli",
 
-        rating:"4.2",
+        rating: "4.2",
 
-        phone:"34120290",
+        phone: "17783888",
 
-        hours:"Sat–Thu 8 AM–7 PM, Friday Closed",
+        hours: "Sat–Thu 8 AM–5 PM, Friday Closed",
 
-        image:"images(HOMS-GATE).jpeg",
+        image: "images(BOSCH-Service).jpeg",
 
-        map:"https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+        map: "https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
 
     },
 
     {
 
-        name:"Fit and Fix",
+        name: "HOMS GATE",
 
-        service:"repair",
+        service: "repair",
 
-        location:"Hamala",
+        location: "Hamala",
 
-        rating:"4.9",
+        rating: "4.2",
 
-        phone:"37377196",
+        phone: "34120290",
 
-        hours:"Sat–Thu 8 AM–8 PM, Friday Closed",
+        hours: "Sat–Thu 8 AM–7 PM, Friday Closed",
 
-        image:"images(Fit-and-fix).jpeg",
+        image: "images(HOMS-GATE).jpeg",
 
-        map:"https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
+        map: "https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+
+    },
+
+    {
+
+        name: "Fit and Fix",
+
+        service: "repair",
+
+        location: "Hamala",
+
+        rating: "4.9",
+
+        phone: "37377196",
+
+        hours: "Sat–Thu 8 AM–8 PM, Friday Closed",
+
+        image: "images(Fit-and-fix).jpeg",
+
+        map: "https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
 
     }
 
 ];
 
-function searchGarage(){
+function searchGarage() {
 
-    let text=document.getElementById("search").value.toLowerCase();
+    let text = document.getElementById("search").value.toLowerCase();
 
-    let filter=document.getElementById("filter").value;
+    let filter = document.getElementById("filter").value;
 
-    let result="";
+    let result = "";
 
-    garages.forEach(g=>{
+    garages.forEach(g => {
 
-        if((filter==="all"||g.service===filter) &&
+        if (
 
-        (g.name.toLowerCase().includes(text)||g.location.toLowerCase().includes(text)||g.service.toLowerCase().includes(text))){
+            (filter === "all" || g.service === filter) &&
 
-            result+=`
+            (
+
+                g.name.toLowerCase().includes(text) ||
+
+                g.location.toLowerCase().includes(text) ||
+
+                g.service.toLowerCase().includes(text)
+
+            )
+
+        ) {
+
+            result += `
 <div class="garage">
 <img class="garage-img" src="${g.image}">
 <div class="garage-info">
@@ -276,82 +687,82 @@ function searchGarage(){
 <button class="book-btn" onclick="book('${g.name}')">احجز الآن</button>
 </div>
 </div>
-</div>`;
+</div>
+
+            `;
 
         }
 
     });
 
-    document.getElementById("results").innerHTML = result || "<p>لا توجد كراجات مطابقة.</p>";
+    document.getElementById("results").innerHTML =
+
+    result || "<p>لا توجد كراجات مطابقة.</p>";
 
 }
 
-function book(name){
+function book(name) {
 
     localStorage.setItem("garage", name);
 
-    if(currentUser){
+    if (currentUser) {
 
-        window.location.href="booking.html";
+        window.location.href = "booking.html";
 
-    }else{
+    } else {
 
-        window.location.href="login.html";
+        window.location.href = "login.html";
 
     }
 
 }
 
-function nearestGarage(){
+function nearestGarage() {
 
     alert("ميزة أقرب كراج بنضيفها بعد ما نحط إحداثيات الكراجات.");
 
 }
 
-function openMenu(){
+function openMenu() {
 
     document.getElementById("sideMenu").classList.add("open");
 
 }
 
-function closeMenu(){
+function closeMenu() {
 
     document.getElementById("sideMenu").classList.remove("open");
 
 }
 
-function logout(){
+function logout() {
 
-    auth.signOut().then(()=>{
+    auth.signOut().then(() => {
 
         localStorage.removeItem("loggedIn");
 
-        window.location.href="index.html";
+        window.location.href = "index.html";
 
     });
 
 }
 
-auth.onAuthStateChanged(function(user){
+auth.onAuthStateChanged(function(user) {
 
     currentUser = user;
 
-    let adminEmails=[
+    let adminEmails = [
 
         "alhanoof.t29@gmail.com",
         "anwaralhayki55@gmail.com"
 
     ];
 
-    if(user){
+    if (user) {
 
-        document.getElementById("topUserLinks").innerHTML =
+        if (adminEmails.includes(user.email.toLowerCase())) {
 
-        `<span>مرحباً، ${user.email}</span>`;
-
-        if(adminEmails.includes(user.email.toLowerCase())){
-
-            document.getElementById("dashboardLink").style.display="block";
+            document.getElementById("dashboardLink").style.display = "block";
 
         }
 
@@ -359,7 +770,7 @@ auth.onAuthStateChanged(function(user){
 
 });
 
-window.onload=searchGarage;
+window.onload = searchGarage;
 </script>
 </body>
 </html>
