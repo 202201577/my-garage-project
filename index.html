@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 <title>My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +31,6 @@ body {
 
     align-items: center;
 
-    position: relative;
-
 }
 
 .logo-section {
@@ -46,12 +44,19 @@ body {
 }
 
 .logo {
-   width: 65px;
-   height: 65px;
-   border-radius: 14px;
-   object-fit: contain;
-   background: white;
-   padding: 6px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 14px;
+
+    object-fit: contain;
+
+    background: white;
+
+    padding: 6px;
+
 }
 
 .brand-text {
@@ -76,9 +81,9 @@ body {
 
     position: absolute;
 
-    right: 20px;
+    left: 20px;
 
-    top: 80px;
+    top: 85px;
 
     background: white;
 
@@ -92,7 +97,7 @@ body {
 
     z-index: 999;
 
-    text-align: left;
+    text-align: right;
 
 }
 
@@ -112,25 +117,53 @@ body {
 
 }
 
-.menu a:hover {
+.hero {
 
-    background: #f3f4f6;
+    background:
+
+    linear-gradient(rgba(15,23,42,0.82), rgba(15,23,42,0.82)),
+
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+
+    padding: 80px 20px 100px;
 
 }
 
-h1 {
+.hero h1 {
 
-    margin-top: 35px;
+    font-size: 42px;
 
-    font-size: 36px;
+    margin-bottom: 15px;
 
-    color: #0f172a;
+}
+
+.hero h1 span {
+
+    color: #ef4444;
+
+}
+
+.hero p {
+
+    font-size: 20px;
+
+    margin-bottom: 35px;
 
 }
 
 .search-box {
 
-    margin: 25px auto;
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
 
     display: flex;
 
@@ -140,7 +173,11 @@ h1 {
 
     flex-wrap: wrap;
 
-    width: 90%;
+    max-width: 900px;
+
+    margin: auto;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
 
 }
 
@@ -148,7 +185,7 @@ input, select {
 
     padding: 14px;
 
-    width: 280px;
+    width: 260px;
 
     border-radius: 10px;
 
@@ -162,11 +199,11 @@ input, select {
 
 button {
 
-    padding: 12px 22px;
+    padding: 12px 24px;
 
     border: none;
 
-    background: #2563eb;
+    background: #dc2626;
 
     color: white;
 
@@ -180,7 +217,81 @@ button {
 
 button:hover {
 
-    background: #1d4ed8;
+    background: #b91c1c;
+
+}
+
+.why {
+
+    padding: 50px 20px 25px;
+
+}
+
+.why h2 {
+
+    font-size: 30px;
+
+    color: #0f172a;
+
+}
+
+.features {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+
+    margin-top: 25px;
+
+}
+
+.feature {
+
+    background: white;
+
+    width: 210px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+
+}
+
+.feature-icon {
+
+    font-size: 32px;
+
+}
+
+.feature h3 {
+
+    color: #0f172a;
+
+    margin-bottom: 8px;
+
+}
+
+.feature p {
+
+    color: #4b5563;
+
+    font-size: 15px;
+
+}
+
+.section-title {
+
+    font-size: 34px;
+
+    color: #0f172a;
+
+    margin-top: 40px;
 
 }
 
@@ -206,7 +317,7 @@ button:hover {
 
     gap: 35px;
 
-    text-align: left;
+    text-align: right;
 
     transition: 0.2s;
 
@@ -260,11 +371,7 @@ button:hover {
 
 .icon {
 
-    color: #2563eb;
-
-    font-weight: bold;
-
-    margin-right: 8px;
+    margin-left: 8px;
 
 }
 
@@ -310,23 +417,15 @@ button:hover {
 
 @media (max-width: 768px) {
 
-    h1 {
+    .hero h1 {
 
         font-size: 32px;
 
     }
 
-    .brand-text {
+    .hero p {
 
-        font-size: 20px;
-
-    }
-
-    .logo {
-
-        width: 48px;
-
-        height: 48px;
+        font-size: 17px;
 
     }
 
@@ -382,27 +481,56 @@ button:hover {
 <body>
 <div class="navbar">
 <div class="logo-section">
-<img src="logo.png" class="logo" alt="My Garage Logo">
+<img src="logo.png" class="logo">
 <span class="brand-text">My Garage</span>
 </div>
 <div class="menu-icon" onclick="toggleMenu()">☰</div>
 </div>
 <div id="menu" class="menu">
-<a href="index.html">Home</a>
-<a href="mybookings.html">My Bookings</a>
-<a id="dashboardMenuLink" href="garage-dashboard.html" style="display:none;">Dashboard</a>
-<a href="#" onclick="logout()">Logout</a>
+<a href="index.html">الرئيسية</a>
+<a href="mybookings.html">حجوزاتي</a>
+<a id="dashboardMenuLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a href="#" onclick="logout()">تسجيل الخروج</a>
 </div>
-<h1>Garage Services</h1>
+<section class="hero">
+<h1>ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span></h1>
+<p>خدمات صيانة وإصلاح السيارات في البحرين بخطوات بسيطة</p>
 <div class="search-box">
-<input type="text" id="search" placeholder="Search garage...">
+<input type="text" id="search" placeholder="ابحث عن كراج...">
 <select id="filter">
-<option value="all">All Services</option>
-<option value="repair">Repair</option>
-<option value="oil">Oil Change</option>
+<option value="all">كل الخدمات</option>
+<option value="repair">تصليح</option>
+<option value="oil">تغيير زيت</option>
 </select>
-<button onclick="searchGarage()">Search</button>
+<button onclick="searchGarage()">ابحث الآن</button>
 </div>
+</section>
+<section class="why">
+<h2>لماذا تختار My Garage؟</h2>
+<div class="features">
+<div class="feature">
+<div class="feature-icon">🛡️</div>
+<h3>كراجات موثوقة</h3>
+<p>كراجات حقيقية مع معلومات واضحة.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">📅</div>
+<h3>حجز سريع وسهل</h3>
+<p>احجز موعدك بخطوات بسيطة.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">📍</div>
+<h3>موقع واضح</h3>
+<p>اعرض موقع الكراج على الخريطة.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">🔔</div>
+<h3>متابعة الحجز</h3>
+<p>تابع حالة الحجز: انتظار، قبول، أو رفض.</p>
+</div>
+</div>
+</section>
+<h2 class="section-title">الكراجات المتوفرة</h2>
 <div id="results"></div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -524,14 +652,14 @@ function searchGarage() {
 <img class="garage-img" src="${g.image}" alt="${g.name}">
 <div class="garage-info">
 <h3>${g.name}</h3>
-<p><span class="icon">🔧</span><b>Service:</b> ${g.service}</p>
-<p><span class="icon">📍</span><b>Location:</b> ${g.location}</p>
-<p><span class="icon">📞</span><b>Phone:</b> ${g.phone}</p>
-<p><span class="icon">⭐</span><b>Rating:</b> ${g.rating}</p>
-<p><span class="icon">🕒</span><b>Hours:</b> ${g.hours}</p>
+<p><span class="icon">🔧</span><b>الخدمة:</b> ${g.service}</p>
+<p><span class="icon">📍</span><b>الموقع:</b> ${g.location}</p>
+<p><span class="icon">📞</span><b>الهاتف:</b> ${g.phone}</p>
+<p><span class="icon">⭐</span><b>التقييم:</b> ${g.rating}</p>
+<p><span class="icon">🕒</span><b>ساعات العمل:</b> ${g.hours}</p>
 <div class="action-row">
-<a href="${g.map}" target="_blank" class="map-btn">View Location</a>
-<button class="book-btn" onclick="book('${g.name}')">Book Now</button>
+<a href="${g.map}" target="_blank" class="map-btn">عرض الموقع</a>
+<button class="book-btn" onclick="book('${g.name}')">احجز الآن</button>
 </div>
 </div>
 </div>
@@ -544,7 +672,7 @@ function searchGarage() {
 
     if (result === "") {
 
-        result = "<p>No garages found.</p>";
+        result = "<p>لا توجد كراجات مطابقة.</p>";
 
     }
 
@@ -564,15 +692,7 @@ function toggleMenu() {
 
     let menu = document.getElementById("menu");
 
-    if (menu.style.display === "block") {
-
-        menu.style.display = "none";
-
-    } else {
-
-        menu.style.display = "block";
-
-    }
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
 
 }
 
@@ -595,7 +715,6 @@ auth.onAuthStateChanged(function(user) {
         let allowedEmails = [
 
             "alhanoof.t29@gmail.com",
-
             "anwaralhayki55@gmail.com"
 
         ];
