@@ -112,6 +112,11 @@ button:hover {
     </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="firebase.js"></script>
+
 <script>
 document.getElementById("garageName").innerText =
     "Garage: " + (localStorage.getItem("garage") || "Not selected");
@@ -119,6 +124,12 @@ document.getElementById("garageName").innerText =
 function confirmBooking() {
     let date = document.getElementById("date").value;
     let garage = localStorage.getItem("garage");
+    let user = auth.currentUser;
+
+    if (!user) {
+        document.getElementById("msg").innerText = "Please login first.";
+        return;
+    }
 
     if (!garage) {
         document.getElementById("msg").innerText = "No garage selected.";
@@ -130,17 +141,27 @@ function confirmBooking() {
         return;
     }
 
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-    bookings.push({
+    db.collection("bookings").add({
         garage: garage,
         date: date,
-        status: "Waiting"
+        status: "Waiting",
+        userEmail: user.email,
+        userId: user.uid,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => {
+        window.location.href = "booking-success.html";
+    })
+    .catch((error) => {
+        document.getElementById("msg").innerText = error.message;
     });
-
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-    window.location.href = "booking-success.html";
 }
+
+auth.onAuthStateChanged(function(user) {
+    if (!user) {
+        window.location.href = "login.html";
+    }
+});
 </script>
 
 </body>
