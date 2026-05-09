@@ -19,45 +19,105 @@ body {
 
 .navbar {
 
-    background: #1e293b;
+    background: #0f172a;
 
     color: white;
 
-    padding: 15px;
+    padding: 12px 20px;
 
-    font-size: 20px;
+    display: flex;
 
-    text-align: center;
+    justify-content: space-between;
+
+    align-items: center;
 
     position: relative;
 
 }
 
-.logout-btn {
+.logo-section {
 
-    position: absolute;
+    display: flex;
 
-    right: 15px;
+    align-items: center;
 
-    top: 10px;
-
-    color: white;
-
-    text-decoration: none;
-
-    background: #ef4444;
-
-    padding: 8px 12px;
-
-    border-radius: 8px;
-
-    font-size: 14px;
+    gap: 12px;
 
 }
 
-.logout-btn:hover {
+.logo {
 
-    background: #dc2626;
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+
+}
+
+.brand-text {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+}
+
+.menu-icon {
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+}
+
+.menu {
+
+    display: none;
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 80px;
+
+    background: white;
+
+    width: 220px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    z-index: 999;
+
+    text-align: left;
+
+}
+
+.menu a {
+
+    display: block;
+
+    padding: 15px;
+
+    text-decoration: none;
+
+    color: #111827;
+
+    border-bottom: 1px solid #eee;
+
+    font-size: 16px;
+
+}
+
+.menu a:hover {
+
+    background: #f3f4f6;
 
 }
 
@@ -251,35 +311,25 @@ button:hover {
 
 }
 
-.links {
-
-    margin: 30px 0;
-
-}
-
-.links a {
-
-    display: inline-block;
-
-    text-decoration: none;
-
-    color: white;
-
-    background: #10b981;
-
-    padding: 12px 18px;
-
-    border-radius: 10px;
-
-    margin: 5px;
-
-}
-
 @media (max-width: 768px) {
 
     h1 {
 
         font-size: 32px;
+
+    }
+
+    .brand-text {
+
+        font-size: 20px;
+
+    }
+
+    .logo {
+
+        width: 48px;
+
+        height: 48px;
 
     }
 
@@ -334,9 +384,17 @@ button:hover {
 </head>
 <body>
 <div class="navbar">
-
-    My Garage
-<a href="#" class="logout-btn" onclick="logout()">Logout</a>
+<div class="logo-section">
+<img src="logo.png" class="logo" alt="My Garage Logo">
+<span class="brand-text">My Garage</span>
+</div>
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+</div>
+<div id="menu" class="menu">
+<a href="index.html">Home</a>
+<a href="mybookings.html">My Bookings</a>
+<a id="dashboardMenuLink" href="garage-dashboard.html" style="display:none;">Dashboard</a>
+<a href="#" onclick="logout()">Logout</a>
 </div>
 <h1>Garage Services</h1>
 <div class="search-box">
@@ -349,13 +407,6 @@ button:hover {
 <button onclick="searchGarage()">Search</button>
 </div>
 <div id="results"></div>
-<div class="links">
-<a href="mybookings.html">My Bookings</a>
-<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">
-
-        Garage Dashboard
-</a>
-</div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="firebase.js"></script>
@@ -473,7 +524,7 @@ function searchGarage() {
 
             result += `
 <div class="garage">
-<img class="garage-img" src="${g.image}">
+<img class="garage-img" src="${g.image}" alt="${g.name}">
 <div class="garage-info">
 <h3>${g.name}</h3>
 <p><span class="icon">🔧</span><b>Service:</b> ${g.service}</p>
@@ -482,14 +533,8 @@ function searchGarage() {
 <p><span class="icon">⭐</span><b>Rating:</b> ${g.rating}</p>
 <p><span class="icon">🕒</span><b>Hours:</b> ${g.hours}</p>
 <div class="action-row">
-<a href="${g.map}" target="_blank" class="map-btn">
-
-                            View Location
-</a>
-<button class="book-btn" onclick="book('${g.name}')">
-
-                            Book Now
-</button>
+<a href="${g.map}" target="_blank" class="map-btn">View Location</a>
+<button class="book-btn" onclick="book('${g.name}')">Book Now</button>
 </div>
 </div>
 </div>
@@ -515,6 +560,22 @@ function book(name) {
     localStorage.setItem("garage", name);
 
     window.location.href = "booking.html";
+
+}
+
+function toggleMenu() {
+
+    let menu = document.getElementById("menu");
+
+    if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "block";
+
+    }
 
 }
 
@@ -544,7 +605,7 @@ auth.onAuthStateChanged(function(user) {
 
         if (allowedEmails.includes(user.email.toLowerCase())) {
 
-            document.getElementById("dashboardLink").style.display = "inline-block";
+            document.getElementById("dashboardMenuLink").style.display = "block";
 
         }
 
