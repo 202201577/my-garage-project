@@ -111,11 +111,73 @@ body {
 
 }
 
-.form-title {
+.step-box {
 
-    margin-bottom: 25px;
+    display: none;
 
-    font-size: 28px;
+}
+
+.step-box.active {
+
+    display: block;
+
+}
+
+.steps {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+
+}
+
+.step {
+
+    flex: 1;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-weight: bold;
+
+}
+
+.circle {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    border: 2px solid #9ca3af;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: auto auto 8px;
+
+}
+
+.step.active {
+
+    color: #dc2626;
+
+}
+
+.step.active .circle {
+
+    background: #dc2626;
+
+    color: white;
+
+    border-color: #dc2626;
 
 }
 
@@ -174,6 +236,46 @@ textarea {
 .full {
 
     grid-column: 1 / 3;
+
+}
+
+.service-options {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+.service-card {
+
+    border: 2px solid #e5e7eb;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.service-card:hover,
+
+.service-card.selected {
+
+    border-color: #dc2626;
+
+    background: #fff5f5;
+
+}
+
+.service-card h3 {
+
+    margin: 0 0 8px;
 
 }
 
@@ -259,6 +361,37 @@ button, .back-btn {
 
 }
 
+.success-box {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+}
+
+.success-icon {
+
+    font-size: 65px;
+
+    color: #16a34a;
+
+}
+
+.status {
+
+    background: orange;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 20px;
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+}
 
 #msg {
 
@@ -278,7 +411,9 @@ button, .back-btn {
 
     }
 
-    .form-grid {
+    .form-grid,
+
+    .service-options {
 
         grid-template-columns: 1fr;
 
@@ -323,18 +458,55 @@ button, .back-btn {
 </div>
 <div class="container">
 <div class="card">
-<h2 class="form-title">تفاصيل الحجز</h2>
-<div class="form-grid">
-<div class="form-group">
-<label>نوع الخدمة *</label>
-<select id="serviceType" onchange="updateSummary()">
-<option value="تغيير زيت + فلتر">تغيير زيت + فلتر</option>
-<option value="تصليح عام">تصليح عام</option>
-<option value="فحص كمبيوتر">فحص كمبيوتر</option>
-<option value="كهرباء سيارات">كهرباء سيارات</option>
-<option value="مكيف سيارات">مكيف سيارات</option>
-</select>
+<div class="steps">
+<div class="step active" id="step1">
+<div class="circle">1</div>
+
+                اختيار الخدمة
 </div>
+<div class="step" id="step2">
+<div class="circle">2</div>
+
+                تفاصيل الحجز
+</div>
+<div class="step" id="step3">
+<div class="circle">3</div>
+
+                تأكيد الحجز
+</div>
+</div>
+<div class="step-box active" id="serviceStep">
+<h2>اختاري نوع الخدمة</h2>
+<div class="service-options">
+<div class="service-card" onclick="selectService('تغيير زيت + فلتر', this)">
+<h3>تغيير زيت + فلتر</h3>
+<p>خدمة صيانة أساسية للسيارة.</p>
+</div>
+<div class="service-card" onclick="selectService('تصليح عام', this)">
+<h3>تصليح عام</h3>
+<p>فحص وتصليح مشاكل السيارة.</p>
+</div>
+<div class="service-card" onclick="selectService('فحص كمبيوتر', this)">
+<h3>فحص كمبيوتر</h3>
+<p>تشخيص أعطال السيارة بالكمبيوتر.</p>
+</div>
+<div class="service-card" onclick="selectService('كهرباء سيارات', this)">
+<h3>كهرباء سيارات</h3>
+<p>تصليح مشاكل الكهرباء والبطارية.</p>
+</div>
+<div class="service-card" onclick="selectService('مكيف سيارات', this)">
+<h3>مكيف سيارات</h3>
+<p>فحص وتصليح مكيف السيارة.</p>
+</div>
+</div>
+<div class="buttons">
+<a href="index.html" class="back-btn">رجوع</a>
+<button class="next-btn" onclick="goToDetails()">التالي</button>
+</div>
+</div>
+<div class="step-box" id="detailsStep">
+<h2>تفاصيل الحجز</h2>
+<div class="form-grid">
 <div class="form-group">
 <label>المركبة *</label>
 <input type="text" id="carType" placeholder="مثال: Toyota Camry - 2020" oninput="updateSummary()">
@@ -363,10 +535,23 @@ button, .back-btn {
 </div>
 </div>
 <div class="buttons">
-<a href="index.html" class="back-btn">رجوع</a>
+<button class="back-btn" onclick="backToService()">رجوع</button>
 <button class="next-btn" onclick="confirmBooking()">تأكيد الحجز</button>
 </div>
 <p id="msg"></p>
+</div>
+<div class="step-box" id="successStep">
+<div class="success-box">
+<div class="success-icon">✅</div>
+<h2>تم إرسال الحجز بنجاح</h2>
+<p>تم استلام طلبك وسيتم مراجعته من قبل الكراج.</p>
+<div class="status">الحالة: Waiting</div>
+<div class="buttons" style="justify-content:center;">
+<a href="mybookings.html" class="back-btn">عرض حجوزاتي</a>
+<a href="index.html" class="back-btn">العودة للرئيسية</a>
+</div>
+</div>
+</div>
 </div>
 <div class="card">
 <h3>ملخص الحجز</h3>
@@ -374,7 +559,7 @@ button, .back-btn {
 <div class="summary-title" id="summaryGarage">Garage</div>
 <div class="summary-row">
 <span>نوع الخدمة</span>
-<b id="summaryService">تغيير زيت + فلتر</b>
+<b id="summaryService">-</b>
 </div>
 <div class="summary-row">
 <span>المركبة</span>
@@ -402,7 +587,6 @@ button, .back-btn {
 </div>
 </div>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -410,6 +594,8 @@ button, .back-btn {
 <script>
 
 let garage = localStorage.getItem("garage") || "Not selected";
+
+let selectedService = "";
 
 let garageImages = {
 
@@ -425,37 +611,13 @@ let garageImages = {
 
 let garageTimes = {
 
-    "Blue Motors Auto Services": [
+    "Blue Motors Auto Services": ["08:00", "09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"],
 
-        "08:00", "09:00", "10:00", "11:00", "12:00",
+    "BOSCH Service": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
 
-        "15:00", "16:00", "17:00"
+    "HOMS GATE": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
 
-    ],
-
-    "BOSCH Service": [
-
-        "08:00", "09:00", "10:00", "11:00", "12:00",
-
-        "13:00", "14:00", "15:00", "16:00"
-
-    ],
-
-    "HOMS GATE": [
-
-        "08:00", "09:00", "10:00", "11:00", "12:00",
-
-        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"
-
-    ],
-
-    "Fit and Fix": [
-
-        "08:00", "09:00", "10:00", "11:00", "12:00",
-
-        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
-
-    ]
+    "Fit and Fix": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"]
 
 };
 
@@ -466,6 +628,48 @@ document.getElementById("summaryGarage").innerText = garage;
 if (garageImages[garage]) {
 
     document.getElementById("garageImage").src = garageImages[garage];
+
+}
+
+function selectService(service, element) {
+
+    selectedService = service;
+
+    let cards = document.querySelectorAll(".service-card");
+
+    cards.forEach(card => card.classList.remove("selected"));
+
+    element.classList.add("selected");
+
+    updateSummary();
+
+}
+
+function goToDetails() {
+
+    if (selectedService === "") {
+
+        alert("اختاري نوع الخدمة أولاً.");
+
+        return;
+
+    }
+
+    document.getElementById("serviceStep").classList.remove("active");
+
+    document.getElementById("detailsStep").classList.add("active");
+
+    document.getElementById("step2").classList.add("active");
+
+}
+
+function backToService() {
+
+    document.getElementById("detailsStep").classList.remove("active");
+
+    document.getElementById("serviceStep").classList.add("active");
+
+    document.getElementById("step2").classList.remove("active");
 
 }
 
@@ -531,41 +735,25 @@ function checkDateAndLoadTimes() {
 
 function updateSummary() {
 
-    document.getElementById("summaryService").innerText =
+    document.getElementById("summaryService").innerText = selectedService || "-";
 
-    document.getElementById("serviceType").value;
+    document.getElementById("summaryCar").innerText = document.getElementById("carType")?.value || "-";
 
-    document.getElementById("summaryCar").innerText =
+    document.getElementById("summaryPlate").innerText = document.getElementById("plateNumber")?.value || "-";
 
-    document.getElementById("carType").value || "-";
+    document.getElementById("summaryDate").innerText = document.getElementById("date")?.value || "-";
 
-    document.getElementById("summaryPlate").innerText =
+    document.getElementById("summaryTime").innerText = document.getElementById("time")?.value || "-";
 
-    document.getElementById("plateNumber").value || "-";
+    document.getElementById("summaryPhone").innerText = document.getElementById("phone")?.value || "-";
 
-    document.getElementById("summaryDate").innerText =
-
-    document.getElementById("date").value || "-";
-
-    document.getElementById("summaryTime").innerText =
-
-    document.getElementById("time").value || "-";
-
-    document.getElementById("summaryPhone").innerText =
-
-    document.getElementById("phone").value || "-";
-
-    document.getElementById("summaryNotes").innerText =
-
-    document.getElementById("notes").value || "-";
+    document.getElementById("summaryNotes").innerText = document.getElementById("notes")?.value || "-";
 
 }
 
 function confirmBooking() {
 
     let user = auth.currentUser;
-
-    let serviceType = document.getElementById("serviceType").value;
 
     let carType = document.getElementById("carType").value;
 
@@ -595,7 +783,7 @@ function confirmBooking() {
 
     }
 
-    if (carType === "" || plateNumber === "" || date === "" || time === "" || phone === "") {
+    if (selectedService === "" || carType === "" || plateNumber === "" || date === "" || time === "" || phone === "") {
 
         document.getElementById("msg").innerText = "يرجى تعبئة جميع البيانات المطلوبة.";
 
@@ -617,7 +805,7 @@ function confirmBooking() {
 
         garage: garage,
 
-        serviceType: serviceType,
+        serviceType: selectedService,
 
         carType: carType,
 
@@ -643,7 +831,11 @@ function confirmBooking() {
 
     .then(() => {
 
-        window.location.href = "booking-success.html";
+        document.getElementById("detailsStep").classList.remove("active");
+
+        document.getElementById("successStep").classList.add("active");
+
+        document.getElementById("step3").classList.add("active");
 
     })
 
