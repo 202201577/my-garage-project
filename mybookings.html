@@ -1,186 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 <title>My Bookings - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background: #f5f7fa;
-    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    color: #0f172a;
 }
 
 .navbar {
-    background: #1e293b;
-    color: white;
-    padding: 15px;
-    font-size: 20px;
+    background: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    direction: ltr;
 }
 
-h1 {
-    margin-top: 30px;
+.logo {
+    width: 150px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #111827;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+.page-title {
+    text-align: center;
+    margin: 35px 0 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+.container {
+    width: 88%;
+    max-width: 1100px;
+    margin: auto;
 }
 
 .booking {
     background: white;
-    margin: 15px auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 320px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: 0.2s;
+    margin: 22px auto;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
 }
 
-.booking:hover {
-    transform: scale(1.02);
+.booking h3 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    color: #0f172a;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 25px;
+}
+
+.detail {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.detail b {
+    color: #111827;
+}
+
+.status-box {
+    text-align: center;
+    min-width: 160px;
 }
 
 .status {
     color: white;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 12px;
+    padding: 9px 18px;
+    border-radius: 20px;
+    font-size: 14px;
     display: inline-block;
+    font-weight: bold;
+}
+
+.waiting {
+    background: #f59e0b;
+}
+
+.accepted {
+    background: #16a34a;
+}
+
+.rejected {
+    background: #dc2626;
+}
+
+.empty {
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
 }
 
 .buttons {
-    margin-top: 20px;
-}
-
-.buttons a,
-.buttons button {
-    display: inline-block;
-    margin: 8px;
-    text-decoration: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    width: 90%;
-    max-width: 250px;
+    text-align: center;
+    margin: 30px 0;
 }
 
 .home-btn {
-    background: #10b981;
-}
-
-.clear-btn {
-    background: #ef4444;
-}
-
-.clear-btn:hover {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
     background: #dc2626;
+    padding: 13px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+@media(max-width: 800px) {
+    .nav-links {
+        display: none;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .booking {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="navbar">My Garage</div>
+<div class="navbar">
+    <img src="logo.png" class="logo">
 
-<h1>My Bookings</h1>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="index.html#garages">الكراجات</a>
+        <a href="index.html#about">من نحن</a>
+        <a href="index.html#contact">اتصل بنا</a>
+    </div>
+</div>
 
-<div id="bookingList"></div>
+<h1 class="page-title">حجوزاتي</h1>
+<p class="subtitle">تابعي حالة حجوزاتك وتفاصيل الطلب</p>
+
+<div class="container">
+    <div id="bookingList"></div>
+</div>
 
 <div class="buttons">
-    <a class="home-btn" href="index.html">Back to Home</a>
+    <a class="home-btn" href="index.html">العودة للرئيسية</a>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
 <script src="firebase.js"></script>
 
 <script>
+function getStatusClass(status) {
+    if (status === "Accepted") return "accepted";
+    if (status === "Rejected") return "rejected";
+    return "waiting";
+}
+
+function getArabicStatus(status) {
+    if (status === "Accepted") return "مقبول";
+    if (status === "Rejected") return "مرفوض";
+    return "انتظار";
+}
 
 function loadBookings(userEmail) {
-
     db.collection("bookings")
     .where("userEmail", "==", userEmail)
     .onSnapshot((snapshot) => {
-
         let output = "";
 
         if (snapshot.empty) {
-
-            output = "<p>No bookings found.</p>";
-
+            output = `
+            <div class="empty">
+                <h3>لا توجد حجوزات حالياً</h3>
+                <p>ابدئي بحجز خدمة من صفحة الكراجات.</p>
+            </div>
+            `;
         } else {
-
             let count = 1;
 
             snapshot.forEach((doc) => {
-
                 let b = doc.data();
-
                 let status = b.status || "Waiting";
 
-                let color = "";
-
-                if (status === "Accepted")
-                    color = "green";
-
-                else if (status === "Rejected")
-                    color = "red";
-
-                else
-                    color = "orange";
-
                 output += `
-
                 <div class="booking">
+                    <div>
+                        <h3>حجز ${count}</h3>
 
-                    <h3>Booking ${count}</h3>
+                        <div class="details">
+                            <div class="detail"><b>الكراج:</b> ${b.garage || "-"}</div>
+                            <div class="detail"><b>الخدمة:</b> ${b.serviceType || "-"}</div>
+                            <div class="detail"><b>المركبة:</b> ${b.carType || "-"}</div>
+                            <div class="detail"><b>رقم اللوحة:</b> ${b.plateNumber || "-"}</div>
+                            <div class="detail"><b>التاريخ:</b> ${b.date || "-"}</div>
+                            <div class="detail"><b>الوقت:</b> ${b.time || "-"}</div>
+                            <div class="detail"><b>رقم الهاتف:</b> ${b.phone || "-"}</div>
+                            <div class="detail"><b>الملاحظات:</b> ${b.notes || "-"}</div>
+                        </div>
+                    </div>
 
-                    <p>Garage: ${b.garage}</p>
-
-                    <p>Date: ${b.date}</p>
-
-                    <p>Status:
-
-                        <span class="status"
-                              style="background:${color};">
-
-                              ${status}
-
+                    <div class="status-box">
+                        <p><b>الحالة</b></p>
+                        <span class="status ${getStatusClass(status)}">
+                            ${getArabicStatus(status)}
                         </span>
-
-                    </p>
-
+                    </div>
                 </div>
-
                 `;
 
                 count++;
             });
         }
 
-        document.getElementById("bookingList")
-        .innerHTML = output;
-
+        document.getElementById("bookingList").innerHTML = output;
     });
 }
 
 auth.onAuthStateChanged(function(user) {
-
     if (user) {
-
         loadBookings(user.email);
-
     } else {
-
         window.location.href = "login.html";
     }
 });
-
 </script>
 
 </body>
