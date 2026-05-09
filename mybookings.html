@@ -105,7 +105,6 @@ function loadBookings(userEmail) {
 
     db.collection("bookings")
     .where("userEmail", "==", userEmail)
-    .orderBy("createdAt", "desc")
     .onSnapshot((snapshot) => {
 
         let output = "";
