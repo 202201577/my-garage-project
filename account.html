@@ -2,309 +2,441 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>الحساب - My Garage</title>
+<title>حسابي - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f8fafc;
-    color:#0f172a;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
 }
 
-/* navbar */
-
-.navbar{
-    background:white;
-    padding:18px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+.navbar {
+    background: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
 }
 
-.logo{
-    width:150px;
+.logo {
+    width: 150px;
 }
 
-/* page */
-
-.page{
-    width:90%;
-    max-width:1100px;
-    margin:40px auto;
+.home-link {
+    text-decoration: none;
+    color: #111827;
+    font-weight: bold;
 }
 
-/* card */
-
-.account-card{
-    background:white;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+.page {
+    width: 90%;
+    max-width: 1150px;
+    margin: 35px auto;
 }
 
-/* top */
-
-.top-section{
-    background:
-    linear-gradient(rgba(7,17,31,.85),rgba(7,17,31,.85)),
-    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600");
-
-    background-size:cover;
-    background-position:center;
-
-    padding:50px 30px;
-    text-align:center;
-    color:white;
+.title {
+    font-size: 34px;
+    margin-bottom: 5px;
 }
 
-.profile-circle{
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    background:white;
-    color:#dc2626;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:45px;
-    margin:auto;
-    margin-bottom:18px;
-    font-weight:bold;
+.breadcrumb {
+    color: #6b7280;
+    margin-bottom: 25px;
 }
 
-.top-section h1{
-    margin:0;
-    font-size:35px;
+.profile-card,
+.stats-card,
+.info-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    padding: 30px;
+    margin-bottom: 25px;
 }
 
-.top-section p{
-    margin-top:10px;
-    color:#e5e7eb;
+.profile-card {
+    display: grid;
+    grid-template-columns: 150px 1fr 180px;
+    gap: 25px;
+    align-items: center;
 }
 
-/* info */
-
-.info-section{
-    padding:35px;
+.avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#0f172a,#dc2626);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 55px;
 }
 
-.section-title{
-    font-size:28px;
-    margin-bottom:25px;
+.verified {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+.profile-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-.info-box{
-    background:#f8fafc;
-    padding:22px;
-    border-radius:16px;
-    border:1px solid #e5e7eb;
+.profile-line {
+    color: #374151;
+    margin: 8px 0;
 }
 
-.label{
-    color:#6b7280;
-    font-size:14px;
-    margin-bottom:10px;
+.join-box {
+    text-align: center;
+    border-right: 1px solid #e5e7eb;
+    padding-right: 20px;
 }
 
-.value{
-    font-size:20px;
-    font-weight:bold;
+.join-icon {
+    font-size: 35px;
+    background: #fee2e2;
+    color: #dc2626;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto 12px;
 }
 
-/* buttons */
-
-.buttons{
-    margin-top:35px;
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
+.stats-card {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    text-align: center;
 }
 
-.btn{
-    text-decoration:none;
-    padding:14px 25px;
-    border-radius:12px;
-    font-weight:bold;
-    transition:.2s;
+.stat {
+    border-left: 1px solid #e5e7eb;
+    padding: 15px;
 }
 
-.home-btn{
-    background:#dc2626;
-    color:white;
+.stat:last-child {
+    border-left: none;
 }
 
-.logout-btn{
-    background:#07111f;
-    color:white;
+.stat-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
 }
 
-.btn:hover{
-    transform:translateY(-2px);
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
 }
 
-/* mobile */
-
-@media(max-width:800px){
-
-.info-grid{
-    grid-template-columns:1fr;
+.stat-label {
+    color: #6b7280;
 }
 
-.logo{
-    width:120px;
+.info-card {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 30px;
 }
 
-.top-section h1{
-    font-size:28px;
+.side-tabs {
+    background: #f8fafc;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
+.tab {
+    padding: 18px;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: bold;
 }
 
+.tab.active {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.form-title {
+    font-size: 26px;
+    margin-bottom: 22px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #374151;
+}
+
+input, select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-size: 16px;
+    background: white;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #dc2626;
+}
+
+.email-readonly {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.save-btn {
+    margin-top: 25px;
+    width: 100%;
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #b91c1c;
+}
+
+.logout-btn {
+    margin-top: 15px;
+    width: 100%;
+    background: #07111f;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#msg {
+    color: #16a34a;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+@media(max-width:900px) {
+    .profile-card,
+    .info-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .avatar {
+        margin: auto;
+    }
+
+    .stats-card,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .join-box {
+        border-right: none;
+        padding-right: 0;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- navbar -->
-
 <div class="navbar">
+    <a href="index.html" class="home-link">الرئيسية</a>
     <img src="logo.png" class="logo">
-
-    <div>
-        <a href="index.html"
-        style="text-decoration:none;
-        color:#111827;
-        font-weight:bold;">
-        الرئيسية
-        </a>
-    </div>
 </div>
-
-<!-- page -->
 
 <div class="page">
 
-<div class="account-card">
+    <h1 class="title">حسابي</h1>
+    <div class="breadcrumb">الرئيسية › حسابي</div>
 
-    <!-- top -->
+    <div class="profile-card">
+        <div class="avatar">👤</div>
 
-    <div class="top-section">
-
-        <div class="profile-circle">
-            👤
+        <div>
+            <div class="verified">✓ مستخدم موثق</div>
+            <div class="profile-name" id="profileName">اسم المستخدم</div>
+            <div class="profile-line">✉️ <span id="profileEmail">example@gmail.com</span></div>
+            <div class="profile-line">📞 <span id="profilePhone">-</span></div>
+            <div class="profile-line">📍 البحرين</div>
         </div>
 
-        <h1>حسابك</h1>
-
-        <p>
-            إدارة معلومات حسابك في My Garage
-        </p>
-
+        <div class="join-box">
+            <div class="join-icon">📅</div>
+            <p>تاريخ الانضمام</p>
+            <b>2026</b>
+        </div>
     </div>
 
-    <!-- info -->
-
-    <div class="info-section">
-
-        <h2 class="section-title">
-            المعلومات الشخصية
-        </h2>
-
-        <div class="info-grid">
-
-            <div class="info-box">
-                <div class="label">الاسم</div>
-                <div class="value" id="name">
-                    Alhanoof
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="label">رقم الهاتف</div>
-                <div class="value" id="phone">
-                    +973 33112244
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="label">البريد الإلكتروني</div>
-                <div class="value" id="email">
-                    example@gmail.com
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="label">عدد الحجوزات</div>
-                <div class="value">
-                    5 حجوزات
-                </div>
-            </div>
-
+    <div class="stats-card">
+        <div class="stat">
+            <div class="stat-icon">🚗</div>
+            <div class="stat-number">1</div>
+            <div class="stat-label">سيارتي</div>
         </div>
 
-        <div class="buttons">
-
-            <a href="mybookings.html"
-            class="btn home-btn">
-            حجوزاتي
-            </a>
-
-            <a href="#"
-            onclick="logout()"
-            class="btn logout-btn">
-            تسجيل خروج
-            </a>
-
+        <div class="stat">
+            <div class="stat-icon">📅</div>
+            <div class="stat-number" id="bookingCount">0</div>
+            <div class="stat-label">إجمالي الحجوزات</div>
         </div>
 
+        <div class="stat">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number">0</div>
+            <div class="stat-label">تقييماتي</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">♡</div>
+            <div class="stat-number">0</div>
+            <div class="stat-label">المفضلة</div>
+        </div>
     </div>
 
-</div>
+    <div class="info-card">
+        <div class="side-tabs">
+            <div class="tab active">👤 المعلومات الشخصية</div>
+            <div class="tab">🔒 تغيير كلمة المرور</div>
+            <div class="tab">🔔 الإشعارات</div>
+            <div class="tab">🛡️ إعدادات الخصوصية</div>
+            <div class="tab" onclick="logout()">↪️ تسجيل الخروج</div>
+        </div>
+
+        <div>
+            <h2 class="form-title">المعلومات الشخصية</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="userName" placeholder="ادخل اسمك">
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" class="email-readonly" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="text" id="userPhone" placeholder="+973 33112244">
+                </div>
+
+                <div class="form-group">
+                    <label>المدينة</label>
+                    <input type="text" id="city" placeholder="مثال: المنامة">
+                </div>
+
+                <div class="form-group">
+                    <label>الدولة</label>
+                    <select id="country">
+                        <option>البحرين</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>الرمز البريدي اختياري</label>
+                    <input type="text" id="postal" placeholder="-">
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveProfile()">حفظ التغييرات</button>
+            <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+
+            <p id="msg"></p>
+        </div>
+    </div>
 
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
 
 <script>
+auth.onAuthStateChanged(function(user) {
+    if (user) {
+        document.getElementById("email").value = user.email;
+        document.getElementById("profileEmail").innerText = user.email;
 
-auth.onAuthStateChanged(function(user){
+        let name = localStorage.getItem("name_" + user.uid) || "";
+        let phone = localStorage.getItem("phone_" + user.uid) || "";
+        let city = localStorage.getItem("city_" + user.uid) || "";
 
-    if(user){
+        document.getElementById("userName").value = name;
+        document.getElementById("userPhone").value = phone;
+        document.getElementById("city").value = city;
 
-        document.getElementById("email").innerText =
-        user.email;
+        document.getElementById("profileName").innerText = name || "مستخدم My Garage";
+        document.getElementById("profilePhone").innerText = phone || "-";
 
+        loadBookingCount(user.email);
     } else {
-
         window.location.href = "login.html";
     }
-
 });
 
-function logout(){
+function saveProfile() {
+    let user = auth.currentUser;
 
-    auth.signOut().then(() => {
+    let name = document.getElementById("userName").value;
+    let phone = document.getElementById("userPhone").value;
+    let city = document.getElementById("city").value;
 
-        window.location.href = "index.html";
+    localStorage.setItem("name_" + user.uid, name);
+    localStorage.setItem("phone_" + user.uid, phone);
+    localStorage.setItem("city_" + user.uid, city);
 
-    });
+    document.getElementById("profileName").innerText = name || "مستخدم My Garage";
+    document.getElementById("profilePhone").innerText = phone || "-";
 
+    document.getElementById("msg").innerText = "تم حفظ التغييرات بنجاح";
 }
 
+function loadBookingCount(email) {
+    db.collection("bookings")
+    .where("userEmail", "==", email)
+    .onSnapshot((snapshot) => {
+        document.getElementById("bookingCount").innerText = snapshot.size;
+    });
+}
+
+function logout() {
+    auth.signOut().then(() => {
+        window.location.href = "index.html";
+    });
+}
 </script>
 
 </body>
