@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -116,12 +115,6 @@ button:hover {
     padding: 10px 15px;
     border-radius: 8px;
 }
-
-.status {
-    color: green;
-    font-weight: bold;
-}
-
 </style>
 </head>
 
@@ -129,185 +122,124 @@ button:hover {
 
 <div class="navbar">
     My Garage
-
-    <a href="#" class="logout-btn" onclick="logout()">
-        Logout
-    </a>
+    <a href="#" class="logout-btn" onclick="logout()">Logout</a>
 </div>
 
 <h1>Garage Services</h1>
 
 <div class="search-box">
-
-    <input type="text"
-           id="search"
-           placeholder="Search garage...">
+    <input type="text" id="search" placeholder="Search garage...">
 
     <select id="filter">
-
         <option value="all">All Services</option>
-
         <option value="repair">Repair</option>
-
         <option value="oil">Oil Change</option>
-
     </select>
 
-    <button onclick="searchGarage()">
-        Search
-    </button>
-
+    <button onclick="searchGarage()">Search</button>
 </div>
 
 <div id="results"></div>
 
 <div class="links">
-
-    <a href="mybookings.html">
-        My Bookings
-    </a>
+    <a href="mybookings.html">My Bookings</a>
 
     <a id="dashboardLink"
        href="garage-dashboard.html"
        style="display:none;">
-
        Garage Dashboard
-
     </a>
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script src="firebase.js"></script>
 
 <script>
-
 let garages = [
-
-{
-    name: "Blue Engine Garage",
-    service: "repair",
-    location: "Salmabad",
-    rating: "4.2",
-    phone: "17877197",
-    status: "Open",
-    image: "https://images.unsplash.com/photo-1486006920555-c77dcf18193c",
-    map: "https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
-},
-
-{
-    name: "Bosch Service",
-    service: "oil",
-    location: "Tubli",
-    rating: "4.2",
-    phone: "17783888",
-    status: "Open",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-    map: "https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
-},
-
-{
-    name: "Homs Gate Garage",
-    service: "repair",
-    location: "Hamala",
-    rating: "4.2",
-    phone: "34120290",
-    status: "Open",
-    image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98",
-    map: "https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
-},
-
-{
-    name: "Fit and Fix",
-    service: "repair",
-    location: "Hamala",
-    rating: "4.9",
-    phone: "37377196",
-    status: "Open",
-    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
-    map: "https://www.google.com/maps"
-}
-
+    {
+        name: "Blue Engine Garage",
+        service: "repair",
+        location: "Salmabad",
+        rating: "4.2",
+        phone: "17877197",
+        hours: "Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
+        image: "https://images.unsplash.com/photo-1486006920555-c77dcf18193c",
+        map: "https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
+    },
+    {
+        name: "Bosch Service",
+        service: "oil",
+        location: "Tubli",
+        rating: "4.2",
+        phone: "17783888",
+        hours: "Sat–Thu 8 AM–5 PM, Friday Closed",
+        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+        map: "https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+    },
+    {
+        name: "Homs Gate Garage",
+        service: "repair",
+        location: "Hamala",
+        rating: "4.2",
+        phone: "34120290",
+        hours: "Sat–Thu 8 AM–7 PM, Friday Closed",
+        image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98",
+        map: "https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+    },
+    {
+        name: "Fit and Fix",
+        service: "repair",
+        location: "Hamala",
+        rating: "4.9",
+        phone: "37377196",
+        hours: "Sat–Thu 8 AM–8 PM, Friday Closed",
+        image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
+        map: "https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
+    }
 ];
 
 function searchGarage() {
-
-    let text =
-    document.getElementById("search")
-    .value
-    .toLowerCase();
-
-    let filter =
-    document.getElementById("filter").value;
-
+    let text = document.getElementById("search").value.toLowerCase();
+    let filter = document.getElementById("filter").value;
     let result = "";
 
     garages.forEach(g => {
-
         if (
-
-            (filter === "all" ||
-            g.service === filter)
-
-            &&
-
-            (g.name.toLowerCase().includes(text)
-
-            ||
-
-            g.service.toLowerCase().includes(text)
-
-            ||
-
-            g.location.toLowerCase().includes(text))
-
+            (filter === "all" || g.service === filter) &&
+            (
+                g.name.toLowerCase().includes(text) ||
+                g.service.toLowerCase().includes(text) ||
+                g.location.toLowerCase().includes(text)
+            )
         ) {
-
             result += `
-
             <div class="garage">
-
                 <img src="${g.image}">
 
                 <h3>${g.name}</h3>
 
                 <p><b>Service:</b> ${g.service}</p>
-
                 <p><b>Location:</b> ${g.location}</p>
-
                 <p><b>Phone:</b> ${g.phone}</p>
-
                 <p><b>Rating:</b> ⭐ ${g.rating}</p>
+                <p><b>Hours:</b> ${g.hours}</p>
 
-                <p class="status">${g.status}</p>
-
-                <a href="${g.map}"
-                   target="_blank"
-                   class="map-btn">
-
-                   View Location
-
+                <a href="${g.map}" target="_blank" class="map-btn">
+                    View Location
                 </a>
 
                 <br>
 
                 <button onclick="book('${g.name}')">
-
                     Book Now
-
                 </button>
-
             </div>
-
             `;
         }
     });
 
     if (result === "") {
-
         result = "<p>No garages found.</p>";
     }
 
@@ -315,47 +247,33 @@ function searchGarage() {
 }
 
 function book(name) {
-
     localStorage.setItem("garage", name);
-
     window.location.href = "booking.html";
 }
 
 function logout() {
-
     auth.signOut().then(function() {
-
         localStorage.removeItem("loggedIn");
-
         window.location.href = "login.html";
-
     });
-
 }
 
 auth.onAuthStateChanged(function(user) {
-
     if (user) {
-
         let allowedEmails = [
             "alhanoof.t29@gmail.com",
             "anwaralhayki55@gmail.com"
         ];
 
         if (allowedEmails.includes(user.email.toLowerCase())) {
-
-            document.getElementById("dashboardLink")
-            .style.display = "inline-block";
+            document.getElementById("dashboardLink").style.display = "inline-block";
         }
-
     } else {
-
         window.location.href = "login.html";
     }
 });
 
 window.onload = searchGarage;
-
 </script>
 
 </body>
