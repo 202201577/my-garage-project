@@ -89,46 +89,99 @@ h1 {
 
 <div class="buttons">
     <a class="home-btn" href="index.html">Back to Home</a>
-    <button class="clear-btn" onclick="clearBookings()">Clear All Bookings</button>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="firebase.js"></script>
+
 <script>
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-let output = "";
+function loadBookings(userEmail) {
 
-if (bookings.length === 0) {
-    output = "<p>No bookings found.</p>";
-} else {
-    bookings.forEach((b, index) => {
-        let status = b.status || "Waiting";
-        let color = "";
+    db.collection("bookings")
+    .where("userEmail", "==", userEmail)
+    .orderBy("createdAt", "desc")
+    .onSnapshot((snapshot) => {
 
-        if (status === "Accepted") color = "green";
-        else if (status === "Rejected") color = "red";
-        else color = "orange";
+        let output = "";
 
-        output += `
-        <div class="booking">
-            <h3>Booking ${index + 1}</h3>
-            <p>Garage: ${b.garage}</p>
-            <p>Date: ${b.date}</p>
-            <p>Status:
-                <span class="status" style="background:${color};">
-                    ${status}
-                </span>
-            </p>
-        </div>
-        `;
+        if (snapshot.empty) {
+
+            output = "<p>No bookings found.</p>";
+
+        } else {
+
+            let count = 1;
+
+            snapshot.forEach((doc) => {
+
+                let b = doc.data();
+
+                let status = b.status || "Waiting";
+
+                let color = "";
+
+                if (status === "Accepted")
+                    color = "green";
+
+                else if (status === "Rejected")
+                    color = "red";
+
+                else
+                    color = "orange";
+
+                output += `
+
+                <div class="booking">
+
+                    <h3>Booking ${count}</h3>
+
+                    <p>Garage: ${b.garage}</p>
+
+                    <p>Date: ${b.date}</p>
+
+                    <p>Status:
+
+                        <span class="status"
+                              style="background:${color};">
+
+                              ${status}
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                `;
+
+                count++;
+            });
+        }
+
+        document.getElementById("bookingList")
+        .innerHTML = output;
+
     });
 }
 
-document.getElementById("bookingList").innerHTML = output;
+auth.onAuthStateChanged(function(user) {
 
-function clearBookings() {
-    localStorage.removeItem("bookings");
-    location.reload();
-}
+    if (user) {
+
+        loadBookings(user.email);
+
+    } else {
+
+        window.location.href = "login.html";
+    }
+});
+
 </script>
 
 </body>
