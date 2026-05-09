@@ -2,9 +2,11 @@
 <html>
 <head>
 <title>My Garage</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -97,6 +99,7 @@ button:hover {
     border-radius: 8px;
     margin: 5px;
 }
+
 </style>
 </head>
 
@@ -104,59 +107,123 @@ button:hover {
 
 <div class="navbar">
     My Garage
-    <a href="login.html" class="logout-btn">Logout</a>
+
+    <a href="login.html" class="logout-btn">
+        Logout
+    </a>
 </div>
 
 <h1>Garage Services</h1>
 
 <div class="search-box">
-    <input type="text" id="search" placeholder="Search garage...">
+
+    <input type="text"
+           id="search"
+           placeholder="Search garage...">
 
     <select id="filter">
+
         <option value="all">All Services</option>
+
         <option value="oil">Oil Change</option>
+
         <option value="repair">Repair</option>
+
     </select>
 
-    <button onclick="searchGarage()">Search</button>
+    <button onclick="searchGarage()">
+        Search
+    </button>
+
 </div>
 
 <div id="results"></div>
 
 <div class="links">
-    <a href="mybookings.html">My Bookings</a>
-    <a href="garage-dashboard.html">Garage Dashboard</a>
+
+    <a href="mybookings.html">
+        My Bookings
+    </a>
+
+    <a id="dashboardLink"
+       href="garage-dashboard.html"
+       style="display:none;">
+
+       Garage Dashboard
+
+    </a>
+
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="firebase.js"></script>
+
 <script>
+
 let garages = [
+
     {name: "Garage A", service: "oil"},
+
     {name: "Garage B", service: "repair"},
+
     {name: "Garage C", service: "oil"}
+
 ];
 
 function searchGarage() {
-    let text = document.getElementById("search").value.toLowerCase();
-    let filter = document.getElementById("filter").value;
+
+    let text =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+    let filter =
+    document.getElementById("filter").value;
+
     let result = "";
 
     garages.forEach(g => {
+
         if (
-            (filter === "all" || g.service === filter) &&
-            (g.name.toLowerCase().includes(text) ||
-             g.service.toLowerCase().includes(text))
+
+            (filter === "all" ||
+            g.service === filter)
+
+            &&
+
+            (g.name.toLowerCase().includes(text)
+
+            ||
+
+            g.service.toLowerCase().includes(text))
+
         ) {
+
             result += `
+
             <div class="garage">
+
                 <h3>${g.name}</h3>
+
                 <p>Service: ${g.service}</p>
-                <button onclick="book('${g.name}')">Book Now</button>
+
+                <button onclick="book('${g.name}')">
+
+                    Book Now
+
+                </button>
+
             </div>
+
             `;
         }
     });
 
     if (result === "") {
+
         result = "<p>No garages found.</p>";
     }
 
@@ -164,11 +231,37 @@ function searchGarage() {
 }
 
 function book(name) {
+
     localStorage.setItem("garage", name);
+
     window.location.href = "booking.html";
 }
 
+auth.onAuthStateChanged(function(user) {
+
+    if (user) {
+
+        let allowedEmails = [
+
+            "alhanoof.t29@gmail.com"
+            "anwaralhayki55@gmail.com"
+
+        ];
+
+        if (allowedEmails.includes(user.email)) {
+
+            document.getElementById("dashboardLink")
+            .style.display = "inline-block";
+        }
+
+    } else {
+
+        window.location.href = "login.html";
+    }
+});
+
 window.onload = searchGarage;
+
 </script>
 
 </body>
