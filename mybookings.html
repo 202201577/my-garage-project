@@ -42,11 +42,7 @@ body{
 
 }
 
-.logo{
-
-    width:145px;
-
-}
+.logo{width:145px;}
 
 .menu-btn{
 
@@ -55,6 +51,8 @@ body{
     cursor:pointer;
 
     color:#111827;
+
+    font-weight:bold;
 
 }
 
@@ -82,11 +80,7 @@ body{
 
 }
 
-.side-menu.open{
-
-    right:0;
-
-}
+.side-menu.open{right:0;}
 
 .close-btn{
 
@@ -140,11 +134,7 @@ body{
 
 .side-menu a:hover,
 
-.side-menu .active{
-
-    background:#dc2626;
-
-}
+.side-menu .active{background:#dc2626;}
 
 .page{
 
@@ -258,7 +248,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:140px 1fr 220px 120px;
+    grid-template-columns:120px 220px 1fr 140px;
 
     gap:25px;
 
@@ -266,15 +256,9 @@ body{
 
 }
 
-.date-box{
-
-    background:#f8fafc;
-
-    border-radius:15px;
+.status-area{
 
     text-align:center;
-
-    padding:18px;
 
 }
 
@@ -289,8 +273,6 @@ body{
     font-weight:bold;
 
     font-size:14px;
-
-    margin-bottom:12px;
 
 }
 
@@ -315,62 +297,6 @@ body{
     background:#fee2e2;
 
     color:#dc2626;
-
-}
-
-.date-day{
-
-    font-size:34px;
-
-    font-weight:bold;
-
-}
-
-.date-month{
-
-    color:#6b7280;
-
-    margin-top:5px;
-
-}
-
-.garage-info{
-
-    display:flex;
-
-    gap:18px;
-
-    align-items:center;
-
-}
-
-.garage-img{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:14px;
-
-    object-fit:cover;
-
-    background:#f3f4f6;
-
-}
-
-.garage-name{
-
-    font-size:22px;
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-
-}
-
-.location{
-
-    color:#6b7280;
 
 }
 
@@ -421,6 +347,74 @@ body{
     background:#dc2626;
 
     color:white;
+
+}
+
+.garage-info{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+.garage-img{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:14px;
+
+    object-fit:cover;
+
+    background:#f3f4f6;
+
+}
+
+.garage-name{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+.location{
+
+    color:#6b7280;
+
+}
+
+.date-box{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    padding:18px;
+
+}
+
+.date-day{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+.date-month{
+
+    color:#6b7280;
+
+    margin-top:5px;
 
 }
 
@@ -514,11 +508,7 @@ body{
 
     }
 
-    .logo{
-
-        width:120px;
-
-    }
+    .logo{width:120px;}
 
 }
 </style>
@@ -526,14 +516,20 @@ body{
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<div class="menu-btn" onclick="toggleMenu()">
+&#9776;
+</div>
 </div>
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
 <a href="mybookings.html" class="active">حجوزاتي</a>
-<a href="account.html">حسابي</a>
+<a href="#" onclick="nearestGarage()">أقرب كراج</a>
+<a href="#">الإشعارات</a>
+<a href="account.html">الحساب</a>
+<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
 <div class="page">
@@ -542,7 +538,7 @@ body{
 <div class="filters">
 <div class="tabs">
 <div class="tab active" onclick="setFilter('all', this)">الكل</div>
-<div class="tab" onclick="setFilter('Waiting', this)">المرتقبة</div>
+<div class="tab" onclick="setFilter('Waiting', this)">الانتظار</div>
 <div class="tab" onclick="setFilter('Accepted', this)">المقبولة</div>
 <div class="tab" onclick="setFilter('Rejected', this)">المرفوضة</div>
 </div>
@@ -594,6 +590,12 @@ function logout(){
 
 }
 
+function nearestGarage(){
+
+    alert("ميزة أقرب كراج بنضيفها بعد ما نحط إحداثيات الكراجات.");
+
+}
+
 function setFilter(filter, element){
 
     currentFilter = filter;
@@ -622,7 +624,7 @@ function getArabicStatus(status){
 
     if(status === "Rejected") return "مرفوضة";
 
-    return "مرتقبة";
+    return "انتظار";
 
 }
 
@@ -708,21 +710,11 @@ function renderBookings(){
 
             output += `
 <div class="booking-card">
-<div class="date-box">
+<div class="status-area">
 <span class="status-label ${getStatusClass(status)}">
 
                         ${getArabicStatus(status)}
 </span>
-<div class="date-day">${getDay(b.date)}</div>
-<div class="date-month">${getMonthYear(b.date)}</div>
-<div style="margin-top:8px;color:#6b7280;">🕒 ${b.time || "-"}</div>
-</div>
-<div class="garage-info">
-<img src="${image}" class="garage-img">
-<div>
-<div class="garage-name">${b.garage || "-"}</div>
-<div class="location">📍 البحرين</div>
-</div>
 </div>
 <div class="service-info">
 <h3>${b.serviceType || "-"}</h3>
@@ -732,8 +724,17 @@ function renderBookings(){
                         عرض التفاصيل
 </button>
 </div>
-<div style="text-align:center;">
-<b>${getArabicStatus(status)}</b>
+<div class="garage-info">
+<img src="${image}" class="garage-img">
+<div>
+<div class="garage-name">${b.garage || "-"}</div>
+<div class="location">📍 البحرين</div>
+</div>
+</div>
+<div class="date-box">
+<div class="date-day">${getDay(b.date)}</div>
+<div class="date-month">${getMonthYear(b.date)}</div>
+<div style="margin-top:8px;color:#6b7280;">🕒 ${b.time || "-"}</div>
 </div>
 <div class="more-details" id="${detailId}">
 <div class="detail-grid">
@@ -782,6 +783,20 @@ function loadBookings(userEmail){
 auth.onAuthStateChanged(function(user){
 
     if(user){
+
+        let adminEmails = [
+
+            "alhanoof.t29@gmail.com",
+
+            "anwaralhayki55@gmail.com"
+
+        ];
+
+        if(adminEmails.includes(user.email.toLowerCase())){
+
+            document.getElementById("dashboardLink").style.display = "block";
+
+        }
 
         loadBookings(user.email);
 
