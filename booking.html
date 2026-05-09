@@ -39,8 +39,6 @@ body {
 
     width: 150px;
 
-    height: auto;
-
 }
 
 .nav-links a {
@@ -113,65 +111,11 @@ body {
 
 }
 
-.steps {
+.form-title {
 
-    display: flex;
+    margin-bottom: 25px;
 
-    justify-content: space-between;
-
-    margin-bottom: 30px;
-
-    position: relative;
-
-}
-
-.step {
-
-    text-align: center;
-
-    flex: 1;
-
-    color: #6b7280;
-
-    font-weight: bold;
-
-}
-
-.circle {
-
-    width: 38px;
-
-    height: 38px;
-
-    background: white;
-
-    border: 2px solid #9ca3af;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    margin: auto auto 8px;
-
-}
-
-.step.active .circle {
-
-    background: #dc2626;
-
-    color: white;
-
-    border-color: #dc2626;
-
-}
-
-.step.active {
-
-    color: #dc2626;
+    font-size: 28px;
 
 }
 
@@ -297,6 +241,8 @@ button, .back-btn {
 
     margin-bottom: 8px;
 
+    font-weight: bold;
+
 }
 
 .summary-row {
@@ -310,18 +256,6 @@ button, .back-btn {
     padding: 12px 0;
 
     gap: 10px;
-
-}
-
-.price {
-
-    font-size: 28px;
-
-    color: #dc2626;
-
-    font-weight: bold;
-
-    margin-top: 20px;
 
 }
 
@@ -405,8 +339,8 @@ button, .back-btn {
 <img src="logo.png" class="logo">
 <div class="nav-links">
 <a href="index.html">الرئيسية</a>
-<a href="index.html#garages">ابحث عن كراج</a>
-<a href="index.html#about">عن نحن</a>
+<a href="index.html#garages">الكراجات</a>
+<a href="index.html#about">من نحن</a>
 <a href="index.html#contact">اتصل بنا</a>
 <a href="index.html#garages" class="book-top-btn">احجز خدمة الآن</a>
 </div>
@@ -414,33 +348,11 @@ button, .back-btn {
 <h1 class="page-title">حجز خدمة</h1>
 <div class="breadcrumb">
 
-    الرئيسية › نتائج البحث › <span id="breadcrumbGarage">الكراج</span> › حجز خدمة
+    الرئيسية › الكراجات › <span id="breadcrumbGarage">الكراج</span> › حجز خدمة
 </div>
 <div class="container">
 <div class="card">
-<div class="steps">
-<div class="step active">
-<div class="circle">1</div>
-
-                اختر الخدمة
-</div>
-<div class="step active">
-<div class="circle">2</div>
-
-                تفاصيل الحجز
-</div>
-<div class="step">
-<div class="circle">3</div>
-
-                مراجعة الطلب
-</div>
-<div class="step">
-<div class="circle">4</div>
-
-                تأكيد الحجز
-</div>
-</div>
-<h2>تفاصيل الحجز</h2>
+<h2 class="form-title">تفاصيل الحجز</h2>
 <div class="form-grid">
 <div class="form-group">
 <label>نوع الخدمة *</label>
@@ -462,11 +374,13 @@ button, .back-btn {
 </div>
 <div class="form-group">
 <label>التاريخ *</label>
-<input type="date" id="date" onchange="updateSummary()">
+<input type="date" id="date" onchange="checkDateAndLoadTimes()">
 </div>
 <div class="form-group">
 <label>الوقت *</label>
-<input type="time" id="time" onchange="updateSummary()">
+<select id="time" onchange="updateSummary()">
+<option value="">اختاري الوقت</option>
+</select>
 </div>
 <div class="form-group">
 <label>رقم الهاتف *</label>
@@ -474,7 +388,7 @@ button, .back-btn {
 </div>
 <div class="form-group full">
 <label>ملاحظات إضافية</label>
-<textarea id="notes" placeholder="اكتب أي ملاحظات عن مشكلة السيارة..." oninput="updateSummary()"></textarea>
+<textarea id="notes" placeholder="اكتبي أي ملاحظات عن مشكلة السيارة..." oninput="updateSummary()"></textarea>
 </div>
 </div>
 <div class="buttons">
@@ -507,14 +421,20 @@ button, .back-btn {
 <span>الوقت</span>
 <b id="summaryTime">-</b>
 </div>
-<div class="price">بدون دفع حالياً</div>
-<small>سيتم تأكيد الحجز من قبل الكراج.</small>
+<div class="summary-row">
+<span>رقم الهاتف</span>
+<b id="summaryPhone">-</b>
+</div>
+<div class="summary-row">
+<span>الملاحظات</span>
+<b id="summaryNotes">-</b>
+</div>
 </div>
 </div>
 <div class="note-box">
 <div class="note">🛡️ حجز آمن ومضمون</div>
 <div class="note">📞 تحتاج مساعدة؟ +973 1234 5678</div>
-<div class="note">🔔 متابعة حالة الحجز</div>
+<div class="note">🔔 تابع حالة الحجز من صفحة حجوزاتي</div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -536,6 +456,42 @@ let garageImages = {
 
 };
 
+let garageTimes = {
+
+    "Blue Motors Auto Services": [
+
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+
+        "15:00", "16:00", "17:00"
+
+    ],
+
+    "BOSCH Service": [
+
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+
+        "13:00", "14:00", "15:00", "16:00"
+
+    ],
+
+    "HOMS GATE": [
+
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+
+        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"
+
+    ],
+
+    "Fit and Fix": [
+
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+
+        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
+
+    ]
+
+};
+
 document.getElementById("breadcrumbGarage").innerText = garage;
 
 document.getElementById("summaryGarage").innerText = garage;
@@ -543,6 +499,66 @@ document.getElementById("summaryGarage").innerText = garage;
 if (garageImages[garage]) {
 
     document.getElementById("garageImage").src = garageImages[garage];
+
+}
+
+function loadTimes() {
+
+    let timeSelect = document.getElementById("time");
+
+    timeSelect.innerHTML = `<option value="">اختاري الوقت</option>`;
+
+    let times = garageTimes[garage] || [];
+
+    times.forEach(t => {
+
+        timeSelect.innerHTML += `<option value="${t}">${t}</option>`;
+
+    });
+
+}
+
+function checkDateAndLoadTimes() {
+
+    let dateValue = document.getElementById("date").value;
+
+    let msg = document.getElementById("msg");
+
+    let timeSelect = document.getElementById("time");
+
+    msg.innerText = "";
+
+    if (!dateValue) {
+
+        loadTimes();
+
+        updateSummary();
+
+        return;
+
+    }
+
+    let selectedDate = new Date(dateValue);
+
+    let day = selectedDate.getDay();
+
+    if (day === 5) {
+
+        msg.innerText = "لا يمكن الحجز يوم الجمعة لأن الكراج مغلق.";
+
+        timeSelect.innerHTML = `<option value="">الكراج مغلق</option>`;
+
+        timeSelect.disabled = true;
+
+    } else {
+
+        timeSelect.disabled = false;
+
+        loadTimes();
+
+    }
+
+    updateSummary();
 
 }
 
@@ -567,6 +583,14 @@ function updateSummary() {
     document.getElementById("summaryTime").innerText =
 
     document.getElementById("time").value || "-";
+
+    document.getElementById("summaryPhone").innerText =
+
+    document.getElementById("phone").value || "-";
+
+    document.getElementById("summaryNotes").innerText =
+
+    document.getElementById("notes").value || "-";
 
 }
 
@@ -607,6 +631,16 @@ function confirmBooking() {
     if (carType === "" || plateNumber === "" || date === "" || time === "" || phone === "") {
 
         document.getElementById("msg").innerText = "يرجى تعبئة جميع البيانات المطلوبة.";
+
+        return;
+
+    }
+
+    let selectedDate = new Date(date);
+
+    if (selectedDate.getDay() === 5) {
+
+        document.getElementById("msg").innerText = "لا يمكن الحجز يوم الجمعة لأن الكراج مغلق.";
 
         return;
 
@@ -663,6 +697,8 @@ auth.onAuthStateChanged(function(user) {
     }
 
 });
+
+loadTimes();
 
 updateSummary();
 </script>
