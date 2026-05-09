@@ -4,415 +4,688 @@
 <meta charset="UTF-8">
 <title>حسابي - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
+
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
+
 .navbar{background:white;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+
 .logo{width:150px}
+
 .home-link{text-decoration:none;color:#111827;font-weight:bold}
+
 .page{width:90%;max-width:1150px;margin:35px auto}
+
 .title{font-size:34px;margin-bottom:5px}
+
 .breadcrumb{color:#6b7280;margin-bottom:25px}
-.profile-card,.stats-card,.info-card{background:white;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:30px;margin-bottom:25px}
+
+.profile-card,.stats-card,.info-card{
+
+background:white;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:30px;margin-bottom:25px
+
+}
+
 .profile-card{display:grid;grid-template-columns:150px 1fr 180px;gap:25px;align-items:center}
-.avatar{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#0f172a,#dc2626);color:white;display:flex;justify-content:center;align-items:center;font-size:55px}
+
+.avatar{
+
+width:130px;height:130px;border-radius:50%;
+
+background:linear-gradient(135deg,#0f172a,#dc2626);
+
+background-size:cover;background-position:center;
+
+display:flex;justify-content:center;align-items:center;
+
+font-size:55px;cursor:pointer;color:white;position:relative
+
+}
+
+.avatar::after{
+
+content:"✎";position:absolute;bottom:5px;left:5px;background:white;color:#dc2626;
+
+width:32px;height:32px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;
+
+box-shadow:0 2px 8px rgba(0,0,0,.2)
+
+}
+
 .badge{display:inline-block;padding:8px 14px;border-radius:20px;font-weight:bold;margin-bottom:12px}
+
 .verified{background:#dcfce7;color:#15803d}
+
 .not-verified{background:#fee2e2;color:#dc2626;cursor:pointer}
+
 .profile-name{font-size:30px;font-weight:bold;margin-bottom:12px}
+
 .profile-line{color:#374151;margin:8px 0}
+
 .join-box{text-align:center;border-right:1px solid #e5e7eb;padding-right:20px}
+
 .join-icon{font-size:35px;background:#fee2e2;color:#dc2626;width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:auto auto 12px}
+
 .stats-card{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;text-align:center}
+
 .stat{border-left:1px solid #e5e7eb;padding:15px;cursor:pointer}
+
 .stat:last-child{border-left:none}
+
 .stat-icon{font-size:28px;margin-bottom:8px}
+
 .stat-number{font-size:28px;font-weight:bold}
+
 .stat-label{color:#6b7280}
+
 .info-card{display:grid;grid-template-columns:230px 1fr;gap:30px}
+
 .side-tabs{background:#f8fafc;border-radius:16px;overflow:hidden}
+
 .tab{padding:18px;border-bottom:1px solid #e5e7eb;font-weight:bold;cursor:pointer}
+
 .tab.active{background:#fee2e2;color:#dc2626}
-.form-title{font-size:26px;margin-bottom:22px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.form-group label{display:block;margin-bottom:8px;font-weight:bold;color:#374151}
-input,select{width:100%;box-sizing:border-box;padding:14px;border-radius:12px;border:1px solid #d1d5db;font-size:16px;background:white}
-input:focus,select:focus{outline:none;border-color:#dc2626}
-.email-readonly{background:#f3f4f6;color:#6b7280}
-.save-btn{margin-top:25px;width:100%;background:#dc2626;color:white;border:none;padding:15px;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer}
-.save-btn:hover{background:#b91c1c}
+
 .section{display:none}
+
 .section.active{display:block}
+
+.form-title{font-size:26px;margin-bottom:22px}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+.form-group label{display:block;margin-bottom:8px;font-weight:bold;color:#374151}
+
+input,select{
+
+width:100%;box-sizing:border-box;padding:14px;border-radius:12px;border:1px solid #d1d5db;font-size:16px;background:white
+
+}
+
+input:focus,select:focus{outline:none;border-color:#dc2626}
+
+.email-readonly{background:#f3f4f6;color:#6b7280}
+
+.save-btn{
+
+margin-top:25px;width:100%;background:#dc2626;color:white;border:none;padding:15px;border-radius:12px;
+
+font-size:17px;font-weight:bold;cursor:pointer
+
+}
+
+.save-btn:hover{background:#b91c1c}
+
+.add-btn{
+
+background:#07111f;color:white;border:none;padding:12px 18px;border-radius:12px;font-weight:bold;cursor:pointer
+
+}
+
 .car-card{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:18px;margin-bottom:18px}
+
 .car-card h3{margin-top:0}
+
 #msg,#passMsg,#carMsg,#verifyMsg{color:#16a34a;font-weight:bold;margin-top:15px}
+
 .error{color:#dc2626!important}
+
 @media(max-width:900px){
+
 .profile-card,.info-card{grid-template-columns:1fr;text-align:center}
-.avatar{margin:auto}.stats-card,.form-grid{grid-template-columns:1fr}
-.join-box{border-right:none;padding-right:0}.logo{width:120px}
+
+.avatar{margin:auto}
+
+.stats-card,.form-grid{grid-template-columns:1fr}
+
+.join-box{border-right:none;padding-right:0}
+
+.logo{width:120px}
+
 }
 </style>
 </head>
-
 <body>
-
 <div class="navbar">
-    <a href="index.html" class="home-link">الرئيسية</a>
-    <img src="logo.png" class="logo">
+<a href="index.html" class="home-link">الرئيسية</a>
+<img src="logo.png" class="logo">
 </div>
-
 <div class="page">
-
 <h1 class="title">حسابي</h1>
 <div class="breadcrumb">الرئيسية › حسابي</div>
-
 <div class="profile-card">
-    <div class="avatar">👤</div>
-
-    <div>
-        <div id="verifyBadge" class="badge">...</div>
-        <div class="profile-name" id="profileName">مستخدم My Garage</div>
-        <div class="profile-line">✉️ <span id="profileEmail">example@gmail.com</span></div>
-        <div class="profile-line">📞 <span id="profilePhone">-</span></div>
-        <div class="profile-line">📍 البحرين</div>
-        <p id="verifyMsg"></p>
-    </div>
-
-    <div class="join-box">
-        <div class="join-icon">📅</div>
-        <p>تاريخ الانضمام</p>
-        <b>2026</b>
-    </div>
+<div>
+<div class="avatar" id="avatarImage" onclick="chooseProfileImage()">👤</div>
+<input type="file" id="profileUpload" accept="image/*" style="display:none" onchange="uploadProfile(event)">
 </div>
-
+<div>
+<div id="verifyBadge" class="badge">...</div>
+<div class="profile-name" id="profileName">مستخدم My Garage</div>
+<div class="profile-line">✉ <span id="profileEmail">example@gmail.com</span></div>
+<div class="profile-line">📞 <span id="profilePhone">-</span></div>
+<div class="profile-line">📍 البحرين</div>
+<p id="verifyMsg"></p>
+</div>
+<div class="join-box">
+<div class="join-icon">📅</div>
+<p>تاريخ الانضمام</p>
+<b>2026</b>
+</div>
+</div>
 <div class="stats-card">
-    <div class="stat" onclick="showSection('cars')">
-        <div class="stat-icon">🚗</div>
-        <div class="stat-number">2</div>
-        <div class="stat-label">سياراتي</div>
-    </div>
-
-    <div class="stat" onclick="window.location.href='mybookings.html'">
-        <div class="stat-icon">📅</div>
-        <div class="stat-number" id="bookingCount">0</div>
-        <div class="stat-label">إجمالي الحجوزات</div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-icon">⭐</div>
-        <div class="stat-number">0</div>
-        <div class="stat-label">تقييماتي</div>
-    </div>
+<div class="stat" onclick="showSection('cars')">
+<div class="stat-icon">🚗</div>
+<div class="stat-number" id="carCountDisplay">0</div>
+<div class="stat-label">سياراتي</div>
 </div>
-
+<div class="stat" onclick="window.location.href='mybookings.html'">
+<div class="stat-icon">📅</div>
+<div class="stat-number" id="bookingCount">0</div>
+<div class="stat-label">إجمالي الحجوزات</div>
+</div>
+<div class="stat">
+<div class="stat-icon">⭐</div>
+<div class="stat-number">0</div>
+<div class="stat-label">تقييماتي</div>
+</div>
+</div>
 <div class="info-card">
-
-    <div class="side-tabs">
-        <div class="tab active" id="tab-personal" onclick="showSection('personal')">👤 المعلومات الشخصية</div>
-        <div class="tab" id="tab-cars" onclick="showSection('cars')">🚗 سياراتي</div>
-        <div class="tab" id="tab-password" onclick="showSection('password')">🔒 تغيير كلمة المرور</div>
-        <div class="tab" onclick="logout()">↪️ تسجيل الخروج</div>
-    </div>
-
-    <div>
-
-        <div id="personal" class="section active">
-            <h2 class="form-title">المعلومات الشخصية</h2>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>الاسم الكامل</label>
-                    <input type="text" id="userName" placeholder="ادخل اسمك">
-                </div>
-
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" id="email" class="email-readonly" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label>رقم الهاتف</label>
-                    <input type="text" id="userPhone" placeholder="+973 33112244">
-                </div>
-
-                <div class="form-group">
-                    <label>المدينة</label>
-                    <input type="text" id="city" placeholder="مثال: المنامة">
-                </div>
-
-                <div class="form-group">
-                    <label>الدولة</label>
-                    <select id="country">
-                        <option>البحرين</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>الرمز البريدي اختياري</label>
-                    <input type="text" id="postal" placeholder="-">
-                </div>
-            </div>
-
-            <button class="save-btn" onclick="saveProfile()">حفظ التغييرات</button>
-            <p id="msg"></p>
-        </div>
-
-        <div id="cars" class="section">
-            <h2 class="form-title">سياراتي</h2>
-
-            <div class="car-card">
-                <h3>سيارة 1</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>اسم السيارة</label>
-                        <input type="text" id="car1Name" placeholder="مثال: سيارتي الأساسية">
-                    </div>
-                    <div class="form-group">
-                        <label>نوع السيارة</label>
-                        <input type="text" id="car1Type" placeholder="مثال: Toyota Camry">
-                    </div>
-                    <div class="form-group">
-                        <label>رقم السيارة</label>
-                        <input type="text" id="car1Plate" placeholder="مثال: 123456">
-                    </div>
-                </div>
-            </div>
-
-            <div class="car-card">
-                <h3>سيارة 2</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>اسم السيارة</label>
-                        <input type="text" id="car2Name" placeholder="مثال: سيارة البيت">
-                    </div>
-                    <div class="form-group">
-                        <label>نوع السيارة</label>
-                        <input type="text" id="car2Type" placeholder="مثال: Nissan Altima">
-                    </div>
-                    <div class="form-group">
-                        <label>رقم السيارة</label>
-                        <input type="text" id="car2Plate" placeholder="مثال: 654321">
-                    </div>
-                </div>
-            </div>
-
-            <button class="save-btn" onclick="saveCars()">حفظ بيانات السيارات</button>
-            <p id="carMsg"></p>
-        </div>
-
-        <div id="password" class="section">
-            <h2 class="form-title">تغيير كلمة المرور</h2>
-
-            <div id="currentPassBox">
-                <div class="form-group">
-                    <label>كلمة المرور الحالية</label>
-                    <input type="password" id="currentPassword" placeholder="اكتبي كلمة المرور الحالية">
-                </div>
-
-                <button class="save-btn" onclick="checkCurrentPassword()">تحقق</button>
-            </div>
-
-            <div id="newPassBox" style="display:none;">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>كلمة المرور الجديدة</label>
-                        <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
-                    </div>
-
-                    <div class="form-group">
-                        <label>تأكيد كلمة المرور</label>
-                        <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور">
-                    </div>
-                </div>
-
-                <button class="save-btn" onclick="changePassword()">حفظ كلمة المرور الجديدة</button>
-            </div>
-
-            <p id="passMsg"></p>
-        </div>
-
-    </div>
+<div class="side-tabs">
+<div class="tab active" id="tab-personal" onclick="showSection('personal')">👤 المعلومات الشخصية</div>
+<div class="tab" id="tab-cars" onclick="showSection('cars')">🚗 سياراتي</div>
+<div class="tab" id="tab-password" onclick="showSection('password')">🔒 تغيير كلمة المرور</div>
+<div class="tab" onclick="logout()">↪ تسجيل الخروج</div>
 </div>
-
+<div>
+<div id="personal" class="section active">
+<h2 class="form-title">المعلومات الشخصية</h2>
+<div class="form-grid">
+<div class="form-group">
+<label>الاسم الكامل</label>
+<input type="text" id="userName" placeholder="ادخل اسمك">
 </div>
-
+<div class="form-group">
+<label>البريد الإلكتروني</label>
+<input type="email" id="email" class="email-readonly" readonly>
+</div>
+<div class="form-group">
+<label>رقم الهاتف</label>
+<input type="text" id="userPhone" placeholder="+973 33112244">
+</div>
+<div class="form-group">
+<label>الجنس</label>
+<select id="gender" onchange="changeAvatar()">
+<option value="female">أنثى</option>
+<option value="male">ذكر</option>
+</select>
+</div>
+<div class="form-group">
+<label>المدينة</label>
+<input type="text" id="city" placeholder="مثال: المنامة">
+</div>
+<div class="form-group">
+<label>الدولة</label>
+<select id="country">
+<option>البحرين</option>
+</select>
+</div>
+</div>
+<button class="save-btn" onclick="saveProfile()">حفظ التغييرات</button>
+<p id="msg"></p>
+</div>
+<div id="cars" class="section">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:15px;flex-wrap:wrap;">
+<h2 class="form-title" style="margin:0;">سياراتي</h2>
+<button type="button" class="add-btn" onclick="addCar()">+ إضافة سيارة</button>
+</div>
+<div id="carsContainer"></div>
+<button class="save-btn" onclick="saveCars()">حفظ بيانات السيارات</button>
+<p id="carMsg"></p>
+</div>
+<div id="password" class="section">
+<h2 class="form-title">تغيير كلمة المرور</h2>
+<div id="currentPassBox">
+<div class="form-group">
+<label>كلمة المرور الحالية</label>
+<input type="password" id="currentPassword" placeholder="اكتبي كلمة المرور الحالية">
+</div>
+<button class="save-btn" onclick="checkCurrentPassword()">تحقق</button>
+</div>
+<div id="newPassBox" style="display:none;">
+<div class="form-grid">
+<div class="form-group">
+<label>كلمة المرور الجديدة</label>
+<input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
+</div>
+<div class="form-group">
+<label>تأكيد كلمة المرور</label>
+<input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور">
+</div>
+</div>
+<button class="save-btn" onclick="changePassword()">حفظ كلمة المرور الجديدة</button>
+</div>
+<p id="passMsg"></p>
+</div>
+</div>
+</div>
+</div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
-
 <script>
+
 let currentUser = null;
 
+let carCount = 0;
+
 auth.onAuthStateChanged(function(user) {
+
     if (user) {
+
         currentUser = user;
 
         document.getElementById("email").value = user.email;
+
         document.getElementById("profileEmail").innerText = user.email;
 
         let name = localStorage.getItem("name_" + user.uid) || "";
+
         let phone = localStorage.getItem("phone_" + user.uid) || "";
+
         let city = localStorage.getItem("city_" + user.uid) || "";
 
+        let gender = localStorage.getItem("gender_" + user.uid) || "female";
+
         document.getElementById("userName").value = name;
+
         document.getElementById("userPhone").value = phone;
+
         document.getElementById("city").value = city;
 
+        document.getElementById("gender").value = gender;
+
         document.getElementById("profileName").innerText = name || "مستخدم My Garage";
+
         document.getElementById("profilePhone").innerText = phone || "-";
 
+        loadProfileImage();
+
         loadCars();
+
         loadBookingCount(user.email);
+
         checkVerification(user);
+
     } else {
+
         window.location.href = "login.html";
+
     }
+
 });
 
 function checkVerification(user) {
+
     let badge = document.getElementById("verifyBadge");
+
     let isGoogle = user.providerData.some(p => p.providerId === "google.com");
 
     if (isGoogle) {
+
         badge.className = "badge verified";
+
         badge.innerText = "✓ مستخدم موثق";
+
+        badge.onclick = null;
+
     } else {
+
         badge.className = "badge not-verified";
+
         badge.innerText = "وثّق حسابك";
+
         badge.onclick = verifyWithGoogle;
+
     }
+
 }
 
 function verifyWithGoogle() {
+
     let provider = new firebase.auth.GoogleAuthProvider();
 
     currentUser.linkWithPopup(provider)
+
     .then(() => {
+
+        document.getElementById("verifyMsg").className = "";
+
         document.getElementById("verifyMsg").innerText = "تم توثيق الحساب بنجاح";
+
         checkVerification(auth.currentUser);
+
     })
+
     .catch(() => {
+
         document.getElementById("verifyMsg").className = "error";
+
         document.getElementById("verifyMsg").innerText =
+
         "إذا كان حساب Google مستخدم من قبل، سجلي دخول باستخدام Google مباشرة.";
+
     });
+
+}
+
+function chooseProfileImage() {
+
+    document.getElementById("profileUpload").click();
+
+}
+
+function uploadProfile(event) {
+
+    let file = event.target.files[0];
+
+    if (!file) return;
+
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        document.getElementById("avatarImage").innerText = "";
+
+        document.getElementById("avatarImage").style.backgroundImage =
+
+        `url('${e.target.result}')`;
+
+        localStorage.setItem("profileImage_" + auth.currentUser.uid, e.target.result);
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+function changeAvatar() {
+
+    let user = auth.currentUser;
+
+    if (!user) return;
+
+    let gender = document.getElementById("gender").value;
+
+    localStorage.setItem("gender_" + user.uid, gender);
+
+    if (!localStorage.getItem("profileImage_" + user.uid)) {
+
+        let avatar = document.getElementById("avatarImage");
+
+        avatar.style.backgroundImage = "none";
+
+        if (gender === "male") {
+
+            avatar.innerText = "👨";
+
+        } else {
+
+            avatar.innerText = "👩";
+
+        }
+
+    }
+
+}
+
+function loadProfileImage() {
+
+    let user = auth.currentUser;
+
+    let savedImage = localStorage.getItem("profileImage_" + user.uid);
+
+    if (savedImage) {
+
+        document.getElementById("avatarImage").innerText = "";
+
+        document.getElementById("avatarImage").style.backgroundImage =
+
+        `url('${savedImage}')`;
+
+    } else {
+
+        changeAvatar();
+
+    }
+
 }
 
 function showSection(sectionId) {
+
     document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
     document.getElementById(sectionId).classList.add("active");
 
     if (document.getElementById("tab-" + sectionId)) {
+
         document.getElementById("tab-" + sectionId).classList.add("active");
+
     }
+
 }
 
 function saveProfile() {
+
     let user = auth.currentUser;
 
     let name = document.getElementById("userName").value;
+
     let phone = document.getElementById("userPhone").value;
+
     let city = document.getElementById("city").value;
 
+    let gender = document.getElementById("gender").value;
+
     localStorage.setItem("name_" + user.uid, name);
+
     localStorage.setItem("phone_" + user.uid, phone);
+
     localStorage.setItem("city_" + user.uid, city);
 
+    localStorage.setItem("gender_" + user.uid, gender);
+
     document.getElementById("profileName").innerText = name || "مستخدم My Garage";
+
     document.getElementById("profilePhone").innerText = phone || "-";
+
+    changeAvatar();
+
     document.getElementById("msg").innerText = "تم حفظ التغييرات بنجاح";
+
+}
+
+function addCar(data = {}) {
+
+    carCount++;
+
+    document.getElementById("carsContainer").innerHTML += `
+<div class="car-card" id="car${carCount}">
+<h3>سيارة ${carCount}</h3>
+<div class="form-grid">
+<div class="form-group">
+<label>نوع السيارة</label>
+<input type="text" id="carType${carCount}" placeholder="مثال: Toyota" value="${data.type || ""}">
+</div>
+<div class="form-group">
+<label>موديل السيارة</label>
+<input type="text" id="carModel${carCount}" placeholder="مثال: Camry 2020" value="${data.model || ""}">
+</div>
+<div class="form-group">
+<label>رقم السيارة</label>
+<input type="text" id="carPlate${carCount}" placeholder="مثال: 123456" value="${data.plate || ""}">
+</div>
+</div>
+</div>
+
+    `;
+
+    document.getElementById("carCountDisplay").innerText = carCount;
+
 }
 
 function saveCars() {
+
     let uid = auth.currentUser.uid;
 
-    localStorage.setItem("car1Name_" + uid, document.getElementById("car1Name").value);
-    localStorage.setItem("car1Type_" + uid, document.getElementById("car1Type").value);
-    localStorage.setItem("car1Plate_" + uid, document.getElementById("car1Plate").value);
+    let cars = [];
 
-    localStorage.setItem("car2Name_" + uid, document.getElementById("car2Name").value);
-    localStorage.setItem("car2Type_" + uid, document.getElementById("car2Type").value);
-    localStorage.setItem("car2Plate_" + uid, document.getElementById("car2Plate").value);
+    for (let i = 1; i <= carCount; i++) {
 
-    document.getElementById("carMsg").innerText = "تم حفظ بيانات السيارات بنجاح";
+        cars.push({
+
+            type: document.getElementById("carType" + i).value,
+
+            model: document.getElementById("carModel" + i).value,
+
+            plate: document.getElementById("carPlate" + i).value
+
+        });
+
+    }
+
+    localStorage.setItem("cars_" + uid, JSON.stringify(cars));
+
+    document.getElementById("carCountDisplay").innerText = cars.length;
+
+    document.getElementById("carMsg").innerText = "تم حفظ السيارات بنجاح";
+
 }
 
 function loadCars() {
+
     let uid = auth.currentUser.uid;
 
-    document.getElementById("car1Name").value = localStorage.getItem("car1Name_" + uid) || "";
-    document.getElementById("car1Type").value = localStorage.getItem("car1Type_" + uid) || "";
-    document.getElementById("car1Plate").value = localStorage.getItem("car1Plate_" + uid) || "";
+    let cars = JSON.parse(localStorage.getItem("cars_" + uid)) || [];
 
-    document.getElementById("car2Name").value = localStorage.getItem("car2Name_" + uid) || "";
-    document.getElementById("car2Type").value = localStorage.getItem("car2Type_" + uid) || "";
-    document.getElementById("car2Plate").value = localStorage.getItem("car2Plate_" + uid) || "";
+    document.getElementById("carsContainer").innerHTML = "";
+
+    carCount = 0;
+
+    document.getElementById("carCountDisplay").innerText = 0;
+
+    cars.forEach(car => {
+
+        addCar(car);
+
+    });
+
 }
 
 function checkCurrentPassword() {
+
     let password = document.getElementById("currentPassword").value;
+
     let user = auth.currentUser;
 
     let credential =
+
     firebase.auth.EmailAuthProvider.credential(user.email, password);
 
     user.reauthenticateWithCredential(credential)
+
     .then(() => {
+
         document.getElementById("passMsg").className = "";
+
         document.getElementById("passMsg").innerText = "كلمة المرور صحيحة، اكتبي كلمة المرور الجديدة";
+
         document.getElementById("newPassBox").style.display = "block";
+
     })
+
     .catch(() => {
+
         document.getElementById("passMsg").className = "error";
+
         document.getElementById("passMsg").innerText = "كلمة المرور الحالية غير صحيحة";
+
     });
+
 }
 
 function changePassword() {
+
     let newPassword = document.getElementById("newPassword").value;
+
     let confirmPassword = document.getElementById("confirmPassword").value;
 
     if (newPassword.length < 6) {
+
         document.getElementById("passMsg").className = "error";
+
         document.getElementById("passMsg").innerText = "كلمة المرور يجب أن تكون 6 أحرف أو أكثر";
+
         return;
+
     }
 
     if (newPassword !== confirmPassword) {
+
         document.getElementById("passMsg").className = "error";
+
         document.getElementById("passMsg").innerText = "كلمة المرور غير متطابقة";
+
         return;
+
     }
 
     auth.currentUser.updatePassword(newPassword)
+
     .then(() => {
+
         document.getElementById("passMsg").className = "";
+
         document.getElementById("passMsg").innerText = "تم تغيير كلمة المرور بنجاح";
+
     })
+
     .catch((error) => {
+
         document.getElementById("passMsg").className = "error";
+
         document.getElementById("passMsg").innerText = error.message;
+
     });
+
 }
 
 function loadBookingCount(email) {
+
     db.collection("bookings")
+
     .where("userEmail", "==", email)
+
     .onSnapshot((snapshot) => {
+
         document.getElementById("bookingCount").innerText = snapshot.size;
+
     });
+
 }
 
 function logout() {
+
     auth.signOut().then(() => {
+
         window.location.href = "login.html";
+
     });
+
 }
 </script>
-
 </body>
 </html>
+ 
