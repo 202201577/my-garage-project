@@ -76,7 +76,7 @@ button:hover {
     margin: 15px auto;
     padding: 20px;
     width: 90%;
-    max-width: 320px;
+    max-width: 340px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: 0.2s;
@@ -84,6 +84,13 @@ button:hover {
 
 .garage:hover {
     transform: scale(1.02);
+}
+
+.garage img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .links {
@@ -98,6 +105,21 @@ button:hover {
     padding: 10px 15px;
     border-radius: 8px;
     margin: 5px;
+}
+
+.map-btn {
+    display: inline-block;
+    margin: 8px;
+    text-decoration: none;
+    color: white;
+    background: #0ea5e9;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.status {
+    color: green;
+    font-weight: bold;
 }
 
 </style>
@@ -125,9 +147,9 @@ button:hover {
 
         <option value="all">All Services</option>
 
-        <option value="oil">Oil Change</option>
-
         <option value="repair">Repair</option>
+
+        <option value="oil">Oil Change</option>
 
     </select>
 
@@ -165,11 +187,49 @@ button:hover {
 
 let garages = [
 
-    {name: "Garage A", service: "oil"},
+{
+    name: "Blue Engine Garage",
+    service: "repair",
+    location: "Salmabad",
+    rating: "4.2",
+    phone: "17877197",
+    status: "Open",
+    image: "https://images.unsplash.com/photo-1486006920555-c77dcf18193c",
+    map: "https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
+},
 
-    {name: "Garage B", service: "repair"},
+{
+    name: "Bosch Service",
+    service: "oil",
+    location: "Tubli",
+    rating: "4.2",
+    phone: "17783888",
+    status: "Open",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+    map: "https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+},
 
-    {name: "Garage C", service: "oil"}
+{
+    name: "Homs Gate Garage",
+    service: "repair",
+    location: "Hamala",
+    rating: "4.2",
+    phone: "34120290",
+    status: "Open",
+    image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98",
+    map: "https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+},
+
+{
+    name: "Fit and Fix",
+    service: "repair",
+    location: "Hamala",
+    rating: "4.9",
+    phone: "37377196",
+    status: "Open",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
+    map: "https://www.google.com/maps"
+}
 
 ];
 
@@ -198,7 +258,11 @@ function searchGarage() {
 
             ||
 
-            g.service.toLowerCase().includes(text))
+            g.service.toLowerCase().includes(text)
+
+            ||
+
+            g.location.toLowerCase().includes(text))
 
         ) {
 
@@ -206,9 +270,29 @@ function searchGarage() {
 
             <div class="garage">
 
+                <img src="${g.image}">
+
                 <h3>${g.name}</h3>
 
-                <p>Service: ${g.service}</p>
+                <p><b>Service:</b> ${g.service}</p>
+
+                <p><b>Location:</b> ${g.location}</p>
+
+                <p><b>Phone:</b> ${g.phone}</p>
+
+                <p><b>Rating:</b> ⭐ ${g.rating}</p>
+
+                <p class="status">${g.status}</p>
+
+                <a href="${g.map}"
+                   target="_blank"
+                   class="map-btn">
+
+                   View Location
+
+                </a>
+
+                <br>
 
                 <button onclick="book('${g.name}')">
 
