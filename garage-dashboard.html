@@ -134,8 +134,13 @@ button {
 
 <a class="home-btn" href="index.html">Back to Home</a>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="firebase.js"></script>
+
 <script>
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+let bookings = [];
 
 function getStatusColor(status) {
     if (status === "Accepted") return "green";
@@ -168,8 +173,8 @@ function renderBookings() {
 
             if (status === "Waiting") {
                 buttons = `
-                <button class="accept" onclick="updateStatus(${index}, 'Accepted')">Accept</button>
-                <button class="reject" onclick="updateStatus(${index}, 'Rejected')">Reject</button>
+                <button class="accept" onclick="updateStatus('${b.id}', 'Accepted')">Accept</button>
+                <button class="reject" onclick="updateStatus('${b.id}', 'Rejected')">Reject</button>
                 `;
             }
 
@@ -178,6 +183,7 @@ function renderBookings() {
                 <h3>Booking ${index + 1}</h3>
                 <p>Garage: ${b.garage}</p>
                 <p>Date: ${b.date}</p>
+                <p>User: ${b.userEmail || "Unknown"}</p>
                 <p>Status:
                     <span class="status-badge" style="background:${color};">
                         ${status}
@@ -197,13 +203,45 @@ function renderBookings() {
     updateStats();
 }
 
-function updateStatus(index, newStatus) {
-    bookings[index].status = newStatus;
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-    renderBookings();
+function loadBookings() {
+    db.collection("bookings")
+    .orderBy("createdAt", "desc")
+    .onSnapshot((snapshot) => {
+        bookings = [];
+
+        snapshot.forEach((doc) => {
+            bookings.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        renderBookings();
+    });
 }
 
-renderBookings();
+function updateStatus(id, newStatus) {
+    db.collection("bookings").doc(id).update({
+        status: newStatus
+    });
+}
+
+auth.onAuthStateChanged(function(user) {
+    if (user) {
+        let allowedEmails = [
+            "alhanoof.t29@gmail.com",
+            "anwaralhayki55@gmail.com"
+        ];
+
+        if (allowedEmails.includes(user.email.toLowerCase())) {
+            loadBookings();
+        } else {
+            window.location.href = "index.html";
+        }
+    } else {
+        window.location.href = "login.html";
+    }
+});
 </script>
 
 </body>
