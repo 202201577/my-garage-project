@@ -1,168 +1,671 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 <title>Booking - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
+
 body {
-    font-family: Arial, sans-serif;
+
     margin: 0;
-    background: #f5f7fa;
-    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    background: #f8f9fa;
+
+    color: #0f172a;
+
 }
 
 .navbar {
-    background: #1e293b;
-    color: white;
-    padding: 15px;
-    font-size: 20px;
+
+    background: white;
+
+    padding: 18px 40px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+    direction: ltr;
+
+}
+
+.logo {
+
+    width: 150px;
+
+    height: auto;
+
+}
+
+.nav-links a {
+
+    text-decoration: none;
+
+    color: #111827;
+
+    margin: 0 12px;
+
+    font-weight: bold;
+
+}
+
+.book-top-btn {
+
+    background: #dc2626;
+
+    color: white !important;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+}
+
+.page-title {
+
     text-align: center;
+
+    margin: 35px 0 10px;
+
+}
+
+.breadcrumb {
+
+    text-align: center;
+
+    color: #6b7280;
+
+    margin-bottom: 25px;
+
 }
 
 .container {
-    margin-top: 50px;
-}
 
-.box {
-    background: white;
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 25px;
+
+    width: 88%;
+
+    max-width: 1200px;
+
     margin: auto;
-    padding: 30px;
-    width: 90%;
-    max-width: 360px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: 0.2s;
+
 }
 
-.box:hover {
-    transform: scale(1.02);
+.card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+
+    padding: 25px;
+
 }
 
-h2 {
-    margin-bottom: 20px;
+.steps {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+
+    position: relative;
+
 }
 
-#garageName {
-    margin-bottom: 15px;
-    font-size: 20px;
+.step {
+
+    text-align: center;
+
+    flex: 1;
+
+    color: #6b7280;
+
+    font-weight: bold;
+
 }
 
-input {
-    padding: 10px;
-    margin: 10px;
-    width: 90%;
-    max-width: 250px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.circle {
+
+    width: 38px;
+
+    height: 38px;
+
+    background: white;
+
+    border: 2px solid #9ca3af;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: auto auto 8px;
+
 }
 
-button {
-    padding: 10px 20px;
+.step.active .circle {
+
+    background: #dc2626;
+
+    color: white;
+
+    border-color: #dc2626;
+
+}
+
+.step.active {
+
+    color: #dc2626;
+
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+.form-group {
+
+    text-align: right;
+
+}
+
+label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+
+}
+
+input, select, textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    background: white;
+
+}
+
+textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+
+}
+
+.full {
+
+    grid-column: 1 / 3;
+
+}
+
+.buttons {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+button, .back-btn {
+
     border: none;
-    background: #3b82f6;
-    color: white;
-    border-radius: 8px;
+
+    padding: 13px 25px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
     cursor: pointer;
-    width: 90%;
-    max-width: 220px;
-}
 
-button:hover {
-    background: #2563eb;
-}
-
-.links {
-    margin-top: 20px;
-}
-
-.links a,
-#msg a {
-    display: inline-block;
-    margin: 8px;
     text-decoration: none;
+
+}
+
+.next-btn {
+
+    background: #dc2626;
+
     color: white;
-    background: #10b981;
-    padding: 10px 15px;
-    border-radius: 8px;
+
+}
+
+.back-btn {
+
+    background: #f3f4f6;
+
+    color: #111827;
+
+}
+
+.summary-img {
+
+    width: 100%;
+
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+.summary-title {
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+
+}
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #eee;
+
+    padding: 12px 0;
+
+    gap: 10px;
+
+}
+
+.price {
+
+    font-size: 28px;
+
+    color: #dc2626;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+
+}
+
+.note-box {
+
+    margin-top: 20px;
+
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+
+    display: flex;
+
+    justify-content: space-around;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+}
+
+.note {
+
+    text-align: center;
+
+    color: #374151;
+
 }
 
 #msg {
+
     margin-top: 15px;
+
+    color: #dc2626;
+
     font-weight: bold;
+
+}
+
+@media(max-width: 900px) {
+
+    .container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .full {
+
+        grid-column: 1;
+
+    }
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+    .logo {
+
+        width: 120px;
+
+    }
+
 }
 </style>
 </head>
 <body>
-
-<div class="navbar">My Garage</div>
-
-<div class="container">
-    <div class="box">
-        <h2>Booking Page</h2>
-        <p id="garageName"></p>
-        <input type="date" id="date"><br>
-        <button type="button" onclick="confirmBooking()">Confirm Booking</button>
-
-        <div class="links">
-            <a href="index.html">Back to Home</a>
-        </div>
-
-        <p id="msg"></p>
-    </div>
+<div class="navbar">
+<img src="logo.png" class="logo">
+<div class="nav-links">
+<a href="index.html">الرئيسية</a>
+<a href="index.html#garages">ابحث عن كراج</a>
+<a href="index.html#about">عن نحن</a>
+<a href="index.html#contact">اتصل بنا</a>
+<a href="index.html#garages" class="book-top-btn">احجز خدمة الآن</a>
 </div>
+</div>
+<h1 class="page-title">حجز خدمة</h1>
+<div class="breadcrumb">
 
+    الرئيسية › نتائج البحث › <span id="breadcrumbGarage">الكراج</span> › حجز خدمة
+</div>
+<div class="container">
+<div class="card">
+<div class="steps">
+<div class="step active">
+<div class="circle">1</div>
+
+                اختر الخدمة
+</div>
+<div class="step active">
+<div class="circle">2</div>
+
+                تفاصيل الحجز
+</div>
+<div class="step">
+<div class="circle">3</div>
+
+                مراجعة الطلب
+</div>
+<div class="step">
+<div class="circle">4</div>
+
+                تأكيد الحجز
+</div>
+</div>
+<h2>تفاصيل الحجز</h2>
+<div class="form-grid">
+<div class="form-group">
+<label>نوع الخدمة *</label>
+<select id="serviceType" onchange="updateSummary()">
+<option value="تغيير زيت + فلتر">تغيير زيت + فلتر</option>
+<option value="تصليح عام">تصليح عام</option>
+<option value="فحص كمبيوتر">فحص كمبيوتر</option>
+<option value="كهرباء سيارات">كهرباء سيارات</option>
+<option value="مكيف سيارات">مكيف سيارات</option>
+</select>
+</div>
+<div class="form-group">
+<label>المركبة *</label>
+<input type="text" id="carType" placeholder="مثال: Toyota Camry - 2020" oninput="updateSummary()">
+</div>
+<div class="form-group">
+<label>رقم اللوحة *</label>
+<input type="text" id="plateNumber" placeholder="مثال: 123456" oninput="updateSummary()">
+</div>
+<div class="form-group">
+<label>التاريخ *</label>
+<input type="date" id="date" onchange="updateSummary()">
+</div>
+<div class="form-group">
+<label>الوقت *</label>
+<input type="time" id="time" onchange="updateSummary()">
+</div>
+<div class="form-group">
+<label>رقم الهاتف *</label>
+<input type="tel" id="phone" placeholder="مثال: 33112244" oninput="updateSummary()">
+</div>
+<div class="form-group full">
+<label>ملاحظات إضافية</label>
+<textarea id="notes" placeholder="اكتب أي ملاحظات عن مشكلة السيارة..." oninput="updateSummary()"></textarea>
+</div>
+</div>
+<div class="buttons">
+<a href="index.html" class="back-btn">رجوع</a>
+<button class="next-btn" onclick="confirmBooking()">تأكيد الحجز</button>
+</div>
+<p id="msg"></p>
+</div>
+<div class="card">
+<h3>ملخص الحجز</h3>
+<img id="garageImage" class="summary-img" src="garage-bg.jpeg">
+<div class="summary-title" id="summaryGarage">Garage</div>
+<div class="summary-row">
+<span>نوع الخدمة</span>
+<b id="summaryService">تغيير زيت + فلتر</b>
+</div>
+<div class="summary-row">
+<span>المركبة</span>
+<b id="summaryCar">-</b>
+</div>
+<div class="summary-row">
+<span>رقم اللوحة</span>
+<b id="summaryPlate">-</b>
+</div>
+<div class="summary-row">
+<span>التاريخ</span>
+<b id="summaryDate">-</b>
+</div>
+<div class="summary-row">
+<span>الوقت</span>
+<b id="summaryTime">-</b>
+</div>
+<div class="price">بدون دفع حالياً</div>
+<small>سيتم تأكيد الحجز من قبل الكراج.</small>
+</div>
+</div>
+<div class="note-box">
+<div class="note">🛡️ حجز آمن ومضمون</div>
+<div class="note">📞 تحتاج مساعدة؟ +973 1234 5678</div>
+<div class="note">🔔 متابعة حالة الحجز</div>
+</div>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
-
 <script>
-document.getElementById("garageName").innerText =
-    "Garage: " + (localStorage.getItem("garage") || "Not selected");
+
+let garage = localStorage.getItem("garage") || "Not selected";
+
+let garageImages = {
+
+    "Blue Motors Auto Services": "images(blue-motor).jpeg",
+
+    "BOSCH Service": "images(BOSCH-Service).jpeg",
+
+    "HOMS GATE": "images(HOMS-GATE).jpeg",
+
+    "Fit and Fix": "images(Fit-and-fix).jpeg"
+
+};
+
+document.getElementById("breadcrumbGarage").innerText = garage;
+
+document.getElementById("summaryGarage").innerText = garage;
+
+if (garageImages[garage]) {
+
+    document.getElementById("garageImage").src = garageImages[garage];
+
+}
+
+function updateSummary() {
+
+    document.getElementById("summaryService").innerText =
+
+    document.getElementById("serviceType").value;
+
+    document.getElementById("summaryCar").innerText =
+
+    document.getElementById("carType").value || "-";
+
+    document.getElementById("summaryPlate").innerText =
+
+    document.getElementById("plateNumber").value || "-";
+
+    document.getElementById("summaryDate").innerText =
+
+    document.getElementById("date").value || "-";
+
+    document.getElementById("summaryTime").innerText =
+
+    document.getElementById("time").value || "-";
+
+}
 
 function confirmBooking() {
-    let date = document.getElementById("date").value;
-    let garage = localStorage.getItem("garage");
+
     let user = auth.currentUser;
 
+    let serviceType = document.getElementById("serviceType").value;
+
+    let carType = document.getElementById("carType").value;
+
+    let plateNumber = document.getElementById("plateNumber").value;
+
+    let date = document.getElementById("date").value;
+
+    let time = document.getElementById("time").value;
+
+    let phone = document.getElementById("phone").value;
+
+    let notes = document.getElementById("notes").value;
+
     if (!user) {
-        document.getElementById("msg").innerText = "Please login first.";
+
+        document.getElementById("msg").innerText = "يرجى تسجيل الدخول أولاً.";
+
         return;
+
     }
 
-    if (!garage) {
-        document.getElementById("msg").innerText = "No garage selected.";
+    if (!garage || garage === "Not selected") {
+
+        document.getElementById("msg").innerText = "لم يتم اختيار كراج.";
+
         return;
+
     }
 
-    if (date === "") {
-        document.getElementById("msg").innerText = "Choose a date.";
+    if (carType === "" || plateNumber === "" || date === "" || time === "" || phone === "") {
+
+        document.getElementById("msg").innerText = "يرجى تعبئة جميع البيانات المطلوبة.";
+
         return;
+
     }
 
     db.collection("bookings").add({
+
         garage: garage,
+
+        serviceType: serviceType,
+
+        carType: carType,
+
+        plateNumber: plateNumber,
+
         date: date,
+
+        time: time,
+
+        phone: phone,
+
+        notes: notes,
+
         status: "Waiting",
+
         userEmail: user.email,
+
         userId: user.uid,
+
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
     })
+
     .then(() => {
+
         window.location.href = "booking-success.html";
+
     })
+
     .catch((error) => {
+
         document.getElementById("msg").innerText = error.message;
+
     });
+
 }
 
 auth.onAuthStateChanged(function(user) {
-    if (!user) {
-        window.location.href = "login.html";
-    }
-});
-</script>
 
+    if (!user) {
+
+        window.location.href = "login.html";
+
+    }
+
+});
+
+updateSummary();
+</script>
 </body>
 </html>
+ 
