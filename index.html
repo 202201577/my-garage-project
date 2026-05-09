@@ -2,278 +2,562 @@
 <html>
 <head>
 <title>My Garage</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
+
 body {
+
     font-family: Arial, sans-serif;
+
     margin: 0;
+
     background: #f5f7fa;
+
     text-align: center;
+
 }
 
 .navbar {
+
     background: #1e293b;
+
     color: white;
+
     padding: 15px;
+
     font-size: 20px;
+
     text-align: center;
+
     position: relative;
+
 }
 
 .logout-btn {
+
     position: absolute;
+
     right: 15px;
+
     top: 10px;
+
     color: white;
+
     text-decoration: none;
+
     background: #ef4444;
+
     padding: 8px 12px;
+
     border-radius: 8px;
+
     font-size: 14px;
+
 }
 
 .logout-btn:hover {
+
     background: #dc2626;
+
 }
 
 h1 {
-    margin-top: 30px;
+
+    margin-top: 35px;
+
+    font-size: 36px;
+
+    color: #0f172a;
+
 }
 
 .search-box {
-    margin: 20px;
+
+    margin: 25px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    width: 90%;
+
 }
 
 input, select {
-    padding: 10px;
-    margin: 5px;
-    width: 90%;
-    max-width: 250px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+
+    padding: 14px;
+
+    width: 280px;
+
+    border-radius: 10px;
+
+    border: 1px solid #cbd5e1;
+
+    font-size: 16px;
+
+    background: white;
+
 }
 
 button {
-    padding: 10px 20px;
+
+    padding: 12px 22px;
+
     border: none;
-    background: #3b82f6;
+
+    background: #2563eb;
+
     color: white;
-    border-radius: 8px;
+
+    border-radius: 10px;
+
     cursor: pointer;
-    width: 90%;
-    max-width: 200px;
+
+    font-size: 16px;
+
 }
 
 button:hover {
-    background: #2563eb;
+
+    background: #1d4ed8;
+
 }
 
 .garage {
+
     background: white;
-    margin: 15px auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 340px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    margin: 25px auto;
+
+    padding: 25px;
+
+    width: 88%;
+
+    max-width: 980px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+
+    text-align: left;
+
     transition: 0.2s;
+
 }
 
 .garage:hover {
-    transform: scale(1.02);
+
+    transform: scale(1.01);
+
 }
 
-.garage img {
-    width: 100%;
+.garage-img {
+
+    width: 330px;
+
     height: auto;
-    border-radius: 10px;
+
+    border-radius: 14px;
+
+    object-fit: contain;
+
+    background: #f8fafc;
+
 }
 
-.links {
-    margin-top: 20px;
+.garage-info {
+
+    flex: 1;
+
 }
 
-.links a {
-    display: inline-block;
-    text-decoration: none;
-    color: white;
-    background: #10b981;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin: 5px;
+.garage-info h3 {
+
+    font-size: 32px;
+
+    margin: 0 0 20px;
+
+    color: #0f172a;
+
+}
+
+.garage-info p {
+
+    font-size: 18px;
+
+    margin: 12px 0;
+
+    color: #111827;
+
+}
+
+.icon {
+
+    color: #2563eb;
+
+    font-weight: bold;
+
+    margin-right: 8px;
+
+}
+
+.action-row {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
 }
 
 .map-btn {
+
     display: inline-block;
-    margin: 8px;
+
     text-decoration: none;
+
+    color: #2563eb;
+
+    background: white;
+
+    border: 2px solid #2563eb;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+}
+
+.book-btn {
+
+    background: #2563eb;
+
+    min-width: 180px;
+
+}
+
+.links {
+
+    margin: 30px 0;
+
+}
+
+.links a {
+
+    display: inline-block;
+
+    text-decoration: none;
+
     color: white;
-    background: #0ea5e9;
-    padding: 10px 15px;
-    border-radius: 8px;
+
+    background: #10b981;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    margin: 5px;
+
+}
+
+@media (max-width: 768px) {
+
+    h1 {
+
+        font-size: 32px;
+
+    }
+
+    .garage {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        width: 85%;
+
+        gap: 20px;
+
+    }
+
+    .garage-img {
+
+        width: 100%;
+
+    }
+
+    .garage-info h3 {
+
+        font-size: 26px;
+
+    }
+
+    .garage-info p {
+
+        font-size: 17px;
+
+    }
+
+    .action-row {
+
+        justify-content: center;
+
+    }
+
+    .map-btn,
+
+    .book-btn {
+
+        width: 90%;
+
+        max-width: 260px;
+
+    }
+
 }
 </style>
 </head>
-
 <body>
-
 <div class="navbar">
+
     My Garage
-    <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+<a href="#" class="logout-btn" onclick="logout()">Logout</a>
 </div>
-
 <h1>Garage Services</h1>
-
 <div class="search-box">
-    <input type="text" id="search" placeholder="Search garage...">
-
-    <select id="filter">
-        <option value="all">All Services</option>
-        <option value="repair">Repair</option>
-        <option value="oil">Oil Change</option>
-    </select>
-
-    <button onclick="searchGarage()">Search</button>
+<input type="text" id="search" placeholder="Search garage...">
+<select id="filter">
+<option value="all">All Services</option>
+<option value="repair">Repair</option>
+<option value="oil">Oil Change</option>
+</select>
+<button onclick="searchGarage()">Search</button>
 </div>
-
 <div id="results"></div>
-
 <div class="links">
-    <a href="mybookings.html">My Bookings</a>
+<a href="mybookings.html">My Bookings</a>
+<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">
 
-    <a id="dashboardLink"
-       href="garage-dashboard.html"
-       style="display:none;">
-       Garage Dashboard
-    </a>
+        Garage Dashboard
+</a>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="firebase.js"></script>
-
 <script>
+
 let garages = [
+
     {
+
         name: "Blue Motors Auto Services",
+
         service: "repair",
+
         location: "Salmabad",
+
         rating: "4.2",
+
         phone: "17877197",
+
         hours: "Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
+
         image: "images(blue-motor).jpeg",
+
         map: "https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
+
     },
+
     {
+
         name: "Bosch Service",
+
         service: "oil",
+
         location: "Tubli",
+
         rating: "4.2",
+
         phone: "17783888",
+
         hours: "Sat–Thu 8 AM–5 PM, Friday Closed",
+
         image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+
         map: "https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+
     },
+
     {
+
         name: "Homs Gate Garage",
+
         service: "repair",
+
         location: "Hamala",
+
         rating: "4.2",
+
         phone: "34120290",
+
         hours: "Sat–Thu 8 AM–7 PM, Friday Closed",
+
         image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98",
+
         map: "https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+
     },
+
     {
+
         name: "Fit and Fix",
+
         service: "repair",
+
         location: "Hamala",
+
         rating: "4.9",
+
         phone: "37377196",
+
         hours: "Sat–Thu 8 AM–8 PM, Friday Closed",
+
         image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
+
         map: "https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
+
     }
+
 ];
 
 function searchGarage() {
+
     let text = document.getElementById("search").value.toLowerCase();
+
     let filter = document.getElementById("filter").value;
+
     let result = "";
 
     garages.forEach(g => {
+
         if (
+
             (filter === "all" || g.service === filter) &&
+
             (
+
                 g.name.toLowerCase().includes(text) ||
+
                 g.service.toLowerCase().includes(text) ||
+
                 g.location.toLowerCase().includes(text)
+
             )
+
         ) {
+
             result += `
-            <div class="garage">
-                <img src="${g.image}">
+<div class="garage">
+<img class="garage-img" src="${g.image}">
+<div class="garage-info">
+<h3>${g.name}</h3>
+<p><span class="icon">🔧</span><b>Service:</b> ${g.service}</p>
+<p><span class="icon">📍</span><b>Location:</b> ${g.location}</p>
+<p><span class="icon">📞</span><b>Phone:</b> ${g.phone}</p>
+<p><span class="icon">⭐</span><b>Rating:</b> ${g.rating}</p>
+<p><span class="icon">🕒</span><b>Hours:</b> ${g.hours}</p>
+<div class="action-row">
+<a href="${g.map}" target="_blank" class="map-btn">
 
-                <h3>${g.name}</h3>
+                            View Location
+</a>
+<button class="book-btn" onclick="book('${g.name}')">
 
-                <p><b>Service:</b> ${g.service}</p>
-                <p><b>Location:</b> ${g.location}</p>
-                <p><b>Phone:</b> ${g.phone}</p>
-                <p><b>Rating:</b> ⭐ ${g.rating}</p>
-                <p><b>Hours:</b> ${g.hours}</p>
+                            Book Now
+</button>
+</div>
+</div>
+</div>
 
-                <a href="${g.map}" target="_blank" class="map-btn">
-                    View Location
-                </a>
-
-                <br>
-
-                <button onclick="book('${g.name}')">
-                    Book Now
-                </button>
-            </div>
             `;
+
         }
+
     });
 
     if (result === "") {
+
         result = "<p>No garages found.</p>";
+
     }
 
     document.getElementById("results").innerHTML = result;
+
 }
 
 function book(name) {
+
     localStorage.setItem("garage", name);
+
     window.location.href = "booking.html";
+
 }
 
 function logout() {
+
     auth.signOut().then(function() {
+
         localStorage.removeItem("loggedIn");
+
         window.location.href = "login.html";
+
     });
+
 }
 
 auth.onAuthStateChanged(function(user) {
+
     if (user) {
+
         let allowedEmails = [
+
             "alhanoof.t29@gmail.com",
+
             "anwaralhayki55@gmail.com"
+
         ];
 
         if (allowedEmails.includes(user.email.toLowerCase())) {
+
             document.getElementById("dashboardLink").style.display = "inline-block";
+
         }
+
     } else {
+
         window.location.href = "login.html";
+
     }
+
 });
 
 window.onload = searchGarage;
 </script>
-
 </body>
 </html>
+ 
