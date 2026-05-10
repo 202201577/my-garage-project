@@ -511,14 +511,26 @@ button:hover {
 <div class="close-btn" onclick="closeMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="mybookings.html">حجوزاتي</a>
+<a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
 <a href="nearest-garage.html">أقرب كراج</a>
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
-<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">
+
+        لوحة تحكم الكراج
+</a>
+<a id="adminDashboardLink" href="admin-dashboard.html" style="display:none;">
+
+        لوحة تحكم الأدمن
+</a>
+<a id="complaintsLink" href="complaints.html">
+
+        الشكاوي
+</a>
 <a href="#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
+
 <section class="hero">
 <h1>ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span></h1>
 <p>خدمات صيانة وإصلاح السيارات في البحرين بخطوات بسيطة</p>
@@ -757,19 +769,73 @@ auth.onAuthStateChanged(function(user) {
     let adminEmails = [
 
         "alhanoof.t29@gmail.com",
+
         "anwaralhayki55@gmail.com"
 
     ];
 
+    let garageOwnerEmails = [
+
+    "bluemotors@mygarage.com",
+
+    "bosch@mygarage.com",
+
+    "homsgate@mygarage.com",
+
+    "fitandfix@mygarage.com"
+
+    ];
+
     if (user) {
-   document.getElementById("guestLinks").style.display = "none";
-   if (adminEmails.includes(user.email.toLowerCase())) {
-       document.getElementById("dashboardLink").style.display = "block";
-   }
-}
+
+        document.getElementById("guestLinks").style.display = "none";
+
+        let email = user.email.toLowerCase();
+
+        let isAdmin = adminEmails.includes(email);
+
+        let isGarageOwner = garageOwnerEmails.includes(email);
+
+        if (isAdmin) {
+
+            document.getElementById("myBookingsLink").style.display = "none";
+
+            document.getElementById("garageDashboardLink").style.display = "none";
+
+            document.getElementById("adminDashboardLink").style.display = "block";
+
+            document.getElementById("complaintsLink").style.display = "block";
+
+        }
+
+        else if (isGarageOwner) {
+
+            document.getElementById("myBookingsLink").style.display = "none";
+
+            document.getElementById("garageDashboardLink").style.display = "block";
+
+            document.getElementById("adminDashboardLink").style.display = "none";
+
+            document.getElementById("complaintsLink").style.display = "none";
+
+        }
+
+        else {
+
+            document.getElementById("myBookingsLink").style.display = "block";
+
+            document.getElementById("garageDashboardLink").style.display = "none";
+
+            document.getElementById("adminDashboardLink").style.display = "none";
+
+            document.getElementById("complaintsLink").style.display = "block";
+
+        }
+
+    }
 
 });
-
+ 
 window.onload = searchGarage;
 </script>
 </body>
