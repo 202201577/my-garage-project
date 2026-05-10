@@ -496,21 +496,28 @@ function setServiceAmount(id){
     }
 
     let booking = bookings.find(b => b.id === id);
-    let oldAmount = Number(booking?.serviceAmount || 0);
-    let oldPaymentStatus = booking?.paymentStatus || "Not Set";
+
+    let paidAmount = Number(booking?.paidAmount || 0);
+    let remainingAmount = amount - paidAmount;
+
+    if(remainingAmount < 0){
+        remainingAmount = 0;
+    }
 
     let commissionRate = 0.10;
     let commissionAmount = amount * commissionRate;
     let garageNetAmount = amount - commissionAmount;
 
-    let newPaymentStatus = oldPaymentStatus;
+    let newPaymentStatus = "Unpaid";
 
-    if(amount !== oldAmount){
-        newPaymentStatus = "Unpaid";
+    if(remainingAmount === 0){
+        newPaymentStatus = "Paid";
     }
 
     db.collection("bookings").doc(id).update({
         serviceAmount: amount,
+        paidAmount: paidAmount,
+        remainingAmount: remainingAmount,
         commissionRate: commissionRate,
         commissionAmount: commissionAmount,
         garageNetAmount: garageNetAmount,
