@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>أقرب كراج - My Garage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
+
+.navbar{background:white;padding:18px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+
+.logo{width:140px}
+
+.menu{font-size:32px;cursor:pointer}
+
+.container{width:90%;max-width:1100px;margin:40px auto}
+
+h1{text-align:center;font-size:38px}
+
+.desc{text-align:center;color:#64748b;margin-bottom:30px}
+
+.location-box,.garage-card{background:white;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+
+.btn{background:#c4122f;color:white;border:none;padding:14px 25px;border-radius:12px;font-size:16px;cursor:pointer}
+
+.btn:hover{background:#a90f28}
+
+.garage-card{display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+.distance{font-size:24px;font-weight:bold;color:#c4122f}
+
+.badge{background:#dcfce7;color:#15803d;padding:7px 14px;border-radius:20px;font-weight:bold}
+
+.map-link{display:inline-block;margin-top:12px;text-decoration:none;color:white;background:#0f172a;padding:10px 18px;border-radius:10px}
+
+@media(max-width:700px){.garage-card{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div class="navbar">
+<img src="logo.png" class="logo">
+<div class="menu" onclick="window.location.href='index.html'">⌂</div>
+</div>
+<div class="container">
+<h1>أقرب كراج</h1>
+<p class="desc">اعرف موقعك الحالي وشوف الكراجات مرتبة من الأقرب إلى الأبعد</p>
+<div class="location-box">
+<h2>موقعي الحالي</h2>
+<p id="userLocation">اضغطي الزر عشان نحدد موقعك.</p>
+<button class="btn" onclick="findNearestGarages()">تحديد موقعي وعرض الكراجات</button>
+</div>
+<div id="garageList"></div>
+</div>
+<script>
+
+let garages = [
+
+    {
+
+        name:"Blue Motors Auto Services",
+
+        area:"Salmabad",
+
+        lat:26.1769,
+
+        lng:50.5477,
+
+        map:"https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
+
+    },
+
+    {
+
+        name:"BOSCH Service",
+
+        area:"Tubli",
+
+        lat:26.1885,
+
+        lng:50.5538,
+
+        map:"https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+
+    },
+
+    {
+
+        name:"HOMS GATE",
+
+        area:"Hamala",
+
+        lat:26.1505,
+
+        lng:50.4809,
+
+        map:"https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
+
+    },
+
+    {
+
+        name:"Fit and Fix",
+
+        area:"Hamala",
+
+        lat:26.1500,
+
+        lng:50.4815,
+
+        map:"https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
+
+    }
+
+];
+
+function getDistance(lat1,lng1,lat2,lng2){
+
+    let R = 6371;
+
+    let dLat = (lat2-lat1) * Math.PI / 180;
+
+    let dLng = (lng2-lng1) * Math.PI / 180;
+
+    let a =
+
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+
+    Math.cos(lat1*Math.PI/180) *
+
+    Math.cos(lat2*Math.PI/180) *
+
+    Math.sin(dLng/2) * Math.sin(dLng/2);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c;
+
+}
+
+function findNearestGarages(){
+
+    if(!navigator.geolocation){
+
+        alert("المتصفح لا يدعم تحديد الموقع");
+
+        return;
+
+    }
+
+    document.getElementById("userLocation").innerText = "جاري تحديد موقعك...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            let userLat = position.coords.latitude;
+
+            let userLng = position.coords.longitude;
+
+            document.getElementById("userLocation").innerHTML =
+
+            "📍 موقعك الحالي:<br>Latitude: " + userLat.toFixed(5) +
+
+            "<br>Longitude: " + userLng.toFixed(5);
+
+            let sortedGarages = garages.map(g => {
+
+                return {
+
+                    ...g,
+
+                    distance:getDistance(userLat,userLng,g.lat,g.lng)
+
+                };
+
+            }).sort((a,b) => a.distance - b.distance);
+
+            let output = "";
+
+            sortedGarages.forEach((g,index) => {
+
+                output += `
+<div class="garage-card">
+<div>
+
+                        ${index === 0 ? '<span class="badge">الأقرب لك</span>' : ''}
+<h2>${g.name}</h2>
+<p>📍 المنطقة: ${g.area}</p>
+<p>المسافة التقريبية:</p>
+<div class="distance">${g.distance.toFixed(2)} كم</div>
+<a class="map-link" href="${g.map}" target="_blank">فتح الموقع في الخريطة</a>
+</div>
+<div>
+
+                        ${index + 1}
+</div>
+</div>
+
+                `;
+
+            });
+
+            document.getElementById("garageList").innerHTML = output;
+
+        },
+
+        function(){
+
+            document.getElementById("userLocation").innerText =
+
+            "ما قدرنا نحدد موقعك. تأكدي إنك سمحتي للموقع باستخدام Location.";
+
+        }
+
+    );
+
+}
+</script>
+</body>
+</html>
+ 
