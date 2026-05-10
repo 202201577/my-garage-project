@@ -621,6 +621,13 @@ let garageTimes = {
 
 };
 
+let garageOwners = {
+   "Blue Motors Auto Services": "bluemotors@mygarage.com",
+   "BOSCH Service": "bosch@mygarage.com",
+   "HOMS GATE": "homsgate@mygarage.com",
+   "Fit and Fix": "fitandfix@mygarage.com"
+};
+
 document.getElementById("breadcrumbGarage").innerText = garage;
 
 document.getElementById("summaryGarage").innerText = garage;
@@ -803,31 +810,44 @@ function confirmBooking() {
 
     db.collection("bookings").add({
 
-        garage: garage,
+    garage: garage,
 
-        serviceType: selectedService,
+    garageOwnerEmail: garageOwners[garage] || "",
 
-        carType: carType,
+    serviceType: selectedService,
 
-        plateNumber: plateNumber,
+    carType: carType,
 
-        date: date,
+    plateNumber: plateNumber,
 
-        time: time,
+    date: date,
 
-        phone: phone,
+    time: time,
 
-        notes: notes,
+    phone: phone,
 
-        status: "Waiting",
+    notes: notes,
 
-        userEmail: user.email,
+    status: "Waiting",
 
-        userId: user.uid,
+    paymentStatus: "Not Set",
 
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    serviceAmount: 0,
 
-    })
+    commissionRate: 0.10,
+
+    commissionAmount: 0,
+
+    garageNetAmount: 0,
+
+    userEmail: user.email,
+
+    userId: user.uid,
+
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
+})
+ 
 
     .then(() => {
 
