@@ -350,33 +350,76 @@ input[type="checkbox"]{
 
 @media(max-width:1000px){
 
-    .login-wrapper{
-
-        flex-direction:column;
-
+    body{
+        padding:10px;
+        overflow-x:hidden;
     }
 
-    .image-side,
-
-    .login-side{
-
+    .login-wrapper{
         width:100%;
-
+        max-width:100%;
+        border-radius:25px;
+        display:flex;
+        flex-direction:row;
+        min-height:100vh;
     }
 
     .image-side{
-
-        min-height:520px;
-
+        width:50%;
+        min-height:100vh;
+        background-size:cover;
+        background-position:center;
     }
 
     .login-side{
+        width:50%;
+        padding:20px 15px;
+        overflow-y:auto;
+    }
 
-        padding:35px 20px;
+    .logo{
+        width:140px;
+        margin-bottom:15px;
+    }
 
+    h1{
+        font-size:32px;
+        margin-bottom:10px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        line-height:1.6;
+        margin-bottom:20px;
+    }
+
+    .form-box{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    input{
+        height:48px;
+        font-size:14px;
+    }
+
+    .login-btn,
+    .google-btn{
+        height:50px;
+        font-size:16px;
+    }
+
+    .contact h3{
+        font-size:20px;
+    }
+
+    .contact p{
+        font-size:15px;
     }
 
 }
+
+
 </style>
 </head>
 <body>
