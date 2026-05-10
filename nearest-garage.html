@@ -270,7 +270,8 @@ h1{
 <a href="nearest-garage.html">أقرب كراج</a>
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
-<a href="garage-dashboard.html">لوحة التحكم</a>
+<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a href="complaints.html">الشكاوي</a>
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
@@ -284,6 +285,11 @@ h1{
 </div>
 <div id="garageList"></div>
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="firebase.js"></script>
+    
 <script>
 
 let garages = [
@@ -466,6 +472,43 @@ function findNearestGarages(){
     );
 
 }
+
+firebase.auth().onAuthStateChanged(function(user){
+
+    if(user){
+
+        let adminEmails = [
+
+            "alhanoof.t29@gmail.com",
+
+            "anwaralhayki55@gmail.com"
+
+        ];
+
+        let garageOwnerEmails = [
+
+            "bluemotors@mygarage.com",
+
+            "bosch@mygarage.com",
+
+            "homsgate@mygarage.com",
+
+            "fitandfix@mygarage.com"
+
+        ];
+
+        let email = user.email.toLowerCase();
+
+        if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
+
+            document.getElementById("dashboardLink").style.display = "block";
+
+        }
+
+    }
+
+});
+    
 </script>
 </body>
 </html>
