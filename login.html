@@ -23,7 +23,7 @@ body{
 
     background:
 
-    linear-gradient(rgba(7,13,30,0.78), rgba(7,13,30,0.78)),
+    linear-gradient(rgba(7,13,30,0.72), rgba(7,13,30,0.72)),
 
     url('garage-bg.jpeg');
 
@@ -37,8 +37,6 @@ body{
 
 }
 
-/* top bar */
-
 .topbar{
 
     width:100%;
@@ -51,7 +49,7 @@ body{
 
     align-items:center;
 
-    justify-content:flex-start;
+    justify-content:flex-end;
 
     padding:0 40px;
 
@@ -73,8 +71,6 @@ body{
 
 }
 
-/* login */
-
 .login-container{
 
     width:100%;
@@ -83,11 +79,13 @@ body{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:flex-start;
 
     align-items:center;
 
     padding-top:110px;
+
+    padding-left:120px;
 
     padding-bottom:40px;
 
@@ -95,7 +93,7 @@ body{
 
 .login-box{
 
-    width:430px;
+    width:450px;
 
     background:#fff;
 
@@ -115,7 +113,7 @@ body{
 
     height:90px;
 
-    background:linear-gradient(135deg,#ff4f7b,#ff7a95);
+    background:linear-gradient(135deg,#c62839,#a61d2d);
 
     border-radius:50%;
 
@@ -151,7 +149,9 @@ body{
 
     margin-bottom:30px;
 
-    font-size:15px;
+    font-size:14px;
+
+    white-space:nowrap;
 
 }
 
@@ -199,9 +199,9 @@ body{
 
 .form-group input:focus{
 
-    border-color:#ff4f7b;
+    border-color:#c62839;
 
-    box-shadow:0 0 0 4px rgba(255,79,123,0.1);
+    box-shadow:0 0 0 4px rgba(198,40,57,0.12);
 
 }
 
@@ -215,7 +215,7 @@ body{
 
     border-radius:14px;
 
-    background:linear-gradient(135deg,#ff4f7b,#ff6b88);
+    background:linear-gradient(135deg,#c62839,#a61d2d);
 
     color:#fff;
 
@@ -235,7 +235,7 @@ body{
 
     transform:translateY(-2px);
 
-    box-shadow:0 8px 20px rgba(255,79,123,0.3);
+    box-shadow:0 8px 20px rgba(198,40,57,0.3);
 
 }
 
@@ -295,7 +295,7 @@ body{
 
     margin-top:25px;
 
-    color:#ff4f7b;
+    color:#c62839;
 
     text-decoration:none;
 
@@ -311,13 +311,39 @@ body{
 
 }
 
-@media(max-width:500px){
+#error{
+
+    margin-top:15px;
+
+    color:#c62839;
+
+    font-weight:bold;
+
+}
+
+@media(max-width:700px){
+
+    .login-container{
+
+        justify-content:center;
+
+        padding-left:20px;
+
+        padding-right:20px;
+
+    }
 
     .login-box{
 
-        width:92%;
+        width:95%;
 
         padding:30px 25px;
+
+    }
+
+    .login-box p{
+
+        white-space:normal;
 
     }
 
@@ -342,41 +368,77 @@ body{
 </header>
 <div class="login-container">
 <div class="login-box">
-<div class="login-icon">
-
-            🔐
-</div>
+<div class="login-icon">🔐</div>
 <h1>تسجيل الدخول</h1>
-<p>
-
-            سجل دخولك للوصول إلى حجوزاتك وإدارة حسابك في My Garage
-</p>
-<form>
+<p>سجل دخولك للوصول إلى حجوزاتك وإدارة حسابك في My Garage</p>
 <div class="form-group">
 <label>البريد الإلكتروني</label>
-<input type="email" placeholder="example@gmail.com">
+<input type="email" id="email" placeholder="example@gmail.com">
 </div>
 <div class="form-group">
 <label>كلمة المرور</label>
-<input type="password" placeholder="••••••••">
+<input type="password" id="password" placeholder="••••••••">
 </div>
-<button type="submit" class="login-btn">
-
-                تسجيل الدخول
-</button>
-</form>
+<button class="login-btn" onclick="login()">تسجيل الدخول</button>
 <div class="or">OR</div>
-<button class="google-btn">
+<button class="google-btn" onclick="googleLogin()">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
 
             Sign in with Google
 </button>
-<a href="signup.html" class="create-account">
+<a href="register.html" class="create-account">إنشاء حساب جديد</a>
+<p id="error"></p>
+</div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="firebase.js"></script>
+<script>
 
-            إنشاء حساب جديد
-</a>
-</div>
-</div>
+function login(){
+
+    let email = document.getElementById("email").value;
+
+    let password = document.getElementById("password").value;
+
+    auth.signInWithEmailAndPassword(email,password)
+
+    .then(() => {
+
+        window.location.href = "index.html";
+
+    })
+
+    .catch(() => {
+
+        document.getElementById("error").innerText =
+
+        "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+
+    });
+
+}
+
+function googleLogin(){
+
+    let provider = new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider)
+
+    .then(() => {
+
+        window.location.href = "index.html";
+
+    })
+
+    .catch((error) => {
+
+        document.getElementById("error").innerText = error.message;
+
+    });
+
+}
+</script>
 </body>
 </html>
  
