@@ -38,16 +38,11 @@ body{
 
 .logo{width:140px}
 
-.menu-icon{
-
-    font-size:32px;
-
-    cursor:pointer;
-
-    color:#111827;
-
-    font-weight:bold;
-
+.menu-btn{
+   font-size:32px;
+   cursor:pointer;
+   color:#111827;
+   font-weight:bold;
 }
 
 .side-menu{
@@ -260,14 +255,14 @@ h1{
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
-<div class="menu-icon" onclick="openMenu()">☰</div>
+<div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
-<div id="sideMenu" class="side-menu">
-<div class="close-btn" onclick="closeMenu()">×</div>
+<div class="side-menu" id="sideMenu">
+<div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
 <a href="mybookings.html">حجوزاتي</a>
-<a href="nearest-garage.html">أقرب كراج</a>
+<a href="nearest-garage.html" class="active">أقرب كراج</a>
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
@@ -275,6 +270,7 @@ h1{
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
+ 
 <div class="container">
 <h1>أقرب كراج</h1>
 <p class="desc">اعرف موقعك الحالي وشوف الكراجات مرتبة من الأقرب إلى الأبعد</p>
@@ -352,17 +348,12 @@ let garages = [
 
 ];
 
-function openMenu(){
+function toggleMenu(){
 
-    document.getElementById("sideMenu").classList.add("open");
-
-}
-
-function closeMenu(){
-
-    document.getElementById("sideMenu").classList.remove("open");
+    document.getElementById("sideMenu").classList.toggle("open");
 
 }
+    
 
 function logout(){
 
