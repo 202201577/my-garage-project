@@ -685,7 +685,31 @@ function toggleDetails(id){
 
 }
 
+function createNotification(userId, title, message, type){
+
+    if(!userId) return;
+
+    db.collection("notifications").add({
+
+        userId:userId,
+
+        title:title,
+
+        message:message,
+
+        type:type,
+
+        read:false,
+
+        createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+    });
+
+}
+
 function payBooking(id){
+
+    let booking = bookings.find(b => b.id === id);
 
     db.collection("bookings").doc(id).update({
 
@@ -697,11 +721,56 @@ function payBooking(id){
 
     .then(() => {
 
+        if(booking){
+
+            createNotification(
+
+                booking.userId,
+
+                "تم الدفع بنجاح",
+
+                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD لحجزك في " + booking.garage,
+
+                "payment"
+
+            );
+
+            createNotification(
+
+                "admin",
+
+                "تم استلام دفعة جديدة",
+
+                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD من العميل " + booking.userEmail,
+
+                "payment"
+
+            );
+
+            if(booking.garageOwnerEmail){
+
+                createNotification(
+
+                    booking.garageOwnerEmail,
+
+                    "تم دفع مبلغ الحجز",
+
+                    "قام العميل بدفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD لحجز في " + booking.garage,
+
+                    "payment"
+
+                );
+
+            }
+
+        }
+
         alert("تم الدفع بنجاح");
 
     });
 
 }
+ 
 
 function renderBookings(){
 
