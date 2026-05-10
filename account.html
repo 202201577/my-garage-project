@@ -588,301 +588,206 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
 <script>
-
 let currentUser = null;
-
 let carCount = 0;
-
+let adminEmails = [
+   "alhanoof.t29@gmail.com",
+   "anwaralhayki55@gmail.com"
+];
+let garageOwnerEmails = [
+   "bluemotors@mygarage.com",
+   "bosch@mygarage.com",
+   "homsgate@mygarage.com",
+   "fitandfix@mygarage.com"
+];
 auth.onAuthStateChanged(function(user) {
-
-    if (user) {
-
-        currentUser = user;
-
-        document.getElementById("email").value = user.email;
-
-        document.getElementById("profileEmail").innerText = user.email;
-
-        let name = localStorage.getItem("name_" + user.uid) || "";
-
-        let phone = localStorage.getItem("phone_" + user.uid) || "";
-
-        let city = localStorage.getItem("city_" + user.uid) || "";
-
-        let gender = localStorage.getItem("gender_" + user.uid) || "female";
-
-        document.getElementById("userName").value = name;
-
-        document.getElementById("userPhone").value = phone;
-
-        document.getElementById("city").value = city;
-
-        document.getElementById("gender").value = gender;
-
-        document.getElementById("profileName").innerText = name || "مستخدم My Garage";
-
-        document.getElementById("profilePhone").innerText = phone || "-";
-
-        showJoinDate(user);
-
-        loadProfileImage();
-
-        loadCars();
-
-        loadBookingCount(user.email);
-
-        checkVerification(user);
-
-        showAdmin(user.email);
-
-    } else {
-
-        window.location.href = "login.html";
-
-    }
-
+   if (user) {
+       currentUser = user;
+       document.getElementById("email").value = user.email;
+       document.getElementById("profileEmail").innerText = user.email;
+       showJoinDate(user);
+       checkVerification(user);
+       showAdmin(user.email);
+       loadUserProfile(user.uid);
+       loadBookingCount(user.email);
+   } else {
+       window.location.href = "login.html";
+   }
 });
-
 function showJoinDate(user) {
-
-    let creationDate = user.metadata.creationTime;
-
-    let date = new Date(creationDate);
-
-    let formatted =
-
-    date.toLocaleDateString("ar-BH", {
-
-        year: "numeric",
-
-        month: "long",
-
-        day: "numeric"
-
-    });
-
-    document.getElementById("joinDate").innerText = formatted;
-
+   let creationDate = user.metadata.creationTime;
+   let date = new Date(creationDate);
+   let formatted = date.toLocaleDateString("ar-BH", {
+       year: "numeric",
+       month: "long",
+       day: "numeric"
+   });
+   document.getElementById("joinDate").innerText = formatted;
 }
-
 function toggleMenu(){
-
-    document.getElementById("sideMenu").classList.toggle("open");
-
+   document.getElementById("sideMenu").classList.toggle("open");
 }
-
-
 function showAdmin(email){
-
-    let adminEmails = [
-
-        "alhanoof.t29@gmail.com",
-
-        "anwaralhayki55@gmail.com"
-
-    ];
-
-    if(adminEmails.includes(email.toLowerCase())){
-
-        document.getElementById("dashboardLink").style.display = "block";
-
-    }
-
+   let userEmail = email.toLowerCase();
+   if(adminEmails.includes(userEmail) || garageOwnerEmails.includes(userEmail)){
+       let link = document.getElementById("dashboardLink");
+       if(link){
+           link.style.display = "block";
+       }
+   }
 }
-
 function checkVerification(user) {
-
-    let badge = document.getElementById("verifyBadge");
-
-    let isGoogle = user.providerData.some(p => p.providerId === "google.com");
-
-    if (isGoogle) {
-
-        badge.className = "badge verified";
-
-        badge.innerText = "✓ مستخدم موثق";
-
-        badge.onclick = null;
-
-    } else {
-
-        badge.className = "badge not-verified";
-
-        badge.innerText = "وثّق حسابك";
-
-        badge.onclick = verifyWithGoogle;
-
-    }
-
+   let badge = document.getElementById("verifyBadge");
+   let isGoogle = user.providerData.some(p => p.providerId === "google.com");
+   if (isGoogle) {
+       badge.className = "badge verified";
+       badge.innerText = "✓ مستخدم موثق";
+       badge.onclick = null;
+   } else {
+       badge.className = "badge not-verified";
+       badge.innerText = "وثّق حسابك";
+       badge.onclick = verifyWithGoogle;
+   }
 }
-
 function verifyWithGoogle() {
-
-    let provider = new firebase.auth.GoogleAuthProvider();
-
-    currentUser.linkWithPopup(provider)
-
-    .then(() => {
-
-        document.getElementById("verifyMsg").className = "";
-
-        document.getElementById("verifyMsg").innerText = "تم توثيق الحساب بنجاح";
-
-        checkVerification(auth.currentUser);
-
-    })
-
-    .catch(() => {
-
-        document.getElementById("verifyMsg").className = "error";
-
-        document.getElementById("verifyMsg").innerText =
-
-        "إذا كان حساب Google مستخدم من قبل، سجلي دخول باستخدام Google مباشرة.";
-
-    });
-
+   let provider = new firebase.auth.GoogleAuthProvider();
+   currentUser.linkWithPopup(provider)
+   .then(() => {
+       document.getElementById("verifyMsg").className = "";
+       document.getElementById("verifyMsg").innerText = "تم توثيق الحساب بنجاح";
+       checkVerification(auth.currentUser);
+   })
+   .catch(() => {
+       document.getElementById("verifyMsg").className = "error";
+       document.getElementById("verifyMsg").innerText =
+       "إذا كان حساب Google مستخدم من قبل، سجلي دخول باستخدام Google مباشرة.";
+   });
 }
-
 function chooseProfileImage() {
-
-    document.getElementById("profileUpload").click();
-
+   document.getElementById("profileUpload").click();
 }
-
 function uploadProfile(event) {
-
-    let file = event.target.files[0];
-
-    if (!file) return;
-
-    let reader = new FileReader();
-
-    reader.onload = function(e) {
-
-        document.getElementById("avatarImage").innerText = "";
-
-        document.getElementById("avatarImage").style.backgroundImage =
-
-        `url('${e.target.result}')`;
-
-        localStorage.setItem("profileImage_" + auth.currentUser.uid, e.target.result);
-
-    };
-
-    reader.readAsDataURL(file);
-
+   let file = event.target.files[0];
+   if (!file) return;
+   let reader = new FileReader();
+   reader.onload = function(e) {
+       let imageData = e.target.result;
+       document.getElementById("avatarImage").innerText = "";
+       document.getElementById("avatarImage").style.backgroundImage =
+       `url('${imageData}')`;
+       db.collection("users").doc(auth.currentUser.uid).set({
+           profileImage: imageData,
+           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+       }, { merge:true });
+   };
+   reader.readAsDataURL(file);
 }
-
 function changeAvatar() {
-
-    let user = auth.currentUser;
-
-    if (!user) return;
-
-    let gender = document.getElementById("gender").value;
-
-    localStorage.setItem("gender_" + user.uid, gender);
-
-    if (!localStorage.getItem("profileImage_" + user.uid)) {
-
-        let avatar = document.getElementById("avatarImage");
-
-        avatar.style.backgroundImage = "none";
-
-        if (gender === "male") {
-
-            avatar.innerText = "👨";
-
-        } else {
-
-            avatar.innerText = "👩";
-
-        }
-
-    }
-
+   let user = auth.currentUser;
+   if (!user) return;
+   let gender = document.getElementById("gender").value;
+   let avatar = document.getElementById("avatarImage");
+   db.collection("users").doc(user.uid).get().then((doc) => {
+       let data = doc.exists ? doc.data() : {};
+       if (data.profileImage) {
+           avatar.innerText = "";
+           avatar.style.backgroundImage = `url('${data.profileImage}')`;
+       } else {
+           avatar.style.backgroundImage = "none";
+           if (gender === "male") {
+               avatar.innerText = "👨";
+           } else {
+               avatar.innerText = "👩";
+           }
+       }
+   });
 }
-
-function loadProfileImage() {
-
-    let user = auth.currentUser;
-
-    let savedImage = localStorage.getItem("profileImage_" + user.uid);
-
-    if (savedImage) {
-
-        document.getElementById("avatarImage").innerText = "";
-
-        document.getElementById("avatarImage").style.backgroundImage =
-
-        `url('${savedImage}')`;
-
-    } else {
-
-        changeAvatar();
-
-    }
-
+function loadUserProfile(uid) {
+   db.collection("users").doc(uid).get()
+   .then((doc) => {
+       if (doc.exists) {
+           let data = doc.data();
+           document.getElementById("userName").value = data.name || "";
+           document.getElementById("userPhone").value = data.phone || "";
+           document.getElementById("city").value = data.city || "";
+           document.getElementById("gender").value = data.gender || "female";
+           document.getElementById("profileName").innerText = data.name || "مستخدم My Garage";
+           document.getElementById("profilePhone").innerText = data.phone || "-";
+           loadProfileImage(data);
+           if(data.cars && Array.isArray(data.cars)){
+               loadCars(data.cars);
+           } else {
+               loadCars([]);
+           }
+       } else {
+           document.getElementById("userName").value = "";
+           document.getElementById("userPhone").value = "";
+           document.getElementById("city").value = "";
+           document.getElementById("gender").value = "female";
+           document.getElementById("profileName").innerText = "مستخدم My Garage";
+           document.getElementById("profilePhone").innerText = "-";
+           loadProfileImage({});
+           loadCars([]);
+       }
+   });
 }
-
+function loadProfileImage(data) {
+   let avatar = document.getElementById("avatarImage");
+   if (data.profileImage) {
+       avatar.innerText = "";
+       avatar.style.backgroundImage = `url('${data.profileImage}')`;
+   } else {
+       avatar.style.backgroundImage = "none";
+       let gender = document.getElementById("gender").value;
+       if (gender === "male") {
+           avatar.innerText = "👨";
+       } else {
+           avatar.innerText = "👩";
+       }
+   }
+}
 function showSection(sectionId) {
-
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-
-    document.getElementById(sectionId).classList.add("active");
-
-    if (document.getElementById("tab-" + sectionId)) {
-
-        document.getElementById("tab-" + sectionId).classList.add("active");
-
-    }
-
+   document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+   document.getElementById(sectionId).classList.add("active");
+   if (document.getElementById("tab-" + sectionId)) {
+       document.getElementById("tab-" + sectionId).classList.add("active");
+   }
 }
-
 function saveProfile() {
-
-    let user = auth.currentUser;
-
-    let name = document.getElementById("userName").value;
-
-    let phone = document.getElementById("userPhone").value;
-
-    let city = document.getElementById("city").value;
-
-    let gender = document.getElementById("gender").value;
-
-    localStorage.setItem("name_" + user.uid, name);
-
-    localStorage.setItem("phone_" + user.uid, phone);
-
-    localStorage.setItem("city_" + user.uid, city);
-
-    localStorage.setItem("gender_" + user.uid, gender);
-
-    document.getElementById("profileName").innerText = name || "مستخدم My Garage";
-
-    document.getElementById("profilePhone").innerText = phone || "-";
-
-    changeAvatar();
-
-    document.getElementById("msg").innerText = "تم حفظ التغييرات بنجاح";
-
+   let user = auth.currentUser;
+   let name = document.getElementById("userName").value;
+   let phone = document.getElementById("userPhone").value;
+   let city = document.getElementById("city").value;
+   let gender = document.getElementById("gender").value;
+   db.collection("users").doc(user.uid).set({
+       name: name,
+       email: user.email,
+       phone: phone,
+       city: city,
+       gender: gender,
+       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+   }, { merge:true })
+   .then(() => {
+       document.getElementById("profileName").innerText = name || "مستخدم My Garage";
+       document.getElementById("profilePhone").innerText = phone || "-";
+       changeAvatar();
+       document.getElementById("msg").className = "";
+       document.getElementById("msg").innerText = "تم حفظ التغييرات بنجاح";
+   })
+   .catch((error) => {
+       document.getElementById("msg").className = "error";
+       document.getElementById("msg").innerText = error.message;
+   });
 }
-
 function addCar(data = {}) {
-
-    carCount++;
-
-    document.getElementById("carsContainer").innerHTML += `
+   carCount++;
+   document.getElementById("carsContainer").innerHTML += `
 <div class="car-card" id="carBox${carCount}" data-car="${carCount}">
 <div class="car-header">
 <h3>سيارة ${carCount}</h3>
 <button type="button" class="delete-car-btn" onclick="removeCar(${carCount})">
-
-                حذف السيارة
+               حذف السيارة
 </button>
 </div>
 <div class="form-grid">
@@ -900,185 +805,103 @@ function addCar(data = {}) {
 </div>
 </div>
 </div>
-
-    `;
-
-    updateCarCount();
-
+   `;
+   updateCarCount();
 }
-
 function removeCar(id) {
-
-    let box = document.getElementById("carBox" + id);
-
-    if (box) {
-
-        box.remove();
-
-    }
-
-    updateCarCount();
-
+   let box = document.getElementById("carBox" + id);
+   if (box) {
+       box.remove();
+   }
+   updateCarCount();
 }
-
 function updateCarCount() {
-
-    let total = document.querySelectorAll(".car-card").length;
-
-    document.getElementById("carCountDisplay").innerText = total;
-
+   let total = document.querySelectorAll(".car-card").length;
+   document.getElementById("carCountDisplay").innerText = total;
 }
-
 function saveCars() {
-
-    let uid = auth.currentUser.uid;
-
-    let cars = [];
-
-    document.querySelectorAll(".car-card").forEach(card => {
-
-        let id = card.getAttribute("data-car");
-
-        cars.push({
-
-            type: document.getElementById("carType" + id).value,
-
-            model: document.getElementById("carModel" + id).value,
-
-            plate: document.getElementById("carPlate" + id).value
-
-        });
-
-    });
-
-    localStorage.setItem("cars_" + uid, JSON.stringify(cars));
-
-    document.getElementById("carCountDisplay").innerText = cars.length;
-
-    document.getElementById("carMsg").innerText = "تم حفظ السيارات بنجاح";
-
+   let user = auth.currentUser;
+   let cars = [];
+   document.querySelectorAll(".car-card").forEach(card => {
+       let id = card.getAttribute("data-car");
+       cars.push({
+           type: document.getElementById("carType" + id).value,
+           model: document.getElementById("carModel" + id).value,
+           plate: document.getElementById("carPlate" + id).value
+       });
+   });
+   db.collection("users").doc(user.uid).set({
+       cars: cars,
+       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+   }, { merge:true })
+   .then(() => {
+       document.getElementById("carCountDisplay").innerText = cars.length;
+       document.getElementById("carMsg").className = "";
+       document.getElementById("carMsg").innerText = "تم حفظ السيارات بنجاح";
+   })
+   .catch((error) => {
+       document.getElementById("carMsg").className = "error";
+       document.getElementById("carMsg").innerText = error.message;
+   });
 }
-
-function loadCars() {
-
-    let uid = auth.currentUser.uid;
-
-    let cars = JSON.parse(localStorage.getItem("cars_" + uid)) || [];
-
-    document.getElementById("carsContainer").innerHTML = "";
-
-    carCount = 0;
-
-    document.getElementById("carCountDisplay").innerText = 0;
-
-    cars.forEach(car => {
-
-        addCar(car);
-
-    });
-
+function loadCars(cars = []) {
+   document.getElementById("carsContainer").innerHTML = "";
+   carCount = 0;
+   document.getElementById("carCountDisplay").innerText = 0;
+   cars.forEach(car => {
+       addCar(car);
+   });
 }
-
 function checkCurrentPassword() {
-
-    let password = document.getElementById("currentPassword").value;
-
-    let user = auth.currentUser;
-
-    let credential =
-
-    firebase.auth.EmailAuthProvider.credential(user.email, password);
-
-    user.reauthenticateWithCredential(credential)
-
-    .then(() => {
-
-        document.getElementById("passMsg").className = "";
-
-        document.getElementById("passMsg").innerText = "كلمة المرور صحيحة، اكتبي كلمة المرور الجديدة";
-
-        document.getElementById("newPassBox").style.display = "block";
-
-    })
-
-    .catch(() => {
-
-        document.getElementById("passMsg").className = "error";
-
-        document.getElementById("passMsg").innerText = "كلمة المرور الحالية غير صحيحة";
-
-    });
-
+   let password = document.getElementById("currentPassword").value;
+   let user = auth.currentUser;
+   let credential =
+   firebase.auth.EmailAuthProvider.credential(user.email, password);
+   user.reauthenticateWithCredential(credential)
+   .then(() => {
+       document.getElementById("passMsg").className = "";
+       document.getElementById("passMsg").innerText = "كلمة المرور صحيحة، اكتبي كلمة المرور الجديدة";
+       document.getElementById("newPassBox").style.display = "block";
+   })
+   .catch(() => {
+       document.getElementById("passMsg").className = "error";
+       document.getElementById("passMsg").innerText = "كلمة المرور الحالية غير صحيحة";
+   });
 }
-
 function changePassword() {
-
-    let newPassword = document.getElementById("newPassword").value;
-
-    let confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (newPassword.length < 6) {
-
-        document.getElementById("passMsg").className = "error";
-
-        document.getElementById("passMsg").innerText = "كلمة المرور يجب أن تكون 6 أحرف أو أكثر";
-
-        return;
-
-    }
-
-    if (newPassword !== confirmPassword) {
-
-        document.getElementById("passMsg").className = "error";
-
-        document.getElementById("passMsg").innerText = "كلمة المرور غير متطابقة";
-
-        return;
-
-    }
-
-    auth.currentUser.updatePassword(newPassword)
-
-    .then(() => {
-
-        document.getElementById("passMsg").className = "";
-
-        document.getElementById("passMsg").innerText = "تم تغيير كلمة المرور بنجاح";
-
-    })
-
-    .catch((error) => {
-
-        document.getElementById("passMsg").className = "error";
-
-        document.getElementById("passMsg").innerText = error.message;
-
-    });
-
+   let newPassword = document.getElementById("newPassword").value;
+   let confirmPassword = document.getElementById("confirmPassword").value;
+   if (newPassword.length < 6) {
+       document.getElementById("passMsg").className = "error";
+       document.getElementById("passMsg").innerText = "كلمة المرور يجب أن تكون 6 أحرف أو أكثر";
+       return;
+   }
+   if (newPassword !== confirmPassword) {
+       document.getElementById("passMsg").className = "error";
+       document.getElementById("passMsg").innerText = "كلمة المرور غير متطابقة";
+       return;
+   }
+   auth.currentUser.updatePassword(newPassword)
+   .then(() => {
+       document.getElementById("passMsg").className = "";
+       document.getElementById("passMsg").innerText = "تم تغيير كلمة المرور بنجاح";
+   })
+   .catch((error) => {
+       document.getElementById("passMsg").className = "error";
+       document.getElementById("passMsg").innerText = error.message;
+   });
 }
-
 function loadBookingCount(email) {
-
-    db.collection("bookings")
-
-    .where("userEmail", "==", email)
-
-    .onSnapshot((snapshot) => {
-
-        document.getElementById("bookingCount").innerText = snapshot.size;
-
-    });
-
+   db.collection("bookings")
+   .where("userEmail", "==", email)
+   .onSnapshot((snapshot) => {
+       document.getElementById("bookingCount").innerText = snapshot.size;
+   });
 }
-
 function logout() {
-
-    auth.signOut().then(() => {
-
-        window.location.href = "login.html";
-
-    });
-
+   auth.signOut().then(() => {
+       window.location.href = "login.html";
+   });
 }
 </script>
 </body>
