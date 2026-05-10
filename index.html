@@ -496,8 +496,10 @@ button:hover {
 <img src="logo.png" class="logo">
 </div>
 <div class="main-links">
+<div id="guestLinks">
 <a href="register.html">إنشاء حساب</a>
 <a href="login.html">تسجيل دخول</a>
+</div>
 <a href="#garages">الكراجات</a>
 <a href="#about">من نحن</a>
 <a href="#contact">اتصل بنا</a>
@@ -765,14 +767,11 @@ auth.onAuthStateChanged(function(user) {
     ];
 
     if (user) {
-
-        if (adminEmails.includes(user.email.toLowerCase())) {
-
-            document.getElementById("dashboardLink").style.display = "block";
-
-        }
-
-    }
+   document.getElementById("guestLinks").style.display = "none";
+   if (adminEmails.includes(user.email.toLowerCase())) {
+       document.getElementById("dashboardLink").style.display = "block";
+   }
+}
 
 });
 
