@@ -62,11 +62,13 @@ body{
 
     background-image:url("garage-bg2.jpeg");
 
-    background-size:cover;
+    background-size:contain;
 
     background-position:center;
 
     background-repeat:no-repeat;
+
+    background-color:#05070c;
 
 }
 
@@ -336,7 +338,7 @@ input[type="checkbox"]{
 
     direction:ltr;
 
-    unicode-bidi:bidi-override;
+    unicode-bidi:embed;
 
     font-size:22px;
 
@@ -364,7 +366,7 @@ input[type="checkbox"]{
 
     .image-side{
 
-        min-height:450px;
+        min-height:520px;
 
     }
 
@@ -379,9 +381,7 @@ input[type="checkbox"]{
 </head>
 <body>
 <div class="login-wrapper">
-<!-- الصورة -->
 <div class="image-side"></div>
-<!-- الفورم -->
 <div class="login-side">
 <img src="logo.png" class="logo">
 <h1>تسجيل الدخول</h1>
@@ -423,10 +423,7 @@ input[type="checkbox"]{
 </div>
 <div class="contact">
 <h3>اتصل بنا</h3>
-<p>
-
-                +973 38202464 | +973 37171721
-</p>
+<p>+973 38202464 | +973 37171721</p>
 </div>
 </div>
 </div>
