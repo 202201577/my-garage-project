@@ -1,229 +1,426 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<title>Login - My Garage</title>
+<meta charset="UTF-8">
+<title>تسجيل الدخول - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body {
+*{
 
-    font-family: Arial, sans-serif;
+    margin:0;
 
-    margin: 0;
+    padding:0;
 
-    background: #f5f7fa;
-
-}
-
-.navbar {
-
-    background: #1e293b;
-
-    color: white;
-
-    padding: 15px;
-
-    font-size: 20px;
-
-    text-align: center;
+    box-sizing:border-box;
 
 }
 
-.container {
+body{
 
-    display: flex;
+    font-family:Arial,sans-serif;
 
-    justify-content: center;
+    background:#f8fafc;
 
-    align-items: center;
-
-    min-height: 80vh;
+    overflow-x:hidden;
 
 }
 
-.box {
+/* navbar */
 
-    background: white;
+.navbar{
 
-    padding: 30px;
+    background:white;
 
-    width: 90%;
+    padding:18px 40px;
 
-    max-width: 320px;
+    display:flex;
 
-    border-radius: 15px;
+    justify-content:space-between;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    align-items:center;
 
-    text-align: center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 
-}
+    position:sticky;
 
-h2 {
+    top:0;
 
-    margin-bottom: 20px;
-
-}
-
-input {
-
-    display: block;
-
-    width: 90%;
-
-    max-width: 260px;
-
-    padding: 12px;
-
-    margin: 10px auto;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
+    z-index:1000;
 
 }
 
-button {
+.logo{
 
-    padding: 12px;
-
-    border: none;
-
-    background: #3b82f6;
-
-    color: white;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    width: 90%;
-
-    max-width: 220px;
-
-    font-size: 15px;
-
-    margin-top: 10px;
+    width:150px;
 
 }
 
-button:hover {
+/* page */
 
-    background: #2563eb;
+.login-page{
 
-}
+    min-height:90vh;
 
-.google-btn {
+    display:flex;
 
-    background: white;
+    justify-content:center;
 
-    color: #111;
+    align-items:center;
 
-    border: 1px solid #ccc;
+    padding:40px 20px;
 
-}
-
-.google-btn:hover {
-
-    background: #f3f4f6;
+    position:relative;
 
 }
 
-#msg {
+/* background */
 
-    margin-top: 15px;
+.bg{
 
-    color: #d11a2a;
+    position:absolute;
 
-}
+    inset:0;
 
-.link {
+    background:
 
-    margin-top: 15px;
+    linear-gradient(rgba(7,17,31,.78),rgba(7,17,31,.78)),
 
-}
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1400");
 
-.link a {
+    background-size:cover;
 
-    text-decoration: none;
-
-    color: #2563eb;
+    background-position:center;
 
 }
 
-.or {
+/* card */
 
-    margin: 18px 0;
+.login-card{
 
-    color: gray;
+    position:relative;
+
+    width:100%;
+
+    max-width:460px;
+
+    background:white;
+
+    border-radius:28px;
+
+    padding:45px 35px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+
+    text-align:center;
+
+    z-index:2;
+
+}
+
+.icon{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+    color:white;
+
+    font-size:40px;
+
+}
+
+.title{
+
+    font-size:38px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+    color:#111827;
+
+}
+
+.subtitle{
+
+    color:#6b7280;
+
+    margin-bottom:35px;
+
+    line-height:1.7;
+
+}
+
+/* inputs */
+
+.input-group{
+
+    margin-bottom:18px;
+
+    text-align:right;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+    color:#374151;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:2px solid #e5e7eb;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    transition:.2s;
+
+}
+
+.input-group input:focus{
+
+    border-color:#ef4444;
+
+    outline:none;
+
+}
+
+/* buttons */
+
+.login-btn{
+
+    width:100%;
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+    color:white;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+    transition:.2s;
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(239,68,68,.35);
+
+}
+
+.or{
+
+    margin:25px 0;
+
+    color:#9ca3af;
+
+    font-weight:bold;
+
+}
+
+/* google */
+
+.google-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:2px solid #e5e7eb;
+
+    border-radius:14px;
+
+    background:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    transition:.2s;
+
+}
+
+.google-btn:hover{
+
+    background:#f9fafb;
+
+}
+
+.google-icon{
+
+    width:24px;
+
+}
+
+/* links */
+
+.links{
+
+    margin-top:25px;
+
+}
+
+.links a{
+
+    text-decoration:none;
+
+    color:#dc2626;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+.links a:hover{
+
+    opacity:.7;
+
+}
+
+/* error */
+
+#error{
+
+    margin-top:18px;
+
+    color:#dc2626;
+
+    font-weight:bold;
+
+}
+
+@media(max-width:600px){
+
+    .login-card{
+
+        padding:35px 25px;
+
+    }
+
+    .title{
+
+        font-size:30px;
+
+    }
 
 }
 </style>
 </head>
 <body>
+<!-- navbar -->
 <div class="navbar">
-
-    My Garage
+<img src="logo.png" class="logo">
 </div>
-<div class="container">
-<div class="box">
-<h2>Login</h2>
-<input type="email"
+<!-- page -->
+<div class="login-page">
+<div class="bg"></div>
+<div class="login-card">
+<div class="icon">🔐</div>
+<h1 class="title">تسجيل الدخول</h1>
+<p class="subtitle">
 
-               id="email"
+            سجل دخولك للوصول إلى حجوزاتك وإدارة حسابك في My Garage
+</p>
+<!-- email -->
+<div class="input-group">
+<label>البريد الإلكتروني</label>
+<input type="email" id="email" placeholder="example@gmail.com">
+</div>
+<!-- password -->
+<div class="input-group">
+<label>كلمة المرور</label>
+<input type="password" id="password" placeholder="••••••••">
+</div>
+<!-- login -->
+<button class="login-btn" onclick="login()">
 
-               placeholder="Email">
-<input type="password"
-
-               id="password"
-
-               placeholder="Password">
-<button onclick="login()">
-
-            Login
+            تسجيل الدخول
 </button>
 <div class="or">OR</div>
-<button class="google-btn"
+<!-- google -->
+<button class="google-btn" onclick="googleLogin()">
+<img class="google-icon"
 
-        onclick="googleLogin()">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+            src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
 
-         width="20"
-
-         style="vertical-align: middle; margin-right: 8px;">
-
-    Sign in with Google
+            Sign in with Google
 </button>
- 
-<p id="msg"></p>
-<div class="link">
+<!-- links -->
+<div class="links">
 <a href="register.html">
 
-                Create new account
+                إنشاء حساب جديد
 </a>
 </div>
+<p id="error"></p>
 </div>
 </div>
+<!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="firebase.js"></script>
 <script>
 
-function login() {
+/* login */
 
-    let email =
+function login(){
 
-    document.getElementById("email").value;
+    let email = document.getElementById("email").value;
 
-    let password =
+    let password = document.getElementById("password").value;
 
-    document.getElementById("password").value;
-
-    auth.signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email,password)
 
     .then(() => {
-
-        localStorage.setItem("loggedIn", "true");
 
         window.location.href = "index.html";
 
@@ -231,39 +428,49 @@ function login() {
 
     .catch((error) => {
 
-        document.getElementById("msg").innerText =
+        document.getElementById("error").innerText =
 
-        error.message;
+        "البريد الإلكتروني أو كلمة المرور غير صحيحة";
 
     });
 
 }
 
-function googleLogin() {
+/* google */
 
-    let provider =
+function googleLogin(){
 
-    new firebase.auth.GoogleAuthProvider();
+    let provider = new firebase.auth.GoogleAuthProvider();
 
     auth.signInWithPopup(provider)
 
     .then(() => {
 
-        localStorage.setItem("loggedIn", "true");
-
         window.location.href = "index.html";
 
     })
 
     .catch((error) => {
 
-        document.getElementById("msg").innerText =
+        document.getElementById("error").innerText =
 
         error.message;
 
     });
 
 }
+
+/* already login */
+
+auth.onAuthStateChanged(function(user){
+
+    if(user){
+
+        window.location.href = "index.html";
+
+    }
+
+});
 </script>
 </body>
 </html>
