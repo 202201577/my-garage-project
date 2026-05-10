@@ -114,8 +114,8 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="mybookings.html">حجوزاتي</a>
-<a href="nearest-garage.html">أقرب كراج</a>
+<a id="myBookingMenu" href="mybookings.html">حجوزاتي</a>
+<a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
 <a href="notifications.html" class="active">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
@@ -378,18 +378,37 @@ auth.onAuthStateChanged(function(user){
     if(user){
  
         let adminEmails = [
+
+    "alhanoof.t29@gmail.com",
+
+    "anwaralhayki55@gmail.com"
+
+];
+
+let garageOwnerEmails = [
+
+    "bluemotors@mygarage.com",
+
+    "bosch@mygarage.com",
+
+    "homsgate@mygarage.com",
+
+    "fitandfix@mygarage.com"
+
+];
+
+let email = user.email.toLowerCase();
+
+if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
+
+    document.getElementById("myBookingsMenu").style.display = "none";
+
+    document.getElementById("nearestMenu").style.display = "none";
+
+    document.getElementById("dashboardLink").style.display = "block";
+
+}
  
-            "alhanoof.t29@gmail.com",
- 
-            "anwaralhayki55@gmail.com"
- 
-        ];
- 
-        if(adminEmails.includes(user.email.toLowerCase())){
- 
-            document.getElementById("dashboardLink").style.display = "block";
- 
-        }
  
         loadBookings(user.email);
  
