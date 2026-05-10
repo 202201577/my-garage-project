@@ -711,9 +711,53 @@ function payBooking(id){
 
     let booking = bookings.find(b => b.id === id);
 
+    let method = prompt(
+
+        "اختاري طريقة الدفع:\n\n1 - BenefitPay\n2 - Apple Pay\n3 - Credit Card\n\nاكتبي الرقم:"
+
+    );
+
+    let paymentMethod = "";
+
+    if(method === "1"){
+
+        paymentMethod = "BenefitPay";
+
+    } 
+
+    else if(method === "2"){
+
+        paymentMethod = "Apple Pay";
+
+    } 
+
+    else if(method === "3"){
+
+        paymentMethod = "Credit Card";
+
+    } 
+
+    else{
+
+        alert("يرجى اختيار طريقة دفع صحيحة");
+
+        return;
+
+    }
+
+    let confirmPay = confirm("تأكيد الدفع باستخدام " + paymentMethod + "؟");
+
+    if(!confirmPay){
+
+        return;
+
+    }
+
     db.collection("bookings").doc(id).update({
 
         paymentStatus: "Paid",
+
+        paymentMethod: paymentMethod,
 
         paidAt: firebase.firestore.FieldValue.serverTimestamp()
 
@@ -729,7 +773,7 @@ function payBooking(id){
 
                 "تم الدفع بنجاح",
 
-                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD لحجزك في " + booking.garage,
+                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD باستخدام " + paymentMethod,
 
                 "payment"
 
@@ -741,7 +785,7 @@ function payBooking(id){
 
                 "تم استلام دفعة جديدة",
 
-                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD من العميل " + booking.userEmail,
+                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD باستخدام " + paymentMethod,
 
                 "payment"
 
@@ -755,7 +799,7 @@ function payBooking(id){
 
                     "تم دفع مبلغ الحجز",
 
-                    "قام العميل بدفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD لحجز في " + booking.garage,
+                    "قام العميل بالدفع باستخدام " + paymentMethod,
 
                     "payment"
 
@@ -765,11 +809,12 @@ function payBooking(id){
 
         }
 
-        alert("تم الدفع بنجاح");
+        alert("تم الدفع بنجاح باستخدام " + paymentMethod);
 
     });
 
 }
+ 
  
 
 function renderBookings(){
@@ -889,6 +934,7 @@ function renderBookings(){
 <div class="detail"><b>الملاحظات:</b> ${b.notes || "-"}</div>
 <div class="detail"><b>مبلغ الخدمة:</b> ${amount > 0 ? amount.toFixed(3) + " BD" : "-"}</div>
 <div class="detail"><b>حالة الدفع:</b> ${getArabicPayment(paymentStatus)}</div>
+<div class="detail"><b>طريقة الدفع:</b> ${b.paymentMethod || "-"}</div>
 </div>
 </div>
 </div>
