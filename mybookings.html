@@ -6,17 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body{
-
-    margin:0;
-
-    font-family:Arial,sans-serif;
-
-    background:#f8fafc;
-
-    color:#0f172a;
-
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 
 .navbar{
 
@@ -42,7 +32,7 @@ body{
 
 }
 
-.logo{width:145px;}
+.logo{width:145px}
 
 .menu-btn{
 
@@ -80,7 +70,7 @@ body{
 
 }
 
-.side-menu.open{right:0;}
+.side-menu.open{right:0}
 
 .close-btn{
 
@@ -134,7 +124,7 @@ body{
 
 .side-menu a:hover,
 
-.side-menu .active{background:#dc2626;}
+.side-menu .active{background:#dc2626}
 
 .page{
 
@@ -248,7 +238,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:120px 220px 1fr 140px;
+    grid-template-columns:120px 220px 1fr 150px;
 
     gap:25px;
 
@@ -276,29 +266,17 @@ body{
 
 }
 
-.waiting{
+.waiting{background:#fef3c7;color:#d97706}
 
-    background:#fef3c7;
+.accepted{background:#dcfce7;color:#15803d}
 
-    color:#d97706;
+.rejected{background:#fee2e2;color:#dc2626}
 
-}
+.paid{background:#dcfce7;color:#15803d}
 
-.accepted{
+.unpaid{background:#fee2e2;color:#dc2626}
 
-    background:#dcfce7;
-
-    color:#15803d;
-
-}
-
-.rejected{
-
-    background:#fee2e2;
-
-    color:#dc2626;
-
-}
+.notset{background:#e5e7eb;color:#374151}
 
 .service-info{
 
@@ -347,6 +325,32 @@ body{
     background:#dc2626;
 
     color:white;
+
+}
+
+.pay-btn{
+
+    margin-top:10px;
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+.pay-btn:hover{
+
+    background:#15803d;
 
 }
 
@@ -456,6 +460,20 @@ body{
 
 }
 
+.payment-box{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #e5e7eb;
+
+    margin-top:15px;
+
+}
+
 .empty{
 
     background:white;
@@ -508,7 +526,7 @@ body{
 
     }
 
-    .logo{width:120px;}
+    .logo{width:120px}
 
 }
 </style>
@@ -516,9 +534,7 @@ body{
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
-<div class="menu-btn" onclick="toggleMenu()">
-&#9776;
-</div>
+<div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="toggleMenu()">×</div>
@@ -529,6 +545,7 @@ body{
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a href="complaints.html">الشكاوي</a>
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
@@ -590,7 +607,6 @@ function logout(){
 
 }
 
-
 function setFilter(filter, element){
 
     currentFilter = filter;
@@ -623,6 +639,26 @@ function getArabicStatus(status){
 
 }
 
+function getPaymentClass(paymentStatus){
+
+    if(paymentStatus === "Paid") return "paid";
+
+    if(paymentStatus === "Unpaid") return "unpaid";
+
+    return "notset";
+
+}
+
+function getArabicPayment(paymentStatus){
+
+    if(paymentStatus === "Paid") return "مدفوع";
+
+    if(paymentStatus === "Unpaid") return "غير مدفوع";
+
+    return "لم يتم تحديد المبلغ";
+
+}
+
 function getDay(date){
 
     if(!date) return "-";
@@ -646,6 +682,24 @@ function toggleDetails(id){
     let box = document.getElementById(id);
 
     box.style.display = box.style.display === "block" ? "none" : "block";
+
+}
+
+function payBooking(id){
+
+    db.collection("bookings").doc(id).update({
+
+        paymentStatus: "Paid",
+
+        paidAt: firebase.firestore.FieldValue.serverTimestamp()
+
+    })
+
+    .then(() => {
+
+        alert("تم الدفع بنجاح");
+
+    });
 
 }
 
@@ -699,9 +753,13 @@ function renderBookings(){
 
             let status = b.status || "Waiting";
 
+            let paymentStatus = b.paymentStatus || "Not Set";
+
             let image = garageImages[b.garage] || "garage-bg.jpeg";
 
             let detailId = "details" + index;
+
+            let amount = Number(b.serviceAmount || 0);
 
             output += `
 <div class="booking-card">
@@ -714,6 +772,27 @@ function renderBookings(){
 <div class="service-info">
 <h3>${b.serviceType || "-"}</h3>
 <p>خدمة</p>
+
+                    ${amount > 0 ? `
+<p><b>المبلغ:</b> ${amount.toFixed(3)} BD</p>
+<span class="status-label ${getPaymentClass(paymentStatus)}">
+
+                            ${getArabicPayment(paymentStatus)}
+</span>
+
+                        ${paymentStatus === "Unpaid" ? `
+<button class="pay-btn" onclick="payBooking('${b.id}')">
+
+                                ادفع الآن
+</button>
+
+                        ` : ""}
+
+                    ` : `
+<p style="color:#6b7280;">لم يتم تحديد المبلغ بعد</p>
+
+                    `}
+<br><br>
 <button class="details-btn" onclick="toggleDetails('${detailId}')">
 
                         عرض التفاصيل
@@ -739,6 +818,8 @@ function renderBookings(){
 <div class="detail"><b>التاريخ:</b> ${b.date || "-"}</div>
 <div class="detail"><b>الوقت:</b> ${b.time || "-"}</div>
 <div class="detail"><b>الملاحظات:</b> ${b.notes || "-"}</div>
+<div class="detail"><b>مبلغ الخدمة:</b> ${amount > 0 ? amount.toFixed(3) + " BD" : "-"}</div>
+<div class="detail"><b>حالة الدفع:</b> ${getArabicPayment(paymentStatus)}</div>
 </div>
 </div>
 </div>
@@ -765,7 +846,13 @@ function loadBookings(userEmail){
 
         snapshot.forEach((doc) => {
 
-            bookings.push(doc.data());
+            bookings.push({
+
+                id: doc.id,
+
+                ...doc.data()
+
+            });
 
         });
 
@@ -787,9 +874,25 @@ auth.onAuthStateChanged(function(user){
 
         ];
 
-        if(adminEmails.includes(user.email.toLowerCase())){
+        let garageOwnerEmails = [
 
-            document.getElementById("dashboardLink").style.display = "block";
+            "bluemotors@mygarage.com",
+
+            "bosch@mygarage.com",
+
+            "homsgate@mygarage.com",
+
+            "fitandfix@mygarage.com"
+
+        ];
+
+        let email = user.email.toLowerCase();
+
+        if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
+
+            window.location.href = "garage-dashboard.html";
+
+            return;
 
         }
 
