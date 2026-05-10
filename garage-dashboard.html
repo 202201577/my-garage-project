@@ -487,6 +487,7 @@ function updateStatus(id, newStatus){
 }
 
 function setServiceAmount(id){
+
     let amount = Number(document.getElementById("amount_" + id).value);
 
     if(!amount || amount <= 0){
@@ -495,27 +496,27 @@ function setServiceAmount(id){
     }
 
     let booking = bookings.find(b => b.id === id);
+    let oldAmount = Number(booking?.serviceAmount || 0);
+    let oldPaymentStatus = booking?.paymentStatus || "Not Set";
+
     let commissionRate = 0.10;
     let commissionAmount = amount * commissionRate;
     let garageNetAmount = amount - commissionAmount;
 
-    db.collection("bookings").doc(id).update({
-        serviceAmount:amount,
-        commissionRate:commissionRate,
-        commissionAmount:commissionAmount,
-        garageNetAmount:garageNetAmount,
-        paymentStatus:"Unpaid"
-    }).then(() => {
-        if(booking){
-            createNotification(
-                booking.userId,
-                "تم تحديد مبلغ الخدمة",
-                "تم تحديد مبلغ " + amount.toFixed(3) + " BD لحجزك في " + booking.garage,
-                "payment"
-            );
-        }
+    let newPaymentStatus = oldPaymentStatus;
 
-        alert("تم حفظ المبلغ وإرساله للعميل للدفع");
+    if(amount !== oldAmount){
+        newPaymentStatus = "Unpaid";
+    }
+
+    db.collection("bookings").doc(id).update({
+        serviceAmount: amount,
+        commissionRate: commissionRate,
+        commissionAmount: commissionAmount,
+        garageNetAmount: garageNetAmount,
+        paymentStatus: newPaymentStatus
+    }).then(() => {
+        alert("تم حفظ المبلغ");
     });
 }
 
