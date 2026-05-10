@@ -6,41 +6,273 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
+body{
 
-.navbar{background:white;padding:18px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    margin:0;
+
+    font-family:Arial,sans-serif;
+
+    background:#f8fafc;
+
+    color:#0f172a;
+
+}
+
+.navbar{
+
+    background:white;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    direction:ltr;
+
+}
 
 .logo{width:140px}
 
-.menu{font-size:32px;cursor:pointer}
+.menu-icon{
 
-.container{width:90%;max-width:1100px;margin:40px auto}
+    font-size:32px;
 
-h1{text-align:center;font-size:38px}
+    cursor:pointer;
 
-.desc{text-align:center;color:#64748b;margin-bottom:30px}
+    color:#111827;
 
-.location-box,.garage-card{background:white;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+    font-weight:bold;
 
-.btn{background:#c4122f;color:white;border:none;padding:14px 25px;border-radius:12px;font-size:16px;cursor:pointer}
+}
+
+.side-menu{
+
+    position:fixed;
+
+    top:0;
+
+    right:-290px;
+
+    width:270px;
+
+    height:100%;
+
+    background:#07111f;
+
+    color:white;
+
+    z-index:1000;
+
+    padding-top:35px;
+
+    transition:.3s;
+
+    text-align:right;
+
+}
+
+.side-menu.open{right:0}
+
+.side-menu img{
+
+    width:150px;
+
+    display:block;
+
+    margin:0 auto 25px;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:6px;
+
+}
+
+.side-menu a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:16px 30px;
+
+    font-size:18px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.close-btn{
+
+    position:absolute;
+
+    left:20px;
+
+    top:15px;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    color:white;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:40px auto;
+
+}
+
+h1{
+
+    text-align:center;
+
+    font-size:38px;
+
+}
+
+.desc{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-bottom:30px;
+
+}
+
+.location-box,
+
+.garage-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.btn{
+
+    background:#c4122f;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
 
 .btn:hover{background:#a90f28}
 
-.garage-card{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.garage-card{
 
-.distance{font-size:24px;font-weight:bold;color:#c4122f}
+    display:flex;
 
-.badge{background:#dcfce7;color:#15803d;padding:7px 14px;border-radius:20px;font-weight:bold}
+    justify-content:space-between;
 
-.map-link{display:inline-block;margin-top:12px;text-decoration:none;color:white;background:#0f172a;padding:10px 18px;border-radius:10px}
+    align-items:center;
 
-@media(max-width:700px){.garage-card{flex-direction:column;text-align:center}}
+    gap:20px;
+
+}
+
+.distance{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#c4122f;
+
+}
+
+.badge{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+}
+
+.map-link{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#0f172a;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+}
+
+@media(max-width:700px){
+
+    .garage-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+}
 </style>
 </head>
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
-<div class="menu" onclick="window.location.href='index.html'">⌂</div>
+<div class="menu-icon" onclick="openMenu()">☰</div>
+</div>
+<div id="sideMenu" class="side-menu">
+<div class="close-btn" onclick="closeMenu()">×</div>
+<img src="logo.png">
+<a href="index.html">الرئيسية</a>
+<a href="mybookings.html">حجوزاتي</a>
+<a href="nearest-garage.html">أقرب كراج</a>
+<a href="notifications.html">الإشعارات</a>
+<a href="account.html">الحساب</a>
+<a href="garage-dashboard.html">لوحة التحكم</a>
+<a href="index.html#contact">اتصل بنا</a>
+<a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
 <div class="container">
 <h1>أقرب كراج</h1>
@@ -113,6 +345,24 @@ let garages = [
     }
 
 ];
+
+function openMenu(){
+
+    document.getElementById("sideMenu").classList.add("open");
+
+}
+
+function closeMenu(){
+
+    document.getElementById("sideMenu").classList.remove("open");
+
+}
+
+function logout(){
+
+    window.location.href = "login.html";
+
+}
 
 function getDistance(lat1,lng1,lat2,lng2){
 
