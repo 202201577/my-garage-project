@@ -711,108 +711,89 @@ function payBooking(id){
 
     let booking = bookings.find(b => b.id === id);
 
+    if(!booking){
+        alert("لم يتم العثور على الحجز");
+        return;
+    }
+
+    let serviceAmount = Number(booking.serviceAmount || 0);
+    let paidAmount = Number(booking.paidAmount || 0);
+    let remainingAmount = Number(booking.remainingAmount || 0);
+
+    if(remainingAmount <= 0){
+        remainingAmount = serviceAmount - paidAmount;
+    }
+
+    if(remainingAmount <= 0){
+        alert("هذا الحجز مدفوع بالكامل");
+        return;
+    }
+
     let method = prompt(
-
+        "المبلغ المطلوب دفعه: " + remainingAmount.toFixed(3) + " BD\n\n" +
         "اختاري طريقة الدفع:\n\n1 - BenefitPay\n2 - Apple Pay\n3 - Credit Card\n\nاكتبي الرقم:"
-
     );
 
     let paymentMethod = "";
 
     if(method === "1"){
-
         paymentMethod = "BenefitPay";
-
     } 
-
     else if(method === "2"){
-
         paymentMethod = "Apple Pay";
-
     } 
-
     else if(method === "3"){
-
         paymentMethod = "Credit Card";
-
     } 
-
     else{
-
         alert("يرجى اختيار طريقة دفع صحيحة");
-
         return;
-
     }
 
-    let confirmPay = confirm("تأكيد الدفع باستخدام " + paymentMethod + "؟");
+    let confirmPay = confirm(
+        "تأكيد دفع " + remainingAmount.toFixed(3) + " BD باستخدام " + paymentMethod + "؟"
+    );
 
     if(!confirmPay){
-
         return;
-
     }
 
+    let newPaidAmount = paidAmount + remainingAmount;
+
     db.collection("bookings").doc(id).update({
-
         paymentStatus: "Paid",
-
         paymentMethod: paymentMethod,
-
+        paidAmount: newPaidAmount,
+        remainingAmount: 0,
         paidAt: firebase.firestore.FieldValue.serverTimestamp()
-
     })
-
     .then(() => {
 
-        if(booking){
+        createNotification(
+            booking.userId,
+            "تم الدفع بنجاح",
+            "تم دفع مبلغ " + remainingAmount.toFixed(3) + " BD باستخدام " + paymentMethod,
+            "payment"
+        );
 
+        createNotification(
+            "admin",
+            "تم استلام دفعة جديدة",
+            "تم دفع مبلغ " + remainingAmount.toFixed(3) + " BD باستخدام " + paymentMethod,
+            "payment"
+        );
+
+        if(booking.garageOwnerEmail){
             createNotification(
-
-                booking.userId,
-
-                "تم الدفع بنجاح",
-
-                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD باستخدام " + paymentMethod,
-
+                booking.garageOwnerEmail,
+                "تم دفع مبلغ الحجز",
+                "قام العميل بدفع مبلغ " + remainingAmount.toFixed(3) + " BD باستخدام " + paymentMethod,
                 "payment"
-
             );
-
-            createNotification(
-
-                "admin",
-
-                "تم استلام دفعة جديدة",
-
-                "تم دفع مبلغ " + Number(booking.serviceAmount || 0).toFixed(3) + " BD باستخدام " + paymentMethod,
-
-                "payment"
-
-            );
-
-            if(booking.garageOwnerEmail){
-
-                createNotification(
-
-                    booking.garageOwnerEmail,
-
-                    "تم دفع مبلغ الحجز",
-
-                    "قام العميل بالدفع باستخدام " + paymentMethod,
-
-                    "payment"
-
-                );
-
-            }
-
         }
 
         alert("تم الدفع بنجاح باستخدام " + paymentMethod);
-
     });
-
 }
  
  
