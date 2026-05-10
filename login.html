@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>تسجيل الدخول - My Garage</title>
 
 <style>
@@ -34,26 +36,32 @@ body{
     box-shadow:0 10px 40px rgba(0,0,0,.1);
 }
 
+/* الصورة */
+
 .image-side{
-    width:32%;
+    width:50%;
     min-height:950px;
+
     background-image:url("garage-bg2.jpeg");
     background-size:cover;
-    background-position:78% center;
+    background-position:center;
     background-repeat:no-repeat;
 }
+
+/* الفورم */
 
 .login-side{
     width:50%;
     padding:60px;
     direction:rtl;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
 
 .logo{
-    width:260px;
+    width:240px;
     display:block;
     margin:0 auto 25px;
 }
@@ -93,9 +101,12 @@ label{
 input{
     width:100%;
     height:58px;
+
     border:1px solid #ddd;
     border-radius:15px;
+
     padding:0 18px;
+
     font-size:16px;
     outline:none;
 }
@@ -133,12 +144,16 @@ input[type="checkbox"]{
 .login-btn{
     width:100%;
     height:60px;
+
     border:none;
     border-radius:16px;
+
     background:#c4122f;
     color:white;
+
     font-size:22px;
     font-weight:bold;
+
     cursor:pointer;
     transition:.3s;
 }
@@ -157,15 +172,20 @@ input[type="checkbox"]{
 .google-btn{
     width:100%;
     height:60px;
+
     border:1px solid #ddd;
     border-radius:16px;
+
     background:white;
+
     display:flex;
     justify-content:center;
     align-items:center;
     gap:12px;
+
     font-size:18px;
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -198,72 +218,64 @@ input[type="checkbox"]{
 
 .contact p{
     direction:ltr;
+    unicode-bidi:bidi-override;
+
     font-size:22px;
     font-weight:bold;
     color:#444;
 }
 
-/* MOBILE */
+/* الموبايل */
 
 @media(max-width:768px){
 
     body{
-        padding:0;
-        background:
-        linear-gradient(rgba(255,255,255,.88), rgba(255,255,255,.88)),
-        url("garage-bg2.jpeg");
-        background-size:cover;
-        background-position:center;
-        background-attachment:fixed;
+        padding:12px;
     }
 
     .login-wrapper{
-        width:100%;
-        min-height:100vh;
-        border-radius:0;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:transparent;
-        box-shadow:none;
+        flex-direction:row;
+        border-radius:28px;
     }
 
     .image-side{
-        display:none;
+        width:38%;
+        min-height:100vh;
+
+        background-image:url("garage-bg2.jpeg");
+        background-size:cover;
+        background-position:72% center;
+        background-repeat:no-repeat;
+
+        border-radius:30px 0 0 30px;
     }
 
     .login-side{
-        width:100%;
-        max-width:420px;
-        padding:35px 22px;
-        background:rgba(255,255,255,.92);
-        border-radius:28px;
-        margin:25px;
-        box-shadow:0 10px 35px rgba(0,0,0,.12);
+        width:62%;
+        padding:30px 18px;
     }
 
     .logo{
-        width:170px;
-        margin:0 auto 18px;
+        width:150px;
     }
 
     h1{
-        font-size:38px;
+        font-size:34px;
     }
 
     .subtitle{
-        font-size:16px;
+        font-size:14px;
+        line-height:1.7;
         margin-bottom:25px;
     }
 
     .form-box{
-        padding:22px;
-        border-radius:22px;
-        background:white;
+        padding:18px;
+        border-radius:20px;
     }
 
     input{
-        height:50px;
+        height:48px;
         font-size:14px;
     }
 
@@ -280,6 +292,7 @@ input[type="checkbox"]{
     .contact p{
         font-size:14px;
     }
+
 }
 
 </style>
@@ -289,10 +302,12 @@ input[type="checkbox"]{
 
 <div class="login-wrapper">
 
-    <!-- IMAGE -->
+    <!-- الصورة -->
+
     <div class="image-side"></div>
 
-    <!-- LOGIN -->
+    <!-- الفورم -->
+
     <div class="login-side">
 
         <img src="logo.png" class="logo">
@@ -307,32 +322,55 @@ input[type="checkbox"]{
 
             <div class="form-group">
                 <label>البريد الإلكتروني</label>
-                <input type="email" id="email" placeholder="ادخل بريدك الإلكتروني">
+
+                <input
+                type="email"
+                id="email"
+                placeholder="ادخل بريدك الإلكتروني">
             </div>
 
             <div class="form-group">
                 <label>كلمة المرور</label>
-                <input type="password" id="password" placeholder="ادخل كلمة المرور">
+
+                <input
+                type="password"
+                id="password"
+                placeholder="ادخل كلمة المرور">
             </div>
 
             <div class="row">
 
-                <a href="#">نسيت كلمة المرور؟</a>
+                <a href="#">
+                    نسيت كلمة المرور؟
+                </a>
 
                 <div class="checkbox-area">
-                    <label style="margin:0;">تذكرني</label>
+
+                    <label style="margin:0;">
+                        تذكرني
+                    </label>
+
                     <input type="checkbox">
+
                 </div>
 
             </div>
 
-            <button class="login-btn" onclick="login()">
+            <button
+            class="login-btn"
+            onclick="login()">
+
                 تسجيل الدخول
+
             </button>
 
-            <div class="or">أو</div>
+            <div class="or">
+                أو
+            </div>
 
-            <button class="google-btn" onclick="googleLogin()">
+            <button
+            class="google-btn"
+            onclick="googleLogin()">
 
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
 
@@ -343,8 +381,13 @@ input[type="checkbox"]{
         </div>
 
         <div class="create-account">
+
             ليس لديك حساب؟
-            <a href="register.html">إنشاء حساب جديد</a>
+
+            <a href="register.html">
+                إنشاء حساب جديد
+            </a>
+
         </div>
 
         <div class="contact">
@@ -362,6 +405,7 @@ input[type="checkbox"]{
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script src="firebase.js"></script>
@@ -370,8 +414,11 @@ input[type="checkbox"]{
 
 function login(){
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    let email =
+    document.getElementById("email").value;
+
+    let password =
+    document.getElementById("password").value;
 
     auth.signInWithEmailAndPassword(email,password)
 
@@ -391,7 +438,8 @@ function login(){
 
 function googleLogin(){
 
-    let provider = new firebase.auth.GoogleAuthProvider();
+    let provider =
+    new firebase.auth.GoogleAuthProvider();
 
     auth.signInWithPopup(provider)
 
