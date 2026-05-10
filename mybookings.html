@@ -887,25 +887,22 @@ function renderBookings(){
 <h3>${b.serviceType || "-"}</h3>
 <p>خدمة</p>
 
-                    ${amount > 0 ? `
+                    ${amount > 0 && status === "Accepted" ? `
 <p><b>المبلغ:</b> ${amount.toFixed(3)} BD</p>
-<span class="status-label ${getPaymentClass(paymentStatus)}">
 
-                            ${getArabicPayment(paymentStatus)}
+<span class="status-label ${getPaymentClass(paymentStatus)}">
+    ${getArabicPayment(paymentStatus)}
 </span>
 
-                        ${paymentStatus === "Unpaid" ? `
+${paymentStatus === "Unpaid" ? `
 <button class="pay-btn" onclick="payBooking('${b.id}')">
-
-                                ادفع الآن
+    ادفع الآن
 </button>
+` : ""}
+` : `
+<p style="color:#6b7280;">سيتم تحديد المبلغ بعد قبول الحجز</p>
+`}
 
-                        ` : ""}
-
-                    ` : `
-<p style="color:#6b7280;">لم يتم تحديد المبلغ بعد</p>
-
-                    `}
 <br><br>
 <button class="details-btn" onclick="toggleDetails('${detailId}')">
 
