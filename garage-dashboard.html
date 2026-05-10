@@ -402,6 +402,28 @@ function logout(){
 
 }
 
+function createNotification(userId, title, message, type){
+
+    if(!userId) return;
+
+    db.collection("notifications").add({
+
+        userId:userId,
+
+        title:title,
+
+        message:message,
+
+        type:type,
+
+        read:false,
+
+        createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+    });
+
+}
+
 function getStatusClass(status){
 
     if(status === "Accepted") return "accepted";
@@ -602,7 +624,7 @@ function loadBookingsForUser(){
 
             bookings.push({
 
-                id: doc.id,
+                id:doc.id,
 
                 ...doc.data()
 
@@ -618,9 +640,65 @@ function loadBookingsForUser(){
 
 function updateStatus(id, newStatus){
 
+    let booking = bookings.find(b => b.id === id);
+
     db.collection("bookings").doc(id).update({
 
-        status: newStatus
+        status:newStatus
+
+    }).then(() => {
+
+        if(booking){
+
+            if(newStatus === "Accepted"){
+
+                createNotification(
+
+                    booking.userId,
+
+                    "تم قبول حجزك",
+
+                    "تم قبول حجزك في " + booking.garage,
+
+                    "booking"
+
+                );
+
+            }
+
+            if(newStatus === "Rejected"){
+
+                createNotification(
+
+                    booking.userId,
+
+                    "تم رفض حجزك",
+
+                    "تم رفض حجزك في " + booking.garage,
+
+                    "booking"
+
+                );
+
+            }
+
+            if(newStatus === "Waiting"){
+
+                createNotification(
+
+                    booking.userId,
+
+                    "تم تحديث حالة الحجز",
+
+                    "تم إرجاع حجزك في " + booking.garage + " إلى حالة الانتظار",
+
+                    "booking"
+
+                );
+
+            }
+
+        }
 
     });
 
@@ -638,6 +716,8 @@ function setServiceAmount(id){
 
     }
 
+    let booking = bookings.find(b => b.id === id);
+
     let commissionRate = 0.10;
 
     let commissionAmount = amount * commissionRate;
@@ -646,19 +726,35 @@ function setServiceAmount(id){
 
     db.collection("bookings").doc(id).update({
 
-        serviceAmount: amount,
+        serviceAmount:amount,
 
-        commissionRate: commissionRate,
+        commissionRate:commissionRate,
 
-        commissionAmount: commissionAmount,
+        commissionAmount:commissionAmount,
 
-        garageNetAmount: garageNetAmount,
+        garageNetAmount:garageNetAmount,
 
-        paymentStatus: "Unpaid"
+        paymentStatus:"Unpaid"
 
     })
 
     .then(() => {
+
+        if(booking){
+
+            createNotification(
+
+                booking.userId,
+
+                "تم تحديد مبلغ الخدمة",
+
+                "تم تحديد مبلغ " + amount.toFixed(3) + " BD لحجزك في " + booking.garage,
+
+                "payment"
+
+            );
+
+        }
 
         alert("تم حفظ المبلغ وإرساله للعميل للدفع");
 
