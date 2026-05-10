@@ -610,7 +610,7 @@ function loadBookingsForUser(){
 
         query = db.collection("bookings")
 
-        .where("garageOwnerEmail", "==", currentUserEmail)
+        .where("garageOwnerEmail", "==", currentUserEmail.toLowerCase())
 
         .orderBy("createdAt", "desc");
 
