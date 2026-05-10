@@ -604,35 +604,45 @@ function renderBookings(){
 
 function loadBookingsForUser(){
 
-    let query = db.collection("bookings").orderBy("createdAt", "desc");
-
-    if(!isAdmin){
-
-        query = db.collection("bookings")
-
-        .where("garageOwnerEmail", "==", currentUserEmail.toLowerCase())
-
-        .orderBy("createdAt", "desc");
-
-    }
-
-    query.onSnapshot((snapshot) => {
+    db.collection("bookings").onSnapshot((snapshot) => {
 
         bookings = [];
 
         snapshot.forEach((doc) => {
 
-            bookings.push({
+            let data = doc.data();
 
-                id:doc.id,
+            if(isAdmin || (data.garageOwnerEmail || "").toLowerCase() === currentUserEmail){
 
-                ...doc.data()
+                bookings.push({
 
-            });
+                    id: doc.id,
+
+                    ...data
+
+                });
+
+            }
+
+        });
+
+        bookings.sort((a, b) => {
+
+            let first = a.createdAt ? a.createdAt.seconds : 0;
+
+            let second = b.createdAt ? b.createdAt.seconds : 0;
+
+            return second - first;
 
         });
 
         renderBookings();
+
+    }, (error) => {
+
+        alert("خطأ: " + error.message);
+
+        console.log(error);
 
     });
 
