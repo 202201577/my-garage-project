@@ -5,103 +5,103 @@
 <title>الإشعارات - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-
+ 
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
-
+ 
 .navbar{
-
+ 
     background:white;padding:15px 35px;display:flex;justify-content:space-between;
-
+ 
     align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08);
-
+ 
     position:sticky;top:0;z-index:1000;direction:ltr
-
+ 
 }
-
+ 
 .logo{width:145px}
-
+ 
 .menu-btn{font-size:32px;cursor:pointer;color:#111827;font-weight:bold}
-
+ 
 .side-menu{
-
+ 
     position:fixed;top:0;right:-270px;width:250px;height:100%;
-
+ 
     background:#07111f;transition:.3s;z-index:2000;padding-top:70px;
-
+ 
     box-shadow:-5px 0 20px rgba(0,0,0,.25)
-
+ 
 }
-
+ 
 .side-menu.open{right:0}
-
+ 
 .close-btn{position:absolute;top:18px;left:22px;color:white;font-size:30px;cursor:pointer}
-
+ 
 .side-menu img{width:140px;display:block;margin:0 auto 25px;background:white;padding:6px;border-radius:12px}
-
+ 
 .side-menu a{display:block;color:white;text-decoration:none;padding:18px 25px;border-bottom:1px solid rgba(255,255,255,.08);font-size:18px;font-weight:bold}
-
+ 
 .side-menu a:hover,.side-menu .active{background:#dc2626}
-
+ 
 .page{width:90%;max-width:1050px;margin:45px auto}
-
+ 
 .title{font-size:38px;margin-bottom:8px}
-
+ 
 .breadcrumb{color:#6b7280;margin-bottom:25px}
-
+ 
 .tabs{display:flex;gap:25px;flex-wrap:wrap;margin-bottom:25px}
-
+ 
 .tab{padding:12px 18px;cursor:pointer;color:#6b7280;font-weight:bold;border-bottom:3px solid transparent}
-
+ 
 .tab.active{color:#dc2626;border-bottom-color:#dc2626}
-
+ 
 .actions{margin-bottom:20px}
-
+ 
 .read-btn{background:white;border:1px solid #d1d5db;padding:12px 18px;border-radius:10px;font-weight:bold;cursor:pointer}
-
+ 
 .notification{
-
+ 
     background:white;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08);
-
+ 
     padding:22px;margin-bottom:18px;display:grid;grid-template-columns:90px 1fr 130px;
-
+ 
     gap:20px;align-items:center
-
+ 
 }
-
+ 
 .icon-box{width:70px;height:70px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:34px}
-
+ 
 .green{background:#dcfce7;color:#16a34a}
-
+ 
 .red{background:#fee2e2;color:#dc2626}
-
+ 
 .blue{background:#dbeafe;color:#2563eb}
-
+ 
 .purple{background:#ede9fe;color:#7c3aed}
-
+ 
 .orange{background:#ffedd5;color:#f97316}
-
+ 
 .notif-title{font-size:22px;font-weight:bold;margin-bottom:8px}
-
+ 
 .notif-text{color:#374151;line-height:1.8}
-
+ 
 .tag{display:inline-block;padding:5px 10px;border-radius:10px;font-size:13px;font-weight:bold;margin-bottom:8px}
-
+ 
 .time{text-align:center;color:#6b7280;border-right:1px solid #e5e7eb;padding-right:15px}
-
+ 
 .details-link{color:#dc2626;font-weight:bold;text-decoration:none;display:inline-block;margin-top:10px}
-
+ 
 .empty{background:white;padding:40px;text-align:center;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
-
+ 
 @media(max-width:800px){
-
+ 
     .notification{grid-template-columns:1fr;text-align:center}
-
+ 
     .icon-box{margin:auto}
-
+ 
     .time{border-right:none;padding-right:0}
-
+ 
     .logo{width:120px}
-
+ 
 }
 </style>
 </head>
@@ -142,195 +142,194 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
 <script>
-
+ 
 let notifications = [];
-
+ 
 let currentFilter = "all";
-
+ 
 function toggleMenu(){
-
+ 
     document.getElementById("sideMenu").classList.toggle("open");
-
+ 
 }
-
+ 
 function logout(){
-
+ 
     auth.signOut().then(() => {
-
+ 
         window.location.href = "login.html";
-
+ 
     });
-
+ 
 }
-
-
-
+ 
+ 
 function setFilter(filter, element){
-
+ 
     currentFilter = filter;
-
+ 
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-
+ 
     element.classList.add("active");
-
+ 
     renderNotifications();
-
+ 
 }
-
+ 
 function markRead(){
-
+ 
     alert("تم تحديد الإشعارات كمقروءة");
-
+ 
 }
-
+ 
 function addBookingNotifications(bookings){
-
+ 
     notifications = [];
-
+ 
     bookings.forEach(b => {
-
+ 
         let status = b.status || "Waiting";
-
+ 
         if(status === "Accepted"){
-
+ 
             notifications.push({
-
+ 
                 type:"booking",
-
+ 
                 icon:"✓",
-
+ 
                 color:"green",
-
+ 
                 tag:"حجز",
-
+ 
                 title:"تم قبول حجزك",
-
+ 
                 text:`تم قبول حجزك في ${b.garage || "الكراج"} لخدمة ${b.serviceType || "-"}.`,
-
+ 
                 time:b.date || "اليوم"
-
+ 
             });
-
+ 
         }
-
+ 
         if(status === "Rejected"){
-
+ 
             notifications.push({
-
+ 
                 type:"booking",
-
+ 
                 icon:"×",
-
+ 
                 color:"red",
-
+ 
                 tag:"حجز",
-
+ 
                 title:"تم رفض الحجز",
-
+ 
                 text:`نأسف، تم رفض حجزك في ${b.garage || "الكراج"}.`,
-
+ 
                 time:b.date || "اليوم"
-
+ 
             });
-
+ 
         }
-
+ 
         if(status === "Waiting"){
-
+ 
             notifications.push({
-
+ 
                 type:"booking",
-
+ 
                 icon:"⏳",
-
+ 
                 color:"orange",
-
+ 
                 tag:"حجز",
-
+ 
                 title:"طلبك قيد الانتظار",
-
+ 
                 text:`حجزك في ${b.garage || "الكراج"} قيد المراجعة.`,
-
+ 
                 time:b.date || "اليوم"
-
+ 
             });
-
+ 
         }
-
+ 
         notifications.push({
-
+ 
             type:"reminder",
-
+ 
             icon:"⏰",
-
+ 
             color:"blue",
-
+ 
             tag:"تذكير",
-
+ 
             title:"تذكير بالموعد",
-
+ 
             text:`لديك موعد في ${b.garage || "الكراج"} بتاريخ ${b.date || "-"} الساعة ${b.time || "-"}.`,
-
+ 
             time:"قبل الموعد بيوم"
-
+ 
         });
-
+ 
     });
-
+ 
     notifications.push({
-
+ 
         type:"offer",
-
+ 
         icon:"🏷️",
-
+ 
         color:"purple",
-
+ 
         tag:"عرض",
-
+ 
         title:"عرض خاص",
-
+ 
         text:"خصم 20% على خدمات تغيير الزيت هذا الأسبوع في بعض الكراجات.",
-
+ 
         time:"اليوم"
-
+ 
     });
-
+ 
     notifications.push({
-
+ 
         type:"smart",
-
+ 
         icon:"🤖",
-
+ 
         color:"orange",
-
+ 
         tag:"اقتراح ذكي",
-
+ 
         title:"اقتراح ذكي من My Garage",
-
+ 
         text:"بناءً على آخر حجز لك، ننصحك بفحص الزيت والبطارية قريباً.",
-
+ 
         time:"اليوم"
-
+ 
     });
-
+ 
     renderNotifications();
-
+ 
 }
-
+ 
 function renderNotifications(){
-
+ 
     let filtered = notifications.filter(n => currentFilter === "all" || n.type === currentFilter);
-
+ 
     let output = "";
-
+ 
     if(filtered.length === 0){
-
+ 
         output = `<div class="empty"><h2>لا توجد إشعارات</h2></div>`;
-
+ 
     } else {
-
+ 
         filtered.forEach(n => {
-
+ 
             output += `
 <div class="notification">
 <div class="icon-box ${n.color}">${n.icon}</div>
@@ -341,67 +340,68 @@ function renderNotifications(){
 <a href="mybookings.html" class="details-link">عرض التفاصيل</a>
 </div>
 <div class="time">
-
+ 
                     ${n.time}
 </div>
 </div>
-
+ 
             `;
-
+ 
         });
-
+ 
     }
-
+ 
     document.getElementById("notificationList").innerHTML = output;
-
+ 
 }
-
+ 
 function loadBookings(userEmail){
-
+ 
     db.collection("bookings")
-
+ 
     .where("userEmail", "==", userEmail)
-
+ 
     .onSnapshot((snapshot) => {
-
+ 
         let bookings = [];
-
+ 
         snapshot.forEach(doc => bookings.push(doc.data()));
-
+ 
         addBookingNotifications(bookings);
-
+ 
     });
-
+ 
 }
-
+ 
 auth.onAuthStateChanged(function(user){
-
+ 
     if(user){
-
+ 
         let adminEmails = [
-
+ 
             "alhanoof.t29@gmail.com",
-
+ 
             "anwaralhayki55@gmail.com"
-
+ 
         ];
-
+ 
         if(adminEmails.includes(user.email.toLowerCase())){
-
+ 
             document.getElementById("dashboardLink").style.display = "block";
-
+ 
         }
-
+ 
         loadBookings(user.email);
-
+ 
     } else {
-
+ 
         window.location.href = "login.html";
-
+ 
     }
-
+ 
 });
 </script>
 </body>
 </html>
+
  
