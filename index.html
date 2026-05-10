@@ -512,7 +512,7 @@ button:hover {
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
 <a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
-<a href="nearest-garage.html">أقرب كراج</a>
+<a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">
@@ -791,6 +791,24 @@ auth.onAuthStateChanged(function(user) {
         document.getElementById("guestLinks").style.display = "none";
 
         let email = user.email.toLowerCase();
+
+        let garageOwnerEmails = [
+
+    "bluemotors@mygarage.com",
+
+    "bosch@mygarage.com",
+
+    "homsgate@mygarage.com",
+
+    "fitandfix@mygarage.com"
+
+];
+
+if (adminEmails.includes(email) || garageOwnerEmails.includes(email)) {
+
+    document.getElementById("nearestMenu").style.display = "none";
+
+}
 
         let isAdmin = adminEmails.includes(email);
 
