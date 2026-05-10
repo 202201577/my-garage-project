@@ -760,6 +760,18 @@ function updateSummary() {
 
 function confirmBooking() {
 
+    let garageOwners = {
+
+    "Blue Motors Auto Services": "bluemotors@mygarage.com",
+
+    "BOSCH Service": "bosch@mygarage.com",
+
+    "HOMS GATE": "homsgate@mygarage.com",
+
+    "Fit and Fix": "fitandfix@mygarage.com"
+
+};
+
     let user = auth.currentUser;
 
     let carType = document.getElementById("carType").value;
