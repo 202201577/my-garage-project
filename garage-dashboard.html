@@ -130,11 +130,11 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 
     display:grid;
 
-    grid-template-columns:1fr 220px;
+    grid-template-columns:1fr 260px;
 
     gap:25px;
 
-    align-items:center;
+    align-items:start;
 
 }
 
@@ -190,11 +190,13 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 
 .rejected{background:#fee2e2;color:#dc2626}
 
-.actions{
+.paid{background:#dcfce7;color:#15803d}
 
-    text-align:center;
+.unpaid{background:#fee2e2;color:#dc2626}
 
-}
+.notset{background:#e5e7eb;color:#374151}
+
+.actions{text-align:center}
 
 .actions button{
 
@@ -223,6 +225,56 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 .reject-btn{background:#dc2626}
 
 .wait-btn{background:#f59e0b}
+
+.amount-btn{background:#2563eb}
+
+.amount-box{
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    text-align:right;
+
+}
+
+.amount-box input{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:12px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    margin:10px 0;
+
+    font-size:15px;
+
+}
+
+.money-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding:9px 0;
+
+    gap:10px;
+
+}
 
 .empty{
 
@@ -260,7 +312,6 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="mybookings.html">حجوزاتي</a>
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a href="garage-dashboard.html" class="active">لوحة التحكم</a>
@@ -287,13 +338,13 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <div class="stat-label">مقبولة</div>
 </div>
 <div class="stat-card">
-<div class="stat-icon">❌</div>
-<div class="stat-number" id="rejectedCount">0</div>
-<div class="stat-label">مرفوضة</div>
+<div class="stat-icon">💰</div>
+<div class="stat-number" id="netTotal">0</div>
+<div class="stat-label">صافي الكراج BD</div>
 </div>
 </div>
 <div class="filter-bar">
-<input type="text" id="searchInput" placeholder="ابحث عن كراج / مستخدم / خدمة" oninput="renderBookings()">
+<input type="text" id="searchInput" placeholder="ابحث عن مستخدم / خدمة / سيارة" oninput="renderBookings()">
 <select id="statusFilter" onchange="renderBookings()">
 <option value="All">كل الحالات</option>
 <option value="Waiting">الانتظار</option>
@@ -310,6 +361,30 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <script>
 
 let bookings = [];
+
+let currentUserEmail = "";
+
+let isAdmin = false;
+
+let adminEmails = [
+
+    "alhanoof.t29@gmail.com",
+
+    "anwaralhayki55@gmail.com"
+
+];
+
+let garageOwnerEmails = [
+
+    "bluemotors@mygarage.com",
+
+    "bosch@mygarage.com",
+
+    "homsgate@mygarage.com",
+
+    "fitandfix@mygarage.com"
+
+];
 
 function toggleMenu(){
 
@@ -347,6 +422,26 @@ function getArabicStatus(status){
 
 }
 
+function getPaymentClass(paymentStatus){
+
+    if(paymentStatus === "Paid") return "paid";
+
+    if(paymentStatus === "Unpaid") return "unpaid";
+
+    return "notset";
+
+}
+
+function getArabicPayment(paymentStatus){
+
+    if(paymentStatus === "Paid") return "مدفوع";
+
+    if(paymentStatus === "Unpaid") return "غير مدفوع";
+
+    return "لم يتم تحديد المبلغ";
+
+}
+
 function updateStats(){
 
     document.getElementById("totalCount").innerText = bookings.length;
@@ -359,9 +454,15 @@ function updateStats(){
 
     bookings.filter(b => b.status === "Accepted").length;
 
-    document.getElementById("rejectedCount").innerText =
+    let totalNet = 0;
 
-    bookings.filter(b => b.status === "Rejected").length;
+    bookings.forEach(b => {
+
+        totalNet += Number(b.garageNetAmount || 0);
+
+    });
+
+    document.getElementById("netTotal").innerText = totalNet.toFixed(3);
 
 }
 
@@ -381,13 +482,13 @@ function renderBookings(){
 
         let searchMatch =
 
-        (b.garage || "").toLowerCase().includes(search) ||
-
         (b.userEmail || "").toLowerCase().includes(search) ||
 
         (b.serviceType || "").toLowerCase().includes(search) ||
 
-        (b.carType || "").toLowerCase().includes(search);
+        (b.carType || "").toLowerCase().includes(search) ||
+
+        (b.plateNumber || "").toLowerCase().includes(search);
 
         return statusMatch && searchMatch;
 
@@ -409,6 +510,14 @@ function renderBookings(){
 
             let status = b.status || "Waiting";
 
+            let paymentStatus = b.paymentStatus || "Not Set";
+
+            let serviceAmount = Number(b.serviceAmount || 0);
+
+            let commissionAmount = Number(b.commissionAmount || 0);
+
+            let garageNetAmount = Number(b.garageNetAmount || 0);
+
             output += `
 <div class="booking-card">
 <div>
@@ -426,18 +535,36 @@ function renderBookings(){
 </div>
 <div class="actions">
 <span class="status ${getStatusClass(status)}">${getArabicStatus(status)}</span>
-<button class="accept-btn" onclick="updateStatus('${b.id}', 'Accepted')">
+<button class="accept-btn" onclick="updateStatus('${b.id}', 'Accepted')">قبول الحجز</button>
+<button class="reject-btn" onclick="updateStatus('${b.id}', 'Rejected')">رفض الحجز</button>
+<button class="wait-btn" onclick="updateStatus('${b.id}', 'Waiting')">إرجاع للانتظار</button>
+<div class="amount-box">
+<b>الدفع والمبلغ</b>
+<input type="number" id="amount_${b.id}" placeholder="اكتب مبلغ الخدمة BD" value="${serviceAmount || ""}" step="0.001">
+<button class="amount-btn" onclick="setServiceAmount('${b.id}')">
 
-                        قبول الحجز
+                            تأكيد المبلغ
 </button>
-<button class="reject-btn" onclick="updateStatus('${b.id}', 'Rejected')">
+<div class="money-row">
+<span>المبلغ</span>
+<b>${serviceAmount.toFixed(3)} BD</b>
+</div>
+<div class="money-row">
+<span>عمولة النظام 10%</span>
+<b>${commissionAmount.toFixed(3)} BD</b>
+</div>
+<div class="money-row">
+<span>صافي الكراج</span>
+<b>${garageNetAmount.toFixed(3)} BD</b>
+</div>
+<div class="money-row">
+<span>حالة الدفع</span>
+<b class="status ${getPaymentClass(paymentStatus)}">
 
-                        رفض الحجز
-</button>
-<button class="wait-btn" onclick="updateStatus('${b.id}', 'Waiting')">
-
-                        إرجاع للانتظار
-</button>
+                                ${getArabicPayment(paymentStatus)}
+</b>
+</div>
+</div>
 </div>
 </div>
 
@@ -453,13 +580,21 @@ function renderBookings(){
 
 }
 
-function loadBookings(){
+function loadBookingsForUser(){
 
-    db.collection("bookings")
+    let query = db.collection("bookings").orderBy("createdAt", "desc");
 
-    .orderBy("createdAt", "desc")
+    if(!isAdmin){
 
-    .onSnapshot((snapshot) => {
+        query = db.collection("bookings")
+
+        .where("garageOwnerEmail", "==", currentUserEmail)
+
+        .orderBy("createdAt", "desc");
+
+    }
+
+    query.onSnapshot((snapshot) => {
 
         bookings = [];
 
@@ -491,20 +626,59 @@ function updateStatus(id, newStatus){
 
 }
 
+function setServiceAmount(id){
+
+    let amount = Number(document.getElementById("amount_" + id).value);
+
+    if(!amount || amount <= 0){
+
+        alert("اكتبي مبلغ صحيح أولاً");
+
+        return;
+
+    }
+
+    let commissionRate = 0.10;
+
+    let commissionAmount = amount * commissionRate;
+
+    let garageNetAmount = amount - commissionAmount;
+
+    db.collection("bookings").doc(id).update({
+
+        serviceAmount: amount,
+
+        commissionRate: commissionRate,
+
+        commissionAmount: commissionAmount,
+
+        garageNetAmount: garageNetAmount,
+
+        paymentStatus: "Unpaid"
+
+    })
+
+    .then(() => {
+
+        alert("تم حفظ المبلغ وإرساله للعميل للدفع");
+
+    });
+
+}
+
 auth.onAuthStateChanged(function(user){
 
     if(user){
 
-        let allowedEmails = [
+        currentUserEmail = user.email.toLowerCase();
 
-            "alhanoof.t29@gmail.com",
-            "anwaralhayki55@gmail.com"
+        isAdmin = adminEmails.includes(currentUserEmail);
 
-        ];
+        let isGarageOwner = garageOwnerEmails.includes(currentUserEmail);
 
-        if(allowedEmails.includes(user.email.toLowerCase())){
+        if(isAdmin || isGarageOwner){
 
-            loadBookings();
+            loadBookingsForUser();
 
         } else {
 
