@@ -467,7 +467,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <a href="notifications.html">الإشعارات</a>
 <a href="account.html" class="active">الحساب</a>
 <a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
-<a href="complaints.html">الشكاوي</a>
+<a id="complaintsMenu" href="complaints.html">الشكاوي</a>
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
@@ -480,7 +480,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <input type="file" id="profileUpload" accept="image/*" style="display:none" onchange="uploadProfile(event)">
 </div>
 <div>
-<div id="verifyBadge" class="badge">...</div>
+<div id="verifyBadge" class="badge">وثق حسابك</div>
 <div class="profile-name" id="profileName">مستخدم My Garage</div>
 <div class="profile-line">✉ <span id="profileEmail">example@gmail.com</span></div>
 <div class="profile-line">📞 <span id="profilePhone">-</span></div>
@@ -697,6 +697,8 @@ function adjustAccountForRole(email){
         dashboardLink.innerText = "لوحة التحكم";
 
         dashboardLink.style.display = "block";
+        
+        document.getElementById("complaintsMenu").style.display = "none";
 
     }
 
@@ -715,6 +717,8 @@ function adjustAccountForRole(email){
         document.getElementById("myBookingsMenu").style.display = "none";
 
         document.getElementById("nearestMenu").style.display = "none";
+        
+        document.getElementById("verifyBadge").style.display = "none";
 
     }
 
