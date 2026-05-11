@@ -857,32 +857,7 @@ if (adminEmails.includes(email) || garageOwnerEmails.includes(email)) {
 window.onload = searchGarage;
     }
 
-setTimeout(() => {
 
-const aiButton = document.getElementById("ai-button");
-
-const aiChat = document.getElementById("ai-chat");
-
-if(aiButton){
-
-aiButton.onclick = () => {
-
-if(aiChat.style.display === "flex"){
-
-aiChat.style.display = "none";
-
-}else{
-
-aiChat.style.display = "flex";
-
-}
-
-};
-
-}
-
-},500);
-``
 </script>
 
 <!-- AI BUTTON -->
