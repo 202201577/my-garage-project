@@ -856,6 +856,312 @@ if (adminEmails.includes(email) || garageOwnerEmails.includes(email)) {
  
 window.onload = searchGarage;
 </script>
+
+<!-- AI BUTTON -->
+
+<div id="ai-button">
+🤖
+</div>
+
+<!-- AI CHAT -->
+
+<div id="ai-chat">
+
+<div id="ai-header">
+Smart Garage Assistant
+</div>
+
+<div id="chat-box"></div>
+
+<div id="ai-input-area">
+
+<input id="userInput" placeholder="اكتب مشكلة سيارتك">
+
+<button onclick="sendMessage()">
+إرسال
+</button>
+
+</div>
+
+</div>
+
+<style>
+
+#ai-button{
+
+position:fixed;
+
+bottom:20px;
+
+right:20px;
+
+width:75px;
+
+height:75px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#dc2626,#ef4444);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:35px;
+
+cursor:pointer;
+
+z-index:9999;
+
+box-shadow:0 0 25px rgba(0,0,0,.3);
+
+}
+
+#ai-chat{
+
+position:fixed;
+
+bottom:110px;
+
+right:20px;
+
+width:360px;
+
+height:520px;
+
+background:#07111f;
+
+border-radius:20px;
+
+display:none;
+
+flex-direction:column;
+
+overflow:hidden;
+
+z-index:9999;
+
+box-shadow:0 0 35px rgba(0,0,0,.4);
+
+}
+
+#ai-header{
+
+background:#dc2626;
+
+padding:18px;
+
+color:white;
+
+font-weight:bold;
+
+text-align:center;
+
+font-size:18px;
+
+}
+
+#chat-box{
+
+flex:1;
+
+padding:15px;
+
+overflow-y:auto;
+
+color:white;
+
+}
+
+.user{
+
+background:#dc2626;
+
+padding:12px;
+
+border-radius:14px;
+
+margin:10px 0;
+
+color:white;
+
+}
+
+.ai{
+
+background:#1e293b;
+
+padding:12px;
+
+border-radius:14px;
+
+margin:10px 0;
+
+color:white;
+
+line-height:1.7;
+
+}
+
+#ai-input-area{
+
+display:flex;
+
+padding:10px;
+
+gap:10px;
+
+background:#0f172a;
+
+}
+
+#userInput{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:#1e293b;
+
+color:white;
+
+}
+
+#ai-input-area button{
+
+background:#dc2626;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:12px;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+import {
+getAI,
+getGenerativeModel
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-ai.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyA1TicQrYLv7ypC7cJqGUasQfC2e5L6Es8",
+
+authDomain: "my---garage.firebaseapp.com",
+
+projectId: "my---garage",
+
+storageBucket: "my---garage.firebasestorage.app",
+
+messagingSenderId: "52476419320",
+
+appId: "1:52476419320:web:1742f544a775e2864baf0d",
+
+measurementId: "G-Q9MZ7TS0XT"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const ai = getAI(app);
+
+const model = getGenerativeModel(ai,{
+model:"gemini-2.0-flash"
+});
+
+const aiButton = document.getElementById("ai-button");
+
+const aiChat = document.getElementById("ai-chat");
+
+aiButton.onclick = () => {
+
+if(aiChat.style.display === "flex"){
+
+aiChat.style.display = "none";
+
+}else{
+
+aiChat.style.display = "flex";
+
+}
+
+};
+
+window.sendMessage = async function(){
+
+const input = document.getElementById("userInput");
+
+const chatBox = document.getElementById("chat-box");
+
+const userMessage = input.value;
+
+if(!userMessage) return;
+
+chatBox.innerHTML += `
+<div class="user">${userMessage}</div>
+`;
+
+input.value = "";
+
+const garages = `
+
+Blue Motors Auto Services:
+repair services
+
+BOSCH Service:
+oil change services
+
+HOMS GATE:
+repair services
+
+Fit and Fix:
+repair services
+
+`;
+
+const prompt = `
+User problem:
+${userMessage}
+
+Available garages:
+${garages}
+
+Recommend suitable garages only.
+
+Reply professionally in Arabic language.
+`;
+
+const result = await model.generateContent(prompt);
+
+const response = result.response.text();
+
+chatBox.innerHTML += `
+<div class="ai">${response}</div>
+`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+};
+
+</script>
+    
 </body>
 </html>
  
