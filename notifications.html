@@ -184,6 +184,11 @@ function isTomorrow(dateString){
 
 function addReminderNotifications(bookings){
     bookings.forEach(b => {
+
+        if(b.status === "Rejected"){
+            return;
+        }
+
         if(isTomorrow(b.date)){
             notifications.push({
                 type:"reminder",
@@ -323,7 +328,6 @@ auth.onAuthStateChanged(function(user){
         }
 
         loadStoredNotifications(user.uid);
-        loadStoredNotifications(user.email);
 
     } else {
         window.location.href = "login.html";
