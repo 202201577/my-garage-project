@@ -242,6 +242,10 @@ let bookings = [];
 let currentUserEmail = "";
 let isAdmin = false;
 
+if(typeof COMMISSION_RATE === "undefined"){
+    var COMMISSION_RATE = 0.05;
+}
+
 let adminEmails = [
     "alhanoof.t29@gmail.com",
     "anwaralhayki55@gmail.com"
@@ -352,6 +356,9 @@ function renderBookings(){
             let status = b.status || "Waiting";
             let paymentStatus = b.paymentStatus || "Not Set";
             let serviceAmount = Number(b.serviceAmount || 0);
+            let paidAmount = Number(b.paidAmount || 0);
+            let remainingAmount = Number(b.remainingAmount || 0);
+            let commissionRate = Number(b.commissionRate || COMMISSION_RATE);
             let commissionAmount = Number(b.commissionAmount || 0);
             let garageNetAmount = Number(b.garageNetAmount || 0);
 
@@ -403,6 +410,16 @@ function renderBookings(){
                         </div>
 
                         <div class="money-row">
+                            <span>المدفوع</span>
+                            <b>${paidAmount.toFixed(3)} BD</b>
+                        </div>
+
+                        <div class="money-row">
+                            <span>المتبقي</span>
+                            <b>${remainingAmount.toFixed(3)} BD</b>
+                        </div>
+
+                        <div class="money-row">
                             <span>عمولة النظام ${(commissionRate * 100).toFixed(0)}%</span>
                             <b>${commissionAmount.toFixed(3)} BD</b>
                         </div>
@@ -417,6 +434,11 @@ function renderBookings(){
                             <b class="status ${getPaymentClass(paymentStatus)}">
                                 ${getArabicPayment(paymentStatus)}
                             </b>
+                        </div>
+
+                        <div class="money-row">
+                            <span>طريقة الدفع</span>
+                            <b>${b.paymentMethod || "-"}</b>
                         </div>
                     </div>
                 </div>
@@ -497,7 +519,12 @@ function setServiceAmount(id){
 
     let booking = bookings.find(b => b.id === id);
 
-    let paidAmount = Number(booking?.paidAmount || 0);
+    if(!booking){
+        alert("لم يتم العثور على الحجز");
+        return;
+    }
+
+    let paidAmount = Number(booking.paidAmount || 0);
     let remainingAmount = amount - paidAmount;
 
     if(remainingAmount < 0){
@@ -523,6 +550,16 @@ function setServiceAmount(id){
         garageNetAmount: garageNetAmount,
         paymentStatus: newPaymentStatus
     }).then(() => {
+
+        if(booking.userId){
+            createNotification(
+                booking.userId,
+                "تم تحديد مبلغ الخدمة",
+                "تم تحديد مبلغ " + amount.toFixed(3) + " BD لحجزك في " + booking.garage,
+                "payment"
+            );
+        }
+
         alert("تم حفظ المبلغ");
     });
 }
