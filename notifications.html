@@ -400,16 +400,26 @@ let garageOwnerEmails = [
 
 let email = user.email.toLowerCase();
 
-if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
+let isAdmin = adminEmails.includes(email);
+let isGarageOwner = garageOwnerEmails.includes(email);
+
+if(isAdmin || isGarageOwner){
 
     document.getElementById("myBookingsMenu").style.display = "none";
     document.getElementById("nearestMenu").style.display = "none";
-
     document.getElementById("dashboardLink").style.display = "block";
 
-    document.getElementById("dashboardLink").innerText =
-    "لوحة تحكم الأدمن";
+}
 
+if(isAdmin){
+    document.getElementById("dashboardLink").href = "admin-dashboard.html";
+    document.getElementById("dashboardLink").innerText = "لوحة تحكم الأدمن";
+}
+
+if(isGarageOwner){
+    document.getElementById("dashboardLink").href = "garage-dashboard.html";
+    document.getElementById("dashboardLink").innerText = "لوحة تحكم الكراج";
+    document.getElementById("complaintsMenu").style.display = "none";
 }
  
  
