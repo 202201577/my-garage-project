@@ -638,9 +638,22 @@ function saveCars() {
         document.getElementById("carMsg").innerText = "تم حفظ السيارات بنجاح";
     })
     .catch((error) => {
-        document.getElementById("carMsg").className = "error";
-        document.getElementById("carMsg").innerText = error.message;
-    });
+
+    document.getElementById("verifyMsg").className = "error";
+
+    if(error.code === "auth/invalid-phone-number"){
+
+        document.getElementById("verifyMsg").innerText =
+        "يرجى كتابة الرقم بصيغة دولية مع رمز الدولة مثل: +97333112244";
+
+    } else {
+
+        document.getElementById("verifyMsg").innerText =
+        "حدث خطأ أثناء التحقق، حاولي مرة أخرى";
+
+    }
+
+});
 }
 
 function loadCars(cars = []) {
