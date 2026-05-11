@@ -800,6 +800,17 @@ return;
         let filtered = garages.filter(g =>
             g.services.includes(neededService)
         );
+        if(filtered.length === 0){
+
+chatBox.innerHTML += `
+<div class="ai">
+🤖 ما حصلت كراج متخصص بهالمشكلة حاليًا.
+</div>
+`;
+
+return;
+
+}
 
         filtered.forEach(g => {
 
