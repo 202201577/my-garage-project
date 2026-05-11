@@ -678,117 +678,113 @@ window.sendMessage = function(){
 text = text.replace("أ","ا")
 .replace("إ","ا")
 .replace("آ","ا");
-    let neededService = "";
-let problemName = "";
+  const problems = [
 
-// المكيف
+{
+keywords:[
+"مكيف","الايسي","اي سي","ac",
+"حار","مايبرد","تبريد","ينفخ حار"
+],
+service:"ac",
+name:"مكيف السيارة"
+},
+
+{
+keywords:[
+"زيت","اويل","تغيير زيت",
+"فلتر","صيانة","سيرفس"
+],
+service:"oil",
+name:"الزيت والصيانة"
+},
+
+{
+keywords:[
+"بطارية","مايشتغل","السلف",
+"كهربا","اشتراك","طفى",
+"تشغيل","ما تشتغل"
+],
+service:"battery",
+name:"البطارية والكهرباء"
+},
+
+{
+keywords:[
+"بنشر","تاير","كفر",
+"هوا","الاطار","تبديل تاير"
+],
+service:"tires",
+name:"الإطارات والبنشر"
+},
+
+{
+keywords:[
+"مكينة","صوت","طقطقة",
+"رجفة","يهز","دخان",
+"حرارة","صرفية","ما تدعس"
+],
+service:"repair",
+name:"المكينة والتصليح"
+},
+
+{
+keywords:[
+"بنزين","يسرب","تسريب",
+"بترول","ريحة بنزين"
+],
+service:"repair",
+name:"تهريب البنزين"
+},
+
+{
+keywords:[
+"فرامل","بريك","دعسة",
+"يوقف","صرير"
+],
+service:"repair",
+name:"الفرامل"
+},
+
+{
+keywords:[
+"دركسون","سكان","ستيرنج",
+"ثقيل","يسحب"
+],
+service:"repair",
+name:"الدركسون"
+}
+
+];
+
+let foundProblem = null;
+
+for(let p of problems){
+
 if(
-text.includes("ايسي") ||
-text.includes("الايسي") ||
-text.includes("مكيف") ||
-text.includes("ac") ||
-text.includes("مايبرد") ||
-text.includes("حار") ||
-text.includes("تبريد")
+p.keywords.some(word =>
+text.includes(word)
+)
 ){
-neededService = "ac";
-problemName = "مكيف السيارة";
+foundProblem = p;
+break;
 }
 
-// الزيت
-else if(
-text.includes("زيت") ||
-text.includes("اويل") ||
-text.includes("تغيير زيت") ||
-text.includes("فلتر") ||
-text.includes("صيانة")
-){
-neededService = "oil";
-problemName = "الزيت والصيانة";
 }
 
-// البطارية
-else if(
-text.includes("بطارية") ||
-text.includes("مايشتغل") ||
-text.includes("السلف") ||
-text.includes("كهربا") ||
-text.includes("اشتراك")
-){
-neededService = "battery";
-problemName = "البطارية والكهرباء";
-}
-
-// التواير
-else if(
-text.includes("بنشر") ||
-text.includes("تاير") ||
-text.includes("كفر") ||
-text.includes("الاطار") ||
-text.includes("هوا")
-){
-neededService = "tires";
-problemName = "الإطارات والبنشر";
-}
-
-// المكينة
-else if(
-text.includes("مكينة") ||
-text.includes("المكينة") ||
-text.includes("صوت") ||
-text.includes("طقطقة") ||
-text.includes("رجفة") ||
-text.includes("يهز") ||
-text.includes("دخان") ||
-text.includes("حرارة")
-){
-neededService = "repair";
-problemName = "المكينة والتصليح";
-}
-
-// البنزين
-else if(
-text.includes("بنزين") ||
-text.includes("تسريب") ||
-text.includes("يسرب") ||
- text.includes("بترول")
-){
-neededService = "repair";
-problemName = "تهريب البنزين";
-}
-
-// الفرامل
-else if(
-text.includes("بريك") ||
-text.includes("فرامل") ||
-text.includes("يوقف") ||
-text.includes("دعسة")
-){
-neededService = "repair";
-problemName = "الفرامل";
-}
-
-// السكان
-else if(
-text.includes("سكان") ||
-text.includes("دركسون") ||
-text.includes("ستيرنج")
-){
-neededService = "repair";
-problemName = "الدركسون";
-}
-
-else{
+if(!foundProblem){
 
 chatBox.innerHTML += `
 <div class="ai">
 🤖 ما فهمت المشكلة بشكل واضح.
-حاول تشرح أكثر مثل:
-مكيف - زيت - بطارية - بنشر - صوت - حرارة
 </div>
 `;
 
 return;
+
+}
+
+let neededService = foundProblem.service;
+let problemName = foundProblem.name;
 
 }
 
