@@ -679,54 +679,118 @@ text = text.replace("أ","ا")
 .replace("إ","ا")
 .replace("آ","ا");
     let neededService = "";
+let problemName = "";
 
-    if(
-    text.includes("ايسي") ||
-    text.includes("الايسي") ||
-    text.includes("الإيسي") ||
-    text.includes("ac") ||
-    text.includes("اي سي") ||
-    text.includes("مكيف") ||
-    text.includes("حر") ||
-    text.includes("حار") ||
-    text.includes("ما يبرد") ||
-    text.includes("مايبرد")
+// المكيف
+if(
+text.includes("ايسي") ||
+text.includes("الايسي") ||
+text.includes("مكيف") ||
+text.includes("ac") ||
+text.includes("مايبرد") ||
+text.includes("حار") ||
+text.includes("تبريد")
 ){
-    neededService = "ac";
+neededService = "ac";
+problemName = "مكيف السيارة";
 }
 
-    else if(
-        text.includes("زيت") ||
-        text.includes("اويل")
-    ){
-        neededService = "oil";
-    }
+// الزيت
+else if(
+text.includes("زيت") ||
+text.includes("اويل") ||
+text.includes("تغيير زيت") ||
+text.includes("فلتر") ||
+text.includes("صيانة")
+){
+neededService = "oil";
+problemName = "الزيت والصيانة";
+}
 
-    else if(
-        text.includes("بطارية") ||
-        text.includes("كهربا")
-    ){
-        neededService = "battery";
-    }
+// البطارية
+else if(
+text.includes("بطارية") ||
+text.includes("مايشتغل") ||
+text.includes("السلف") ||
+text.includes("كهربا") ||
+text.includes("اشتراك")
+){
+neededService = "battery";
+problemName = "البطارية والكهرباء";
+}
 
-    else if(
-        text.includes("بنشر") ||
-        text.includes("تاير") ||
-        text.includes("كفر")
-    ){
-        neededService = "tires";
-    }
+// التواير
+else if(
+text.includes("بنشر") ||
+text.includes("تاير") ||
+text.includes("كفر") ||
+text.includes("الاطار") ||
+text.includes("هوا")
+){
+neededService = "tires";
+problemName = "الإطارات والبنشر";
+}
 
-    else{
+// المكينة
+else if(
+text.includes("مكينة") ||
+text.includes("المكينة") ||
+text.includes("صوت") ||
+text.includes("طقطقة") ||
+text.includes("رجفة") ||
+text.includes("يهز") ||
+text.includes("دخان") ||
+text.includes("حرارة")
+){
+neededService = "repair";
+problemName = "المكينة والتصليح";
+}
 
-        chatBox.innerHTML += `
-        <div class="ai">
-        🤖 ما فهمت المشكلة، حاول تشرح أكثر.
-        </div>
-        `;
+// البنزين
+else if(
+text.includes("بنزين") ||
+text.includes("تسريب") ||
+text.includes("يسرب") ||
+ text.includes("بترول")
+){
+neededService = "repair";
+problemName = "تهريب البنزين";
+}
 
-        return;
-    }
+// الفرامل
+else if(
+text.includes("بريك") ||
+text.includes("فرامل") ||
+text.includes("يوقف") ||
+text.includes("دعسة")
+){
+neededService = "repair";
+problemName = "الفرامل";
+}
+
+// السكان
+else if(
+text.includes("سكان") ||
+text.includes("دركسون") ||
+text.includes("ستيرنج")
+){
+neededService = "repair";
+problemName = "الدركسون";
+}
+
+else{
+
+chatBox.innerHTML += `
+<div class="ai">
+🤖 ما فهمت المشكلة بشكل واضح.
+حاول تشرح أكثر مثل:
+مكيف - زيت - بطارية - بنشر - صوت - حرارة
+</div>
+`;
+
+return;
+
+}
 
     navigator.geolocation.getCurrentPosition(function(position){
 
@@ -753,7 +817,9 @@ text = text.replace("أ","ا")
         let nearest = filtered[0];
 
         let reply = `
-        🚗 أقرب كراج مناسب لك:
+        🚗 يبدو أن المشكلة متعلقة بـ ${problemName}
+<br><br>
+أقرب كراج مناسب لك:
 
         <br><br>
 
