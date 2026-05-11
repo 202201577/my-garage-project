@@ -122,16 +122,65 @@ body{
 .search-box{
     background:white;
     margin:-55px auto 50px;
-    max-width:1050px;
-    padding:25px;
+    max-width:1200px;
+    padding:18px 25px;
     border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,.12);
 
     display:flex;
-    gap:20px;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between;
+    gap:15px;
     flex-wrap:wrap;
+}
+
+.search-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 20px;
+    border-left:1px solid #e5e7eb;
+}
+
+.search-item h4{
+    margin:0;
+    font-size:15px;
+    color:#111827;
+}
+
+.search-item p{
+    margin:4px 0 0;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.search-icon{
+    font-size:28px;
+    color:#dc2626;
+}
+
+.search-item input,
+.search-item select{
+    border:none;
+    background:none;
+    font-size:15px;
+    outline:none;
+    color:#374151;
+}
+
+.search-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:18px 35px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.search-btn:hover{
+    background:#b91c1c;
 }
 
 input, select{
@@ -408,17 +457,54 @@ button:hover{background:#b91c1c}
 <div class="search-box">
 
     <button onclick="searchGarage()" class="search-btn">
-        ابحث الآن
+        🔍 ابحث الآن
     </button>
 
-    <select id="filter">
-        <option value="all">كل الخدمات</option>
-        <option value="repair">تصليح</option>
-        <option value="oil">تغيير زيت</option>
-        <option value="ac">مكيف</option>
-    </select>
+    <div class="search-item">
 
-    <input type="text" id="search" placeholder="ابحث عن كراج...">
+        <div class="search-icon">🚘</div>
+
+        <div>
+            <h4>جميع الجراجات</h4>
+            <p>عرض الكل</p>
+        </div>
+
+    </div>
+
+    <div class="search-item">
+
+        <div class="search-icon">📅</div>
+
+        <div>
+            <h4>التاريخ</h4>
+            <p>اختر التاريخ</p>
+        </div>
+
+    </div>
+
+    <div class="search-item">
+
+        <div class="search-icon">🔧</div>
+
+        <select id="filter">
+            <option value="all">اختر نوع الخدمة</option>
+            <option value="repair">تصليح</option>
+            <option value="oil">تغيير زيت</option>
+            <option value="ac">مكيف</option>
+        </select>
+
+    </div>
+
+    <div class="search-item">
+
+        <div class="search-icon">📍</div>
+
+        <input
+        type="text"
+        id="search"
+        placeholder="اختر موقعك">
+
+    </div>
 
 </div>
 
