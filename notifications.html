@@ -119,6 +119,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <a href="notifications.html" class="active">الإشعارات</a>
 <a href="account.html">الحساب</a>
 <a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
+<a id="complaintsMenu" href="complaints.html">الشكاوي</a>
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
@@ -402,10 +403,9 @@ let email = user.email.toLowerCase();
 if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
 
     document.getElementById("myBookingsMenu").style.display = "none";
-
     document.getElementById("nearestMenu").style.display = "none";
-
     document.getElementById("dashboardLink").style.display = "block";
+    document.getElementById("complaintsMenu").style.display = "none";
 
 }
  
