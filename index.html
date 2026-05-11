@@ -622,71 +622,38 @@ auth.onAuthStateChanged(function(user){
 window.onload = searchGarage;
 </script>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-ai.js";
+<script>
+window.sendMessage = function(){
 
-const firebaseConfigAI = {
-    apiKey: "AIzaSyA1TicQrYLv7ypC7cJqGUasQfC2e5L6Es8",
-    authDomain: "my---garage.firebaseapp.com",
-    projectId: "my---garage",
-    storageBucket: "my---garage.firebasestorage.app",
-    messagingSenderId: "52476419320",
-    appId: "1:52476419320:web:1742f544a775e2864baf0d",
-    measurementId: "G-Q9MZ7TS0XT"
-};
+    let input = document.getElementById("userInput");
+    let chatBox = document.getElementById("chat-box");
+    let msg = input.value.trim();
 
-const appAI = initializeApp(firebaseConfigAI, "aiApp");
-const ai = getAI(appAI);
-const model = getGenerativeModel(ai, {
-    model:"gemini-2.0-flash"
-});
+    if(msg === "") return;
 
-window.sendMessage = async function(){
-    const input = document.getElementById("userInput");
-    const chatBox = document.getElementById("chat-box");
-    const userMessage = input.value.trim();
+    chatBox.innerHTML += `<div class="user">${msg}</div>`;
 
-    if(!userMessage) return;
+    let reply = "حسب المشكلة، أنصحك بفحص السيارة في أحد الكراجات المتوفرة. ";
 
-    chatBox.innerHTML += `<div class="user">${userMessage}</div>`;
+    let text = msg.toLowerCase();
+
+    if(text.includes("مكيف") || text.includes("يبرد")){
+        reply = "يبدو أن المشكلة في مكيف السيارة. أنصحك بخدمة فحص مكيف سيارات.";
+    }
+    else if(text.includes("زيت")){
+        reply = "يبدو أنك تحتاج خدمة تغيير زيت + فلتر.";
+    }
+    else if(text.includes("بطارية")){
+        reply = "قد تكون المشكلة من البطارية أو الكهرباء. أنصحك بخدمة كهرباء سيارات.";
+    }
+    else if(text.includes("صوت") || text.includes("مشكلة")){
+        reply = "أنصحك بخدمة تصليح عام لفحص السيارة بشكل كامل.";
+    }
+
+    chatBox.innerHTML += `<div class="ai">${reply}</div>`;
     input.value = "";
-
-    chatBox.innerHTML += `<div class="ai" id="loadingMsg">جاري التفكير...</div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
-
-    const garagesText = `
-    Blue Motors Auto Services: repair services, Salmabad
-    BOSCH Service: oil change services, Tubli
-    HOMS GATE: repair services, Hamala
-    Fit and Fix: repair services, Hamala
-    `;
-
-    const prompt = `
-    User car problem:
-    ${userMessage}
-
-    Available garages:
-    ${garagesText}
-
-    Recommend the most suitable garage or service.
-    Reply in simple Arabic.
-    `;
-
-    try{
-        const result = await model.generateContent(prompt);
-        const response = result.response.text();
-
-        document.getElementById("loadingMsg").remove();
-        chatBox.innerHTML += `<div class="ai">${response}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-    catch(error){
-        document.getElementById("loadingMsg").remove();
-        chatBox.innerHTML += `<div class="ai">حالياً لا يمكن تشغيل المساعد الذكي. جربي مرة ثانية.</div>`;
-        console.log(error);
-    }
-};
+}
 </script>
 
 </body>
