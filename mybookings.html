@@ -705,8 +705,24 @@ function renderBookings(){
             <div class="booking-card">
 
                 <div class="status-area">
-                    <span class="status-label ${getPaymentClass(paymentStatus)}">${getArabicPayment(paymentStatus)}</span>`}
-                </div>
+    <span class="status-label ${getStatusClass(status)}">
+        ${getArabicStatus(status)}
+    </span>
+
+    ${paymentStatus === "Paid" ? `
+    <div style="
+        margin-top:10px;
+        font-size:14px;
+        font-weight:bold;
+        color:#15803d;
+        line-height:1.5;
+    ">
+        
+        مدفوع عن طريق<br>
+        ${b.paymentMethod || ""}
+    </div>
+    ` : ""}
+</div>
 
                 <div class="service-info">
                     <h3>${b.serviceType || "-"}</h3>
