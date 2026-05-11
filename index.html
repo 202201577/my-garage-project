@@ -136,7 +136,6 @@ body{
 
     display:flex;
     align-items:center;
-    justify-content:space-between;
 
     gap:10px;
 }
@@ -196,18 +195,7 @@ button{
 }
 
 button:hover{background:#b91c1c}
- .search-btn{
-    background:#dc2626;
-    color:white;
-    border:none;
-    padding:18px 28px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    white-space:nowrap;
-    order:-1;
-}
+
 
 .why{
     text-align:center;
@@ -688,48 +676,7 @@ function searchGarage(){
 
     document.getElementById("results").innerHTML = result;
 }
-          result += `
-
-<div class="garage">
-
-<img class="garage-img" src="${g.image}">
-
-<div class="garage-info">
-
-<h3>${g.name}</h3>
-
-<p>⭐ ${g.rating}</p>
-
-<p>📍 ${g.location}</p>
-
-<p>
-الخدمات:
-${g.services.join(" - ")}
-</p>
-
-<div class="action-row">
-
-<a href="${g.map}" target="_blank" class="map-btn">
-عرض الموقع
-</a>
-
-<button class="book-btn" onclick="book('${g.name}')">
-احجز الآن
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-        }
-    });
-
-    document.getElementById("results").innerHTML =
-    result || "<p style='text-align:center;'>لا توجد كراجات مطابقة.</p>";
-}
+         
 
 function book(name){
     localStorage.setItem("garage", name);
