@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
+    #phoneNumber{
+    direction:ltr;
+    text-align:left;
+}
 .navbar{background:white;padding:15px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:1000;direction:ltr}
 .logo{width:145px}
 .menu-btn{font-size:32px;cursor:pointer;color:#111827;font-weight:bold}
@@ -120,7 +124,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <div class="form-grid">
 <div class="form-group">
 <label>رقم الهاتف</label>
-<input type="text" id="phoneNumber" placeholder="+97333112244">
+<input type="text" id="phoneNumber" dir="ltr" style="text-align:left;">
 </div>
 <div class="form-group">
 <label>رمز التحقق</label>
