@@ -384,14 +384,14 @@ function sendVerificationCode(){
         document.getElementById("verifyMsg").className = "";
         document.getElementById("verifyMsg").innerText = "تم إرسال رمز التحقق";
     })
-    .catch((error) => {
+  .catch((error) => {
 
     document.getElementById("verifyMsg").className = "error";
 
     if(error.code === "auth/invalid-phone-number"){
 
-        document.getElementById("verifyMsg").innerText =
-        "يرجى كتابة الرقم بصيغة دولية مع رمز الدولة مثل: +97333112244";
+        document.getElementById("verifyMsg").innerHTML =
+        'يرجى كتابة الرقم بصيغة دولية مع رمز الدولة مثل: <span dir="ltr">+97333112244</span>';
 
     } else {
 
