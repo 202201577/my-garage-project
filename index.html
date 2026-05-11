@@ -678,14 +678,16 @@ window.sendMessage = function(){
     let neededService = "";
 
     if(
-        text.includes("الايسي") ||
-        text.includes("اي سي") ||
-        text.includes("مكيف") ||
-        text.includes("حر") ||
-        text.includes("مايبرد")
-    ){
-        neededService = "ac";
-    }
+    text.includes("الايسي") ||
+    text.includes("الإيسي") ||
+    text.includes("ac") ||
+    text.includes("اي سي") ||
+    text.includes("مكيف") ||
+    text.includes("حر") ||
+    text.includes("مايبرد")
+){
+    neededService = "ac";
+}
 
     else if(
         text.includes("زيت") ||
