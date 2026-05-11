@@ -861,7 +861,7 @@ window.onload = searchGarage;
 
 <!-- AI BUTTON -->
 
-<div id="ai-button">
+<div id="ai-button" onclick="toggleAIChat()">
 🤖
 </div>
 
@@ -1053,6 +1053,18 @@ cursor:pointer;
 
 </style>
 
+    <script>
+function toggleAIChat(){
+    let aiChat = document.getElementById("ai-chat");
+
+    if(aiChat.style.display === "flex"){
+        aiChat.style.display = "none";
+    } else {
+        aiChat.style.display = "flex";
+    }
+}
+</script>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
@@ -1087,24 +1099,6 @@ const ai = getAI(app);
 const model = getGenerativeModel(ai,{
 model:"gemini-2.0-flash"
 });
-
-const aiButton = document.getElementById("ai-button");
-
-const aiChat = document.getElementById("ai-chat");
-
-aiButton.onclick = () => {
-
-if(aiChat.style.display === "flex"){
-
-aiChat.style.display = "none";
-
-}else{
-
-aiChat.style.display = "flex";
-
-}
-
-};
 
 window.sendMessage = async function(){
 
