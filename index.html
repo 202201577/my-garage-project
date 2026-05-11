@@ -175,7 +175,7 @@ body{
     font-weight:bold;
     cursor:pointer;
     white-space:nowrap;
-    margin-right:auto;
+    margin-left:auto;
 }
 
 .search-btn:hover{
@@ -219,6 +219,18 @@ button:hover{background:#b91c1c}
 }
 
 .feature div{font-size:35px}
+    
+    .recommended-slider{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    padding:20px;
+    scroll-behavior:smooth;
+}
+
+.recommended-slider::-webkit-scrollbar{
+    display:none;
+}
 
 .section-title{
     text-align:center;
@@ -481,6 +493,7 @@ button:hover{background:#b91c1c}
 </select>
 
 </div>
+    <div id="results"></div>
 
 <section class="why" id="about">
 
@@ -515,7 +528,77 @@ button:hover{background:#b91c1c}
 </section>
 
 <h2 class="section-title" id="garages">كراجات موصى بها</h2>
-<div id="results"></div>
+
+  <div class="recommended-slider">
+
+<div class="garage">
+    <img class="garage-img" src="images(blue-motor).jpeg">
+
+    <div class="garage-info">
+        <h3>Blue Motors</h3>
+        <p>📍 سلماباد</p>
+        <p>⭐ 4.2</p>
+
+        <div class="action-row">
+            <a href="https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
+            target="_blank"
+            class="map-btn">
+            عرض الموقع
+            </a>
+
+            <button class="book-btn">
+            احجز الآن
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="garage">
+    <img class="garage-img" src="images(BOSCH-Service).jpeg">
+
+    <div class="garage-info">
+        <h3>BOSCH Service</h3>
+        <p>📍 توبلي</p>
+        <p>⭐ 4.2</p>
+
+        <div class="action-row">
+            <a href="https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
+            target="_blank"
+            class="map-btn">
+            عرض الموقع
+            </a>
+
+            <button class="book-btn">
+            احجز الآن
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="garage">
+    <img class="garage-img" src="images(Fit-and-fix).jpeg">
+
+    <div class="garage-info">
+        <h3>Fit and Fix</h3>
+        <p>📍 الهملة</p>
+        <p>⭐ 4.9</p>
+
+        <div class="action-row">
+            <a href="https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
+            target="_blank"
+            class="map-btn">
+            عرض الموقع
+            </a>
+
+            <button class="book-btn">
+            احجز الآن
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+
 
 <div class="footer" id="contact">
     <h3>اتصل بنا</h3>
@@ -543,6 +626,24 @@ button:hover{background:#b91c1c}
 let currentUser = null;
 
 let garages = [
+
+    {
+    name:"Expert Motors",
+    service:"repair",
+    location:"Manama",
+    lat:26.2235,
+    lng:50.5876,
+    services:["repair","oil"],
+
+    rating:"4.5",
+    phone:"33334444",
+
+    hours:"8AM - 8PM",
+
+    image:"garage-bg2.jpeg",
+
+    map:"https://maps.google.com"
+},
 
     {
         name:"Blue Motors Auto Services",
