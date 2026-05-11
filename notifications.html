@@ -404,8 +404,11 @@ if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
 
     document.getElementById("myBookingsMenu").style.display = "none";
     document.getElementById("nearestMenu").style.display = "none";
+
     document.getElementById("dashboardLink").style.display = "block";
-    document.getElementById("complaintsMenu").style.display = "none";
+
+    document.getElementById("dashboardLink").innerText =
+    "لوحة تحكم الأدمن";
 
 }
  
