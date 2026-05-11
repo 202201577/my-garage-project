@@ -121,23 +121,26 @@ body{
 
 .search-box{
     background:white;
-    margin:-45px auto 50px;
-    max-width:900px;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    margin:-55px auto 50px;
+    max-width:1050px;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+
     display:flex;
-    gap:15px;
+    gap:20px;
+    align-items:center;
     justify-content:center;
     flex-wrap:wrap;
 }
 
 input, select{
-    padding:14px;
-    width:260px;
-    border:1px solid #ddd;
-    border-radius:10px;
+    padding:18px;
+    width:320px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
     font-size:16px;
+    background:#f8fafc;
 }
 
 button{
@@ -151,6 +154,11 @@ button{
 }
 
 button:hover{background:#b91c1c}
+    .search-btn{
+    padding:18px 40px;
+    border-radius:14px;
+    font-weight:bold;
+}
 
 .why{
     text-align:center;
@@ -398,42 +406,55 @@ button:hover{background:#b91c1c}
 </section>
 
 <div class="search-box">
-    <input type="text" id="search" placeholder="ابحث عن كراج...">
+
+    <button onclick="searchGarage()" class="search-btn">
+        ابحث الآن
+    </button>
+
     <select id="filter">
         <option value="all">كل الخدمات</option>
         <option value="repair">تصليح</option>
         <option value="oil">تغيير زيت</option>
+        <option value="ac">مكيف</option>
     </select>
-    <button onclick="searchGarage()">ابحث الآن</button>
+
+    <input type="text" id="search" placeholder="ابحث عن كراج...">
+
 </div>
 
 <section class="why" id="about">
-    <h2>لماذا تختار My Garage؟</h2>
-    <div class="features">
-        <div class="feature">
-            <div>🛡️</div>
-            <h3>كراجات موثوقة</h3>
-            <p>كراجات حقيقية ومعلومات واضحة.</p>
-        </div>
-        <div class="feature">
-            <div>📅</div>
-            <h3>حجز سريع وسهل</h3>
-            <p>احجز موعدك بخطوات بسيطة.</p>
-        </div>
-        <div class="feature">
-            <div>📍</div>
-            <h3>مواقع واضحة</h3>
-            <p>اعرض موقع الكراج بالخريطة.</p>
-        </div>
-        <div class="feature">
-            <div>🔔</div>
-            <h3>متابعة الحجز</h3>
-            <p>تابع حالة طلبك بسهولة.</p>
-        </div>
-    </div>
+
+<div class="features">
+
+<div class="feature">
+<div>🛡️</div>
+<h3>كراجات موثوقة</h3>
+<p>جميع الكراجات معتمدة ومراجعة.</p>
+</div>
+
+<div class="feature">
+<div>⏰</div>
+<h3>حجز سريع وسهل</h3>
+<p>احجز موعدك بخطوات بسيطة.</p>
+</div>
+
+<div class="feature">
+<div>💰</div>
+<h3>أسعار شفافة</h3>
+<p>أسعار واضحة بدون رسوم مخفية.</p>
+</div>
+
+<div class="feature">
+<div>🎧</div>
+<h3>دعم متواصل</h3>
+<p>فريق الدعم جاهز لمساعدتك.</p>
+</div>
+
+</div>
+
 </section>
 
-<h2 class="section-title" id="garages">الكراجات المتوفرة</h2>
+<h2 class="section-title" id="garages">كراجات موصى بها</h2>
 <div id="results"></div>
 
 <div class="footer" id="contact">
@@ -535,23 +556,42 @@ function searchGarage(){
                 g.service.toLowerCase().includes(text)
             )
         ){
-            result += `
-            <div class="garage">
-                <img class="garage-img" src="${g.image}">
-                <div class="garage-info">
-                    <h3>${g.name}</h3>
-                    <p>🔧 <b>الخدمة:</b> ${g.service}</p>
-                    <p>📍 <b>الموقع:</b> ${g.location}</p>
-                    <p>📞 <b>الهاتف:</b> ${g.phone}</p>
-                    <p>⭐ <b>التقييم:</b> ${g.rating}</p>
-                    <p>🕒 <b>ساعات العمل:</b> ${g.hours}</p>
-                    <div class="action-row">
-                        <a href="${g.map}" target="_blank" class="map-btn">عرض الموقع</a>
-                        <button class="book-btn" onclick="book('${g.name}')">احجز الآن</button>
-                    </div>
-                </div>
-            </div>
-            `;
+          result += `
+
+<div class="garage">
+
+<img class="garage-img" src="${g.image}">
+
+<div class="garage-info">
+
+<h3>${g.name}</h3>
+
+<p>⭐ ${g.rating}</p>
+
+<p>📍 ${g.location}</p>
+
+<p>
+الخدمات:
+${g.services.join(" - ")}
+</p>
+
+<div class="action-row">
+
+<a href="${g.map}" target="_blank" class="map-btn">
+عرض الموقع
+</a>
+
+<button class="book-btn" onclick="book('${g.name}')">
+احجز الآن
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
         }
     });
 
