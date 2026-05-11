@@ -462,62 +462,63 @@ button:hover{background:#b91c1c}
 let currentUser = null;
 
 let garages = [
+
     {
-        {
-    name:"Blue Motors Auto Services",
-    service:"repair",
-    location:"Salmabad",
-    lat:26.1769,
-    lng:50.5477,
-    services:["ac","repair"],
+        name:"Blue Motors Auto Services",
+        service:"repair",
+        location:"Salmabad",
+        lat:26.1769,
+        lng:50.5477,
+        services:["ac","repair"],
         rating:"4.2",
         phone:"17877197",
         hours:"Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
         image:"images(blue-motor).jpeg",
         map:"https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
     },
+
     {
-        
-    name:"BOSCH Service",
-    service:"oil",
-    location:"Tubli",
-    lat:26.1885,
-    lng:50.5538,
-    services:["oil"],
+        name:"BOSCH Service",
+        service:"oil",
+        location:"Tubli",
+        lat:26.1885,
+        lng:50.5538,
+        services:["oil"],
         rating:"4.2",
         phone:"17783888",
         hours:"Sat–Thu 8 AM–5 PM, Friday Closed",
         image:"images(BOSCH-Service).jpeg",
         map:"https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
     },
+
     {
-        
-    name:"HOMS GATE",
-    service:"repair",
-    location:"Hamala",
-    lat:26.1505,
-    lng:50.4809,
-    services:["battery","repair"],
+        name:"HOMS GATE",
+        service:"repair",
+        location:"Hamala",
+        lat:26.1505,
+        lng:50.4809,
+        services:["battery","repair"],
         rating:"4.2",
         phone:"34120290",
         hours:"Sat–Thu 8 AM–7 PM, Friday Closed",
         image:"images(HOMS-GATE).jpeg",
         map:"https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
     },
+
     {
-    
-    name:"Fit and Fix",
-    service:"repair",
-    location:"Hamala",
-    lat:26.1500,
-    lng:50.4815,
-    services:["ac","tires","repair"],
+        name:"Fit and Fix",
+        service:"repair",
+        location:"Hamala",
+        lat:26.1500,
+        lng:50.4815,
+        services:["ac","tires","repair"],
         rating:"4.9",
         phone:"37377196",
         hours:"Sat–Thu 8 AM–8 PM, Friday Closed",
         image:"images(Fit-and-fix).jpeg",
         map:"https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
     }
+
 ];
 
 function searchGarage(){
@@ -783,7 +784,7 @@ window.sendMessage = function(){
     });
 
 }
-
+window.onload = searchGarage;
 </script>
 
 </body>
