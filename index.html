@@ -626,34 +626,124 @@ window.onload = searchGarage;
 window.sendMessage = function(){
 
     let input = document.getElementById("userInput");
+
     let chatBox = document.getElementById("chat-box");
+
     let msg = input.value.trim();
 
     if(msg === "") return;
 
-    chatBox.innerHTML += `<div class="user">${msg}</div>`;
-
-    let reply = "حسب المشكلة، أنصحك بفحص السيارة في أحد الكراجات المتوفرة. ";
+    chatBox.innerHTML += `
+    <div class="user">${msg}</div>
+    `;
 
     let text = msg.toLowerCase();
 
-    if(text.includes("مكيف") || text.includes("يبرد")){
-        reply = "يبدو أن المشكلة في مكيف السيارة. أنصحك بخدمة فحص مكيف سيارات.";
-    }
-    else if(text.includes("زيت")){
-        reply = "يبدو أنك تحتاج خدمة تغيير زيت + فلتر.";
-    }
-    else if(text.includes("بطارية")){
-        reply = "قد تكون المشكلة من البطارية أو الكهرباء. أنصحك بخدمة كهرباء سيارات.";
-    }
-    else if(text.includes("صوت") || text.includes("مشكلة")){
-        reply = "أنصحك بخدمة تصليح عام لفحص السيارة بشكل كامل.";
+    let reply = "";
+
+    // فهم الكلمات العامية
+
+    if(
+        text.includes("الايسي") ||
+        text.includes("اي سي") ||
+        text.includes("مكيف") ||
+        text.includes("حر") ||
+        text.includes("مايبرد")
+    ){
+
+        reply = `
+        🚗 يبدو أن المشكلة في مكيف السيارة.
+
+        أقرب الكراجات المناسبة لك:
+
+        • Blue Motors Auto Services
+        📍 Salmabad
+
+        • Fit and Fix
+        📍 Hamala
+
+        يوفرون خدمات صيانة المكيف وفحص التبريد.
+        `;
+
     }
 
-    chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+    else if(
+        text.includes("زيت") ||
+        text.includes("اويل")
+    ){
+
+        reply = `
+        🛢️ يبدو أنك تحتاج تغيير زيت.
+
+        ننصحك بـ:
+
+        • BOSCH Service
+        📍 Tubli
+
+        يوفر خدمة تغيير الزيت والفلاتر.
+        `;
+
+    }
+
+    else if(
+        text.includes("بطارية") ||
+        text.includes("كهربا")
+    ){
+
+        reply = `
+        🔋 قد تكون المشكلة من البطارية أو كهرباء السيارة.
+
+        ننصحك بـ:
+
+        • HOMS GATE
+        📍 Hamala
+
+        يوفر خدمات كهرباء وفحص بطاريات.
+        `;
+
+    }
+
+    else if(
+        text.includes("بنشر") ||
+        text.includes("تاير") ||
+        text.includes("كفر")
+    ){
+
+        reply = `
+        🛞 يبدو أنك تحتاج خدمة إطارات أو بنشر.
+
+        ننصحك بـ:
+
+        • Fit and Fix
+        📍 Hamala
+        `;
+
+    }
+
+    else{
+
+        reply = `
+        🤖 لم أتمكن من تحديد المشكلة بدقة.
+
+        يمكنك شرح المشكلة بشكل أوضح للحصول على أفضل كراج مناسب.
+        `;
+
+    }
+
+    setTimeout(() => {
+
+        chatBox.innerHTML += `
+        <div class="ai">${reply}</div>
+        `;
+
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+    },500);
+
     input.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
+
 }
+``
 </script>
 
 </body>
