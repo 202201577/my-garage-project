@@ -385,9 +385,22 @@ function sendVerificationCode(){
         document.getElementById("verifyMsg").innerText = "تم إرسال رمز التحقق";
     })
     .catch((error) => {
-        document.getElementById("verifyMsg").className = "error";
-        document.getElementById("verifyMsg").innerText = error.message;
-    });
+
+    document.getElementById("verifyMsg").className = "error";
+
+    if(error.code === "auth/invalid-phone-number"){
+
+        document.getElementById("verifyMsg").innerText =
+        "يرجى كتابة الرقم بصيغة دولية مع رمز الدولة مثل: +97333112244";
+
+    } else {
+
+        document.getElementById("verifyMsg").innerText =
+        "حدث خطأ أثناء التحقق، حاولي مرة أخرى";
+
+    }
+
+});
 }
 
 function confirmVerificationCode(){
