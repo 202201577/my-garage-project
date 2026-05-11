@@ -193,25 +193,21 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
             <div class="stat-number" id="totalCount">0</div>
             <div class="stat-label">كل الحجوزات</div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon">⏳</div>
             <div class="stat-number" id="waitingCount">0</div>
             <div class="stat-label">قيد الانتظار</div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon">✅</div>
             <div class="stat-number" id="acceptedCount">0</div>
             <div class="stat-label">مقبولة</div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon">❌</div>
             <div class="stat-number" id="rejectedCount">0</div>
             <div class="stat-label">مرفوضة</div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon">💰</div>
             <div class="stat-number" id="netTotal">0</div>
@@ -242,8 +238,10 @@ let bookings = [];
 let currentUserEmail = "";
 let isAdmin = false;
 
-if(typeof COMMISSION_RATE === "undefined"){
-    var COMMISSION_RATE = 0.05;
+let APP_COMMISSION_RATE = 0.05;
+
+if(typeof COMMISSION_RATE !== "undefined"){
+    APP_COMMISSION_RATE = COMMISSION_RATE;
 }
 
 let adminEmails = [
@@ -358,7 +356,7 @@ function renderBookings(){
             let serviceAmount = Number(b.serviceAmount || 0);
             let paidAmount = Number(b.paidAmount || 0);
             let remainingAmount = Number(b.remainingAmount || 0);
-            let commissionRate = Number(b.commissionRate || COMMISSION_RATE);
+            let commissionRate = Number(b.commissionRate || APP_COMMISSION_RATE);
             let commissionAmount = Number(b.commissionAmount || 0);
             let garageNetAmount = Number(b.garageNetAmount || 0);
 
@@ -509,7 +507,6 @@ function updateStatus(id, newStatus){
 }
 
 function setServiceAmount(id){
-
     let amount = Number(document.getElementById("amount_" + id).value);
 
     if(!amount || amount <= 0){
@@ -531,7 +528,7 @@ function setServiceAmount(id){
         remainingAmount = 0;
     }
 
-    let commissionRate = COMMISSION_RATE;
+    let commissionRate = APP_COMMISSION_RATE;
     let commissionAmount = amount * commissionRate;
     let garageNetAmount = amount - commissionAmount;
 
@@ -550,7 +547,6 @@ function setServiceAmount(id){
         garageNetAmount: garageNetAmount,
         paymentStatus: newPaymentStatus
     }).then(() => {
-
         if(booking.userId){
             createNotification(
                 booking.userId,
