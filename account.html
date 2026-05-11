@@ -308,11 +308,11 @@ function adjustAccountForRole(email){
     }
 
     if(isGarageOwner){
-        dashboardLink.href = "garage-dashboard.html";
-        dashboardLink.innerText = "لوحة التحكم";
-        dashboardLink.style.display = "block";
-        document.getElementById("complaintsMenu").style.display = "none";
-    }
+    dashboardLink.href = "garage-dashboard.html";
+    dashboardLink.innerText = "لوحة تحكم الكراج";
+    dashboardLink.style.display = "block";
+    document.getElementById("complaintsMenu").style.display = "none";
+}
 
     if(isAdmin || isGarageOwner){
         document.getElementById("profileCard").classList.add("role-view");
