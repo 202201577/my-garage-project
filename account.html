@@ -5,459 +5,74 @@
 <title>حسابي - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
-
-.navbar{
-
-    background:white;
-
-    padding:15px 35px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    direction:ltr;
-
-}
-
+.navbar{background:white;padding:15px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:1000;direction:ltr}
 .logo{width:145px}
-
-.menu-btn{
-
-    font-size:32px;
-
-    cursor:pointer;
-
-    color:#111827;
-
-    font-weight:bold;
-
-}
-
-.side-menu{
-
-    position:fixed;
-
-    top:0;
-
-    right:-270px;
-
-    width:250px;
-
-    height:100%;
-
-    background:#07111f;
-
-    transition:0.3s;
-
-    z-index:2000;
-
-    padding-top:70px;
-
-    box-shadow:-5px 0 20px rgba(0,0,0,0.25);
-
-}
-
+.menu-btn{font-size:32px;cursor:pointer;color:#111827;font-weight:bold}
+.side-menu{position:fixed;top:0;right:-270px;width:250px;height:100%;background:#07111f;transition:0.3s;z-index:2000;padding-top:70px;box-shadow:-5px 0 20px rgba(0,0,0,0.25)}
 .side-menu.open{right:0}
-
-.close-btn{
-
-    position:absolute;
-
-    top:18px;
-
-    left:22px;
-
-    color:white;
-
-    font-size:30px;
-
-    cursor:pointer;
-
-}
-
-.side-menu img{
-
-    width:140px;
-
-    display:block;
-
-    margin:0 auto 25px;
-
-    background:white;
-
-    padding:6px;
-
-    border-radius:12px;
-
-}
-
-.side-menu a{
-
-    display:block;
-
-    color:white;
-
-    text-decoration:none;
-
-    padding:18px 25px;
-
-    border-bottom:1px solid rgba(255,255,255,0.08);
-
-    font-size:18px;
-
-    font-weight:bold;
-
-}
-
-.side-menu a:hover,
-
-.side-menu .active{background:#dc2626}
-
+.close-btn{position:absolute;top:18px;left:22px;color:white;font-size:30px;cursor:pointer}
+.side-menu img{width:140px;display:block;margin:0 auto 25px;background:white;padding:6px;border-radius:12px}
+.side-menu a{display:block;color:white;text-decoration:none;padding:18px 25px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:18px;font-weight:bold}
+.side-menu a:hover,.side-menu .active{background:#dc2626}
 .page{width:90%;max-width:1150px;margin:35px auto}
-
 .title{font-size:34px;margin-bottom:5px}
-
 .breadcrumb{color:#6b7280;margin-bottom:25px}
-
-.profile-card,.stats-card,.info-card{
-
-    background:white;
-
-    border-radius:20px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-    padding:30px;
-
-    margin-bottom:25px;
-
-}
-
-.profile-card{
-
-    display:grid;
-
-    grid-template-columns:150px 1fr 180px;
-
-    gap:25px;
-
-    align-items:center;
-
-}
-
-.profile-card.role-view{
-
-    grid-template-columns:150px 1fr;
-
-}
-
-.avatar{
-
-    width:130px;
-
-    height:130px;
-
-    border-radius:50%;
-
-    background:linear-gradient(135deg,#0f172a,#dc2626);
-
-    background-size:cover;
-
-    background-position:center;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:55px;
-
-    cursor:pointer;
-
-    color:white;
-
-    position:relative;
-
-}
-
-.avatar::after{
-
-    content:"✎";
-
-    position:absolute;
-
-    bottom:5px;
-
-    left:5px;
-
-    background:white;
-
-    color:#dc2626;
-
-    width:32px;
-
-    height:32px;
-
-    border-radius:50%;
-
-    font-size:18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.2);
-
-}
-
+.profile-card,.stats-card,.info-card,.phone-verify-card{background:white;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:30px;margin-bottom:25px}
+.profile-card{display:grid;grid-template-columns:150px 1fr 180px;gap:25px;align-items:center}
+.profile-card.role-view{grid-template-columns:150px 1fr}
+.avatar{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#0f172a,#dc2626);background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;font-size:55px;cursor:pointer;color:white;position:relative}
+.avatar::after{content:"✎";position:absolute;bottom:5px;left:5px;background:white;color:#dc2626;width:32px;height:32px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .badge{display:inline-block;padding:8px 14px;border-radius:20px;font-weight:bold;margin-bottom:12px}
-
 .verified{background:#dcfce7;color:#15803d}
-
 .not-verified{background:#fee2e2;color:#dc2626;cursor:pointer}
-
 .profile-name{font-size:30px;font-weight:bold;margin-bottom:12px}
-
 .profile-line{color:#374151;margin:8px 0}
-
-.join-box{
-
-    text-align:center;
-
-    border-right:1px solid #e5e7eb;
-
-    padding-right:20px;
-
-}
-
-.join-icon{
-
-    font-size:35px;
-
-    background:#fee2e2;
-
-    color:#dc2626;
-
-    width:70px;
-
-    height:70px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin:auto auto 12px;
-
-}
-
-.stats-card{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:15px;
-
-    text-align:center;
-
-}
-
-.stat{
-
-    border-left:1px solid #e5e7eb;
-
-    padding:15px;
-
-    cursor:pointer;
-
-}
-
+.join-box{text-align:center;border-right:1px solid #e5e7eb;padding-right:20px}
+.join-icon{font-size:35px;background:#fee2e2;color:#dc2626;width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:auto auto 12px}
+.stats-card{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;text-align:center}
+.stat{border-left:1px solid #e5e7eb;padding:15px;cursor:pointer}
 .stat:last-child{border-left:none}
-
 .stat-icon{font-size:28px;margin-bottom:8px}
-
 .stat-number{font-size:28px;font-weight:bold}
-
 .stat-label{color:#6b7280}
-
-.info-card{
-
-    display:grid;
-
-    grid-template-columns:230px 1fr;
-
-    gap:30px;
-
-}
-
+.info-card{display:grid;grid-template-columns:230px 1fr;gap:30px}
 .side-tabs{background:#f8fafc;border-radius:16px;overflow:hidden}
-
 .tab{padding:18px;border-bottom:1px solid #e5e7eb;font-weight:bold;cursor:pointer}
-
 .tab.active{background:#fee2e2;color:#dc2626}
-
 .section{display:none}
-
 .section.active{display:block}
-
 .form-title{font-size:26px;margin-bottom:22px}
-
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-
 .form-group label{display:block;margin-bottom:8px;font-weight:bold;color:#374151}
-
-input,select{
-
-    width:100%;
-
-    box-sizing:border-box;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    border:1px solid #d1d5db;
-
-    font-size:16px;
-
-    background:white;
-
-}
-
+input,select{width:100%;box-sizing:border-box;padding:14px;border-radius:12px;border:1px solid #d1d5db;font-size:16px;background:white}
 input:focus,select:focus{outline:none;border-color:#dc2626}
-
 .email-readonly{background:#f3f4f6;color:#6b7280}
-
-.save-btn{
-
-    margin-top:25px;
-
-    width:100%;
-
-    background:#dc2626;
-
-    color:white;
-
-    border:none;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    font-size:17px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-.add-btn{
-
-    background:#07111f;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 18px;
-
-    border-radius:12px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-.delete-car-btn{
-
-    background:#fee2e2;
-
-    color:#dc2626;
-
-    border:none;
-
-    padding:10px 14px;
-
-    border-radius:10px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-.car-card{
-
-    background:#f8fafc;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    margin-bottom:18px;
-
-}
-
-.car-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:15px;
-
-}
-
+.save-btn{margin-top:25px;width:100%;background:#dc2626;color:white;border:none;padding:15px;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer}
+.add-btn{background:#07111f;color:white;border:none;padding:12px 18px;border-radius:12px;font-weight:bold;cursor:pointer}
+.delete-car-btn{background:#fee2e2;color:#dc2626;border:none;padding:10px 14px;border-radius:10px;font-weight:bold;cursor:pointer}
+.car-card{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:18px;margin-bottom:18px}
+.car-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.verify-actions{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.verify-btn{background:#07111f;color:white;border:none;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}
 #msg,#passMsg,#carMsg,#verifyMsg{color:#16a34a;font-weight:bold;margin-top:15px}
-
 .error{color:#dc2626!important}
-
 @media(max-width:900px){
-
-    .profile-card,.profile-card.role-view,.info-card{grid-template-columns:1fr;text-align:center}
-
-    .avatar{margin:auto}
-
-    .stats-card,.form-grid{grid-template-columns:1fr}
-
-    .join-box{border-right:none;padding-right:0}
-
-    .logo{width:120px}
-
+.profile-card,.profile-card.role-view,.info-card{grid-template-columns:1fr;text-align:center}
+.avatar{margin:auto}
+.stats-card,.form-grid,.verify-actions{grid-template-columns:1fr}
+.join-box{border-right:none;padding-right:0}
+.logo{width:120px}
 }
 </style>
 </head>
+
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
 <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
+
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
@@ -471,28 +86,56 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
+
 <div class="page">
 <h1 class="title">حسابي</h1>
 <div class="breadcrumb">الرئيسية › حسابي</div>
+
 <div class="profile-card" id="profileCard">
 <div>
 <div class="avatar" id="avatarImage" onclick="chooseProfileImage()">👤</div>
 <input type="file" id="profileUpload" accept="image/*" style="display:none" onchange="uploadProfile(event)">
 </div>
+
 <div>
-<div id="verifyBadge" class="badge">وثق حسابك</div>
+<div id="verifyBadge" class="badge not-verified" onclick="showPhoneVerifyBox()">وثّق حسابك</div>
 <div class="profile-name" id="profileName">مستخدم My Garage</div>
 <div class="profile-line">✉ <span id="profileEmail">example@gmail.com</span></div>
 <div class="profile-line">📞 <span id="profilePhone">-</span></div>
 <div class="profile-line">📍 البحرين</div>
 <p id="verifyMsg"></p>
 </div>
+
 <div class="join-box" id="joinBox">
 <div class="join-icon">📅</div>
 <p>تاريخ الانضمام</p>
 <b id="joinDate">-</b>
 </div>
 </div>
+
+<div class="phone-verify-card" id="phoneVerifyBox" style="display:none;">
+<h2>توثيق رقم الهاتف</h2>
+<p>اكتبي رقم الهاتف بصيغة دولية مثل: +97333112244</p>
+
+<div class="form-grid">
+<div class="form-group">
+<label>رقم الهاتف</label>
+<input type="text" id="phoneNumber" placeholder="+97333112244">
+</div>
+<div class="form-group">
+<label>رمز التحقق</label>
+<input type="text" id="verificationCode" placeholder="اكتبي كود SMS">
+</div>
+</div>
+
+<div id="recaptcha-container" style="margin-top:15px;"></div>
+
+<div class="verify-actions">
+<button class="verify-btn" onclick="sendVerificationCode()">إرسال رمز التحقق</button>
+<button class="save-btn" style="margin-top:0;" onclick="confirmVerificationCode()">تأكيد التحقق</button>
+</div>
+</div>
+
 <div class="stats-card" id="statsCard">
 <div class="stat" onclick="showSection('cars')">
 <div class="stat-icon">🚗</div>
@@ -510,6 +153,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <div class="stat-label">تقييماتي</div>
 </div>
 </div>
+
 <div class="info-card">
 <div class="side-tabs">
 <div class="tab active" id="tab-personal" onclick="showSection('personal')">👤 المعلومات الشخصية</div>
@@ -517,6 +161,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <div class="tab" id="tab-password" onclick="showSection('password')">🔒 تغيير كلمة المرور</div>
 <div class="tab" onclick="logout()">↪ تسجيل الخروج</div>
 </div>
+
 <div>
 <div id="personal" class="section active">
 <h2 class="form-title">المعلومات الشخصية</h2>
@@ -554,6 +199,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <button class="save-btn" onclick="saveProfile()">حفظ التغييرات</button>
 <p id="msg"></p>
 </div>
+
 <div id="cars" class="section">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:15px;flex-wrap:wrap;">
 <h2 class="form-title" style="margin:0;">سياراتي</h2>
@@ -563,6 +209,7 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 <button class="save-btn" onclick="saveCars()">حفظ بيانات السيارات</button>
 <p id="carMsg"></p>
 </div>
+
 <div id="password" class="section">
 <h2 class="form-title">تغيير كلمة المرور</h2>
 <div id="currentPassBox">
@@ -590,472 +237,320 @@ input:focus,select:focus{outline:none;border-color:#dc2626}
 </div>
 </div>
 </div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
+
 <script>
-
 let currentUser = null;
-
 let carCount = 0;
-
 let currentRole = "customer";
+let confirmationResultGlobal = null;
 
-let adminEmails = [
-
-    "alhanoof.t29@gmail.com",
-
-    "anwaralhayki55@gmail.com"
-
-];
+let adminEmails = ["alhanoof.t29@gmail.com","anwaralhayki55@gmail.com"];
 
 let garageOwnerEmails = [
-
     "bluemotors@mygarage.com",
-
     "bosch@mygarage.com",
-
     "homsgate@mygarage.com",
-
     "fitandfix@mygarage.com"
-
 ];
 
 auth.onAuthStateChanged(function(user) {
-
     if (user) {
-
         currentUser = user;
 
         let emailLower = user.email.toLowerCase();
 
         if(adminEmails.includes(emailLower)){
-
             currentRole = "admin";
-
         } else if(garageOwnerEmails.includes(emailLower)){
-
             currentRole = "garage";
-
         } else {
-
             currentRole = "customer";
-
         }
 
         document.getElementById("email").value = user.email;
-
         document.getElementById("profileEmail").innerText = user.email;
 
         showJoinDate(user);
-
-        checkVerification(user);
-
         adjustAccountForRole(user.email);
-
         loadUserProfile(user.uid);
 
         if(currentRole === "customer"){
-
             loadBookingCount(user.email);
-
         }
 
     } else {
-
         window.location.href = "login.html";
-
     }
-
 });
 
 function adjustAccountForRole(email){
-
     let userEmail = email.toLowerCase();
-
     let isAdmin = adminEmails.includes(userEmail);
-
     let isGarageOwner = garageOwnerEmails.includes(userEmail);
-
     let dashboardLink = document.getElementById("dashboardLink");
 
     if(isAdmin){
-
         dashboardLink.href = "admin-dashboard.html";
-
         dashboardLink.innerText = "لوحة تحكم الأدمن";
-
         dashboardLink.style.display = "block";
-
     }
 
     if(isGarageOwner){
-
         dashboardLink.href = "garage-dashboard.html";
-
         dashboardLink.innerText = "لوحة التحكم";
-
         dashboardLink.style.display = "block";
-        
         document.getElementById("complaintsMenu").style.display = "none";
-
     }
 
     if(isAdmin || isGarageOwner){
-
         document.getElementById("profileCard").classList.add("role-view");
-
         document.getElementById("joinBox").style.display = "none";
-
         document.getElementById("statsCard").style.display = "none";
-
         document.getElementById("tab-cars").style.display = "none";
-
         document.getElementById("cars").style.display = "none";
-
         document.getElementById("myBookingsMenu").style.display = "none";
-
         document.getElementById("nearestMenu").style.display = "none";
-        
         document.getElementById("verifyBadge").style.display = "none";
-
+        document.getElementById("phoneVerifyBox").style.display = "none";
     }
-
 }
 
 function showJoinDate(user) {
-
     let creationDate = user.metadata.creationTime;
-
     let date = new Date(creationDate);
-
     let formatted = date.toLocaleDateString("ar-BH", {
-
         year: "numeric",
-
         month: "long",
-
         day: "numeric"
-
     });
-
     document.getElementById("joinDate").innerText = formatted;
-
 }
 
 function toggleMenu(){
-
     document.getElementById("sideMenu").classList.toggle("open");
-
 }
 
-function checkVerification(user) {
-
+function updateVerificationBadge(isVerified){
     let badge = document.getElementById("verifyBadge");
 
-    let isGoogle = user.providerData.some(p => p.providerId === "google.com");
-
-    if (isGoogle) {
-
+    if(isVerified){
         badge.className = "badge verified";
-
-        badge.innerText = "✓ مستخدم موثق";
-
+        badge.innerText = "✓ الحساب موثق برقم الهاتف";
         badge.onclick = null;
-
+        document.getElementById("phoneVerifyBox").style.display = "none";
     } else {
-
         badge.className = "badge not-verified";
-
         badge.innerText = "وثّق حسابك";
-
-        badge.onclick = verifyWithGoogle;
-
+        badge.onclick = showPhoneVerifyBox;
     }
-
 }
 
-function verifyWithGoogle() {
+function showPhoneVerifyBox(){
+    document.getElementById("phoneVerifyBox").style.display = "block";
+    document.getElementById("verifyMsg").innerText = "";
 
-    let provider = new firebase.auth.GoogleAuthProvider();
+    if(!window.recaptchaVerifier){
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container", {
+            size: "normal"
+        });
+        window.recaptchaVerifier.render();
+    }
+}
 
-    currentUser.linkWithPopup(provider)
+function sendVerificationCode(){
+    let phoneNumber = document.getElementById("phoneNumber").value.trim();
 
+    if(phoneNumber === ""){
+        document.getElementById("verifyMsg").className = "error";
+        document.getElementById("verifyMsg").innerText = "اكتبي رقم الهاتف أولاً";
+        return;
+    }
+
+    currentUser.linkWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+    .then((confirmationResult) => {
+        confirmationResultGlobal = confirmationResult;
+        document.getElementById("verifyMsg").className = "";
+        document.getElementById("verifyMsg").innerText = "تم إرسال رمز التحقق";
+    })
+    .catch((error) => {
+        document.getElementById("verifyMsg").className = "error";
+        document.getElementById("verifyMsg").innerText = error.message;
+    });
+}
+
+function confirmVerificationCode(){
+    let code = document.getElementById("verificationCode").value.trim();
+
+    if(code === ""){
+        document.getElementById("verifyMsg").className = "error";
+        document.getElementById("verifyMsg").innerText = "اكتبي رمز التحقق";
+        return;
+    }
+
+    if(!confirmationResultGlobal){
+        document.getElementById("verifyMsg").className = "error";
+        document.getElementById("verifyMsg").innerText = "اضغطي إرسال رمز التحقق أولاً";
+        return;
+    }
+
+    confirmationResultGlobal.confirm(code)
     .then(() => {
+        let phoneNumber = document.getElementById("phoneNumber").value.trim();
+
+        return db.collection("users").doc(currentUser.uid).set({
+            phoneVerified:true,
+            phoneNumber:phoneNumber,
+            phone:phoneNumber,
+            updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge:true });
+    })
+    .then(() => {
+        let phoneNumber = document.getElementById("phoneNumber").value.trim();
 
         document.getElementById("verifyMsg").className = "";
+        document.getElementById("verifyMsg").innerText = "تم توثيق الحساب بنجاح ✅";
 
-        document.getElementById("verifyMsg").innerText = "تم توثيق الحساب بنجاح";
+        document.getElementById("userPhone").value = phoneNumber;
+        document.getElementById("profilePhone").innerText = phoneNumber;
 
-        checkVerification(auth.currentUser);
-
+        updateVerificationBadge(true);
     })
-
-    .catch(() => {
-
+    .catch((error) => {
         document.getElementById("verifyMsg").className = "error";
-
-        document.getElementById("verifyMsg").innerText =
-
-        "إذا كان حساب Google مستخدم من قبل، سجلي دخول باستخدام Google مباشرة.";
-
+        document.getElementById("verifyMsg").innerText = error.message;
     });
-
 }
 
 function chooseProfileImage() {
-
     document.getElementById("profileUpload").click();
-
 }
 
 function uploadProfile(event) {
-
     let file = event.target.files[0];
-
     if (!file) return;
 
     let reader = new FileReader();
 
     reader.onload = function(e) {
-
         let imageData = e.target.result;
 
         document.getElementById("avatarImage").innerText = "";
-
-        document.getElementById("avatarImage").style.backgroundImage =
-
-        `url('${imageData}')`;
+        document.getElementById("avatarImage").style.backgroundImage = `url('${imageData}')`;
 
         db.collection("users").doc(auth.currentUser.uid).set({
-
             profileImage: imageData,
-
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-
         }, { merge:true });
-
     };
 
     reader.readAsDataURL(file);
-
 }
 
 function changeAvatar() {
-
     let user = auth.currentUser;
-
     if (!user) return;
 
     let gender = document.getElementById("gender").value;
-
     let avatar = document.getElementById("avatarImage");
 
     db.collection("users").doc(user.uid).get().then((doc) => {
-
         let data = doc.exists ? doc.data() : {};
 
         if (data.profileImage) {
-
             avatar.innerText = "";
-
             avatar.style.backgroundImage = `url('${data.profileImage}')`;
-
         } else {
-
             avatar.style.backgroundImage = "none";
-
-            if (gender === "male") {
-
-                avatar.innerText = "👨";
-
-            } else {
-
-                avatar.innerText = "👩";
-
-            }
-
+            avatar.innerText = gender === "male" ? "👨" : "👩";
         }
-
     });
-
 }
 
 function loadUserProfile(uid) {
-
     db.collection("users").doc(uid).get()
-
     .then((doc) => {
 
-        if (doc.exists) {
+        let data = doc.exists ? doc.data() : {};
 
-            let data = doc.data();
+        document.getElementById("userName").value = data.name || "";
+        document.getElementById("userPhone").value = data.phone || data.phoneNumber || "";
+        document.getElementById("city").value = data.city || "";
+        document.getElementById("gender").value = data.gender || "female";
+        document.getElementById("profileName").innerText = data.name || "مستخدم My Garage";
+        document.getElementById("profilePhone").innerText = data.phone || data.phoneNumber || "-";
 
-            document.getElementById("userName").value = data.name || "";
+        loadProfileImage(data);
 
-            document.getElementById("userPhone").value = data.phone || "";
-
-            document.getElementById("city").value = data.city || "";
-
-            document.getElementById("gender").value = data.gender || "female";
-
-            document.getElementById("profileName").innerText = data.name || "مستخدم My Garage";
-
-            document.getElementById("profilePhone").innerText = data.phone || "-";
-
-            loadProfileImage(data);
-
-            if(currentRole === "customer"){
-
-                if(data.cars && Array.isArray(data.cars)){
-
-                    loadCars(data.cars);
-
-                } else {
-
-                    loadCars([]);
-
-                }
-
-            }
-
-        } else {
-
-            document.getElementById("userName").value = "";
-
-            document.getElementById("userPhone").value = "";
-
-            document.getElementById("city").value = "";
-
-            document.getElementById("gender").value = "female";
-
-            document.getElementById("profileName").innerText = "مستخدم My Garage";
-
-            document.getElementById("profilePhone").innerText = "-";
-
-            loadProfileImage({});
-
-            if(currentRole === "customer"){
-
-                loadCars([]);
-
-            }
-
+        if(currentRole === "customer"){
+            updateVerificationBadge(data.phoneVerified === true || currentUser.phoneNumber);
+            loadCars(data.cars && Array.isArray(data.cars) ? data.cars : []);
         }
-
     });
-
 }
 
 function loadProfileImage(data) {
-
     let avatar = document.getElementById("avatarImage");
 
     if (data.profileImage) {
-
         avatar.innerText = "";
-
         avatar.style.backgroundImage = `url('${data.profileImage}')`;
-
     } else {
-
         avatar.style.backgroundImage = "none";
-
         let gender = document.getElementById("gender").value;
-
-        if (gender === "male") {
-
-            avatar.innerText = "👨";
-
-        } else {
-
-            avatar.innerText = "👩";
-
-        }
-
+        avatar.innerText = gender === "male" ? "👨" : "👩";
     }
-
 }
 
 function showSection(sectionId) {
-
     if(sectionId === "cars" && currentRole !== "customer"){
-
         sectionId = "personal";
-
     }
 
     document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
     document.getElementById(sectionId).classList.add("active");
 
     if (document.getElementById("tab-" + sectionId)) {
-
         document.getElementById("tab-" + sectionId).classList.add("active");
-
     }
-
 }
 
 function saveProfile() {
-
     let user = auth.currentUser;
-
     let name = document.getElementById("userName").value;
-
     let phone = document.getElementById("userPhone").value;
-
     let city = document.getElementById("city").value;
-
     let gender = document.getElementById("gender").value;
 
     db.collection("users").doc(user.uid).set({
-
         name: name,
-
         email: user.email,
-
         phone: phone,
-
         city: city,
-
         gender: gender,
-
         role: currentRole,
-
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-
     }, { merge:true })
-
     .then(() => {
-
         document.getElementById("profileName").innerText = name || "مستخدم My Garage";
-
         document.getElementById("profilePhone").innerText = phone || "-";
-
         changeAvatar();
-
         document.getElementById("msg").className = "";
-
         document.getElementById("msg").innerText = "تم حفظ التغييرات بنجاح";
-
     })
-
     .catch((error) => {
-
         document.getElementById("msg").className = "error";
-
         document.getElementById("msg").innerText = error.message;
-
     });
-
 }
 
 function addCar(data = {}) {
-
     if(currentRole !== "customer") return;
 
     carCount++;
@@ -1064,10 +559,7 @@ function addCar(data = {}) {
 <div class="car-card" id="carBox${carCount}" data-car="${carCount}">
 <div class="car-header">
 <h3>سيارة ${carCount}</h3>
-<button type="button" class="delete-car-btn" onclick="removeCar(${carCount})">
-
-                حذف السيارة
-</button>
+<button type="button" class="delete-car-btn" onclick="removeCar(${carCount})">حذف السيارة</button>
 </div>
 <div class="form-grid">
 <div class="form-group">
@@ -1084,205 +576,117 @@ function addCar(data = {}) {
 </div>
 </div>
 </div>
-
     `;
 
     updateCarCount();
-
 }
 
 function removeCar(id) {
-
     let box = document.getElementById("carBox" + id);
-
-    if (box) {
-
-        box.remove();
-
-    }
-
+    if (box) box.remove();
     updateCarCount();
-
 }
 
 function updateCarCount() {
-
     let total = document.querySelectorAll(".car-card").length;
-
     document.getElementById("carCountDisplay").innerText = total;
-
 }
 
 function saveCars() {
-
     if(currentRole !== "customer") return;
 
     let user = auth.currentUser;
-
     let cars = [];
 
     document.querySelectorAll(".car-card").forEach(card => {
-
         let id = card.getAttribute("data-car");
 
         cars.push({
-
             type: document.getElementById("carType" + id).value,
-
             model: document.getElementById("carModel" + id).value,
-
             plate: document.getElementById("carPlate" + id).value
-
         });
-
     });
 
     db.collection("users").doc(user.uid).set({
-
         cars: cars,
-
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-
     }, { merge:true })
-
     .then(() => {
-
         document.getElementById("carCountDisplay").innerText = cars.length;
-
         document.getElementById("carMsg").className = "";
-
         document.getElementById("carMsg").innerText = "تم حفظ السيارات بنجاح";
-
     })
-
     .catch((error) => {
-
         document.getElementById("carMsg").className = "error";
-
         document.getElementById("carMsg").innerText = error.message;
-
     });
-
 }
 
 function loadCars(cars = []) {
-
     document.getElementById("carsContainer").innerHTML = "";
-
     carCount = 0;
-
     document.getElementById("carCountDisplay").innerText = 0;
-
-    cars.forEach(car => {
-
-        addCar(car);
-
-    });
-
+    cars.forEach(car => addCar(car));
 }
 
 function checkCurrentPassword() {
-
     let password = document.getElementById("currentPassword").value;
-
     let user = auth.currentUser;
-
-    let credential =
-
-    firebase.auth.EmailAuthProvider.credential(user.email, password);
+    let credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
 
     user.reauthenticateWithCredential(credential)
-
     .then(() => {
-
         document.getElementById("passMsg").className = "";
-
         document.getElementById("passMsg").innerText = "كلمة المرور صحيحة، اكتبي كلمة المرور الجديدة";
-
         document.getElementById("newPassBox").style.display = "block";
-
     })
-
     .catch(() => {
-
         document.getElementById("passMsg").className = "error";
-
         document.getElementById("passMsg").innerText = "كلمة المرور الحالية غير صحيحة";
-
     });
-
 }
 
 function changePassword() {
-
     let newPassword = document.getElementById("newPassword").value;
-
     let confirmPassword = document.getElementById("confirmPassword").value;
 
     if (newPassword.length < 6) {
-
         document.getElementById("passMsg").className = "error";
-
         document.getElementById("passMsg").innerText = "كلمة المرور يجب أن تكون 6 أحرف أو أكثر";
-
         return;
-
     }
 
     if (newPassword !== confirmPassword) {
-
         document.getElementById("passMsg").className = "error";
-
         document.getElementById("passMsg").innerText = "كلمة المرور غير متطابقة";
-
         return;
-
     }
 
     auth.currentUser.updatePassword(newPassword)
-
     .then(() => {
-
         document.getElementById("passMsg").className = "";
-
         document.getElementById("passMsg").innerText = "تم تغيير كلمة المرور بنجاح";
-
     })
-
     .catch((error) => {
-
         document.getElementById("passMsg").className = "error";
-
         document.getElementById("passMsg").innerText = error.message;
-
     });
-
 }
 
 function loadBookingCount(email) {
-
     db.collection("bookings")
-
     .where("userEmail", "==", email)
-
     .onSnapshot((snapshot) => {
-
         document.getElementById("bookingCount").innerText = snapshot.size;
-
     });
-
 }
 
 function logout() {
-
     auth.signOut().then(() => {
-
         window.location.href = "login.html";
-
     });
-
 }
 </script>
 </body>
 </html>
- 
