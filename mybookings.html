@@ -705,9 +705,19 @@ function renderBookings(){
             <div class="booking-card">
 
                 <div class="status-area">
-                    <span class="status-label ${getStatusClass(status)}">
-                        ${getArabicStatus(status)}
-                    </span>
+                    <span class="status-label ${getPaymentClass(paymentStatus)}">${getArabicPayment(paymentStatus)}</span>
+
+${paymentStatus === "Paid" ? `
+<p style="
+margin-top:10px;
+color:#15803d;
+font-weight:bold;
+font-size:15px;
+">
+مدفوع عن طريق ${b.paymentMethod || "وسيلة دفع"}
+</p>
+` : ""}
+
                 </div>
 
                 <div class="service-info">
@@ -771,7 +781,24 @@ function renderBookings(){
                         <div class="detail"><b>المدفوع:</b> ${paidAmount.toFixed(3)} BD</div>
                         <div class="detail"><b>المتبقي:</b> ${remainingAmount.toFixed(3)} BD</div>
                         <div class="detail"><b>حالة الدفع:</b> ${getArabicPayment(paymentStatus)}</div>
-                        <div class="detail"><b>طريقة الدفع:</b> ${b.paymentMethod || "-"}</div>
+                        <div class="detail"><b>طريقة الدفع:</b>
+
+${b.paymentMethod ? `
+<span style="
+background:#ecfdf5;
+color:#15803d;
+padding:6px 12px;
+border-radius:10px;
+font-weight:bold;
+display:inline-block;
+margin-top:6px;
+">
+${b.paymentMethod}
+</span>
+` : `
+<span style="color:#6b7280;">لم يتم الدفع بعد</span>
+`}
+</div>
                     </div>
                 </div>
 
