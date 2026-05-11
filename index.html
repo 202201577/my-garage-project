@@ -674,16 +674,22 @@ window.sendMessage = function(){
     input.value = "";
 
     let text = msg.toLowerCase();
-
+    
+text = text.replace("أ","ا")
+.replace("إ","ا")
+.replace("آ","ا");
     let neededService = "";
 
     if(
+    text.includes("ايسي") ||
     text.includes("الايسي") ||
     text.includes("الإيسي") ||
     text.includes("ac") ||
     text.includes("اي سي") ||
     text.includes("مكيف") ||
     text.includes("حر") ||
+    text.includes("حار") ||
+    text.includes("ما يبرد") ||
     text.includes("مايبرد")
 ){
     neededService = "ac";
