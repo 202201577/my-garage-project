@@ -4,54 +4,137 @@
 <meta charset="UTF-8">
 <title>الشكاوي - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
 
+<style>
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 
-.navbar{background:white;padding:15px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08);direction:ltr}
+.navbar{
+    background:white;
+    padding:15px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    direction:ltr;
+}
 
 .logo{width:145px}
-
 .menu-btn{font-size:32px;cursor:pointer;font-weight:bold}
 
 .page{width:90%;max-width:1100px;margin:45px auto}
 
-.card{background:white;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:25px;margin-bottom:25px}
+.card{
+    background:white;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    padding:25px;
+    margin-bottom:25px;
+}
 
-input,select,textarea{width:100%;box-sizing:border-box;padding:14px;border:1px solid #d1d5db;border-radius:12px;font-size:15px;margin-bottom:15px}
+input,select,textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+    margin-bottom:15px;
+}
 
 textarea{min-height:130px;resize:vertical}
 
-button{background:#dc2626;color:white;border:none;padding:14px 25px;border-radius:12px;font-size:16px;font-weight:bold;cursor:pointer}
+button{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:4px;
+}
 
-.complaint{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:18px;margin-bottom:15px}
+.complaint{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:15px;
+}
 
-.status{display:inline-block;padding:7px 12px;border-radius:14px;font-weight:bold}
+.status{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:14px;
+    font-weight:bold;
+}
 
-.new{background:#fee2e2;color:#dc2626}
+.pending{background:#fee2e2;color:#dc2626}
+.followup{background:#dbeafe;color:#2563eb}
+.resolved{background:#dcfce7;color:#15803d}
 
-.review{background:#fef3c7;color:#d97706}
+.reply-box{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:15px;
+    margin-top:12px;
+}
 
-.done{background:#dcfce7;color:#15803d}
-
-.side-menu{position:fixed;top:0;right:-270px;width:250px;height:100%;background:#07111f;transition:.3s;z-index:2000;padding-top:70px}
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-270px;
+    width:250px;
+    height:100%;
+    background:#07111f;
+    transition:.3s;
+    z-index:2000;
+    padding-top:70px;
+}
 
 .side-menu.open{right:0}
 
-.close-btn{position:absolute;top:18px;left:22px;color:white;font-size:30px;cursor:pointer}
+.close-btn{
+    position:absolute;
+    top:18px;
+    left:22px;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+}
 
-.side-menu img{width:140px;display:block;margin:0 auto 25px;background:white;padding:6px;border-radius:12px}
+.side-menu img{
+    width:140px;
+    display:block;
+    margin:0 auto 25px;
+    background:white;
+    padding:6px;
+    border-radius:12px;
+}
 
-.side-menu a{display:block;color:white;text-decoration:none;padding:18px 25px;border-bottom:1px solid rgba(255,255,255,.08);font-size:18px;font-weight:bold}
+.side-menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:18px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:18px;
+    font-weight:bold;
+}
 
 .side-menu a:hover,.side-menu .active{background:#dc2626}
 </style>
 </head>
+
 <body>
+
 <div class="navbar">
 <img src="logo.png" class="logo">
 <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
+
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
@@ -64,13 +147,17 @@ button{background:#dc2626;color:white;border:none;padding:14px 25px;border-radiu
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
+
 <div class="page">
 <h1>الشكاوي</h1>
-<p>يمكنك إرسال شكوى، وسيتم عرضها للأدمن فقط.</p>
+<p>يمكنك إرسال شكوى ومتابعة حالتها ورد الأدمن.</p>
+
 <div class="card" id="customerForm">
 <h2>إرسال شكوى</h2>
+
 <input type="text" id="complaintName" placeholder="الاسم">
 <input type="text" id="bookingNumber" placeholder="رقم الحجز اختياري">
+
 <select id="complaintType">
 <option value="">اختاري نوع الشكوى</option>
 <option>مشكلة في الحجز</option>
@@ -78,175 +165,237 @@ button{background:#dc2626;color:white;border:none;padding:14px 25px;border-radiu
 <option>مشكلة مع الكراج</option>
 <option>أخرى</option>
 </select>
+
 <textarea id="complaintMessage" placeholder="اكتبي تفاصيل الشكوى..."></textarea>
+
 <button onclick="submitComplaint()">إرسال الشكوى</button>
 <p id="msg"></p>
 </div>
+
+<div class="card" id="userComplaints">
+<h2>سجلات الشكاوي</h2>
+<div id="userComplaintsList"></div>
+</div>
+
 <div class="card" id="adminComplaints" style="display:none;">
 <h2>شكاوي العملاء</h2>
+
+<select id="adminStatusFilter" onchange="loadAdminComplaints()">
+<option value="All">كل الحالات</option>
+<option value="Pending">لم يتم الاطلاع عليها</option>
+<option value="Follow Up">قيد المتابعة</option>
+<option value="Resolved">تم الرد</option>
+</select>
+
 <div id="complaintsList"></div>
 </div>
 </div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
-<script>
 
+<script>
 let currentUser = null;
 
 let adminEmails = [
-
     "alhanoof.t29@gmail.com",
-
     "anwaralhayki55@gmail.com"
-
 ];
 
 function toggleMenu(){
-
     document.getElementById("sideMenu").classList.toggle("open");
-
 }
 
 function logout(){
-
     auth.signOut().then(() => {
-
         window.location.href = "login.html";
-
     });
+}
 
+function getStatusText(status){
+    if(status === "Follow Up") return "قيد المتابعة";
+    if(status === "Resolved") return "تم الرد";
+    return "لم يتم الاطلاع عليها";
+}
+
+function getStatusClass(status){
+    if(status === "Follow Up") return "followup";
+    if(status === "Resolved") return "resolved";
+    return "pending";
 }
 
 function submitComplaint(){
 
-    let name = document.getElementById("complaintName").value;
+    if(!currentUser){
+        alert("يرجى تسجيل الدخول أولاً");
+        return;
+    }
 
-    let bookingNumber = document.getElementById("bookingNumber").value;
-
+    let name = document.getElementById("complaintName").value.trim();
+    let bookingNumber = document.getElementById("bookingNumber").value.trim();
     let type = document.getElementById("complaintType").value;
-
-    let message = document.getElementById("complaintMessage").value;
+    let message = document.getElementById("complaintMessage").value.trim();
 
     if(name === "" || type === "" || message === ""){
-
         document.getElementById("msg").innerText = "يرجى تعبئة البيانات المطلوبة.";
-
         return;
-
     }
 
     db.collection("complaints").add({
-
         name:name,
-
         bookingNumber:bookingNumber,
-
         type:type,
-
         message:message,
-
+        userId:currentUser.uid,
         userEmail:currentUser.email,
-
-        status:"New",
-
-        createdAt:firebase.firestore.FieldValue.serverTimestamp()
-
+        status:"Pending",
+        adminReply:"",
+        createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     })
-
     .then(() => {
-
         document.getElementById("msg").innerText = "تم إرسال الشكوى بنجاح.";
 
         document.getElementById("complaintName").value = "";
-
         document.getElementById("bookingNumber").value = "";
-
         document.getElementById("complaintType").value = "";
-
         document.getElementById("complaintMessage").value = "";
-
     });
-
 }
 
-function getStatusText(status){
-
-    if(status === "Review") return "قيد المراجعة";
-
-    if(status === "Done") return "تم الحل";
-
-    return "جديدة";
-
-}
-
-function getStatusClass(status){
-
-    if(status === "Review") return "review";
-
-    if(status === "Done") return "done";
-
-    return "new";
-
-}
-
-function updateComplaintStatus(id,status){
-
-    db.collection("complaints").doc(id).update({
-
-        status:status
-
-    });
-
-}
-
-function loadComplaints(){
+function loadUserComplaints(email){
 
     db.collection("complaints")
-
-    .orderBy("createdAt","desc")
-
+    .where("userEmail","==",email)
     .onSnapshot((snapshot) => {
+
+        let complaints = [];
+
+        snapshot.forEach(doc => {
+            complaints.push({
+                id:doc.id,
+                ...doc.data()
+            });
+        });
+
+        complaints.sort((a,b) => {
+            let first = a.createdAt ? a.createdAt.seconds : 0;
+            let second = b.createdAt ? b.createdAt.seconds : 0;
+            return second - first;
+        });
 
         let output = "";
 
-        if(snapshot.empty){
-
+        if(complaints.length === 0){
             output = "<p>لا توجد شكاوي حالياً.</p>";
-
         }
 
-        snapshot.forEach(doc => {
-
-            let c = doc.data();
-
+        complaints.forEach(c => {
             output += `
-<div class="complaint">
-<h3>${c.type || "-"}</h3>
-<p><b>الاسم:</b> ${c.name || "-"}</p>
-<p><b>الإيميل:</b> ${c.userEmail || "-"}</p>
-<p><b>رقم الحجز:</b> ${c.bookingNumber || "-"}</p>
-<p><b>الرسالة:</b> ${c.message || "-"}</p>
-<p>
-<b>الحالة:</b>
-<span class="status ${getStatusClass(c.status)}">
+            <div class="complaint">
+                <h3>${c.type || "-"}</h3>
+                <p><b>رقم الحجز:</b> ${c.bookingNumber || "-"}</p>
+                <p><b>الرسالة:</b> ${c.message || "-"}</p>
 
+                <p>
+                    <b>الحالة:</b>
+                    <span class="status ${getStatusClass(c.status)}">
                         ${getStatusText(c.status)}
-</span>
-</p>
-<button onclick="updateComplaintStatus('${doc.id}','Review')">قيد المراجعة</button>
-<button onclick="updateComplaintStatus('${doc.id}','Done')">تم الحل</button>
-</div>
+                    </span>
+                </p>
 
+                <div class="reply-box">
+                    <b>رد الأدمن:</b>
+                    <p>${c.adminReply || "لا يوجد رد حالياً."}</p>
+                </div>
+            </div>
             `;
+        });
 
+        document.getElementById("userComplaintsList").innerHTML = output;
+    });
+}
+
+function loadAdminComplaints(){
+
+    let filter = document.getElementById("adminStatusFilter").value;
+
+    db.collection("complaints")
+    .onSnapshot((snapshot) => {
+
+        let complaints = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+
+            if(filter === "All" || data.status === filter){
+                complaints.push({
+                    id:doc.id,
+                    ...data
+                });
+            }
+        });
+
+        complaints.sort((a,b) => {
+            let first = a.createdAt ? a.createdAt.seconds : 0;
+            let second = b.createdAt ? b.createdAt.seconds : 0;
+            return second - first;
+        });
+
+        let output = "";
+
+        if(complaints.length === 0){
+            output = "<p>لا توجد شكاوي حالياً.</p>";
+        }
+
+        complaints.forEach(c => {
+            output += `
+            <div class="complaint">
+                <h3>${c.type || "-"}</h3>
+                <p><b>الاسم:</b> ${c.name || "-"}</p>
+                <p><b>الإيميل:</b> ${c.userEmail || "-"}</p>
+                <p><b>رقم الحجز:</b> ${c.bookingNumber || "-"}</p>
+                <p><b>الرسالة:</b> ${c.message || "-"}</p>
+
+                <p>
+                    <b>الحالة:</b>
+                    <span class="status ${getStatusClass(c.status)}">
+                        ${getStatusText(c.status)}
+                    </span>
+                </p>
+
+                <select id="status_${c.id}">
+                    <option value="Pending" ${c.status === "Pending" ? "selected" : ""}>لم يتم الاطلاع عليها</option>
+                    <option value="Follow Up" ${c.status === "Follow Up" ? "selected" : ""}>قيد المتابعة</option>
+                    <option value="Resolved" ${c.status === "Resolved" ? "selected" : ""}>تم الرد</option>
+                </select>
+
+                <textarea id="reply_${c.id}" placeholder="اكتب رد الأدمن هنا...">${c.adminReply || ""}</textarea>
+
+                <button onclick="saveAdminReply('${c.id}')">حفظ الرد والحالة</button>
+            </div>
+            `;
         });
 
         document.getElementById("complaintsList").innerHTML = output;
-
     });
+}
 
+function saveAdminReply(id){
+
+    let status = document.getElementById("status_" + id).value;
+    let reply = document.getElementById("reply_" + id).value.trim();
+
+    db.collection("complaints").doc(id).update({
+        status:status,
+        adminReply:reply,
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => {
+        alert("تم تحديث الشكوى بنجاح");
+    });
 }
 
 auth.onAuthStateChanged(function(user){
@@ -260,25 +409,29 @@ auth.onAuthStateChanged(function(user){
         if(isAdmin){
 
             document.getElementById("customerForm").style.display = "none";
-
+            document.getElementById("userComplaints").style.display = "none";
             document.getElementById("adminComplaints").style.display = "block";
 
             document.getElementById("adminDashboardLink").style.display = "block";
-
             document.getElementById("myBookingsLink").style.display = "none";
 
-            loadComplaints();
+            loadAdminComplaints();
 
+        } else {
+
+            document.getElementById("customerForm").style.display = "block";
+            document.getElementById("userComplaints").style.display = "block";
+            document.getElementById("adminComplaints").style.display = "none";
+
+            loadUserComplaints(user.email);
         }
 
     } else {
-
         window.location.href = "login.html";
-
     }
 
 });
 </script>
+
 </body>
 </html>
- 
