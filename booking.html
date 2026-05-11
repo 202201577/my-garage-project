@@ -4,386 +4,53 @@
 <title>Booking - My Garage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-
-body{
-
-    margin:0;
-
-    font-family:Arial,sans-serif;
-
-    background:#f8f9fa;
-
-    color:#0f172a;
-
-}
-
-.navbar{
-
-    background:white;
-
-    padding:18px 40px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
-    direction:ltr;
-
-}
-
+body{margin:0;font-family:Arial,sans-serif;background:#f8f9fa;color:#0f172a}
+.navbar{background:white;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);direction:ltr}
 .logo{width:150px}
-
-.nav-links a{
-
-    text-decoration:none;
-
-    color:#111827;
-
-    margin:0 12px;
-
-    font-weight:bold;
-
-}
-
-.book-top-btn{
-
-    background:#dc2626;
-
-    color:white !important;
-
-    padding:12px 20px;
-
-    border-radius:10px;
-
-}
-
+.nav-links a{text-decoration:none;color:#111827;margin:0 12px;font-weight:bold}
+.book-top-btn{background:#dc2626;color:white!important;padding:12px 20px;border-radius:10px}
 .page-title{text-align:center;margin:35px 0 10px}
-
-.breadcrumb{
-
-    text-align:center;
-
-    color:#6b7280;
-
-    margin-bottom:25px;
-
-}
-
-.container{
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr;
-
-    gap:25px;
-
-    width:88%;
-
-    max-width:1200px;
-
-    margin:auto;
-
-}
-
-.card{
-
-    background:white;
-
-    border-radius:18px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-    padding:25px;
-
-}
-
+.breadcrumb{text-align:center;color:#6b7280;margin-bottom:25px}
+.container{display:grid;grid-template-columns:2fr 1fr;gap:25px;width:88%;max-width:1200px;margin:auto}
+.card{background:white;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:25px}
 .step-box{display:none}
-
 .step-box.active{display:block}
-
-.steps{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:30px;
-
-}
-
-.step{
-
-    flex:1;
-
-    text-align:center;
-
-    color:#6b7280;
-
-    font-weight:bold;
-
-}
-
-.circle{
-
-    width:38px;
-
-    height:38px;
-
-    border-radius:50%;
-
-    border:2px solid #9ca3af;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin:auto auto 8px;
-
-}
-
+.steps{display:flex;justify-content:space-between;margin-bottom:30px}
+.step{flex:1;text-align:center;color:#6b7280;font-weight:bold}
+.circle{width:38px;height:38px;border-radius:50%;border:2px solid #9ca3af;display:flex;align-items:center;justify-content:center;margin:auto auto 8px}
 .step.active{color:#dc2626}
-
-.step.active .circle{
-
-    background:#dc2626;
-
-    color:white;
-
-    border-color:#dc2626;
-
-}
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:18px;
-
-}
-
+.step.active .circle{background:#dc2626;color:white;border-color:#dc2626}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .form-group{text-align:right}
-
-label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
-
-}
-
-input,select,textarea{
-
-    width:100%;
-
-    box-sizing:border-box;
-
-    padding:13px;
-
-    border:1px solid #d1d5db;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    background:white;
-
-}
-
-textarea{
-
-    min-height:90px;
-
-    resize:vertical;
-
-}
-
+label{display:block;margin-bottom:8px;font-weight:bold}
+input,select,textarea{width:100%;box-sizing:border-box;padding:13px;border:1px solid #d1d5db;border-radius:10px;font-size:15px;background:white}
+textarea{min-height:90px;resize:vertical}
 .full{grid-column:1 / 3}
-
-.service-options{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:18px;
-
-}
-
-.service-card{
-
-    border:2px solid #e5e7eb;
-
-    border-radius:15px;
-
-    padding:20px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.service-card:hover,
-
-.service-card.selected{
-
-    border-color:#dc2626;
-
-    background:#fff5f5;
-
-}
-
+.service-options{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.service-card{border:2px solid #e5e7eb;border-radius:15px;padding:20px;cursor:pointer;transition:.2s}
+.service-card:hover,.service-card.selected{border-color:#dc2626;background:#fff5f5}
 .service-card h3{margin:0 0 8px}
-
-.buttons{
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-}
-
-button,.back-btn{
-
-    border:none;
-
-    padding:13px 25px;
-
-    border-radius:10px;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    text-decoration:none;
-
-}
-
-.next-btn{
-
-    background:#dc2626;
-
-    color:white;
-
-}
-
-.back-btn{
-
-    background:#f3f4f6;
-
-    color:#111827;
-
-}
-
-.summary-img{
-
-    width:100%;
-
-    height:130px;
-
-    object-fit:cover;
-
-    border-radius:12px;
-
-    margin-bottom:15px;
-
-}
-
-.summary-title{
-
-    font-size:22px;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
-
-}
-
-.summary-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    border-bottom:1px solid #eee;
-
-    padding:12px 0;
-
-    gap:10px;
-
-}
-
-.success-box{
-
-    text-align:center;
-
-    padding:40px 20px;
-
-}
-
-.success-icon{
-
-    font-size:65px;
-
-    color:#16a34a;
-
-}
-
-.status{
-
-    background:orange;
-
-    color:white;
-
-    padding:8px 18px;
-
-    border-radius:20px;
-
-    display:inline-block;
-
-    margin-top:12px;
-
-}
-
-#msg{
-
-    margin-top:15px;
-
-    color:#dc2626;
-
-    font-weight:bold;
-
-}
-
+.buttons{margin-top:25px;display:flex;justify-content:space-between;gap:15px}
+button,.back-btn{border:none;padding:13px 25px;border-radius:10px;font-size:16px;cursor:pointer;text-decoration:none}
+.next-btn{background:#dc2626;color:white}
+.back-btn{background:#f3f4f6;color:#111827}
+.summary-img{width:100%;height:130px;object-fit:cover;border-radius:12px;margin-bottom:15px}
+.summary-title{font-size:22px;margin-bottom:8px;font-weight:bold}
+.summary-row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0;gap:10px}
+.success-box{text-align:center;padding:40px 20px}
+.success-icon{font-size:65px;color:#16a34a}
+.status{background:orange;color:white;padding:8px 18px;border-radius:20px;display:inline-block;margin-top:12px}
+#msg{margin-top:15px;color:#dc2626;font-weight:bold}
 @media(max-width:900px){
-
-    .container{grid-template-columns:1fr}
-
-    .form-grid,.service-options{grid-template-columns:1fr}
-
-    .full{grid-column:1}
-
-    .nav-links{display:none}
-
-    .logo{width:120px}
-
+.container{grid-template-columns:1fr}
+.form-grid,.service-options{grid-template-columns:1fr}
+.full{grid-column:1}
+.nav-links{display:none}
+.logo{width:120px}
 }
 </style>
 </head>
+
 <body>
 <div class="navbar">
 <img src="logo.png" class="logo">
@@ -395,59 +62,35 @@ button,.back-btn{
 <a href="index.html#garages" class="book-top-btn">احجز خدمة الآن</a>
 </div>
 </div>
+
 <h1 class="page-title">حجز خدمة</h1>
 <div class="breadcrumb">
-
 الرئيسية › الكراجات › <span id="breadcrumbGarage">الكراج</span> › حجز خدمة
 </div>
+
 <div class="container">
 <div class="card">
 <div class="steps">
-<div class="step active" id="step1">
-<div class="circle">1</div>
+<div class="step active" id="step1"><div class="circle">1</div>اختيار الخدمة</div>
+<div class="step" id="step2"><div class="circle">2</div>تفاصيل الحجز</div>
+<div class="step" id="step3"><div class="circle">3</div>تأكيد الحجز</div>
+</div>
 
-اختيار الخدمة
-</div>
-<div class="step" id="step2">
-<div class="circle">2</div>
-
-تفاصيل الحجز
-</div>
-<div class="step" id="step3">
-<div class="circle">3</div>
-
-تأكيد الحجز
-</div>
-</div>
 <div class="step-box active" id="serviceStep">
 <h2>اختاري نوع الخدمة</h2>
 <div class="service-options">
-<div class="service-card" onclick="selectService('تغيير زيت + فلتر', this)">
-<h3>تغيير زيت + فلتر</h3>
-<p>خدمة صيانة أساسية للسيارة.</p>
-</div>
-<div class="service-card" onclick="selectService('تصليح عام', this)">
-<h3>تصليح عام</h3>
-<p>فحص وتصليح مشاكل السيارة.</p>
-</div>
-<div class="service-card" onclick="selectService('فحص كمبيوتر', this)">
-<h3>فحص كمبيوتر</h3>
-<p>تشخيص أعطال السيارة بالكمبيوتر.</p>
-</div>
-<div class="service-card" onclick="selectService('كهرباء سيارات', this)">
-<h3>كهرباء سيارات</h3>
-<p>تصليح مشاكل الكهرباء والبطارية.</p>
-</div>
-<div class="service-card" onclick="selectService('مكيف سيارات', this)">
-<h3>مكيف سيارات</h3>
-<p>فحص وتصليح مكيف السيارة.</p>
-</div>
+<div class="service-card" onclick="selectService('تغيير زيت + فلتر', this)"><h3>تغيير زيت + فلتر</h3><p>خدمة صيانة أساسية للسيارة.</p></div>
+<div class="service-card" onclick="selectService('تصليح عام', this)"><h3>تصليح عام</h3><p>فحص وتصليح مشاكل السيارة.</p></div>
+<div class="service-card" onclick="selectService('فحص كمبيوتر', this)"><h3>فحص كمبيوتر</h3><p>تشخيص أعطال السيارة بالكمبيوتر.</p></div>
+<div class="service-card" onclick="selectService('كهرباء سيارات', this)"><h3>كهرباء سيارات</h3><p>تصليح مشاكل الكهرباء والبطارية.</p></div>
+<div class="service-card" onclick="selectService('مكيف سيارات', this)"><h3>مكيف سيارات</h3><p>فحص وتصليح مكيف السيارة.</p></div>
 </div>
 <div class="buttons">
 <a href="index.html" class="back-btn">رجوع</a>
 <button class="next-btn" onclick="goToDetails()">التالي</button>
 </div>
 </div>
+
 <div class="step-box" id="detailsStep">
 <h2>تفاصيل الحجز</h2>
 <div class="form-grid">
@@ -484,6 +127,7 @@ button,.back-btn{
 </div>
 <p id="msg"></p>
 </div>
+
 <div class="step-box" id="successStep">
 <div class="success-box">
 <div class="success-icon">✅</div>
@@ -497,348 +141,252 @@ button,.back-btn{
 </div>
 </div>
 </div>
+
 <div class="card">
 <h3>ملخص الحجز</h3>
 <img id="garageImage" class="summary-img" src="garage-bg.jpeg">
 <div class="summary-title" id="summaryGarage">Garage</div>
-<div class="summary-row">
-<span>نوع الخدمة</span>
-<b id="summaryService">-</b>
-</div>
-<div class="summary-row">
-<span>المركبة</span>
-<b id="summaryCar">-</b>
-</div>
-<div class="summary-row">
-<span>رقم اللوحة</span>
-<b id="summaryPlate">-</b>
-</div>
-<div class="summary-row">
-<span>التاريخ</span>
-<b id="summaryDate">-</b>
-</div>
-<div class="summary-row">
-<span>الوقت</span>
-<b id="summaryTime">-</b>
-</div>
-<div class="summary-row">
-<span>رقم الهاتف</span>
-<b id="summaryPhone">-</b>
-</div>
-<div class="summary-row">
-<span>الملاحظات</span>
-<b id="summaryNotes">-</b>
+<div class="summary-row"><span>نوع الخدمة</span><b id="summaryService">-</b></div>
+<div class="summary-row"><span>المركبة</span><b id="summaryCar">-</b></div>
+<div class="summary-row"><span>رقم اللوحة</span><b id="summaryPlate">-</b></div>
+<div class="summary-row"><span>التاريخ</span><b id="summaryDate">-</b></div>
+<div class="summary-row"><span>الوقت</span><b id="summaryTime">-</b></div>
+<div class="summary-row"><span>رقم الهاتف</span><b id="summaryPhone">-</b></div>
+<div class="summary-row"><span>الملاحظات</span><b id="summaryNotes">-</b></div>
 </div>
 </div>
-</div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
+
 <script>
-
 let garage = localStorage.getItem("garage") || "Not selected";
-
 let selectedService = "";
 
+let APP_COMMISSION_RATE = 0.10;
+if(typeof COMMISSION_RATE !== "undefined"){
+    APP_COMMISSION_RATE = COMMISSION_RATE;
+}
+
 let garageImages = {
-
     "Blue Motors Auto Services": "images(blue-motor).jpeg",
-
     "BOSCH Service": "images(BOSCH-Service).jpeg",
-
     "HOMS GATE": "images(HOMS-GATE).jpeg",
-
     "Fit and Fix": "images(Fit-and-fix).jpeg"
-
 };
 
 let garageOwners = {
-
     "Blue Motors Auto Services": "bluemotors@mygarage.com",
-
     "BOSCH Service": "bosch@mygarage.com",
-
     "HOMS GATE": "homsgate@mygarage.com",
-
     "Fit and Fix": "fitandfix@mygarage.com"
-
 };
 
 let garageTimes = {
-
-    "Blue Motors Auto Services": ["08:00", "09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"],
-
-    "BOSCH Service": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
-
-    "HOMS GATE": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
-
-    "Fit and Fix": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"]
-
+    "Blue Motors Auto Services": ["08:00","09:00","10:00","11:00","12:00","15:00","16:00","17:00"],
+    "BOSCH Service": ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00"],
+    "HOMS GATE": ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"],
+    "Fit and Fix": ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"]
 };
 
 document.getElementById("breadcrumbGarage").innerText = garage;
-
 document.getElementById("summaryGarage").innerText = garage;
 
 if(garageImages[garage]){
-
     document.getElementById("garageImage").src = garageImages[garage];
-
 }
 
 function selectService(service, element){
-
     selectedService = service;
-
-    let cards = document.querySelectorAll(".service-card");
-
-    cards.forEach(card => card.classList.remove("selected"));
-
+    document.querySelectorAll(".service-card").forEach(card => card.classList.remove("selected"));
     element.classList.add("selected");
-
     updateSummary();
-
 }
 
 function goToDetails(){
-
     if(selectedService === ""){
-
         alert("اختاري نوع الخدمة أولاً.");
-
         return;
-
     }
 
     document.getElementById("serviceStep").classList.remove("active");
-
     document.getElementById("detailsStep").classList.add("active");
-
     document.getElementById("step2").classList.add("active");
-
 }
 
 function backToService(){
-
     document.getElementById("detailsStep").classList.remove("active");
-
     document.getElementById("serviceStep").classList.add("active");
-
     document.getElementById("step2").classList.remove("active");
-
 }
 
 function loadTimes(){
-
     let timeSelect = document.getElementById("time");
-
     timeSelect.innerHTML = `<option value="">اختاري الوقت</option>`;
 
     let times = garageTimes[garage] || [];
-
     times.forEach(t => {
-
         timeSelect.innerHTML += `<option value="${t}">${t}</option>`;
-
     });
-
 }
 
 function checkDateAndLoadTimes(){
-
     let dateValue = document.getElementById("date").value;
-
     let msg = document.getElementById("msg");
-
     let timeSelect = document.getElementById("time");
 
     msg.innerText = "";
 
     if(!dateValue){
-
         loadTimes();
-
         updateSummary();
-
         return;
-
     }
 
     let selectedDate = new Date(dateValue);
-
     let day = selectedDate.getDay();
 
     if(day === 5){
-
         msg.innerText = "لا يمكن الحجز يوم الجمعة لأن الكراج مغلق.";
-
         timeSelect.innerHTML = `<option value="">الكراج مغلق</option>`;
-
         timeSelect.disabled = true;
-
     } else {
-
         timeSelect.disabled = false;
-
         loadTimes();
-
     }
 
     updateSummary();
-
 }
 
 function updateSummary(){
-
     document.getElementById("summaryService").innerText = selectedService || "-";
-
     document.getElementById("summaryCar").innerText = document.getElementById("carType")?.value || "-";
-
     document.getElementById("summaryPlate").innerText = document.getElementById("plateNumber")?.value || "-";
-
     document.getElementById("summaryDate").innerText = document.getElementById("date")?.value || "-";
-
     document.getElementById("summaryTime").innerText = document.getElementById("time")?.value || "-";
-
     document.getElementById("summaryPhone").innerText = document.getElementById("phone")?.value || "-";
-
     document.getElementById("summaryNotes").innerText = document.getElementById("notes")?.value || "-";
+}
 
+function createNotification(userId, title, message, type){
+    if(!userId) return;
+
+    db.collection("notifications").add({
+        userId: userId,
+        title: title,
+        message: message,
+        type: type,
+        read: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
 }
 
 function confirmBooking(){
-
     let user = auth.currentUser;
 
     let carType = document.getElementById("carType").value.trim();
-
     let plateNumber = document.getElementById("plateNumber").value.trim();
-
     let date = document.getElementById("date").value;
-
     let time = document.getElementById("time").value;
-
     let phone = document.getElementById("phone").value.trim();
-
     let notes = document.getElementById("notes").value.trim();
-
     let garageOwnerEmail = garageOwners[garage] || "";
 
     if(!user){
-
         document.getElementById("msg").innerText = "يرجى تسجيل الدخول أولاً.";
-
         return;
-
     }
 
     if(!garage || garage === "Not selected"){
-
         document.getElementById("msg").innerText = "لم يتم اختيار كراج.";
-
         return;
-
     }
 
     if(!garageOwnerEmail){
-
         document.getElementById("msg").innerText = "لم يتم العثور على إيميل راعي الكراج لهذا الكراج.";
-
         return;
-
     }
 
     if(selectedService === "" || carType === "" || plateNumber === "" || date === "" || time === "" || phone === ""){
-
         document.getElementById("msg").innerText = "يرجى تعبئة جميع البيانات المطلوبة.";
-
         return;
-
     }
 
     let selectedDate = new Date(date);
 
     if(selectedDate.getDay() === 5){
-
         document.getElementById("msg").innerText = "لا يمكن الحجز يوم الجمعة لأن الكراج مغلق.";
-
         return;
-
     }
 
-    db.collection("bookings").add({
+    document.getElementById("msg").innerText = "جاري التحقق من توفر الموعد...";
 
-        garage: garage,
+    db.collection("bookings")
+    .where("garage", "==", garage)
+    .where("date", "==", date)
+    .where("time", "==", time)
+    .get()
+    .then((snapshot) => {
 
-        garageOwnerEmail: garageOwnerEmail,
+        if(snapshot.size >= 2){
+            document.getElementById("msg").innerText =
+            "عذراً، هذا الموعد ممتلئ. يمكن حجز سيارتين فقط في نفس الوقت. يرجى اختيار وقت آخر.";
+            return null;
+        }
 
-        serviceType: selectedService,
-
-        carType: carType,
-
-        plateNumber: plateNumber,
-
-        date: date,
-
-        time: time,
-
-        phone: phone,
-
-        notes: notes,
-
-        status: "Waiting",
-
-        paymentStatus: "Not Set",
-
-        serviceAmount: 0,
-
-        commissionRate: 0.10,
-
-        commissionAmount: 0,
-
-        garageNetAmount: 0,
-
-        userEmail: user.email,
-
-        userId: user.uid,
-
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-
+        return db.collection("bookings").add({
+            garage: garage,
+            garageOwnerEmail: garageOwnerEmail,
+            serviceType: selectedService,
+            carType: carType,
+            plateNumber: plateNumber,
+            date: date,
+            time: time,
+            phone: phone,
+            notes: notes,
+            status: "Waiting",
+            paymentStatus: "Not Set",
+            serviceAmount: 0,
+            commissionRate: APP_COMMISSION_RATE,
+            commissionAmount: 0,
+            garageNetAmount: 0,
+            paidAmount: 0,
+            remainingAmount: 0,
+            userEmail: user.email,
+            userId: user.uid,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
     })
+    .then((docRef) => {
 
-    .then(() => {
+        if(!docRef) return;
+
+        createNotification(
+            garageOwnerEmail,
+            "وصل حجز جديد",
+            "وصل حجز جديد من " + user.email + " لخدمة " + selectedService + " بتاريخ " + date + " الساعة " + time,
+            "booking"
+        );
 
         document.getElementById("detailsStep").classList.remove("active");
-
         document.getElementById("successStep").classList.add("active");
-
         document.getElementById("step3").classList.add("active");
-
     })
-
     .catch((error) => {
-
         document.getElementById("msg").innerText = error.message;
-
     });
-
 }
 
 auth.onAuthStateChanged(function(user){
-
     if(!user){
-
         window.location.href = "login.html";
-
     }
-
 });
 
 loadTimes();
-
 updateSummary();
 </script>
 </body>
 </html>
- 
