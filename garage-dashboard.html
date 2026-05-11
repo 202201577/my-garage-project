@@ -403,7 +403,7 @@ function renderBookings(){
                         </div>
 
                         <div class="money-row">
-                            <span>عمولة النظام 10%</span>
+                            <span>عمولة النظام ${(commissionRate * 100).toFixed(0)}%</span>
                             <b>${commissionAmount.toFixed(3)} BD</b>
                         </div>
 
@@ -504,7 +504,7 @@ function setServiceAmount(id){
         remainingAmount = 0;
     }
 
-    let commissionRate = 0.10;
+    let commissionRate = COMMISSION_RATE;
     let commissionAmount = amount * commissionRate;
     let garageNetAmount = amount - commissionAmount;
 
