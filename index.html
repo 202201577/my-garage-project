@@ -11,6 +11,13 @@ body{
     background:#f8f9fa;
     color:#0f172a;
 }
+    .location-select{
+    border:none;
+    background:transparent;
+    font-size:16px;
+    outline:none;
+    color:#111827;
+}
 
 .navbar{
     background:white;
@@ -188,10 +195,17 @@ button{
 }
 
 button:hover{background:#b91c1c}
-    .search-btn{
-    padding:18px 40px;
+ .search-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:18px 28px;
     border-radius:14px;
+    font-size:16px;
     font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+    order:-1;
 }
 
 .why{
@@ -445,27 +459,15 @@ button:hover{background:#b91c1c}
         🔍 ابحث الآن
     </button>
 
-    <div class="search-item">
-
-        <div class="search-icon">🚘</div>
-
-        <div>
-            <h4>جميع الجراجات</h4>
-            <p>عرض الكل</p>
-        </div>
-
+   <div class="search-item" onclick="window.location.href='garages.html'">
+    <div>🚗</div>
+    <div>
+        <strong>جميع الكراجات</strong>
+        <span>عرض الكل</span>
     </div>
+</div>
 
-    <div class="search-item">
-
-        <div class="search-icon">📅</div>
-
-        <div>
-            <h4>التاريخ</h4>
-            <p>اختر التاريخ</p>
-        </div>
-
-    </div>
+   
 
     <div class="search-item">
 
@@ -480,16 +482,14 @@ button:hover{background:#b91c1c}
 
     </div>
 
-    <div class="search-item">
-
-        <div class="search-icon">📍</div>
-
-        <input
-        type="text"
-        id="search"
-        placeholder="اختر موقعك">
-
-    </div>
+   <select id="locationSelect" class="location-select">
+    <option value="">اختر موقعك</option>
+    <option value="Salmabad">سلماباد</option>
+    <option value="Tubli">توبلي</option>
+    <option value="Hamala">الهملة</option>
+    <option value="Riffa">الرفاع</option>
+    <option value="Manama">المنامة</option>
+</select>
 
 </div>
 
@@ -614,19 +614,79 @@ let garages = [
 ];
 
 function searchGarage(){
-    let text = document.getElementById("search").value.toLowerCase();
+
     let filter = document.getElementById("filter").value;
+    let location = document.getElementById("locationSelect").value;
+
     let result = "";
 
-    garages.forEach(g => {
-        if(
-            (filter === "all" || g.service === filter) &&
-            (
-                g.name.toLowerCase().includes(text) ||
-                g.location.toLowerCase().includes(text) ||
-                g.service.toLowerCase().includes(text)
-            )
-        ){
+    let filteredGarages = garages.filter(g => {
+
+        let serviceMatch =
+        filter === "all" || g.service === filter;
+
+        let locationMatch =
+        location === "" || g.location === location;
+
+        return serviceMatch && locationMatch;
+
+    });
+
+    if(filteredGarages.length === 0){
+
+        document.getElementById("results").innerHTML = `
+        <p style="
+        text-align:center;
+        font-size:22px;
+        margin-top:40px;
+        ">
+        عذراً لا يوجد كراج في منطقتك الحالية 😔
+        </p>
+        `;
+
+        return;
+    }
+
+    filteredGarages.forEach(g => {
+
+        result += `
+        <div class="garage">
+
+            <img class="garage-img" src="${g.image}">
+
+            <div class="garage-info">
+
+                <h3>${g.name}</h3>
+
+                <p>📍 ${g.location}</p>
+
+                <p>⭐ ${g.rating}</p>
+
+                <p>📞 ${g.phone}</p>
+
+                <div class="action-row">
+
+                    <a href="${g.map}"
+                    target="_blank"
+                    class="map-btn">
+                    عرض الموقع
+                    </a>
+
+                    <button class="book-btn"
+                    onclick="book('${g.name}')">
+                    احجز الآن
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("results").innerHTML = result;
+}
           result += `
 
 <div class="garage">
