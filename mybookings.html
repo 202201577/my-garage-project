@@ -9,533 +9,392 @@
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 
 .navbar{
-
     background:white;
-
     padding:15px 35px;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     box-shadow:0 2px 10px rgba(0,0,0,0.08);
-
     position:sticky;
-
     top:0;
-
     z-index:1000;
-
     direction:ltr;
-
 }
 
 .logo{width:145px}
 
 .menu-btn{
-
     font-size:32px;
-
     cursor:pointer;
-
     color:#111827;
-
     font-weight:bold;
-
 }
 
 .side-menu{
-
     position:fixed;
-
     top:0;
-
     right:-270px;
-
     width:250px;
-
     height:100%;
-
     background:#07111f;
-
     transition:0.3s;
-
     z-index:2000;
-
     padding-top:70px;
-
     box-shadow:-5px 0 20px rgba(0,0,0,0.25);
-
 }
 
 .side-menu.open{right:0}
 
 .close-btn{
-
     position:absolute;
-
     top:18px;
-
     left:22px;
-
     color:white;
-
     font-size:30px;
-
     cursor:pointer;
-
 }
 
 .side-menu img{
-
     width:140px;
-
     display:block;
-
     margin:0 auto 25px;
-
     background:white;
-
     padding:6px;
-
     border-radius:12px;
-
 }
 
 .side-menu a{
-
     display:block;
-
     color:white;
-
     text-decoration:none;
-
     padding:18px 25px;
-
     border-bottom:1px solid rgba(255,255,255,0.08);
-
     font-size:18px;
-
     font-weight:bold;
-
 }
 
 .side-menu a:hover,
-
 .side-menu .active{background:#dc2626}
 
 .page{
-
     width:90%;
-
     max-width:1180px;
-
     margin:45px auto;
-
 }
 
 .page-title{
-
     font-size:38px;
-
     margin-bottom:8px;
-
 }
 
 .breadcrumb{
-
     color:#6b7280;
-
     margin-bottom:30px;
-
 }
 
 .filters{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     gap:15px;
-
     margin-bottom:25px;
-
     flex-wrap:wrap;
-
 }
 
 .tabs{
-
     display:flex;
-
     gap:25px;
-
     flex-wrap:wrap;
-
 }
 
 .tab{
-
     padding:12px 18px;
-
     cursor:pointer;
-
     color:#6b7280;
-
     font-weight:bold;
-
     border-bottom:3px solid transparent;
-
 }
 
 .tab.active{
-
     color:#dc2626;
-
     border-bottom-color:#dc2626;
-
 }
 
 .search-filter{
-
     display:flex;
-
     gap:10px;
-
     flex-wrap:wrap;
-
 }
 
 .search-filter input,
-
 .search-filter select{
-
     padding:12px;
-
     border:1px solid #d1d5db;
-
     border-radius:10px;
-
     font-size:15px;
-
 }
 
 .booking-card{
-
     background:white;
-
     border-radius:18px;
-
     box-shadow:0 8px 25px rgba(0,0,0,0.08);
-
     padding:22px;
-
     margin-bottom:18px;
-
     display:grid;
-
     grid-template-columns:120px 220px 1fr 150px;
-
     gap:25px;
-
     align-items:center;
-
 }
 
-.status-area{
-
-    text-align:center;
-
-}
+.status-area{text-align:center}
 
 .status-label{
-
     padding:8px 14px;
-
     border-radius:12px;
-
     display:inline-block;
-
     font-weight:bold;
-
     font-size:14px;
-
 }
 
 .waiting{background:#fef3c7;color:#d97706}
-
 .accepted{background:#dcfce7;color:#15803d}
-
 .rejected{background:#fee2e2;color:#dc2626}
-
 .paid{background:#dcfce7;color:#15803d}
-
 .unpaid{background:#fee2e2;color:#dc2626}
-
 .notset{background:#e5e7eb;color:#374151}
 
 .service-info{
-
     border-right:1px solid #e5e7eb;
-
     padding-right:22px;
-
 }
 
 .service-info h3{
-
     margin:0 0 8px;
-
     font-size:20px;
-
 }
 
 .service-info p{
-
     color:#6b7280;
-
     margin:6px 0;
-
 }
 
 .details-btn{
-
     background:white;
-
     border:1px solid #d1d5db;
-
     color:#111827;
-
     padding:10px 18px;
-
     border-radius:10px;
-
     cursor:pointer;
-
     font-weight:bold;
-
 }
 
 .details-btn:hover{
-
     background:#dc2626;
-
     color:white;
-
 }
 
 .pay-btn{
-
     margin-top:10px;
-
     background:#16a34a;
-
     color:white;
-
     border:none;
-
     padding:10px 18px;
-
     border-radius:10px;
-
     cursor:pointer;
-
     font-weight:bold;
-
 }
 
-.pay-btn:hover{
-
-    background:#15803d;
-
-}
+.pay-btn:hover{background:#15803d}
 
 .garage-info{
-
     display:flex;
-
     gap:18px;
-
     align-items:center;
-
 }
 
 .garage-img{
-
     width:90px;
-
     height:90px;
-
     border-radius:14px;
-
     object-fit:cover;
-
     background:#f3f4f6;
-
 }
 
 .garage-name{
-
     font-size:22px;
-
     font-weight:bold;
-
     margin-bottom:8px;
-
 }
 
-.location{
-
-    color:#6b7280;
-
-}
+.location{color:#6b7280}
 
 .date-box{
-
     background:#f8fafc;
-
     border-radius:15px;
-
     text-align:center;
-
     padding:18px;
-
 }
 
 .date-day{
-
     font-size:34px;
-
     font-weight:bold;
-
 }
 
 .date-month{
-
     color:#6b7280;
-
     margin-top:5px;
-
 }
 
 .more-details{
-
     display:none;
-
     grid-column:1 / 5;
-
     background:#f8fafc;
-
     border-radius:14px;
-
     padding:18px;
-
     margin-top:10px;
-
 }
 
 .detail-grid{
-
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
     gap:12px;
-
 }
 
 .detail{
-
     background:white;
-
     padding:12px;
-
     border-radius:10px;
-
     border:1px solid #e5e7eb;
-
-}
-
-.payment-box{
-
-    background:white;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    border:1px solid #e5e7eb;
-
-    margin-top:15px;
-
 }
 
 .empty{
-
     background:white;
-
     padding:40px;
-
     text-align:center;
-
     border-radius:18px;
-
     box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
 
+/* Payment Modal */
+.payment-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:5000;
+}
+
+.payment-box{
+    width:90%;
+    max-width:430px;
+    background:white;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.payment-box h2{
+    margin-top:0;
+    font-size:30px;
+}
+
+.payment-amount{
+    color:#6b7280;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.pay-option{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border:2px solid #e5e7eb;
+    border-radius:16px;
+    padding:18px;
+    margin-top:14px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.pay-option:hover{
+    border-color:#94a3b8;
+    background:#f8fafc;
+}
+
+.pay-option input{
+    width:22px;
+    height:22px;
+}
+
+.apple-pay-option{
+    border-color:#64748b;
+}
+
+.confirm-pay-btn{
+    width:100%;
+    background:#000;
+    color:white;
+    border:none;
+    padding:16px;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:25px;
+    cursor:pointer;
+}
+
+.close-pay-btn{
+    width:100%;
+    background:#e5e7eb;
+    color:#111827;
+    border:none;
+    padding:14px;
+    border-radius:16px;
+    margin-top:10px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 @media(max-width:900px){
 
     .booking-card{
-
         grid-template-columns:1fr;
-
         text-align:center;
-
     }
 
     .garage-info{
-
         justify-content:center;
-
         flex-direction:column;
-
     }
 
     .service-info{
-
         border-right:none;
-
         padding-right:0;
-
     }
 
     .more-details{
-
         grid-column:1;
-
     }
 
     .detail-grid{
-
         grid-template-columns:1fr;
-
     }
 
     .logo{width:120px}
-
 }
 </style>
 </head>
+
 <body>
+
 <div class="navbar">
 <img src="logo.png" class="logo">
 <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
+
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
@@ -549,9 +408,11 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <a href="index.html#contact">اتصل بنا</a>
 <a href="#" onclick="logout()">تسجيل خروج</a>
 </div>
+
 <div class="page">
 <h1 class="page-title">حجوزاتي</h1>
 <div class="breadcrumb">الرئيسية › حجوزاتي</div>
+
 <div class="filters">
 <div class="tabs">
 <div class="tab active" onclick="setFilter('all', this)">الكل</div>
@@ -559,6 +420,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <div class="tab" onclick="setFilter('Accepted', this)">المقبولة</div>
 <div class="tab" onclick="setFilter('Rejected', this)">المرفوضة</div>
 </div>
+
 <div class="search-filter">
 <input type="text" id="searchInput" placeholder="ابحث..." oninput="renderBookings()">
 <select id="sortSelect" onchange="renderBookings()">
@@ -567,144 +429,120 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 </select>
 </div>
 </div>
+
 <div id="bookingList"></div>
 </div>
+
+<div class="payment-modal" id="paymentModal">
+    <div class="payment-box">
+        <h2>الدفع 💵</h2>
+        <p class="payment-amount" id="paymentAmount">المبلغ المطلوب: -</p>
+
+        <label class="pay-option apple-pay-option">
+            <span> Apple Pay</span>
+            <input type="radio" name="payMethod" value="Apple Pay">
+        </label>
+
+        <label class="pay-option">
+            <span>💳 Visa or Debit Card</span>
+            <input type="radio" name="payMethod" value="Visa or Debit Card">
+        </label>
+
+        <label class="pay-option">
+            <span>📱 BenefitPay</span>
+            <input type="radio" name="payMethod" value="BenefitPay">
+        </label>
+
+        <button class="confirm-pay-btn" onclick="confirmPayment()">تأكيد الدفع</button>
+        <button class="close-pay-btn" onclick="closePaymentModal()">إلغاء</button>
+    </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="firebase.js"></script>
+
 <script>
-
 let bookings = [];
-
 let currentFilter = "all";
+let currentPaymentBooking = null;
 
 let garageImages = {
-
     "Blue Motors Auto Services": "images(blue-motor).jpeg",
-
     "BOSCH Service": "images(BOSCH-Service).jpeg",
-
     "HOMS GATE": "images(HOMS-GATE).jpeg",
-
     "Fit and Fix": "images(Fit-and-fix).jpeg"
-
 };
 
 function toggleMenu(){
-
     document.getElementById("sideMenu").classList.toggle("open");
-
 }
 
 function logout(){
-
     auth.signOut().then(() => {
-
         window.location.href = "login.html";
-
     });
-
 }
 
 function setFilter(filter, element){
-
     currentFilter = filter;
-
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-
     element.classList.add("active");
-
     renderBookings();
-
 }
 
 function getStatusClass(status){
-
     if(status === "Accepted") return "accepted";
-
     if(status === "Rejected") return "rejected";
-
     return "waiting";
-
 }
 
 function getArabicStatus(status){
-
     if(status === "Accepted") return "مقبولة";
-
     if(status === "Rejected") return "مرفوضة";
-
     return "انتظار";
-
 }
 
 function getPaymentClass(paymentStatus){
-
     if(paymentStatus === "Paid") return "paid";
-
     if(paymentStatus === "Unpaid") return "unpaid";
-
     return "notset";
-
 }
 
 function getArabicPayment(paymentStatus){
-
     if(paymentStatus === "Paid") return "مدفوع";
-
     if(paymentStatus === "Unpaid") return "غير مدفوع";
-
     return "لم يتم تحديد المبلغ";
-
 }
 
 function getDay(date){
-
     if(!date) return "-";
-
     return date.split("-")[2] || "-";
-
 }
 
 function getMonthYear(date){
-
     if(!date) return "-";
-
     let parts = date.split("-");
-
     return `${parts[1] || ""} / ${parts[0] || ""}`;
-
 }
 
 function toggleDetails(id){
-
     let box = document.getElementById(id);
-
     box.style.display = box.style.display === "block" ? "none" : "block";
-
 }
 
 function createNotification(userId, title, message, type){
-
     if(!userId) return;
 
     db.collection("notifications").add({
-
         userId:userId,
-
         title:title,
-
         message:message,
-
         type:type,
-
         read:false,
-
         createdAt:firebase.firestore.FieldValue.serverTimestamp()
-
     });
-
 }
 
 function payBooking(id){
@@ -729,38 +567,56 @@ function payBooking(id){
         return;
     }
 
-    let method = prompt(
-        "المبلغ المطلوب دفعه: " + remainingAmount.toFixed(3) + " BD\n\n" +
-        "اختاري طريقة الدفع:\n\n1 - BenefitPay\n2 - Apple Pay\n3 - Credit Card\n\nاكتبي الرقم:"
-    );
+    currentPaymentBooking = booking;
 
-    let paymentMethod = "";
+    document.getElementById("paymentAmount").innerText =
+    "المبلغ المطلوب دفعه: " + remainingAmount.toFixed(3) + " BD";
 
-    if(method === "1"){
-        paymentMethod = "BenefitPay";
-    } 
-    else if(method === "2"){
-        paymentMethod = "Apple Pay";
-    } 
-    else if(method === "3"){
-        paymentMethod = "Credit Card";
-    } 
-    else{
-        alert("يرجى اختيار طريقة دفع صحيحة");
+    document.querySelectorAll('input[name="payMethod"]').forEach(r => r.checked = false);
+
+    document.getElementById("paymentModal").style.display = "flex";
+}
+
+function closePaymentModal(){
+    document.getElementById("paymentModal").style.display = "none";
+    currentPaymentBooking = null;
+}
+
+function confirmPayment(){
+
+    let selected = document.querySelector('input[name="payMethod"]:checked');
+
+    if(!selected){
+        alert("اختاري طريقة الدفع");
         return;
     }
 
-    let confirmPay = confirm(
-        "تأكيد دفع " + remainingAmount.toFixed(3) + " BD باستخدام " + paymentMethod + "؟"
-    );
+    let booking = currentPaymentBooking;
 
-    if(!confirmPay){
+    if(!booking){
+        alert("لم يتم العثور على الحجز");
+        return;
+    }
+
+    let paymentMethod = selected.value;
+
+    let serviceAmount = Number(booking.serviceAmount || 0);
+    let paidAmount = Number(booking.paidAmount || 0);
+    let remainingAmount = Number(booking.remainingAmount || 0);
+
+    if(remainingAmount <= 0){
+        remainingAmount = serviceAmount - paidAmount;
+    }
+
+    if(remainingAmount <= 0){
+        alert("هذا الحجز مدفوع بالكامل");
+        closePaymentModal();
         return;
     }
 
     let newPaidAmount = paidAmount + remainingAmount;
 
-    db.collection("bookings").doc(id).update({
+    db.collection("bookings").doc(booking.id).update({
         paymentStatus: "Paid",
         paymentMethod: paymentMethod,
         paidAmount: newPaidAmount,
@@ -792,16 +648,14 @@ function payBooking(id){
             );
         }
 
+        closePaymentModal();
         alert("تم الدفع بنجاح باستخدام " + paymentMethod);
     });
 }
- 
- 
 
 function renderBookings(){
 
     let search = document.getElementById("searchInput").value.toLowerCase();
-
     let sort = document.getElementById("sortSelect").value;
 
     let filtered = bookings.filter(b => {
@@ -809,150 +663,143 @@ function renderBookings(){
         let statusMatch = currentFilter === "all" || b.status === currentFilter;
 
         let searchMatch =
-
         (b.garage || "").toLowerCase().includes(search) ||
-
         (b.serviceType || "").toLowerCase().includes(search) ||
-
         (b.carType || "").toLowerCase().includes(search) ||
-
         (b.plateNumber || "").toLowerCase().includes(search);
 
         return statusMatch && searchMatch;
-
     });
 
     filtered.sort((a,b) => {
-
         if(sort === "newest") return (b.date || "").localeCompare(a.date || "");
-
         return (a.date || "").localeCompare(b.date || "");
-
     });
 
     let output = "";
 
     if(filtered.length === 0){
-
         output = `
-<div class="empty">
-<h2>لا توجد حجوزات</h2>
-<p>لا توجد حجوزات مطابقة حالياً.</p>
-</div>
-
+        <div class="empty">
+            <h2>لا توجد حجوزات</h2>
+            <p>لا توجد حجوزات مطابقة حالياً.</p>
+        </div>
         `;
-
     } else {
 
         filtered.forEach((b, index) => {
 
             let status = b.status || "Waiting";
-
             let paymentStatus = b.paymentStatus || "Not Set";
-
             let image = garageImages[b.garage] || "garage-bg.jpeg";
-
             let detailId = "details" + index;
-
             let amount = Number(b.serviceAmount || 0);
+            let paidAmount = Number(b.paidAmount || 0);
+            let remainingAmount = Number(b.remainingAmount || 0);
+
+            if(remainingAmount <= 0 && amount > paidAmount){
+                remainingAmount = amount - paidAmount;
+            }
 
             output += `
-<div class="booking-card">
-<div class="status-area">
-<span class="status-label ${getStatusClass(status)}">
+            <div class="booking-card">
 
+                <div class="status-area">
+                    <span class="status-label ${getStatusClass(status)}">
                         ${getArabicStatus(status)}
-</span>
-</div>
-<div class="service-info">
-<h3>${b.serviceType || "-"}</h3>
-<p>خدمة</p>
+                    </span>
+                </div>
+
+                <div class="service-info">
+                    <h3>${b.serviceType || "-"}</h3>
+                    <p>خدمة</p>
 
                     ${amount > 0 && status === "Accepted" ? `
-<p><b>المبلغ:</b> ${amount.toFixed(3)} BD</p>
+                        <p><b>المبلغ:</b> ${amount.toFixed(3)} BD</p>
 
-<span class="status-label ${getPaymentClass(paymentStatus)}">
-    ${getArabicPayment(paymentStatus)}
-</span>
+                        ${paidAmount > 0 ? `
+                            <p><b>المدفوع:</b> ${paidAmount.toFixed(3)} BD</p>
+                        ` : ""}
 
-${paymentStatus === "Unpaid" ? `
-<button class="pay-btn" onclick="payBooking('${b.id}')">
-    ادفع الآن
-</button>
-` : ""}
-` : `
-<p style="color:#6b7280;">سيتم تحديد المبلغ بعد قبول الحجز</p>
-`}
+                        ${remainingAmount > 0 ? `
+                            <p><b>المتبقي:</b> ${remainingAmount.toFixed(3)} BD</p>
+                        ` : ""}
 
-<br><br>
-<button class="details-btn" onclick="toggleDetails('${detailId}')">
+                        <span class="status-label ${getPaymentClass(paymentStatus)}">
+                            ${getArabicPayment(paymentStatus)}
+                        </span>
 
+                        ${paymentStatus === "Unpaid" ? `
+                            <button class="pay-btn" onclick="payBooking('${b.id}')">
+                                ادفع الآن
+                            </button>
+                        ` : ""}
+                    ` : `
+                        <p style="color:#6b7280;">سيتم تحديد المبلغ بعد قبول الحجز</p>
+                    `}
+
+                    <br><br>
+
+                    <button class="details-btn" onclick="toggleDetails('${detailId}')">
                         عرض التفاصيل
-</button>
-</div>
-<div class="garage-info">
-<img src="${image}" class="garage-img">
-<div>
-<div class="garage-name">${b.garage || "-"}</div>
-<div class="location">📍 البحرين</div>
-</div>
-</div>
-<div class="date-box">
-<div class="date-day">${getDay(b.date)}</div>
-<div class="date-month">${getMonthYear(b.date)}</div>
-<div style="margin-top:8px;color:#6b7280;">🕒 ${b.time || "-"}</div>
-</div>
-<div class="more-details" id="${detailId}">
-<div class="detail-grid">
-<div class="detail"><b>المركبة:</b> ${b.carType || "-"}</div>
-<div class="detail"><b>رقم اللوحة:</b> ${b.plateNumber || "-"}</div>
-<div class="detail"><b>رقم الهاتف:</b> ${b.phone || "-"}</div>
-<div class="detail"><b>التاريخ:</b> ${b.date || "-"}</div>
-<div class="detail"><b>الوقت:</b> ${b.time || "-"}</div>
-<div class="detail"><b>الملاحظات:</b> ${b.notes || "-"}</div>
-<div class="detail"><b>مبلغ الخدمة:</b> ${amount > 0 ? amount.toFixed(3) + " BD" : "-"}</div>
-<div class="detail"><b>حالة الدفع:</b> ${getArabicPayment(paymentStatus)}</div>
-<div class="detail"><b>طريقة الدفع:</b> ${b.paymentMethod || "-"}</div>
-</div>
-</div>
-</div>
+                    </button>
+                </div>
 
+                <div class="garage-info">
+                    <img src="${image}" class="garage-img">
+                    <div>
+                        <div class="garage-name">${b.garage || "-"}</div>
+                        <div class="location">📍 البحرين</div>
+                    </div>
+                </div>
+
+                <div class="date-box">
+                    <div class="date-day">${getDay(b.date)}</div>
+                    <div class="date-month">${getMonthYear(b.date)}</div>
+                    <div style="margin-top:8px;color:#6b7280;">🕒 ${b.time || "-"}</div>
+                </div>
+
+                <div class="more-details" id="${detailId}">
+                    <div class="detail-grid">
+                        <div class="detail"><b>المركبة:</b> ${b.carType || "-"}</div>
+                        <div class="detail"><b>رقم اللوحة:</b> ${b.plateNumber || "-"}</div>
+                        <div class="detail"><b>رقم الهاتف:</b> ${b.phone || "-"}</div>
+                        <div class="detail"><b>التاريخ:</b> ${b.date || "-"}</div>
+                        <div class="detail"><b>الوقت:</b> ${b.time || "-"}</div>
+                        <div class="detail"><b>الملاحظات:</b> ${b.notes || "-"}</div>
+                        <div class="detail"><b>مبلغ الخدمة:</b> ${amount > 0 ? amount.toFixed(3) + " BD" : "-"}</div>
+                        <div class="detail"><b>المدفوع:</b> ${paidAmount.toFixed(3)} BD</div>
+                        <div class="detail"><b>المتبقي:</b> ${remainingAmount.toFixed(3)} BD</div>
+                        <div class="detail"><b>حالة الدفع:</b> ${getArabicPayment(paymentStatus)}</div>
+                        <div class="detail"><b>طريقة الدفع:</b> ${b.paymentMethod || "-"}</div>
+                    </div>
+                </div>
+
+            </div>
             `;
-
         });
-
     }
 
     document.getElementById("bookingList").innerHTML = output;
-
 }
 
 function loadBookings(userEmail){
 
     db.collection("bookings")
-
     .where("userEmail", "==", userEmail)
-
     .onSnapshot((snapshot) => {
 
         bookings = [];
 
         snapshot.forEach((doc) => {
-
             bookings.push({
-
                 id: doc.id,
-
                 ...doc.data()
-
             });
-
         });
 
         renderBookings();
-
     });
-
 }
 
 auth.onAuthStateChanged(function(user){
@@ -960,45 +807,32 @@ auth.onAuthStateChanged(function(user){
     if(user){
 
         let adminEmails = [
-
             "alhanoof.t29@gmail.com",
-
             "anwaralhayki55@gmail.com"
-
         ];
 
         let garageOwnerEmails = [
-
             "bluemotors@mygarage.com",
-
             "bosch@mygarage.com",
-
             "homsgate@mygarage.com",
-
             "fitandfix@mygarage.com"
-
         ];
 
         let email = user.email.toLowerCase();
 
         if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
-
             window.location.href = "garage-dashboard.html";
-
             return;
-
         }
 
         loadBookings(user.email);
 
     } else {
-
         window.location.href = "login.html";
-
     }
 
 });
 </script>
+
 </body>
 </html>
- 
