@@ -7,123 +7,27 @@
 
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
-
-.navbar{
-    background:white;
-    padding:15px 35px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-    direction:ltr;
-}
-
+.navbar{background:white;padding:15px 35px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08);direction:ltr}
 .logo{width:145px}
 .menu-btn{font-size:32px;cursor:pointer;font-weight:bold}
-
 .page{width:90%;max-width:1100px;margin:45px auto}
-
-.card{
-    background:white;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    padding:25px;
-    margin-bottom:25px;
-}
-
-input,select,textarea{
-    width:100%;
-    box-sizing:border-box;
-    padding:14px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    font-size:15px;
-    margin-bottom:15px;
-}
-
+.card{background:white;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.08);padding:25px;margin-bottom:25px}
+input,select,textarea{width:100%;box-sizing:border-box;padding:14px;border:1px solid #d1d5db;border-radius:12px;font-size:15px;margin-bottom:15px}
 textarea{min-height:130px;resize:vertical}
-
-button{
-    background:#dc2626;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:12px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    margin:4px;
-}
-
-.complaint{
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:18px;
-    margin-bottom:15px;
-}
-
-.status{
-    display:inline-block;
-    padding:7px 12px;
-    border-radius:14px;
-    font-weight:bold;
-}
-
+button{background:#dc2626;color:white;border:none;padding:12px 18px;border-radius:12px;font-size:15px;font-weight:bold;cursor:pointer;margin:4px}
+.back-btn{background:#374151}
+.complaint{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:18px;margin-bottom:15px;cursor:pointer}
+.complaint:hover{background:#eef2f7}
+.status{display:inline-block;padding:7px 12px;border-radius:14px;font-weight:bold}
 .pending{background:#fee2e2;color:#dc2626}
 .followup{background:#dbeafe;color:#2563eb}
 .resolved{background:#dcfce7;color:#15803d}
-
-.reply-box{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:15px;
-    margin-top:12px;
-}
-
-.side-menu{
-    position:fixed;
-    top:0;
-    right:-270px;
-    width:250px;
-    height:100%;
-    background:#07111f;
-    transition:.3s;
-    z-index:2000;
-    padding-top:70px;
-}
-
+.reply-box{background:white;border:1px solid #e5e7eb;border-radius:12px;padding:15px;margin-top:12px}
+.side-menu{position:fixed;top:0;right:-270px;width:250px;height:100%;background:#07111f;transition:.3s;z-index:2000;padding-top:70px}
 .side-menu.open{right:0}
-
-.close-btn{
-    position:absolute;
-    top:18px;
-    left:22px;
-    color:white;
-    font-size:30px;
-    cursor:pointer;
-}
-
-.side-menu img{
-    width:140px;
-    display:block;
-    margin:0 auto 25px;
-    background:white;
-    padding:6px;
-    border-radius:12px;
-}
-
-.side-menu a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:18px 25px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    font-size:18px;
-    font-weight:bold;
-}
-
+.close-btn{position:absolute;top:18px;left:22px;color:white;font-size:30px;cursor:pointer}
+.side-menu img{width:140px;display:block;margin:0 auto 25px;background:white;padding:6px;border-radius:12px}
+.side-menu a{display:block;color:white;text-decoration:none;padding:18px 25px;border-bottom:1px solid rgba(255,255,255,.08);font-size:18px;font-weight:bold}
 .side-menu a:hover,.side-menu .active{background:#dc2626}
 </style>
 </head>
@@ -156,7 +60,6 @@ button{
 <h2>إرسال شكوى</h2>
 
 <input type="text" id="complaintName" placeholder="الاسم">
-<input type="text" id="bookingNumber" placeholder="رقم الحجز اختياري">
 
 <select id="complaintType">
 <option value="">اختاري نوع الشكوى</option>
@@ -189,6 +92,12 @@ button{
 
 <div id="complaintsList"></div>
 </div>
+
+<div class="card" id="adminComplaintDetails" style="display:none;">
+<h2 id="detailTitle">تفاصيل الشكوى</h2>
+<div id="detailContent"></div>
+</div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -198,6 +107,7 @@ button{
 
 <script>
 let currentUser = null;
+let complaintsCache = [];
 
 let adminEmails = [
     "alhanoof.t29@gmail.com",
@@ -234,7 +144,6 @@ function submitComplaint(){
     }
 
     let name = document.getElementById("complaintName").value.trim();
-    let bookingNumber = document.getElementById("bookingNumber").value.trim();
     let type = document.getElementById("complaintType").value;
     let message = document.getElementById("complaintMessage").value.trim();
 
@@ -245,7 +154,6 @@ function submitComplaint(){
 
     db.collection("complaints").add({
         name:name,
-        bookingNumber:bookingNumber,
         type:type,
         message:message,
         userId:currentUser.uid,
@@ -257,9 +165,7 @@ function submitComplaint(){
     })
     .then(() => {
         document.getElementById("msg").innerText = "تم إرسال الشكوى بنجاح.";
-
         document.getElementById("complaintName").value = "";
-        document.getElementById("bookingNumber").value = "";
         document.getElementById("complaintType").value = "";
         document.getElementById("complaintMessage").value = "";
     });
@@ -294,9 +200,8 @@ function loadUserComplaints(email){
 
         complaints.forEach(c => {
             output += `
-            <div class="complaint">
+            <div class="complaint" style="cursor:default;">
                 <h3>${c.type || "-"}</h3>
-                <p><b>رقم الحجز:</b> ${c.bookingNumber || "-"}</p>
                 <p><b>الرسالة:</b> ${c.message || "-"}</p>
 
                 <p>
@@ -320,25 +225,28 @@ function loadUserComplaints(email){
 
 function loadAdminComplaints(){
 
+    document.getElementById("adminComplaintDetails").style.display = "none";
+    document.getElementById("adminComplaints").style.display = "block";
+
     let filter = document.getElementById("adminStatusFilter").value;
 
     db.collection("complaints")
     .onSnapshot((snapshot) => {
 
-        let complaints = [];
+        complaintsCache = [];
 
         snapshot.forEach(doc => {
             let data = doc.data();
 
             if(filter === "All" || data.status === filter){
-                complaints.push({
+                complaintsCache.push({
                     id:doc.id,
                     ...data
                 });
             }
         });
 
-        complaints.sort((a,b) => {
+        complaintsCache.sort((a,b) => {
             let first = a.createdAt ? a.createdAt.seconds : 0;
             let second = b.createdAt ? b.createdAt.seconds : 0;
             return second - first;
@@ -346,18 +254,16 @@ function loadAdminComplaints(){
 
         let output = "";
 
-        if(complaints.length === 0){
+        if(complaintsCache.length === 0){
             output = "<p>لا توجد شكاوي حالياً.</p>";
         }
 
-        complaints.forEach(c => {
+        complaintsCache.forEach((c,index) => {
             output += `
-            <div class="complaint">
-                <h3>${c.type || "-"}</h3>
-                <p><b>الاسم:</b> ${c.name || "-"}</p>
+            <div class="complaint" onclick="openComplaint('${c.id}')">
+                <h3>شكوى ${index + 1}</h3>
+                <p><b>نوع الشكوى:</b> ${c.type || "-"}</p>
                 <p><b>الإيميل:</b> ${c.userEmail || "-"}</p>
-                <p><b>رقم الحجز:</b> ${c.bookingNumber || "-"}</p>
-                <p><b>الرسالة:</b> ${c.message || "-"}</p>
 
                 <p>
                     <b>الحالة:</b>
@@ -365,16 +271,6 @@ function loadAdminComplaints(){
                         ${getStatusText(c.status)}
                     </span>
                 </p>
-
-                <select id="status_${c.id}">
-                    <option value="Pending" ${c.status === "Pending" ? "selected" : ""}>لم يتم الاطلاع عليها</option>
-                    <option value="Follow Up" ${c.status === "Follow Up" ? "selected" : ""}>قيد المتابعة</option>
-                    <option value="Resolved" ${c.status === "Resolved" ? "selected" : ""}>تم الرد</option>
-                </select>
-
-                <textarea id="reply_${c.id}" placeholder="اكتب رد الأدمن هنا...">${c.adminReply || ""}</textarea>
-
-                <button onclick="saveAdminReply('${c.id}')">حفظ الرد والحالة</button>
             </div>
             `;
         });
@@ -383,18 +279,93 @@ function loadAdminComplaints(){
     });
 }
 
+function openComplaint(id){
+
+    let complaint = complaintsCache.find(c => c.id === id);
+
+    if(!complaint){
+        alert("لم يتم العثور على الشكوى");
+        return;
+    }
+
+    if(complaint.status === "Pending"){
+        db.collection("complaints").doc(id).update({
+            status:"Follow Up",
+            updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        });
+        complaint.status = "Follow Up";
+    }
+
+    document.getElementById("adminComplaints").style.display = "none";
+    document.getElementById("adminComplaintDetails").style.display = "block";
+
+    let alreadyReplied = complaint.status === "Resolved" && complaint.adminReply;
+
+    let output = `
+        <button class="back-btn" onclick="backToComplaints()">رجوع للشكاوي</button>
+
+        <div class="complaint" style="cursor:default;">
+            <h3>${complaint.type || "-"}</h3>
+            <p><b>الاسم:</b> ${complaint.name || "-"}</p>
+            <p><b>الإيميل:</b> ${complaint.userEmail || "-"}</p>
+            <p><b>الرسالة:</b> ${complaint.message || "-"}</p>
+
+            <p>
+                <b>الحالة:</b>
+                <span class="status ${getStatusClass(complaint.status)}">
+                    ${getStatusText(complaint.status)}
+                </span>
+            </p>
+
+            <div class="reply-box">
+                <b>رد الأدمن الحالي:</b>
+                <p>${complaint.adminReply || "لا يوجد رد حالياً."}</p>
+            </div>
+        </div>
+    `;
+
+    if(alreadyReplied){
+        output += `
+        <div class="reply-box">
+            <h3>تم الرد على هذه الشكوى</h3>
+            <p>لا يمكن إضافة رد جديد حتى لا تتكرر الردود.</p>
+        </div>
+        `;
+    } else {
+        output += `
+        <div class="reply-box">
+            <h3>كتابة رد الأدمن</h3>
+            <textarea id="adminReplyText" placeholder="اكتب رد الأدمن هنا..."></textarea>
+            <button onclick="saveAdminReply('${id}')">إرسال الرد</button>
+        </div>
+        `;
+    }
+
+    document.getElementById("detailContent").innerHTML = output;
+}
+
+function backToComplaints(){
+    document.getElementById("adminComplaintDetails").style.display = "none";
+    document.getElementById("adminComplaints").style.display = "block";
+}
+
 function saveAdminReply(id){
 
-    let status = document.getElementById("status_" + id).value;
-    let reply = document.getElementById("reply_" + id).value.trim();
+    let reply = document.getElementById("adminReplyText").value.trim();
+
+    if(reply === ""){
+        alert("يرجى كتابة الرد أولاً");
+        return;
+    }
 
     db.collection("complaints").doc(id).update({
-        status:status,
+        status:"Resolved",
         adminReply:reply,
         updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(() => {
-        alert("تم تحديث الشكوى بنجاح");
+        alert("تم إرسال الرد بنجاح");
+        backToComplaints();
     });
 }
 
@@ -403,7 +374,6 @@ auth.onAuthStateChanged(function(user){
     if(user){
 
         currentUser = user;
-
         let isAdmin = adminEmails.includes(user.email.toLowerCase());
 
         if(isAdmin){
@@ -422,6 +392,7 @@ auth.onAuthStateChanged(function(user){
             document.getElementById("customerForm").style.display = "block";
             document.getElementById("userComplaints").style.display = "block";
             document.getElementById("adminComplaints").style.display = "none";
+            document.getElementById("adminComplaintDetails").style.display = "none";
 
             loadUserComplaints(user.email);
         }
