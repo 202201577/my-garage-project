@@ -103,7 +103,7 @@ EN
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="garages.html">الكراجات</a>
+<a id="garagesMenu" href="garages.html">الكراجات</a>
 <a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
 <a id="myBookingsMenu" href="mybookings.html">حجوزاتي</a>
 <a href="notifications.html">الإشعارات</a>
@@ -338,7 +338,9 @@ function adjustAccountForRole(email){
 }
 
     if(isAdmin || isGarageOwner){
-        document.getElementById("profileCard").classList.add("role-view");
+
+    document.getElementById("garagesMenu").style.display = "none";
+    document.getElementById("profileCard").classList.add("role-view");
         document.getElementById("joinBox").style.display = "none";
         document.getElementById("statsCard").style.display = "none";
         document.getElementById("tab-cars").style.display = "none";
