@@ -795,7 +795,7 @@ text.includes("garage")
 if(foundArea){
 
 let matched = garages.filter(g => 
-g.location.toLowerCase().includes(foundArea)
+g.location.toLowerCase().includes(foundArea.toLowerCase())
 );
 
 if(matched.length > 0){
@@ -896,6 +896,7 @@ break;
 if(foundProblem){
 
 navigator.geolocation.getCurrentPosition(function(position){
+    chatBox.scrollTop = chatBox.scrollHeight;
 
 let userLat = position.coords.latitude;
 let userLng = position.coords.longitude;
