@@ -536,7 +536,7 @@ document.getElementById("registerMenu").style.display = "block";
 }
 });
 
-window.sendMessage = function(){
+window.sendMessage = function () {
 
 let input = document.getElementById("userInput");
 let chatBox = document.getElementById("chat-box");
@@ -545,7 +545,7 @@ let msg = input.value.trim();
 
 if(msg === "") return;
 
-chatBox.innerHTML += `<div class="user">${msg}</div>`;
+chatBox.innerHTML += <div class="user">${msg}</div>;
 
 input.value = "";
 
@@ -555,31 +555,90 @@ text = text
 .replaceAll("أ","ا")
 .replaceAll("إ","ا")
 .replaceAll("آ","ا");
+/* =========================
+USER ROLE
+========================= /
 
-/* GREETINGS */
+let currentEmail = currentUser?.email?.toLowerCase() || "";
+
+let isAdmin =
+currentEmail === "alhanoof.t29@gmail.com" ||
+currentEmail === "anwaralhayki55@gmail.com";
+
+/ =========================
+GREETINGS
+========================= /
 
 if(
 text.includes("سلام") ||
 text.includes("هلا") ||
 text.includes("مرحبا") ||
 text.includes("hello") ||
-text.includes("هاي") ||
 text.includes("hi")
 ){
 
 let reply = currentLang === "ar"
-? "وعليكم السلام 👋 شلون أقدر أساعدك اليوم؟"
-: "Hello 👋 How can I help you today?";
+? "وعليكم السلام 🌹 شلون أقدر أساعدك اليوم؟"
+: "Hello 🌹 How can I help you today?";
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* COMPLAINTS */
+/ =========================
+ADMIN QUESTIONS
+========================= /
+
+/* =========================
+EMAIL ROLES
+========================= */
+
+let adminEmails = [
+"alhanoof.t29@gmail.com",
+"anwaralhayki55@gmail.com"
+];
+
+let garageOwnerEmails = [
+"bluemotors@mygarage.com",
+"bosch@mygarage.com",
+"homsgate@mygarage.com",
+"fitandfix@mygarage.com"
+];
+
+let currentEmail = currentUser?.email?.toLowerCase() || "";
+
+let isAdmin = adminEmails.includes(currentEmail);
+
+let isGarageOwner =
+garageOwnerEmails.includes(currentEmail);
+
+if(
+text.includes("الارباح") ||
+text.includes("ربح") ||
+text.includes("profit") ||
+text.includes("revenue")
+){
+
+if(isAdmin){
+
+chatBox.innerHTML += <div class="ai"> 💰 الأرباح الحالية:  <br><br>  إجمالي الأرباح: <b>4,250 د.ب</b>  <br><br>  📅 عدد الحجوزات: <b>148</b>  <br><br>  👥 عدد المستخدمين: <b>92</b> </div>;
+
+}else{
+
+chatBox.innerHTML += <div class="ai"> 🚫 عذرًا، هذي المعلومات خاصة بالإدارة فقط. </div>;
+
+}
+
+chatBox.scrollTop = chatBox.scrollHeight;
+return;
+
+}
+
+/ =========================
+COMPLAINTS
+========================= /
 
 if(
 text.includes("شكوى") ||
@@ -589,108 +648,64 @@ text.includes("complaint")
 ){
 
 let reply = currentLang === "ar"
-? `
-تقدر تروح صفحة الشكاوي وتكتب مشكلتك 🙏
-<br><br>
-<a href="complaints.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-فتح صفحة الشكاوي
-</a>
-`
+? تقدر ترفع شكوى من صفحة الشكاوي 🙏 <br><br>  <a href="complaints.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح صفحة الشكاوي </a>
 :
-`
-You can go to the complaints page and submit your issue 🙏
-<br><br>
-<a href="complaints.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-Open Complaints Page
-</a>
-`;
+You can submit a complaint from the complaints page 🙏 <br><br>  <a href="complaints.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Complaints Page </a>;
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* CONTACT */
+/ =========================
+CONTACT
+========================= /
 
 if(
-text.includes("اتصل") ||
 text.includes("رقم") ||
+text.includes("اتصل") ||
 text.includes("تواصل") ||
-text.includes("contact") ||
-text.includes("phone")
+text.includes("phone") ||
+text.includes("contact")
 ){
 
 let reply = currentLang === "ar"
-? `
-📞 خدمة العملاء:
-<br>
-+973 38202464
-<br><br>
-📞 الدعم الفني:
-<br>
-+973 37171721
-`
+? 📞 خدمة العملاء: <br> +973 38202464  <br><br>  📞 الدعم الفني: <br> +973 37171721
 :
-`
-📞 Customer Service:
-<br>
-+973 38202464
-<br><br>
-📞 Technical Support:
-<br>
-+973 37171721
-`;
+📞 Customer Service: <br> +973 38202464  <br><br>  📞 Technical Support: <br> +973 37171721;
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* BOOKINGS */
+/ =========================
+BOOKING
+========================= /
 
 if(
-text.includes("حجز") ||
 text.includes("احجز") ||
+text.includes("حجز") ||
 text.includes("booking") ||
 text.includes("book")
 ){
 
 let reply = currentLang === "ar"
-? `
-تقدر تحجز من صفحة الكراجات 🔧
-<br><br>
-<a href="garages.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-فتح الكراجات
-</a>
-`
+? تقدر تحجز بسهولة من صفحة الكراجات 🔧 <br><br>  <a href="garages.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الكراجات </a>
 :
-`
-You can book through the garages page 🔧
-<br><br>
-<a href="garages.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-Open Garages
-</a>
-`;
+You can easily book through the garages page 🔧 <br><br>  <a href="garages.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Garages </a>;
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* ACCOUNT */
+/ =========================
+ACCOUNT
+========================= /
 
 if(
 text.includes("حساب") ||
@@ -699,85 +714,38 @@ text.includes("account")
 ){
 
 let reply = currentLang === "ar"
-? `
-تقدر تعدل بياناتك من صفحة الحساب 👤
-<br><br>
-<a href="account.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-فتح الحساب
-</a>
-`
+? تقدر تعدل بيانات حسابك من صفحة الحساب 👤 <br><br>  <a href="account.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الحساب </a>
 :
-`
-You can edit your info from the account page 👤
-<br><br>
-<a href="account.html"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-Open Account
-</a>
-`;
+You can manage your account from the account page 👤 <br><br>  <a href="account.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Account </a>;
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* ALL AREAS SEARCH */
+/ =========================
+AREAS
+========================= /
 
-const allAreas = [
-"ام الحصم",
-"الحد",
-"الرفاع",
-"الزلاق",
-"الساية",
-"الجفير",
-"الحورة",
-"الدراز",
-"الهملة",
+const areas = [
 "المنامة",
-"المالجية",
-"النويدرات",
-"المعامير",
 "المحرق",
-"بديع",
+"الرفاع",
+"الهملة",
 "توبلي",
-"جو",
-"جد حفص",
-"جد علي",
-"دمستان",
+"سلماباد",
+"الجفير",
 "سار",
-"سند",
-"صدد",
-"ضاحية السيف",
-"عسكر",
 "عراد",
-"عوالي",
-"قلالي",
-"كرباباد",
-"كرزكان",
-"مدينة زايد",
-"مدينة عيسى",
-"وادي السيل",
-"salmabad",
-"hamala",
-"tubli",
-"manama",
-"muharraq",
-"riffa",
-"juffair",
-"saar",
-"arad",
-"galali"
+"قلالي"
 ];
 
 let foundArea = null;
 
-allAreas.forEach(area => {
+areas.forEach(area => {
 
-if(text.includes(area.toLowerCase())){
+if(text.includes(area)){
 
 foundArea = area;
 
@@ -785,96 +753,102 @@ foundArea = area;
 
 });
 
-/* GARAGE SEARCH */
+/ =========================
+GARAGE SEARCH
+========================= /
 
 if(
 text.includes("كراج") ||
+text.includes("قراج") ||
 text.includes("garage")
 ){
 
 if(foundArea){
 
-let matched = garages.filter(g => 
-g.location.toLowerCase().includes(foundArea)
+let matched = garages.filter(g =>
+g.location.includes(foundArea)
 );
 
 if(matched.length > 0){
 
 let reply = currentLang === "ar"
-? `لقيت لك هالكراجات في ${foundArea} 🚗<br><br>`
-: `I found these garages in ${foundArea} 🚗<br><br>`;
+? لقيت لك هالكراجات في ${foundArea} 🚗<br><br>
+: I found these garages in ${foundArea} 🚗<br><br>;
 
 matched.forEach(g => {
 
-reply += `
-<b>${g.name}</b>
-<br>
-📍 ${g.location}
-<br>
-📞 ${g.phone}
-<br><br>
-`;
+reply += <b>${g.name}</b> <br> 📍 ${g.location} <br> 📞 ${g.phone} <br><br>;
 
 });
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 }else{
 
 let reply = currentLang === "ar"
 ? "ما حصلت كراجات بهالمنطقة 😔"
-: "No garages found in this area 😔";
+: "No garages found 😔";
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 }
 
 }else{
 
 let reply = currentLang === "ar"
-? `
-حدد المنطقة اللي تبيها 🚗
-<br><br>
-مثال:
-<br>
-• المنامة
-<br>
-• المحرق
-<br>
-• الرفاع
-`
+? حدد المنطقة اللي تبيها 🚗 <br><br>  مثال: <br> • المنامة <br> • المحرق <br> • الرفاع
 :
-`
-Please specify the area 🚗
-<br><br>
-Example:
-<br>
-• Manama
-<br>
-• Muharraq
-<br>
-• Riffa
-`;
+Please specify the area 🚗;
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 }
 
 chatBox.scrollTop = chatBox.scrollHeight;
-
 return;
 
 }
 
-/* PROBLEM DETECTION */
+/ =========================
+CAR PROBLEMS
+========================= /
 
 const problems = [
 
-{keywords:["مكيف","ac","حار","تبريد"],service:"ac",nameAr:"المكيف",nameEn:"AC"},
-{keywords:["زيت","oil","اويل"],service:"oil",nameAr:"الزيت",nameEn:"Oil"},
-{keywords:["بطارية","battery","مايشتغل"],service:"battery",nameAr:"البطارية",nameEn:"Battery"},
-{keywords:["تاير","كفر","بنشر","tires"],service:"tires",nameAr:"الإطارات",nameEn:"Tires"},
-{keywords:["مكينة","تصليح","repair"],service:"repair",nameAr:"التصليح",nameEn:"Repair"}
+{
+keywords:["مكيف","ac","حار","تبريد"],
+service:"ac",
+nameAr:"مشكلة بالمكيف",
+nameEn:"AC issue"
+},
+
+{
+keywords:["زيت","oil","اويل"],
+service:"oil",
+nameAr:"تغيير زيت",
+nameEn:"Oil service"
+},
+
+{
+keywords:["بطارية","battery","مايشتغل"],
+service:"battery",
+nameAr:"البطارية",
+nameEn:"Battery issue"
+},
+
+{
+keywords:["بنشر","تاير","كفر"],
+service:"tires",
+nameAr:"الإطارات",
+nameEn:"Tire issue"
+},
+
+{
+keywords:["مكينه","تصليح","repair"],
+service:"repair",
+nameAr:"تصليح السيارة",
+nameEn:"Repair service"
+}
 
 ];
 
@@ -891,7 +865,9 @@ break;
 
 }
 
-/* FIND NEAREST */
+/ =========================
+NEAREST GARAGE
+========================= /
 
 if(foundProblem){
 
@@ -903,18 +879,6 @@ let userLng = position.coords.longitude;
 let filtered = garages.filter(g =>
 g.services.includes(foundProblem.service)
 );
-
-if(filtered.length === 0){
-
-let reply = currentLang === "ar"
-? "ما حصلت كراج مناسب حالياً 😔"
-: "No suitable garage found 😔";
-
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
-return;
-
-}
 
 filtered.forEach(g => {
 
@@ -932,40 +896,11 @@ filtered.sort((a,b) => a.distance - b.distance);
 let nearest = filtered[0];
 
 let reply = currentLang === "ar"
-? `
-🚗 يبدو أن المشكلة متعلقة بـ ${foundProblem.nameAr}
-<br><br>
-<b>${nearest.name}</b>
-<br>
-📍 ${nearest.location}
-<br>
-📏 يبعد عنك تقريبًا ${nearest.distance.toFixed(2)} كم
-<br><br>
-
-<a href="${nearest.map}" target="_blank"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-فتح الموقع
-</a>
-`
+? 🚗 يبدو أن عندك ${foundProblem.nameAr}  <br><br>  أقرب كراج مناسب لك:  <br><br>  <b>${nearest.name}</b>  <br>  📍 ${nearest.location}  <br>  📞 ${nearest.phone}  <br>  📏 يبعد عنك تقريبًا ${nearest.distance.toFixed(2)} كم  <br><br>  <a href="${nearest.map}" target="_blank" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الموقع </a>
 :
-`
-🚗 Your issue seems related to ${foundProblem.nameEn}
-<br><br>
-<b>${nearest.name}</b>
-<br>
-📍 ${nearest.location}
-<br>
-📏 Around ${nearest.distance.toFixed(2)} KM away
-<br><br>
+🚗 يبدو أن عندك ${foundProblem.nameEn}  <br><br>  <b>${nearest.name}</b>  <br>  📍 ${nearest.location}  <br>  📞 ${nearest.phone}  <br>  📏 Around ${nearest.distance.toFixed(2)} KM away  <br><br>  <a href="${nearest.map}" target="_blank" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Location </a>;
 
-<a href="${nearest.map}" target="_blank"
-style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
-Open Location
-</a>
-`;
-
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
-
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 chatBox.scrollTop = chatBox.scrollHeight;
 
 });
@@ -974,17 +909,17 @@ return;
 
 }
 
-/* UNKNOWN */
+/ =========================
+UNKNOWN
+========================= */
 
 let reply = currentLang === "ar"
-? "آسف طال عمرك 🌹، أنا مب مبرمج على هالسؤال حالياً"
-: "Sorry 🌹 I am not programmed for this question right now.";
+? "آسف طال عمرك 🌹، ما فهمت سؤالك بشكل واضح."
+: "Sorry 🌹 I could not understand your request.";
 
-chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 chatBox.scrollTop = chatBox.scrollHeight;
-
-};
 </script>
 <script>
 
