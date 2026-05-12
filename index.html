@@ -220,11 +220,17 @@ button:hover{background:#b91c1c}
 }
 
 .feature{
+    width:190px;
+    height:190px;
+    border-radius:50%;
     background:white;
-    width:220px;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .feature div{font-size:35px}
@@ -515,76 +521,53 @@ button:hover{background:#b91c1c}
 
     </div>
 
- <select id="locationSelect" class="location-select">
+<div class="search-item">
+    📍
+    <select id="locationFilter">
+        <option value="">اختر موقعك</option>
 
-<option value="">اختر موقعك</option>
+        <option value="أم الحصم">أم الحصم</option>
+        <option value="الحد">الحد</option>
+        <option value="الرفاع">الرفاع</option>
+        <option value="الزلاق">الزلاق</option>
+        <option value="الساية">الساية</option>
+        <option value="الجفير">الجفير</option>
+        <option value="الحورة">الحورة</option>
+        <option value="الدراز">الدراز</option>
+        <option value="الهملة">الهملة</option>
+        <option value="المالجية">المالجية</option>
+        <option value="النويدرات">النويدرات</option>
+        <option value="المعامير">المعامير</option>
+        <option value="المحرق">المحرق</option>
 
-<option value="أم الحصم">أم الحصم</option>
+        <option value="بديع">بديع</option>
+        <option value="توبلي">توبلي</option>
+        <option value="جو">جو</option>
+        <option value="جد حفص">جد حفص</option>
+        <option value="جد علي">جد علي</option>
 
-<option value="البديع">البديع</option>
+        <option value="دمستان">دمستان</option>
 
-<option value="الحد">الحد</option>
+        <option value="سار">سار</option>
+        <option value="سند">سند</option>
+        <option value="صدد">صدد</option>
 
-<option value="الحورة">الحورة</option>
+        <option value="ضاحية السيف">ضاحية السيف</option>
 
-<option value="الجفير">الجفير</option>
+        <option value="عسكر">عسكر</option>
+        <option value="عراد">عراد</option>
+        <option value="عوالي">عوالي</option>
 
-<option value="الدراز">الدراز</option>
+        <option value="قلالي">قلالي</option>
 
-<option value="الرفاع">الرفاع</option>
+        <option value="كرباباد">كرباباد</option>
+        <option value="كرزكان">كرزكان</option>
 
-<option value="الزلاق">الزلاق</option>
+        <option value="مدينة زايد">مدينة زايد</option>
+        <option value="مدينة عيسى">مدينة عيسى</option>
 
-<option value="الساية">الساية</option>
-
-<option value="المالجية">المالجية</option>
-
-<option value="المعامير">المعامير</option>
-
-<option value="المحرق">المحرق</option>
-
-<option value="النويدرات">النويدرات</option>
-
-<option value="الهملة">الهملة</option>
-
-<option value="البديع">البديع</option>
-
-<option value="توبلي">توبلي</option>
-
-<option value="جد حفص">جد حفص</option>
-
-<option value="جد علي">جد علي</option>
-
-<option value="جو">جو</option>
-
-<option value="سار">سار</option>
-
-<option value="سند">سند</option>
-
-<option value="سلماباد">سلماباد</option>
-
-<option value="ضاحية السيف">ضاحية السيف</option>
-
-<option value="عراد">عراد</option>
-
-<option value="عسكر">عسكر</option>
-
-<option value="عوالي">عوالي</option>
-
-<option value="قلالي">قلالي</option>
-
-<option value="كرباباد">كرباباد</option>
-
-<option value="كرزكان">كرزكان</option>
-
-<option value="مدينة حمد">مدينة حمد</option>
-
-<option value="مدينة عيسى">مدينة عيسى</option>
-
-<option value="وادي السيل">وادي السيل</option>
-
-</select>
-
+        <option value="وادي السيل">وادي السيل</option>
+    </select>
 </div>
     <div id="results"></div>
 
@@ -604,11 +587,6 @@ button:hover{background:#b91c1c}
 <p>احجز موعدك بخطوات بسيطة.</p>
 </div>
 
-<div class="feature">
-<div>💰</div>
-<h3>أسعار شفافة</h3>
-<p>أسعار واضحة بدون رسوم مخفية.</p>
-</div>
 
 <div class="feature">
 <div>🎧</div>
