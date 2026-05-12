@@ -45,7 +45,11 @@ button:hover{background:#b91c1c}
 
 #results{display:flex;justify-content:center;gap:20px;padding:30px;flex-wrap:wrap}
 .garage{min-width:250px;max-width:250px;background:white;border-radius:18px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.08);flex:none}
-.garage-img{width:100%;height:180px;object-fit:cover}
+.garage-img{
+    width:100%;
+    height:180px;
+    object-fit:contain;
+    background:white;
 .garage-info{padding:18px;flex:1}
 .garage-info h3{font-size:30px;margin:0 0 15px}
 .garage-info p{font-size:17px;margin:10px 0}
@@ -219,19 +223,7 @@ button:hover{background:#b91c1c}
 let currentUser = null;
 
 let garages = [
-{
-name:"Expert Motors",
-service:"repair",
-location:"المنامة",
-lat:26.2235,
-lng:50.5876,
-services:["repair","oil"],
-rating:"4.5",
-phone:"33334444",
-hours:"8AM - 8PM",
-image:"garage-bg2.jpeg",
-map:"https://maps.google.com"
-},
+
 {
 name:"Blue Motors Auto Services",
 service:"repair",
