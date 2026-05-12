@@ -765,9 +765,10 @@ function searchGarage(){
     "بديع":"budaiya",
     "budaiya":"budaiya"
 };
-
-    let selectedLocation =
-    locationMap[location] || location;
+let selectedLocation =
+(locationMap[location] || location)
+.toLowerCase()
+.trim();
 
     garages.forEach(g => {
 
