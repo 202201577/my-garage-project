@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+    select{
+    border:none;
+    background:none;
+    font-size:16px;
+    width:100%;
+    cursor:pointer;
+    outline:none;
+}
+    
 body{
     margin:0;
     font-family:Arial, sans-serif;
@@ -145,11 +154,12 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
-
+    gap:12px;
     padding:10px 15px;
-
-    border-left:1px solid #e5e7eb;
+    border-left:1px 
+    min-width:220px;
+    solid #e5e7eb;
+    cursor:pointer;
 }
 
 .search-item:last-child{
@@ -475,11 +485,19 @@ button:hover{background:#b91c1c}
         🔍 ابحث الآن
     </button>
 
-   <div class="search-item" onclick="window.location.href='garages.html'">
-    <div>🚗</div>
+  <div class="search-item">
+    <div style="font-size:22px;">🚗</div>
+
     <div>
-        <strong>جميع الكراجات</strong>
-        <span>عرض الكل</span>
+        <b>جميع الكراجات</b><br>
+        <a href="garages.html"
+        style="
+        color:#666;
+        text-decoration:none;
+        font-size:14px;
+        ">
+        عرض الكل
+        </a>
     </div>
 </div>
 
@@ -503,36 +521,67 @@ button:hover{background:#b91c1c}
 <option value="">اختر موقعك</option>
 
 <option value="أم الحصم">أم الحصم</option>
-<option value="الرفاع">الرفاع</option>
-<option value="الزلاق">الزلاق</option>
-<option value="الساية">الساية</option>
-<option value="الجفير">الجفير</option>
+
+<option value="البديع">البديع</option>
+
 <option value="الحد">الحد</option>
+
 <option value="الحورة">الحورة</option>
+
+<option value="الجفير">الجفير</option>
+
 <option value="الدراز">الدراز</option>
+
+<option value="الرفاع">الرفاع</option>
+
+<option value="الزلاق">الزلاق</option>
+
+<option value="الساية">الساية</option>
+
 <option value="المالجية">المالجية</option>
-<option value="النويدرات">النويدرات</option>
-<option value="الهملة">الهملة</option>
-<option value="جد حفص">جد حفص</option>
-<option value="جد علي">جد علي</option>
-<option value="جو">جو</option>
-<option value="بديع">بديع</option>
-<option value="توبلي">توبلي</option>
-<option value="دمستان">دمستان</option>
-<option value="سار">سار</option>
-<option value="سند">سند</option>
-<option value="صدد">صدد</option>
-<option value="ضاحية السيف">ضاحية السيف</option>
-<option value="عسكر">عسكر</option>
-<option value="عراد">عراد</option>
-<option value="عوالي">عوالي</option>
-<option value="قلالي">قلالي</option>
-<option value="كرباباد">كرباباد</option>
-<option value="كرزكان">كرزكان</option>
-<option value="مدينة زايد">مدينة زايد</option>
-<option value="مدينة عيسى">مدينة عيسى</option>
+
 <option value="المعامير">المعامير</option>
-<option value="محرق">محرق</option>
+
+<option value="المحرق">المحرق</option>
+
+<option value="النويدرات">النويدرات</option>
+
+<option value="الهملة">الهملة</option>
+
+<option value="البديع">البديع</option>
+
+<option value="توبلي">توبلي</option>
+
+<option value="جد حفص">جد حفص</option>
+
+<option value="جد علي">جد علي</option>
+
+<option value="جو">جو</option>
+
+<option value="سار">سار</option>
+
+<option value="سند">سند</option>
+
+<option value="سلماباد">سلماباد</option>
+
+<option value="ضاحية السيف">ضاحية السيف</option>
+
+<option value="عراد">عراد</option>
+
+<option value="عسكر">عسكر</option>
+
+<option value="عوالي">عوالي</option>
+
+<option value="قلالي">قلالي</option>
+
+<option value="كرباباد">كرباباد</option>
+
+<option value="كرزكان">كرزكان</option>
+
+<option value="مدينة حمد">مدينة حمد</option>
+
+<option value="مدينة عيسى">مدينة عيسى</option>
+
 <option value="وادي السيل">وادي السيل</option>
 
 </select>
@@ -681,37 +730,153 @@ let garages = [
 
 function searchGarage(){
 
-    let filter = document.getElementById("filter").value;
-    let location = document.getElementById("locationSelect").value;
+    let location =
+    document.getElementById("locationSelect")
+    .value
+    .toLowerCase()
+    .trim();
+
+    let service =
+    document.getElementById("serviceSelect")
+    .value
+    .toLowerCase()
+    .trim();
 
     let result = "";
 
-    let filteredGarages = garages.filter(g => {
+    const locationMap = {
 
-        let serviceMatch =
-        filter === "all" || g.service === filter;
+        "الهملة":"hamala",
+        "hamala":"hamala",
 
-        let locationMatch =
-        location === "" || g.location === location;
+        "المحرق":"muharraq",
+        "محرق":"muharraq",
+        "muharraq":"muharraq",
 
-        return serviceMatch && locationMatch;
+        "الرفاع":"riffa",
+        "رفاع":"riffa",
+        "riffa":"riffa",
+
+        "توبلي":"tubli",
+        "tubli":"tubli",
+
+        "سلماباد":"salmabad",
+        "salmabad":"salmabad",
+
+        "مدينة عيسى":"isa town",
+        "isa town":"isa town",
+
+        "مدينة حمد":"hamad town",
+        "hamad town":"hamad town",
+
+        "الجفير":"juffair",
+        "juffair":"juffair",
+
+        "الحد":"hidd",
+        "hidd":"hidd",
+
+        "عراد":"arad",
+        "arad":"arad",
+
+        "قلالي":"galali",
+        "galali":"galali",
+
+        "سار":"saar",
+        "saar":"saar",
+
+        "البديع":"budaiya",
+        "بديع":"budaiya",
+        "budaiya":"budaiya"
+    };
+
+    let selectedLocation =
+    locationMap[location] || location;
+
+    garages.forEach(g => {
+
+        let garageLocation =
+        (locationMap[g.location.toLowerCase()] ||
+        g.location.toLowerCase());
+
+        if(
+
+            (location === "" ||
+            garageLocation === selectedLocation)
+
+            &&
+
+            (service === "" ||
+            g.service.toLowerCase() === service)
+
+        ){
+
+            result += `
+
+            <div class="garage">
+
+                <img class="garage-img"
+                src="${g.image}">
+
+                <div class="garage-info">
+
+                    <h3>${g.name}</h3>
+
+                    <p>
+                    📍 ${g.location}
+                    </p>
+
+                    <p>
+                    ⭐ ${g.rating}
+                    </p>
+
+                    <p>
+                    📞 ${g.phone}
+                    </p>
+
+                    <div class="action-row">
+
+                        <a href="${g.map}"
+                        target="_blank"
+                        class="map-btn">
+
+                        عرض الموقع
+
+                        </a>
+
+                        <button
+                        class="book-btn"
+                        onclick="book('${g.name}')">
+
+                        احجز الآن
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+        }
 
     });
 
-    if(filteredGarages.length === 0){
+    document.getElementById("results").innerHTML =
 
-        document.getElementById("results").innerHTML = `
-        <p style="
-        text-align:center;
-        font-size:22px;
-        margin-top:40px;
-        ">
-        عذراً لا يوجد كراج في منطقتك الحالية 😔
-        </p>
-        `;
+    result ||
 
-        return;
-    }
+    `
+    <p style="
+    text-align:center;
+    width:100%;
+    font-size:20px;
+    padding:40px;
+    ">
+    😔 عذرًا لا يوجد كراج في منطقتك الحالية
+    </p>
+    `;
+}
 
     filteredGarages.forEach(g => {
 
