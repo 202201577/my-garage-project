@@ -268,14 +268,24 @@ h1{
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="mybookings.html">حجوزاتي</a>
-<a href="nearest-garage.html" class="active">أقرب كراج</a>
-<a href="notifications.html">الإشعارات</a>
-<a href="account.html">الحساب</a>
-<a id="dashboardLink" href="garage-dashboard.html" style="display:none;">لوحة التحكم</a>
-<a href="complaints.html">الشكاوي</a>
+
+<a id="loginMenu" href="login.html">تسجيل دخول</a>
+<a id="registerMenu" href="register.html">إنشاء حساب</a>
+
+<a href="garages.html">الكراجات</a>
+<a id="nearestMenu" href="nearest-garage.html" class="active">أقرب كراج</a>
+
+<a id="myBookingsLink" href="mybookings.html" style="display:none;">حجوزاتي</a>
+<a id="notificationsMenu" href="notifications.html" style="display:none;">الإشعارات</a>
+<a id="accountMenu" href="account.html" style="display:none;">الحساب</a>
+<a id="complaintsLink" href="complaints.html" style="display:none;">الشكاوي</a>
+
+<a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">لوحة تحكم الكراج</a>
+<a id="adminDashboardLink" href="admin-dashboard.html" style="display:none;">لوحة تحكم الأدمن</a>
+
 <a href="index.html#contact">اتصل بنا</a>
-<a href="#" onclick="logout()">تسجيل خروج</a>
+
+<a id="logoutLink" href="#" onclick="logout()" style="display:none;">تسجيل خروج</a>
 </div>
  
 <div class="container">
@@ -363,9 +373,9 @@ function toggleMenu(){
     
 
 function logout(){
-
-    window.location.href = "login.html";
-
+    auth.signOut().then(() => {
+        window.location.href = "index.html";
+    });
 }
 
 function getDistance(lat1,lng1,lat2,lng2){
@@ -475,38 +485,33 @@ firebase.auth().onAuthStateChanged(function(user){
 
     if(user){
 
-        let adminEmails = [
+        document.getElementById("loginMenu").style.display = "none";
+        document.getElementById("registerMenu").style.display = "none";
 
-            "alhanoof.t29@gmail.com",
+        document.getElementById("myBookingsLink").style.display = "block";
+        document.getElementById("notificationsMenu").style.display = "block";
+        document.getElementById("accountMenu").style.display = "block";
+        document.getElementById("complaintsLink").style.display = "block";
+        document.getElementById("logoutLink").style.display = "block";
 
-            "anwaralhayki55@gmail.com"
+    } else {
 
-        ];
+        document.getElementById("loginMenu").style.display = "block";
+        document.getElementById("registerMenu").style.display = "block";
 
-        let garageOwnerEmails = [
-
-            "bluemotors@mygarage.com",
-
-            "bosch@mygarage.com",
-
-            "homsgate@mygarage.com",
-
-            "fitandfix@mygarage.com"
-
-        ];
-
-        let email = user.email.toLowerCase();
-
-        if(adminEmails.includes(email) || garageOwnerEmails.includes(email)){
-
-            document.getElementById("dashboardLink").style.display = "block";
-
-        }
+        document.getElementById("myBookingsLink").style.display = "none";
+        document.getElementById("notificationsMenu").style.display = "none";
+        document.getElementById("accountMenu").style.display = "none";
+        document.getElementById("complaintsLink").style.display = "none";
+        document.getElementById("garageDashboardLink").style.display = "none";
+        document.getElementById("adminDashboardLink").style.display = "none";
+        document.getElementById("logoutLink").style.display = "none";
 
     }
 
 });
-    
+
+
 </script>
 </body>
 </html>
