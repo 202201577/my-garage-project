@@ -537,84 +537,452 @@ document.getElementById("registerMenu").style.display = "block";
 });
 
 window.sendMessage = function(){
+
 let input = document.getElementById("userInput");
 let chatBox = document.getElementById("chat-box");
+
 let msg = input.value.trim();
 
 if(msg === "") return;
 
 chatBox.innerHTML += `<div class="user">${msg}</div>`;
+
 input.value = "";
 
 let text = msg.toLowerCase();
-text = text.replace("أ","ا").replace("إ","ا").replace("آ","ا");
+
+text = text
+.replaceAll("أ","ا")
+.replaceAll("إ","ا")
+.replaceAll("آ","ا");
+
+/* GREETINGS */
+
+if(
+text.includes("سلام") ||
+text.includes("هلا") ||
+text.includes("مرحبا") ||
+text.includes("hello") ||
+text.includes("hi")
+){
+
+let reply = currentLang === "ar"
+? "وعليكم السلام 👋 شلون أقدر أساعدك اليوم؟"
+: "Hello 👋 How can I help you today?";
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* COMPLAINTS */
+
+if(
+text.includes("شكوى") ||
+text.includes("اشتكي") ||
+text.includes("مشكله") ||
+text.includes("complaint")
+){
+
+let reply = currentLang === "ar"
+? `
+تقدر تروح صفحة الشكاوي وتكتب مشكلتك 🙏
+<br><br>
+<a href="complaints.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+فتح صفحة الشكاوي
+</a>
+`
+:
+`
+You can go to the complaints page and submit your issue 🙏
+<br><br>
+<a href="complaints.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+Open Complaints Page
+</a>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* CONTACT */
+
+if(
+text.includes("اتصل") ||
+text.includes("رقم") ||
+text.includes("تواصل") ||
+text.includes("contact") ||
+text.includes("phone")
+){
+
+let reply = currentLang === "ar"
+? `
+📞 خدمة العملاء:
+<br>
++973 38202464
+<br><br>
+📞 الدعم الفني:
+<br>
++973 37171721
+`
+:
+`
+📞 Customer Service:
+<br>
++973 38202464
+<br><br>
+📞 Technical Support:
+<br>
++973 37171721
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* BOOKINGS */
+
+if(
+text.includes("حجز") ||
+text.includes("احجز") ||
+text.includes("booking") ||
+text.includes("book")
+){
+
+let reply = currentLang === "ar"
+? `
+تقدر تحجز من صفحة الكراجات 🔧
+<br><br>
+<a href="garages.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+فتح الكراجات
+</a>
+`
+:
+`
+You can book through the garages page 🔧
+<br><br>
+<a href="garages.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+Open Garages
+</a>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* ACCOUNT */
+
+if(
+text.includes("حساب") ||
+text.includes("اكاونت") ||
+text.includes("account")
+){
+
+let reply = currentLang === "ar"
+? `
+تقدر تعدل بياناتك من صفحة الحساب 👤
+<br><br>
+<a href="account.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+فتح الحساب
+</a>
+`
+:
+`
+You can edit your info from the account page 👤
+<br><br>
+<a href="account.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+Open Account
+</a>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* ALL AREAS SEARCH */
+
+const allAreas = [
+"ام الحصم",
+"الحد",
+"الرفاع",
+"الزلاق",
+"الساية",
+"الجفير",
+"الحورة",
+"الدراز",
+"الهملة",
+"المنامة",
+"المالجية",
+"النويدرات",
+"المعامير",
+"المحرق",
+"بديع",
+"توبلي",
+"جو",
+"جد حفص",
+"جد علي",
+"دمستان",
+"سار",
+"سند",
+"صدد",
+"ضاحية السيف",
+"عسكر",
+"عراد",
+"عوالي",
+"قلالي",
+"كرباباد",
+"كرزكان",
+"مدينة زايد",
+"مدينة عيسى",
+"وادي السيل",
+"salmabad",
+"hamala",
+"tubli",
+"manama",
+"muharraq",
+"riffa",
+"juffair",
+"saar",
+"arad",
+"galali"
+];
+
+let foundArea = null;
+
+allAreas.forEach(area => {
+
+if(text.includes(area.toLowerCase())){
+
+foundArea = area;
+
+}
+
+});
+
+/* GARAGE SEARCH */
+
+if(
+text.includes("كراج") ||
+text.includes("garage")
+){
+
+if(foundArea){
+
+let matched = garages.filter(g => 
+g.location.toLowerCase().includes(foundArea)
+);
+
+if(matched.length > 0){
+
+let reply = currentLang === "ar"
+? `لقيت لك هالكراجات في ${foundArea} 🚗<br><br>`
+: `I found these garages in ${foundArea} 🚗<br><br>`;
+
+matched.forEach(g => {
+
+reply += `
+<b>${g.name}</b>
+<br>
+📍 ${g.location}
+<br>
+📞 ${g.phone}
+<br><br>
+`;
+
+});
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+}else{
+
+let reply = currentLang === "ar"
+? "ما حصلت كراجات بهالمنطقة 😔"
+: "No garages found in this area 😔";
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+}
+
+}else{
+
+let reply = currentLang === "ar"
+? `
+حدد المنطقة اللي تبيها 🚗
+<br><br>
+مثال:
+<br>
+• المنامة
+<br>
+• المحرق
+<br>
+• الرفاع
+`
+:
+`
+Please specify the area 🚗
+<br><br>
+Example:
+<br>
+• Manama
+<br>
+• Muharraq
+<br>
+• Riffa
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+}
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+/* PROBLEM DETECTION */
 
 const problems = [
-{keywords:["مكيف","الايسي","اي سي","ac","حار","مايبرد","تبريد","ينفخ حار"],service:"ac",name:"مكيف السيارة"},
-{keywords:["زيت","اويل","تغيير زيت","فلتر","صيانة","سيرفس"],service:"oil",name:"الزيت والصيانة"},
-{keywords:["بطارية","مايشتغل","السلف","كهربا","اشتراك","طفى","تشغيل","ما تشتغل"],service:"battery",name:"البطارية والكهرباء"},
-{keywords:["بنشر","تاير","كفر","هوا","الاطار","تبديل تاير"],service:"tires",name:"الإطارات والبنشر"},
-{keywords:["مكينة","صوت","طقطقة","رجفة","يهز","دخان","حرارة","صرفية","ما تدعس"],service:"repair",name:"المكينة والتصليح"},
-{keywords:["بنزين","يسرب","تسريب","بترول","ريحة بنزين"],service:"repair",name:"البنزين"},
-{keywords:["فرامل","بريك","دعسة","يوقف","صرير"],service:"repair",name:"الفرامل"},
-{keywords:["دركسون","سكان","ستيرنج","ثقيل","يسحب"],service:"repair",name:"الدركسون"}
+
+{keywords:["مكيف","ac","حار","تبريد"],service:"ac",nameAr:"المكيف",nameEn:"AC"},
+{keywords:["زيت","oil","اويل"],service:"oil",nameAr:"الزيت",nameEn:"Oil"},
+{keywords:["بطارية","battery","مايشتغل"],service:"battery",nameAr:"البطارية",nameEn:"Battery"},
+{keywords:["تاير","كفر","بنشر","tires"],service:"tires",nameAr:"الإطارات",nameEn:"Tires"},
+{keywords:["مكينة","تصليح","repair"],service:"repair",nameAr:"التصليح",nameEn:"Repair"}
+
 ];
 
 let foundProblem = null;
 
 for(let p of problems){
+
 if(p.keywords.some(word => text.includes(word))){
+
 foundProblem = p;
 break;
-}
+
 }
 
-if(!foundProblem){
-chatBox.innerHTML += `<div class="ai">🤖 ما فهمت المشكلة بشكل واضح.</div>`;
-return;
 }
 
-let neededService = foundProblem.service;
-let problemName = foundProblem.name;
+/* FIND NEAREST */
+
+if(foundProblem){
 
 navigator.geolocation.getCurrentPosition(function(position){
+
 let userLat = position.coords.latitude;
 let userLng = position.coords.longitude;
 
-let filtered = garages.filter(g => g.services.includes(neededService));
+let filtered = garages.filter(g =>
+g.services.includes(foundProblem.service)
+);
 
 if(filtered.length === 0){
-chatBox.innerHTML += `<div class="ai">🤖 ما حصلت كراج متخصص بهالمشكلة حاليًا.</div>`;
+
+let reply = currentLang === "ar"
+? "ما حصلت كراج مناسب حالياً 😔"
+: "No suitable garage found 😔";
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
 return;
+
 }
 
 filtered.forEach(g => {
-g.distance = getDistance(userLat,userLng,g.lat,g.lng);
+
+g.distance = getDistance(
+userLat,
+userLng,
+g.lat,
+g.lng
+);
+
 });
 
 filtered.sort((a,b) => a.distance - b.distance);
+
 let nearest = filtered[0];
 
-let reply = `
-🚗 يبدو أن المشكلة متعلقة بـ ${problemName}
-<br><br>
-أقرب كراج مناسب لك:
+let reply = currentLang === "ar"
+? `
+🚗 يبدو أن المشكلة متعلقة بـ ${foundProblem.nameAr}
 <br><br>
 <b>${nearest.name}</b>
 <br>
 📍 ${nearest.location}
 <br>
-📏 يبعد عنك تقريبًا: ${nearest.distance.toFixed(2)} كم
+📏 يبعد عنك تقريبًا ${nearest.distance.toFixed(2)} كم
 <br><br>
+
 <a href="${nearest.map}" target="_blank"
 style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
 فتح الموقع
 </a>
+`
+:
+`
+🚗 Your issue seems related to ${foundProblem.nameEn}
+<br><br>
+<b>${nearest.name}</b>
+<br>
+📍 ${nearest.location}
+<br>
+📏 Around ${nearest.distance.toFixed(2)} KM away
+<br><br>
+
+<a href="${nearest.map}" target="_blank"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+Open Location
+</a>
 `;
 
 chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
 chatBox.scrollTop = chatBox.scrollHeight;
+
 });
+
+return;
+
+}
+
+/* UNKNOWN */
+
+let reply = currentLang === "ar"
+? "آسف طال عمرك 🌹، أنا مب مبرمج على هالسؤال حالياً"
+: "Sorry 🌹 I am not programmed for this question right now.";
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
 };
 </script>
 <script>
