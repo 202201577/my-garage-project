@@ -555,6 +555,29 @@ text = text
 .replaceAll("أ","ا")
 .replaceAll("إ","ا")
 .replaceAll("آ","ا");
+    
+    /* ROLES */
+
+let adminEmails = [
+"alhanoof.t29@gmail.com",
+"anwaralhayki55@gmail.com"
+];
+
+let garageOwnerEmails = [
+"bluemotors@mygarage.com",
+"bosch@mygarage.com",
+"homsgate@mygarage.com",
+"fitandfix@mygarage.com"
+];
+
+let currentEmail = currentUser?.email?.toLowerCase() || "";
+
+let isAdmin = adminEmails.includes(currentEmail);
+
+let isGarageOwner = garageOwnerEmails.includes(currentEmail);
+
+let isCustomer =
+!isAdmin && !isGarageOwner && currentUser;
 
 /* GREETINGS */
 
@@ -976,6 +999,178 @@ return;
 }
 
 /* UNKNOWN */
+
+    /* ADMIN AI */
+
+if(isAdmin){
+
+if(
+text.includes("ارباح") ||
+text.includes("احصائيات") ||
+text.includes("المستخدمين") ||
+text.includes("الحجوزات")
+){
+
+let reply = currentLang === "ar"
+? `
+👑 لوحة الإدارة الذكية
+
+<br><br>
+
+📈 إجمالي الأرباح:
+<b>4,250 د.ب</b>
+
+<br><br>
+
+📅 عدد الحجوزات:
+<b>148</b>
+
+<br><br>
+
+👥 عدد المستخدمين:
+<b>92</b>
+
+<br><br>
+
+🚗 عدد الكراجات:
+<b>${garages.length}</b>
+`
+:
+`
+👑 Smart Admin Dashboard
+
+<br><br>
+
+📈 Total Revenue:
+<b>4,250 BHD</b>
+
+<br><br>
+
+📅 Total Bookings:
+<b>148</b>
+
+<br><br>
+
+👥 Users:
+<b>92</b>
+
+<br><br>
+
+🚗 Garages:
+<b>${garages.length}</b>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+}
+
+/* GARAGE OWNER AI */
+
+if(isGarageOwner){
+
+if(
+text.includes("حجوزاتي") ||
+text.includes("الطلبات") ||
+text.includes("bookings")
+){
+
+let reply = currentLang === "ar"
+? `
+🚗 لوحة الكراج
+
+<br><br>
+
+📅 عندك اليوم:
+<b>12 حجز</b>
+
+<br><br>
+
+⭐ تقييم الكراج:
+<b>4.8</b>
+
+<br><br>
+
+🔥 أكثر خدمة مطلوبة:
+<b>تغيير زيت</b>
+`
+:
+`
+🚗 Garage Dashboard
+
+<br><br>
+
+📅 Today's Bookings:
+<b>12</b>
+
+<br><br>
+
+⭐ Garage Rating:
+<b>4.8</b>
+
+<br><br>
+
+🔥 Most Requested Service:
+<b>Oil Change</b>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+}
+
+/* CUSTOMER AI */
+
+if(isCustomer){
+
+if(
+text.includes("حجوزاتي") ||
+text.includes("موعدي") ||
+text.includes("my booking")
+){
+
+let reply = currentLang === "ar"
+? `
+📅 تقدر تشوف حجوزاتك من صفحة حجوزاتي
+
+<br><br>
+
+<a href="mybookings.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+فتح حجوزاتي
+</a>
+`
+:
+`
+📅 You can check your bookings here
+
+<br><br>
+
+<a href="mybookings.html"
+style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;">
+Open My Bookings
+</a>
+`;
+
+chatBox.innerHTML += `<div class="ai">${reply}</div>`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+return;
+
+}
+
+}
 
 let reply = currentLang === "ar"
 ? "آسف طال عمرك 🌹، أنا مب مبرمج على هالسؤال حالياً"
