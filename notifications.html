@@ -55,7 +55,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="garages.html">الكراجات</a>
+<a id="garagesMenu" href="garages.html">الكراجات</a>
 <a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
 <a id="myBookingsMenu" href="mybookings.html">حجوزاتي</a>
 <a href="notifications.html" class="active">الإشعارات</a>
@@ -306,17 +306,19 @@ auth.onAuthStateChanged(function(user){
         let isGarageOwner = garageOwnerEmails.includes(currentEmail);
 
         if(isAdmin){
-            currentRole = "admin";
+    currentRole = "admin";
 
-            document.getElementById("myBookingsMenu").style.display = "none";
-            document.getElementById("nearestMenu").style.display = "none";
-            document.getElementById("dashboardLink").style.display = "block";
-            document.getElementById("dashboardLink").href = "admin-dashboard.html";
-            document.getElementById("dashboardLink").innerText = "لوحة تحكم الأدمن";
-        }
+    document.getElementById("garagesMenu").style.display = "none";
+    document.getElementById("myBookingsMenu").style.display = "none";
+    document.getElementById("nearestMenu").style.display = "none";
+    document.getElementById("dashboardLink").style.display = "block";
+    document.getElementById("dashboardLink").href = "admin-dashboard.html";
+    document.getElementById("dashboardLink").innerText = "لوحة تحكم الأدمن";
+}
         else if(isGarageOwner){
             currentRole = "garage";
 
+            document.getElementById("garagesMenu").style.display = "none";
             document.getElementById("myBookingsMenu").style.display = "none";
             document.getElementById("nearestMenu").style.display = "none";
             document.getElementById("dashboardLink").style.display = "block";
