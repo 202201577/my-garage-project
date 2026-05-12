@@ -43,7 +43,7 @@ button{background:#dc2626;color:white;border:none;padding:12px 18px;border-radiu
 <div class="close-btn" onclick="toggleMenu()">×</div>
 <img src="logo.png">
 <a href="index.html">الرئيسية</a>
-<a href="garages.html">الكراجات</a>
+<a id="garagesMenu" href="garages.html">الكراجات</a>
 <a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
 <a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
 <a href="notifications.html">الإشعارات</a>
@@ -385,6 +385,7 @@ auth.onAuthStateChanged(function(user){
     document.getElementById("adminComplaints").style.display = "block";
 
     document.getElementById("adminDashboardLink").style.display = "block";
+    document.getElementById("garagesMenu").style.display = "none";
     document.getElementById("myBookingsLink").style.display = "none";
     document.getElementById("nearestMenu").style.display = "none";
 
