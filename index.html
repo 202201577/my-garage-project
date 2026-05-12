@@ -142,10 +142,13 @@ body{
     margin:-60px auto 40px;
     border-radius:25px;
     padding:25px 30px;
+
     display:flex;
+    flex-direction:row-reverse;
+
     align-items:center;
-    justify-content:space-between;
     gap:20px;
+
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
@@ -154,7 +157,9 @@ body{
     display:flex;
     align-items:center;
     gap:10px;
-    border-left:1px solid #eee;
+
+    border-right:1px solid #eee;
+
     padding:0 20px;
 }
 
@@ -181,7 +186,6 @@ body{
     font-weight:bold;
     cursor:pointer;
     white-space:nowrap;
-    margin-left:auto;
 }
 
 .search-btn:hover{
@@ -595,8 +599,11 @@ button:hover{background:#b91c1c}
 
 </section>
 
-
 <div id="results"></div>
+
+<script>
+document.getElementById("results").innerHTML = "";
+</script>
 
 
 <div class="footer" id="contact">
