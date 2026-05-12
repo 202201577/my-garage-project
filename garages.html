@@ -165,16 +165,22 @@ body{
 <img src="logo.png">
 
 <a href="index.html">الرئيسية</a>
-<a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
 <a href="garages.html" class="active">الكراجات</a>
 <a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
-<a id="notificationsMenu" href="notifications.html">الإشعارات</a>
-<a id="accountMenu" href="account.html">الحساب</a>
+
+<a id="myBookingsLink" href="mybookings.html" style="display:none;">حجوزاتي</a>
+<a id="notificationsMenu" href="notifications.html" style="display:none;">الإشعارات</a>
+<a id="accountMenu" href="account.html" style="display:none;">الحساب</a>
+<a id="complaintsLink" href="complaints.html" style="display:none;">الشكاوي</a>
+
 <a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">لوحة تحكم الكراج</a>
 <a id="adminDashboardLink" href="admin-dashboard.html" style="display:none;">لوحة تحكم الأدمن</a>
-<a id="complaintsLink" href="complaints.html">الشكاوي</a>
+
 <a href="index.html#contact">اتصل بنا</a>
-<a id="logoutLink" href="#" onclick="logout()">تسجيل خروج</a>
+
+<a id="loginMenu" href="login.html">تسجيل دخول</a>
+<a id="registerMenu" href="register.html">إنشاء حساب</a>
+<a id="logoutLink" href="#" onclick="logout()" style="display:none;">تسجيل خروج</a>
 </div>
 
 <div class="title">الكراجات المتوفرة</div>
@@ -188,7 +194,8 @@ body{
 <h2>Blue Motors Auto Services</h2>
 <p>📍 سلماباد</p>
 <p>🔧 تصليح عام ومكيف سيارات</p>
-<a href="booking.html" class="btn" onclick="setGarage('Blue Motors Auto Services')">احجز الآن</a>
+<a href="#" class="btn"
+onclick="goToBooking('Blue Motors Auto Services')">احجز الآن</a>
 </div>
 </div>
 
@@ -198,7 +205,8 @@ body{
 <h2>BOSCH Service</h2>
 <p>📍 توبلي</p>
 <p>🔧 تغيير زيت وخدمات صيانة</p>
-<a href="booking.html" class="btn" onclick="setGarage('BOSCH Service')">احجز الآن</a>
+<a href="#" class="btn"
+onclick="goToBooking('BOSCH Service')">احجز الآن</a>
 </div>
 </div>
 
@@ -208,7 +216,8 @@ body{
 <h2>HOMS GATE</h2>
 <p>📍 الهملة</p>
 <p>🔧 تصليح عام وكهرباء سيارات</p>
-<a href="booking.html" class="btn" onclick="setGarage('HOMS GATE')">احجز الآن</a>
+<a href="#" class="btn"
+onclick="goToBooking('HOMS GATE')">احجز الآن</a>
 </div>
 </div>
 
@@ -218,7 +227,8 @@ body{
 <h2>Fit and Fix</h2>
 <p>📍 الهملة</p>
 <p>🔧 تصليح عام ومكيف وإطارات</p>
-<a href="booking.html" class="btn" onclick="setGarage('Fit and Fix')">احجز الآن</a>
+<a href="#" class="btn"
+onclick="goToBooking('Fit and Fix')">احجز الآن</a>
 </div>
 </div>
 
@@ -255,12 +265,27 @@ function logout(){
     });
 }
 
+    let currentUser = null;
+
+function goToBooking(name){
+
+    localStorage.setItem("garage", name);
+
+    if(currentUser){
+        window.location.href = "booking.html";
+    }else{
+        window.location.href = "login.html";
+    }
+}
+    
 auth.onAuthStateChanged(function(user){
 
     currentUser = user;
 
     if(user){
-
+        document.getElementById("loginMenu").style.display = "none";
+        document.getElementById("registerMenu").style.display = "none";
+        
         let email = user.email.toLowerCase();
 
         let isAdmin =
@@ -316,6 +341,10 @@ auth.onAuthStateChanged(function(user){
         document.getElementById("accountMenu").style.display = "none";
         document.getElementById("complaintsLink").style.display = "none";
         document.getElementById("logoutLink").style.display = "none";
+        document.getElementById("garageDashboardLink").style.display = "none";
+        document.getElementById("adminDashboardLink").style.display = "none";
+        document.getElementById("loginMenu").style.display = "block";
+        document.getElementById("registerMenu").style.display = "block";
 
         // هذي لازم تبين للزائر
         document.getElementById("nearestMenu").style.display = "block";
