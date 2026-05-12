@@ -755,16 +755,13 @@ function logout() {
         window.location.href = "login.html";
     });
 }
-</script>
-    <script>
+</script><script>
 
-let currentLang = "ar";
+let currentLang = localStorage.getItem("language") || "ar";
 
-function toggleLanguage(){
+function applyLanguage(){
 
-if(currentLang === "ar"){
-
-currentLang = "en";
+if(currentLang === "en"){
 
 document.documentElement.lang = "en";
 document.documentElement.dir = "ltr";
@@ -786,7 +783,8 @@ document.querySelector("#sideMenu a[href='notifications.html']").innerHTML =
 document.querySelector("#sideMenu a[href='account.html']").innerHTML =
 "Account";
 
-document.getElementById("complaintsMenu").innerHTML = "Complaints";
+document.getElementById("complaintsMenu").innerHTML =
+"Complaints";
 
 document.querySelector("#sideMenu a[href='index.html#contact']").innerHTML =
 "Contact Us";
@@ -824,8 +822,6 @@ document.getElementById("tab-password").innerHTML =
 /* PERSONAL INFO */
 document.querySelector("#personal .form-title").innerHTML =
 "Personal Information";
-
-document.querySelector("label[for='']").innerHTML;
 
 let labels = document.querySelectorAll(".form-group label");
 
@@ -865,6 +861,24 @@ document.querySelector(".add-btn").innerHTML =
 document.querySelector("#password .form-title").innerHTML =
 "Change Password";
 
+document.querySelector("#currentPassBox label").innerHTML =
+"Current Password";
+
+document.getElementById("currentPassword").placeholder =
+"Enter current password";
+
+document.querySelector("#newPassBox .form-group label").innerHTML =
+"New Password";
+
+document.querySelectorAll("#newPassBox .form-group label")[1].innerHTML =
+"Confirm Password";
+
+document.getElementById("newPassword").placeholder =
+"New Password";
+
+document.getElementById("confirmPassword").placeholder =
+"Confirm Password";
+
 /* PHONE VERIFY */
 document.querySelector(".phone-verify-card h2").innerHTML =
 "Phone Verification";
@@ -872,9 +886,29 @@ document.querySelector(".phone-verify-card h2").innerHTML =
 document.querySelector(".phone-verify-card p").innerHTML =
 'Write your phone number in international format like: <span dir="ltr">+97333112244</span>';
 
-}else{
+document.querySelectorAll(".phone-verify-card label")[0].innerHTML =
+"Phone Number";
 
-currentLang = "ar";
+document.querySelectorAll(".phone-verify-card label")[1].innerHTML =
+"Verification Code";
+
+document.getElementById("verificationCode").placeholder =
+"Enter SMS Code";
+
+document.querySelector(".verify-btn").innerHTML =
+"Send Code";
+
+document.querySelector(".phone-verify-card .save-btn").innerHTML =
+"Verify";
+
+/* BUTTONS */
+document.querySelector("#cars .save-btn").innerHTML =
+"Save Cars";
+
+document.querySelector("#password .save-btn").innerHTML =
+"Check";
+
+}else{
 
 document.documentElement.lang = "ar";
 document.documentElement.dir = "rtl";
@@ -896,7 +930,8 @@ document.querySelector("#sideMenu a[href='notifications.html']").innerHTML =
 document.querySelector("#sideMenu a[href='account.html']").innerHTML =
 "الحساب";
 
-document.getElementById("complaintsMenu").innerHTML = "الشكاوي";
+document.getElementById("complaintsMenu").innerHTML =
+"الشكاوي";
 
 document.querySelector("#sideMenu a[href='index.html#contact']").innerHTML =
 "اتصل بنا";
@@ -947,6 +982,9 @@ labels[5].innerHTML = "الدولة";
 document.getElementById("userName").placeholder =
 "ادخل اسمك";
 
+document.getElementById("userPhone").placeholder =
+"+973 33112244";
+
 document.getElementById("city").placeholder =
 "مثال: المنامة";
 
@@ -970,6 +1008,24 @@ document.querySelector(".add-btn").innerHTML =
 document.querySelector("#password .form-title").innerHTML =
 "تغيير كلمة المرور";
 
+document.querySelector("#currentPassBox label").innerHTML =
+"كلمة المرور الحالية";
+
+document.getElementById("currentPassword").placeholder =
+"اكتبي كلمة المرور الحالية";
+
+document.querySelector("#newPassBox .form-group label").innerHTML =
+"كلمة المرور الجديدة";
+
+document.querySelectorAll("#newPassBox .form-group label")[1].innerHTML =
+"تأكيد كلمة المرور";
+
+document.getElementById("newPassword").placeholder =
+"كلمة المرور الجديدة";
+
+document.getElementById("confirmPassword").placeholder =
+"تأكيد كلمة المرور";
+
 /* PHONE VERIFY */
 document.querySelector(".phone-verify-card h2").innerHTML =
 "توثيق رقم الهاتف";
@@ -977,7 +1033,53 @@ document.querySelector(".phone-verify-card h2").innerHTML =
 document.querySelector(".phone-verify-card p").innerHTML =
 'اكتبي رقم الهاتف بصيغة دولية مثل: <span dir="ltr">+97333112244</span>';
 
+document.querySelectorAll(".phone-verify-card label")[0].innerHTML =
+"رقم الهاتف";
+
+document.querySelectorAll(".phone-verify-card label")[1].innerHTML =
+"رمز التحقق";
+
+document.getElementById("verificationCode").placeholder =
+"اكتبي كود SMS";
+
+document.querySelector(".verify-btn").innerHTML =
+"إرسال رمز التحقق";
+
+document.querySelector(".phone-verify-card .save-btn").innerHTML =
+"تأكيد التحقق";
+
+/* BUTTONS */
+document.querySelector("#cars .save-btn").innerHTML =
+"حفظ بيانات السيارات";
+
+document.querySelector("#password .save-btn").innerHTML =
+"تحقق";
+
 }
+
+}
+
+function toggleLanguage(){
+
+if(currentLang === "ar"){
+
+currentLang = "en";
+localStorage.setItem("language","en");
+
+}else{
+
+currentLang = "ar";
+localStorage.setItem("language","ar");
+
+}
+
+applyLanguage();
+
+}
+
+window.onload = function(){
+
+applyLanguage();
 
 }
 
