@@ -136,8 +136,8 @@ body{
 
     display:flex;
     align-items:center;
-
     gap:10px;
+    direction:ltr;
 }
 
 .search-item{
@@ -243,12 +243,12 @@ button:hover{background:#b91c1c}
     margin-top:45px;
 }
 
-    #results{
+  #results{
     display:flex;
+    justify-content:center;
     gap:20px;
-    overflow-x:auto;
-    padding:20px;
-    scroll-behavior:smooth;
+    padding:30px;
+    flex-wrap:wrap;
 }
 
 .garage{
@@ -442,7 +442,7 @@ button:hover{background:#b91c1c}
         <a href="#garages">الكراجات</a>
         <a href="#about">من نحن</a>
         <a href="#contact">اتصل بنا</a>
-        <a href="#garages" class="login-btn">احجز خدمة الآن</a>
+        <a href="garages.html" class="login-btn">احجز خدمة الآن</a>
     </div>
 
     <div class="menu-icon" onclick="openMenu()">☰</div>
@@ -453,6 +453,7 @@ button:hover{background:#b91c1c}
     <img src="logo.png">
     <a href="index.html">الرئيسية</a>
     <a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
+    <a href="garages.html">الكراجات</a>
     <a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
     <a href="notifications.html">الإشعارات</a>
     <a href="account.html">الحساب</a>
@@ -465,7 +466,7 @@ button:hover{background:#b91c1c}
 
 <section class="hero">
     <h1>ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span></h1>
-    <p>خدمات صيانة وإصلاح السيارات في البحرين بخطوات بسيطة</p>
+    <p>خدمات صيانة وإصلاح السيارات في البحرين بضغطة واحدة</p>
 </section>
 
 <div class="search-box">
