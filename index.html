@@ -1,228 +1,296 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<title>My Garage</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Garage</title>
 
 <style>
-select{border:none;background:none;font-size:16px;width:100%;cursor:pointer;outline:none}
-body{margin:0;font-family:Arial,sans-serif;background:#f8f9fa;color:#0f172a}
-.location-select{border:none;background:transparent;font-size:16px;outline:none;color:#111827}
 
-.navbar{background:white;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);direction:ltr;position:sticky;top:0;z-index:999}
-.logo{width:150px}
-    
-    #langBtn{
-    background:#111827;
-    color:white;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:14px;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f8f9fa;
+color:#0f172a;
 }
 
-    
-.menu-icon{font-size:34px;cursor:pointer;color:#0f172a;font-weight:bold}
-.main-links{display:flex;gap:28px;align-items:center;direction:rtl}
-.main-links a{text-decoration:none;color:#111827;font-weight:bold;font-size:16px}
-.main-links a:hover{color:#dc2626}
-.login-btn{background:#dc2626;color:white!important;padding:12px 22px;border-radius:10px}
-
-.side-menu{position:fixed;top:0;right:-290px;width:270px;height:100%;background:#07111f;color:white;z-index:1000;padding-top:35px;transition:.3s;text-align:right}
-.side-menu.open{right:0}
-.side-menu img{width:150px;display:block;margin:0 auto 25px;background:white;border-radius:12px;padding:6px}
-.side-menu a{display:block;color:white;text-decoration:none;padding:16px 30px;font-size:18px;border-bottom:1px solid rgba(255,255,255,.08)}
-.close-btn{position:absolute;left:20px;top:15px;font-size:28px;cursor:pointer}
-
-.hero{background:linear-gradient(rgba(7,17,31,.70),rgba(7,17,31,.82)),url("garage-bg.jpeg");background-size:cover;background-position:center;color:white;text-align:center;padding:120px 20px 140px}
-.hero h1{font-size:46px;margin:0 0 15px}
-.hero h1 span{color:#ef4444}
-.hero p{font-size:20px}
-
-.search-box{background:white;max-width:1200px;margin:-60px auto 40px;border-radius:25px;padding:25px 30px;display:flex;flex-direction:row-reverse;align-items:center;gap:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.search-item{flex:1;display:flex;align-items:center;gap:10px;border-right:1px solid #eee;padding:0 20px}
-.search-item:first-child{border:none}
-.search-item input,.search-item select{border:none;background:none;outline:none;font-size:15px;width:100%}
-.search-btn{background:#dc2626;color:white;border:none;padding:18px 28px;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;white-space:nowrap}
-.search-btn:hover{background:#b91c1c}
-
-button{border:none;background:#dc2626;color:white;padding:14px 25px;border-radius:10px;font-size:16px;cursor:pointer}
-button:hover{background:#b91c1c}
-
-.why{
-    text-align:center;
-    padding:80px 25px 25px;
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:999;
 }
 
-.features{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
-    margin-top:40px;
+.logo{
+width:150px;
 }
 
-.feature{
-    width:190px;
-    height:190px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+.main-links{
+display:flex;
+gap:20px;
+align-items:center;
 }
 
-.feature div{
-    font-size:35px;
+.main-links a{
+text-decoration:none;
+color:#111827;
+font-weight:bold;
 }
-.feature div{font-size:35px}
 
-#results{display:flex;justify-content:center;gap:20px;padding:30px;flex-wrap:wrap}
-.garage{min-width:250px;max-width:250px;background:white;border-radius:18px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.08);flex:none}
-.garage-img{
-    width:100%;
-    height:180px;
-    object-fit:contain;
-    background:white;
+.login-btn{
+background:#dc2626;
+color:white !important;
+padding:12px 20px;
+border-radius:10px;
+}
+
+.hero{
+background:#07111f;
+color:white;
+text-align:center;
+padding:120px 20px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.search-box{
+background:white;
+max-width:1100px;
+margin:-50px auto 40px;
+padding:25px;
+border-radius:20px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.search-item{
+flex:1;
+min-width:200px;
+}
+
+.search-item select{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:12px;
+}
+
+.search-btn{
+background:#dc2626;
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+}
+
+#results{
+display:flex;
+gap:20px;
+padding:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.garage{
+background:white;
+width:260px;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.garage img{
+width:100%;
+height:180px;
+object-fit:cover;
 }
 
 .garage-info{
-    padding:18px;
-    flex:1;
+padding:18px;
 }
 
 .garage-info h3{
-    font-size:30px;
-    margin:0 0 15px;
-}
-
-.garage-info p{
-    font-size:17px;
-    margin:10px 0;
+margin:0 0 10px;
 }
 
 .action-row{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
+display:flex;
+gap:10px;
+margin-top:15px;
 }
 
-.map-btn,
-.book-btn{
-    flex:1;
-    text-align:center;
-    padding:12px;
-    border-radius:12px;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:bold;
+.action-row a,
+.action-row button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+cursor:pointer;
+text-align:center;
 }
 
 .map-btn{
-    border:2px solid #2563eb;
-    color:#2563eb;
-    background:white;
+background:white;
+border:2px solid #2563eb !important;
+color:#2563eb;
 }
 
 .book-btn{
-    background:#dc2626;
-    color:white;
-    border:none;
+background:#dc2626;
+color:white;
 }
 
-.footer{background:#07111f;color:white;text-align:center;padding:25px;margin-top:50px}
-
-#ai-button{position:fixed;bottom:20px;right:20px;width:75px;height:75px;border-radius:50%;background:linear-gradient(135deg,#dc2626,#ef4444);display:flex;align-items:center;justify-content:center;font-size:35px;cursor:pointer;z-index:9999;box-shadow:0 0 25px rgba(0,0,0,.3)}
-#ai-chat{position:fixed;bottom:110px;right:20px;width:360px;height:520px;background:#07111f;border-radius:20px;display:none;flex-direction:column;overflow:hidden;z-index:9999;box-shadow:0 0 35px rgba(0,0,0,.4)}
-#ai-header{background:#dc2626;padding:18px;color:white;font-weight:bold;text-align:center;font-size:18px}
-#chat-box{flex:1;padding:15px;overflow-y:auto;color:white;display:flex;flex-direction:column}
-.user{background:#dc2626;padding:12px;border-radius:14px;margin:10px 0;color:white;max-width:85%;align-self:flex-end}
-.ai{background:#1e293b;padding:12px;border-radius:14px;margin:10px 0;color:white;line-height:1.7;max-width:85%;align-self:flex-start}
-#ai-input-area{display:flex;padding:12px;gap:10px;background:#0f172a;align-items:center}
-#userInput{flex:1;width:auto;padding:12px;border:none;border-radius:12px;background:#1e293b;color:white;font-size:15px}
-#ai-input-area button{background:#dc2626;border:none;padding:12px 18px;border-radius:12px;color:white;cursor:pointer}
-
-@media(max-width:800px){
-.main-links{display:none}
-.navbar{padding:15px 20px}
-.logo{width:120px}
-.hero{padding:90px 20px 110px}
-.hero h1{font-size:32px}
-.garage{flex-direction:column;text-align:center}
-.garage-img{width:100%}
-#ai-chat{width:92%;right:4%;height:500px}
+.footer{
+background:#07111f;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:50px;
 }
+
+/* AI CHAT /
+
+#ai-button{
+position:fixed;
+bottom:20px;
+right:20px;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#dc2626;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+cursor:pointer;
+z-index:9999;
+}
+
+#ai-chat{
+position:fixed;
+bottom:100px;
+right:20px;
+width:360px;
+height:520px;
+background:#07111f;
+border-radius:20px;
+display:none;
+flex-direction:column;
+overflow:hidden;
+z-index:9999;
+}
+
+#ai-header{
+background:#dc2626;
+padding:18px;
+color:white;
+font-weight:bold;
+text-align:center;
+}
+
+#chat-box{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+color:white;
+}
+
+.user{
+background:#dc2626;
+padding:12px;
+border-radius:12px;
+margin:8px 0;
+align-self:flex-end;
+max-width:85%;
+}
+
+.ai{
+background:#1e293b;
+padding:12px;
+border-radius:12px;
+margin:8px 0;
+align-self:flex-start;
+max-width:85%;
+line-height:1.7;
+}
+
+#ai-input-area{
+display:flex;
+padding:10px;
+gap:10px;
+background:#0f172a;
+}
+
+#userInput{
+flex:1;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#1e293b;
+color:white;
+}
+
+#ai-input-area button{
+background:#dc2626;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+color:white;
+cursor:pointer;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="navbar">
+
 <img src="logo.png" class="logo">
 
 <div class="main-links">
-<div id="guestLinks" style="display:flex;gap:25px;align-items:center;">
-<a href="login.html">تسجيل دخول</a>
-<a href="register.html">إنشاء حساب</a>
-</div>
-
-<a id="garagesTopLink" href="garages.html" style="display:none;">الكراجات</a>
 <a href="#about">من نحن</a>
 <a href="#contact">اتصل بنا</a>
-<a id="bookNowTopLink" href="garages.html" class="login-btn">احجز خدمة الآن</a>
-</div>
-    
-<button onclick="toggleLanguage()" id="langBtn">
-EN
-</button>
-    
-<div class="menu-icon" onclick="openMenu()">☰</div>
+<a href="garages.html" class="login-btn">احجز الآن</a>
 </div>
 
-<div id="sideMenu" class="side-menu">
-<div class="close-btn" onclick="closeMenu()">×</div>
-<img src="logo.png">
-
-<a href="index.html">الرئيسية</a>
-<a id="loginMenu" href="login.html">تسجيل دخول</a>
-<a id="registerMenu" href="register.html">إنشاء حساب</a>
-<a id="garagesMenuLink" href="garages.html" style="display:none;">الكراجات</a>
-<a id="nearestMenu" href="nearest-garage.html" style="display:none;">أقرب كراج</a>
-    <a id="myBookingsLink" href="mybookings.html" style="display:none;">حجوزاتي</a>
-<a id="notificationsMenu" href="notifications.html" style="display:none;">الإشعارات</a>
-<a id="accountMenu" href="account.html" style="display:none;">الحساب</a>
-<a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">لوحة تحكم الكراج</a>
-<a id="adminDashboardLink" href="admin-dashboard.html" style="display:none;">لوحة تحكم الأدمن</a>
-<a id="complaintsLink" href="complaints.html" style="display:none;">الشكاوي</a>
-<a href="#contact">اتصل بنا</a>
-<a id="logoutLink" href="#" onclick="logout()" style="display:none;">تسجيل خروج</a>
 </div>
 
 <section class="hero">
-<h1>ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span></h1>
-<p>خدمات صيانة وإصلاح السيارات في البحرين بضغطة واحدة</p>
+
+<h1>
+ابحث عن أفضل الكراجات
+<br>
+واحجز بسهولة
+</h1>
+
+<p>
+خدمات صيانة وإصلاح السيارات في البحرين
+</p>
+
 </section>
 
 <div class="search-box">
-<button onclick="searchGarage()" class="search-btn">🔍 ابحث الآن</button>
 
 <div class="search-item">
-<div style="font-size:22px;">🚗</div>
-<div>
-<b>جميع الكراجات</b><br>
-<a href="garages.html" style="color:#666;text-decoration:none;font-size:14px;">عرض الكل</a>
-</div>
-</div>
-
-<div class="search-item">
-<div class="search-icon">🔧</div>
 <select id="filter">
-<option value="all">اختر نوع الخدمة</option>
+<option value="all">اختر الخدمة</option>
 <option value="repair">تصليح</option>
 <option value="oil">تغيير زيت</option>
 <option value="ac">مكيف</option>
@@ -230,70 +298,56 @@ EN
 </div>
 
 <div class="search-item">
-📍
 <select id="locationFilter">
-<option value="">اختر موقعك</option>
-<option value="أم الحصم">أم الحصم</option>
-<option value="الحد">الحد</option>
-<option value="الرفاع">الرفاع</option>
-<option value="الزلاق">الزلاق</option>
-<option value="الساية">الساية</option>
-<option value="الجفير">الجفير</option>
-<option value="الحورة">الحورة</option>
-<option value="الدراز">الدراز</option>
+<option value="">اختر المنطقة</option>
 <option value="الهملة">الهملة</option>
-<option value="المنامة">المنامة</option>
-<option value="المالجية">المالجية</option>
-<option value="النويدرات">النويدرات</option>
-<option value="المعامير">المعامير</option>
-<option value="المحرق">المحرق</option>
-<option value="بديع">بديع</option>
 <option value="توبلي">توبلي</option>
-<option value="جو">جو</option>
-<option value="جد حفص">جد حفص</option>
-<option value="جد علي">جد علي</option>
-<option value="دمستان">دمستان</option>
-<option value="سار">سار</option>
-<option value="سند">سند</option>
-<option value="صدد">صدد</option>
-<option value="ضاحية السيف">ضاحية السيف</option>
-<option value="عسكر">عسكر</option>
-<option value="عراد">عراد</option>
-<option value="عوالي">عوالي</option>
-<option value="قلالي">قلالي</option>
-<option value="كرباباد">كرباباد</option>
-<option value="كرزكان">كرزكان</option>
-<option value="مدينة زايد">مدينة زايد</option>
-<option value="مدينة عيسى">مدينة عيسى</option>
-<option value="وادي السيل">وادي السيل</option>
+<option value="سلماباد">سلماباد</option>
 </select>
 </div>
+
+<button onclick="searchGarage()" class="search-btn">
+🔍 بحث
+</button>
+
 </div>
 
 <div id="results"></div>
 
-<section class="why" id="about">
-<div class="features">
-<div class="feature"><div>🛡️</div><h3>كراجات موثوقة</h3><p>جميع الكراجات معتمدة ومراجعة.</p></div>
-<div class="feature"><div>⏰</div><h3>حجز سريع وسهل</h3><p>احجز موعدك بخطوات بسيطة.</p></div>
-<div class="feature"><div>🎧</div><h3>دعم متواصل</h3><p>فريق الدعم جاهز لمساعدتك.</p></div>
-</div>
-</section>
-
 <div class="footer" id="contact">
+
 <h3>اتصل بنا</h3>
-<p dir="ltr">+973 38202464 | +973 37171721</p>
+
+<p>
++973 38202464
+</p>
+
 </div>
 
-<div id="ai-button" onclick="toggleAIChat()">🤖</div>
+<!-- AI -->
+
+<div id="ai-button" onclick="toggleAIChat()">
+🤖
+</div>
 
 <div id="ai-chat">
-<div id="ai-header">Smart Garage Assistant</div>
-<div id="chat-box"></div>
-<div id="ai-input-area">
-<input id="userInput" placeholder="اكتب مشكلة سيارتك">
-<button type="button" onclick="sendMessage()">إرسال</button>
+
+<div id="ai-header">
+Smart Garage Assistant
 </div>
+
+<div id="chat-box"></div>
+
+<div id="ai-input-area">
+
+<input id="userInput" placeholder="اكتب رسالتك">
+
+<button onclick="sendMessage()">
+إرسال
+</button>
+
+</div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -301,6 +355,7 @@ EN
 <script src="firebase.js"></script>
 
 <script>
+
 let currentUser = null;
 
 let garages = [
@@ -314,10 +369,10 @@ lng:50.5477,
 services:["ac","repair"],
 rating:"4.2",
 phone:"17877197",
-hours:"Sat–Thu 8 AM–1 PM / 3 PM–6 PM, Friday Closed",
 image:"images(blue-motor).jpeg",
 map:"https://maps.app.goo.gl/MA2C4r8D8p5S3L8d7?g_st=ic"
 },
+
 {
 name:"BOSCH Service",
 service:"oil",
@@ -327,23 +382,10 @@ lng:50.5538,
 services:["oil"],
 rating:"4.2",
 phone:"17783888",
-hours:"Sat–Thu 8 AM–5 PM, Friday Closed",
 image:"images(BOSCH-Service).jpeg",
 map:"https://maps.app.goo.gl/NEEPokUmA2KemgfH9?g_st=ic"
 },
-{
-name:"HOMS GATE",
-service:"repair",
-location:"الهملة",
-lat:26.1505,
-lng:50.4809,
-services:["battery","repair"],
-rating:"4.2",
-phone:"34120290",
-hours:"Sat–Thu 8 AM–7 PM, Friday Closed",
-image:"images(HOMS-GATE).jpeg",
-map:"https://maps.app.goo.gl/NMrPft3oPJFnvBcE9?g_st=ic"
-},
+
 {
 name:"Fit and Fix",
 service:"repair",
@@ -353,195 +395,90 @@ lng:50.4815,
 services:["ac","tires","repair"],
 rating:"4.9",
 phone:"37377196",
-hours:"Sat–Thu 8 AM–8 PM, Friday Closed",
 image:"images(Fit-and-fix).jpeg",
 map:"https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
 }
+
 ];
 
 function searchGarage(){
-let location = document.getElementById("locationFilter").value.toLowerCase().trim();
-let service = document.getElementById("filter").value.toLowerCase().trim();
+
+let location =
+document.getElementById("locationFilter").value;
+
+let service =
+document.getElementById("filter").value;
+
 let result = "";
 
-const locationMap = {
-"الهملة":"hamala","hamala":"hamala",
-"سلماباد":"salmabad","salmabad":"salmabad",
-"توبلي":"tubli","tubli":"tubli",
-"المنامة":"manama","manama":"manama",
-"المحرق":"muharraq","محرق":"muharraq","muharraq":"muharraq",
-"الرفاع":"riffa","رفاع":"riffa","riffa":"riffa",
-"مدينة عيسى":"isa town","isa town":"isa town",
-"مدينة حمد":"hamad town","hamad town":"hamad town",
-"الجفير":"juffair","juffair":"juffair",
-"الحد":"hidd","hidd":"hidd",
-"عراد":"arad","arad":"arad",
-"قلالي":"galali","galali":"galali",
-"سار":"saar","saar":"saar",
-"البديع":"budaiya","بديع":"budaiya","budaiya":"budaiya"
-};
-
-let selectedLocation = (locationMap[location] || location).toLowerCase().trim();
-
 garages.forEach(g => {
-let garageLocation = (locationMap[g.location.toLowerCase()] || g.location.toLowerCase());
 
-if((selectedLocation === "" || garageLocation === selectedLocation) &&
-(service === "all" || g.service.toLowerCase() === service)){
+if(
+(location === "" || g.location === location) &&
+(service === "all" || g.service === service)
+){
 
-result += `
-<div class="garage">
-<img class="garage-img" src="${g.image}">
-<div class="garage-info">
-<h3>${g.name}</h3>
-<p>📍 ${g.location}</p>
-<p>⭐ ${g.rating}</p>
-<p>📞 ${g.phone}</p>
-<div class="action-row">
-<a href="${g.map}" target="_blank" class="map-btn">عرض الموقع</a>
-<button class="book-btn" onclick="book('${g.name}')">احجز الآن</button>
-</div>
-</div>
-</div>
-`;
+result +=  <div class="garage">  <img src="${g.image}">  <div class="garage-info">  <h3>${g.name}</h3>  <p>📍 ${g.location}</p>  <p>⭐ ${g.rating}</p>  <p>📞 ${g.phone}</p>  <div class="action-row">  <a href="${g.map}" target="_blank" class="map-btn"> الموقع </a>  <button class="book-btn"> احجز </button>  </div>  </div>  </div> ;
+
 }
+
 });
 
 document.getElementById("results").innerHTML =
 result ||
-`<p style="text-align:center;width:100%;font-size:20px;padding:40px;">😔 عذرًا لا يوجد كراج في منطقتك الحالية</p>`;
-}
+<p>😔 لا يوجد نتائج</p>;
 
-function book(name){
-localStorage.setItem("garage", name);
-
-if(currentUser){
-window.location.href = "booking.html";
-}else{
-window.location.href = "login.html";
-}
-}
-
-function openMenu(){
-document.getElementById("sideMenu").classList.add("open");
-}
-
-function closeMenu(){
-document.getElementById("sideMenu").classList.remove("open");
-}
-
-function logout(){
-auth.signOut().then(() => {
-localStorage.removeItem("loggedIn");
-window.location.href = "index.html";
-});
 }
 
 function toggleAIChat(){
-let aiChat = document.getElementById("ai-chat");
-aiChat.style.display = aiChat.style.display === "flex" ? "none" : "flex";
+
+let chat =
+document.getElementById("ai-chat");
+
+chat.style.display =
+chat.style.display === "flex"
+? "none"
+: "flex";
+
 }
 
 function getDistance(lat1,lng1,lat2,lng2){
+
 let R = 6371;
+
 let dLat = (lat2-lat1) * Math.PI / 180;
+
 let dLng = (lng2-lng1) * Math.PI / 180;
 
 let a =
 Math.sin(dLat/2) * Math.sin(dLat/2) +
-Math.cos(lat1*Math.PI/180) *
-Math.cos(lat2*Math.PI/180) *
+Math.cos(lat1Math.PI/180) *
+Math.cos(lat2Math.PI/180) *
 Math.sin(dLng/2) * Math.sin(dLng/2);
 
-let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+let c =
+2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
 return R * c;
+
 }
 
 auth.onAuthStateChanged(function(user){
+
 currentUser = user;
 
-let adminEmails = [
-"alhanoof.t29@gmail.com",
-"anwaralhayki55@gmail.com"
-];
-
-let garageOwnerEmails = [
-"bluemotors@mygarage.com",
-"bosch@mygarage.com",
-"homsgate@mygarage.com",
-"fitandfix@mygarage.com"
-];
-
-if(user){
-document.getElementById("guestLinks").style.display = "none";
-document.getElementById("logoutLink").style.display = "block";
-document.getElementById("notificationsMenu").style.display = "block";
-document.getElementById("accountMenu").style.display = "block";
-document.getElementById("loginMenu").style.display = "none";
-document.getElementById("registerMenu").style.display = "none";
-  
-let email = user.email.toLowerCase();
-let isAdmin = adminEmails.includes(email);
-let isGarageOwner = garageOwnerEmails.includes(email);
-
-if(isAdmin){
-document.getElementById("myBookingsLink").style.display = "none";
-document.getElementById("garagesMenuLink").style.display = "none";
-document.getElementById("nearestMenu").style.display = "none";
-document.getElementById("garageDashboardLink").style.display = "none";
-document.getElementById("adminDashboardLink").style.display = "block";
-document.getElementById("complaintsLink").style.display = "block";
-document.getElementById("garagesTopLink").style.display = "none";
-document.getElementById("bookNowTopLink").style.display = "none";
-}
-else if(isGarageOwner){
-document.getElementById("myBookingsLink").style.display = "none";
-document.getElementById("garagesMenuLink").style.display = "none";
-document.getElementById("nearestMenu").style.display = "none";
-document.getElementById("garageDashboardLink").style.display = "block";
-document.getElementById("adminDashboardLink").style.display = "none";
-document.getElementById("complaintsLink").style.display = "none";
-document.getElementById("garagesTopLink").style.display = "none";
-document.getElementById("bookNowTopLink").style.display = "none";
-}
-else{
-document.getElementById("myBookingsLink").style.display = "block";
-document.getElementById("garagesMenuLink").style.display = "block";
-document.getElementById("nearestMenu").style.display = "block";
-document.getElementById("garageDashboardLink").style.display = "none";
-document.getElementById("adminDashboardLink").style.display = "none";
-document.getElementById("complaintsLink").style.display = "block";
-document.getElementById("garagesTopLink").style.display = "block";
-document.getElementById("bookNowTopLink").style.display = "inline-block";
-}
-
-}else{
-document.getElementById("guestLinks").style.display = "flex";
-document.getElementById("logoutLink").style.display = "none";
-
-document.getElementById("myBookingsLink").style.display = "none";
-document.getElementById("garagesMenuLink").style.display = "block";
-document.getElementById("nearestMenu").style.display = "block";
-document.getElementById("notificationsMenu").style.display = "none";
-document.getElementById("accountMenu").style.display = "none";
-document.getElementById("garageDashboardLink").style.display = "none";
-document.getElementById("adminDashboardLink").style.display = "none";
-document.getElementById("complaintsLink").style.display = "none";
-
-document.getElementById("garagesTopLink").style.display = "block";
-document.getElementById("bookNowTopLink").style.display = "inline-block";
-
-document.getElementById("loginMenu").style.display = "block";
-document.getElementById("registerMenu").style.display = "block";
-}
 });
 
-window.sendMessage = function () {
+window.sendMessage = function(){
 
-let input = document.getElementById("userInput");
-let chatBox = document.getElementById("chat-box");
+let input =
+document.getElementById("userInput");
 
-let msg = input.value.trim();
+let chatBox =
+document.getElementById("chat-box");
+
+let msg =
+input.value.trim();
 
 if(msg === "") return;
 
@@ -549,16 +486,15 @@ chatBox.innerHTML += <div class="user">${msg}</div>;
 
 input.value = "";
 
-let text = msg.toLowerCase();
+let text =
+msg.toLowerCase();
 
 text = text
 .replaceAll("أ","ا")
 .replaceAll("إ","ا")
 .replaceAll("آ","ا");
 
-/* =========================
-EMAIL ROLES
-========================= /
+/ EMAILS /
 
 let adminEmails = [
 "alhanoof.t29@gmail.com",
@@ -568,663 +504,139 @@ let adminEmails = [
 let garageOwnerEmails = [
 "bluemotors@mygarage.com",
 "bosch@mygarage.com",
-"homsgate@mygarage.com",
 "fitandfix@mygarage.com"
 ];
 
-let currentEmail = currentUser?.email?.toLowerCase() || "";
+let currentEmail =
+currentUser?.email?.toLowerCase() || "";
 
-let isAdmin = adminEmails.includes(currentEmail);
+let isAdmin =
+adminEmails.includes(currentEmail);
 
-let isGarageOwner = garageOwnerEmails.includes(currentEmail);
+let isGarageOwner =
+garageOwnerEmails.includes(currentEmail);
 
-/ =========================
-GREETINGS
-========================= /
+/ GREETING /
 
 if(
 text.includes("سلام") ||
 text.includes("هلا") ||
 text.includes("مرحبا") ||
-text.includes("hello") ||
-text.includes("hi")
+text.includes("hello")
 ){
 
-let reply = currentLang === "ar"
-? "وعليكم السلام 🌹 شلون أقدر أساعدك اليوم؟"
-: "Hello 🌹 How can I help you today?";
+let reply =
+"وعليكم السلام 🌹 شلون أقدر أساعدك؟";
 
 chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
 return;
 
 }
 
-/ =========================
-ADMIN PROFITS
-========================= /
+/ ADMIN /
 
 if(
 text.includes("الارباح") ||
-text.includes("ربح") ||
-text.includes("profit") ||
-text.includes("revenue")
+text.includes("ربح")
 ){
 
 if(isAdmin){
 
-let reply = 💰 الأرباح الحالية: <br><br>  📈 إجمالي الأرباح: <b>4,250 د.ب</b>  <br><br>  📅 عدد الحجوزات: <b>148</b>  <br><br>  👥 عدد المستخدمين: <b>92</b>;
+let reply = 💰 الأرباح الحالية <br><br> 📈 إجمالي الأرباح: <b>4,250 د.ب</b> <br><br> 📅 عدد الحجوزات: <b>148</b>;
 
 chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 }else{
 
-let reply = 🚫 عذرًا، هذي المعلومات خاصة بالإدارة فقط.;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
+chatBox.innerHTML += <div class="ai"> 🚫 هذي المعلومات للإدارة فقط </div>;
 
 }
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
 return;
 
 }
 
-/ =========================
-GARAGE OWNER
-========================= /
+/ GARAGE OWNER /
 
 if(
-text.includes("حجوزاتي") ||
 text.includes("الحجوزات") ||
-text.includes("bookings")
+text.includes("حجوزاتي")
 ){
 
 if(isGarageOwner){
 
-let reply = 📅 عندك اليوم 12 حجز جديد <br><br>  🚗 أكثر خدمة مطلوبة: تغيير الزيت  <br><br>  ⭐ متوسط التقييم: 4.8 / 5;
+let reply = 📅 عندك 12 حجز جديد <br><br> ⭐ تقييم الكراج 4.8;
 
 chatBox.innerHTML += <div class="ai">${reply}</div>;
 
 }else{
 
-let reply = currentLang === "ar"
-? "تقدر تشوف حجوزاتك من صفحة حجوزاتي 📅"
-: "You can check your bookings from My Bookings 📅";
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
+chatBox.innerHTML += <div class="ai"> تقدر تشوف حجوزاتك من صفحة حجوزاتي 📅 </div>;
 
 }
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
 return;
 
 }
 
-/ =========================
-COMPLAINTS
-========================= /
-
-if(
-text.includes("شكوى") ||
-text.includes("اشتكي") ||
-text.includes("مشكله") ||
-text.includes("complaint")
-){
-
-let reply = currentLang === "ar"
-? تقدر ترفع شكوى من صفحة الشكاوي 🙏  <br><br>  <a href="complaints.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح صفحة الشكاوي </a>
-:
-You can submit a complaint from the complaints page 🙏  <br><br>  <a href="complaints.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Complaints Page </a>;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
-return;
-
-}
-
-/ =========================
-CONTACT
-========================= /
+/ CONTACT /
 
 if(
 text.includes("رقم") ||
-text.includes("اتصل") ||
-text.includes("تواصل") ||
-text.includes("phone") ||
-text.includes("contact")
+text.includes("اتصل")
 ){
 
-let reply = currentLang === "ar"
-? 📞 خدمة العملاء: <br> +973 38202464  <br><br>  📞 الدعم الفني: <br> +973 37171721
-:
-📞 Customer Service: <br> +973 38202464  <br><br>  📞 Technical Support: <br> +973 37171721;
+let reply = 📞 خدمة العملاء <br> +973 38202464;
 
 chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
 return;
 
 }
 
-/ =========================
-BOOKING
-========================= /
-
-if(
-text.includes("احجز") ||
-text.includes("حجز") ||
-text.includes("booking") ||
-text.includes("book")
-){
-
-let reply = currentLang === "ar"
-? تقدر تحجز بسهولة من صفحة الكراجات 🔧  <br><br>  <a href="garages.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الكراجات </a>
-:
-You can easily book through the garages page 🔧  <br><br>  <a href="garages.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Garages </a>;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
-return;
-
-}
-
-/ =========================
-ACCOUNT
-========================= /
-
-if(
-text.includes("حساب") ||
-text.includes("اكاونت") ||
-text.includes("account")
-){
-
-let reply = currentLang === "ar"
-? تقدر تعدل بيانات حسابك من صفحة الحساب 👤  <br><br>  <a href="account.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الحساب </a>
-:
-You can manage your account from the account page 👤  <br><br>  <a href="account.html" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> Open Account </a>;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
-return;
-
-}
-
-/ =========================
-AREAS
-========================= /
-
-const areas = [
-"المنامة",
-"المحرق",
-"الرفاع",
-"الهملة",
-"توبلي",
-"سلماباد",
-"الجفير",
-"سار",
-"عراد",
-"قلالي"
-];
-
-let foundArea = null;
-
-areas.forEach(area => {
-
-if(text.includes(area)){
-
-foundArea = area;
-
-}
-
-});
-
-/ =========================
-GARAGE SEARCH
-========================= /
+/ SEARCH GARAGE /
 
 if(
 text.includes("كراج") ||
-text.includes("قراج") ||
 text.includes("garage")
 ){
 
-if(foundArea){
+let matched = garages[0];
 
-let matched = garages.filter(g =>
-g.location.includes(foundArea)
-);
-
-if(matched.length > 0){
-
-let reply = currentLang === "ar"
-? لقيت لك هالكراجات في ${foundArea} 🚗<br><br>
-: I found these garages in ${foundArea} 🚗<br><br>;
-
-matched.forEach(g => {
-
-reply += <b>${g.name}</b> <br> 📍 ${g.location} <br> 📞 ${g.phone} <br><br>;
-
-});
+let reply = 🚗 أنصحك بهذا الكراج:  <br><br>  <b>${matched.name}</b>  <br>  📍 ${matched.location}  <br>  📞 ${matched.phone}  <br><br>  <a href="${matched.map}" target="_blank" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الموقع </a>;
 
 chatBox.innerHTML += <div class="ai">${reply}</div>;
 
-}else{
-
-let reply = currentLang === "ar"
-? "ما حصلت كراجات بهالمنطقة 😔"
-: "No garages found 😔";
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-
-}
-
-}else{
-
-let reply = currentLang === "ar"
-? حدد المنطقة اللي تبيها 🚗  <br><br>  مثال: <br> • المنامة <br> • المحرق <br> • الرفاع
-:
-Please specify the area 🚗;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-
-}
-
-chatBox.scrollTop = chatBox.scrollHeight;
-return;
-
-}
-
-/ =========================
-CAR PROBLEMS
-========================= /
-
-const problems = [
-
-{
-keywords:["مكيف","ac","حار","تبريد"],
-service:"ac",
-nameAr:"مشكلة بالمكيف",
-nameEn:"AC issue"
-},
-
-{
-keywords:["زيت","oil","اويل"],
-service:"oil",
-nameAr:"تغيير زيت",
-nameEn:"Oil service"
-},
-
-{
-keywords:["بطارية","battery","مايشتغل"],
-service:"battery",
-nameAr:"البطارية",
-nameEn:"Battery issue"
-},
-
-{
-keywords:["بنشر","تاير","كفر"],
-service:"tires",
-nameAr:"الإطارات",
-nameEn:"Tire issue"
-},
-
-{
-keywords:["مكينه","تصليح","repair"],
-service:"repair",
-nameAr:"تصليح السيارة",
-nameEn:"Repair service"
-}
-
-];
-
-let foundProblem = null;
-
-for(let p of problems){
-
-if(p.keywords.some(word => text.includes(word))){
-
-foundProblem = p;
-break;
-
-}
-
-}
-
-/ =========================
-NEAREST GARAGE
-========================= */
-
-if(foundProblem){
-
-navigator.geolocation.getCurrentPosition(function(position){
-
-let userLat = position.coords.latitude;
-let userLng = position.coords.longitude;
-
-let filtered = garages.filter(g =>
-g.services.includes(foundProblem.service)
-);
-
-if(filtered.length === 0){
-
-chatBox.innerHTML += <div class="ai"> 😔 ما حصلت كراج مناسب حالياً </div>;
+chatBox.scrollTop =
+chatBox.scrollHeight;
 
 return;
 
 }
 
-filtered.forEach(g => {
+/ UNKNOWN */
 
-g.distance = getDistance(
-userLat,
-userLng,
-g.lat,
-g.lng
-);
+chatBox.innerHTML += <div class="ai"> 🌹 آسف ما فهمت طلبك </div>;
 
-});
-
-filtered.sort((a,b) => a.distance - b.distance);
-
-let nearest = filtered[0];
-
-let reply = currentLang === "ar"
-? 🚗 يبدو أن عندك ${foundProblem.nameAr}  <br><br>  <b>${nearest.name}</b>  <br>  📍 ${nearest.location}  <br>  📞 ${nearest.phone}  <br>  📏 يبعد عنك تقريبًا ${nearest.distance.toFixed(2)} كم  <br><br>  <a href="${nearest.map}" target="_blank" style="background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;"> فتح الموقع </a>
-:
-`
-🚗 Your issue seems related to ${foundProblem.nameEn}
-
-<br><br>
-
-<b>${nearest.name}</b>
-
-<br>
-
-📍 ${nearest.location}
-
-<br>
-
-📞 ${nearest.phone}
-
-<br>
-
-📏 Around ${nearest.distance.toFixed(2)} KM away
-
-<br><br>
-
-<a href="${nearest.map}” target=”_blank”
-style=“background:#dc2626;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;display:inline-block;”>
-Open Location
-`;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-chatBox.scrollTop = chatBox.scrollHeight;
-
-});
-
-return;
-
-}
-
-/* =========================
-UNKNOWN
-========================= */
-
-let reply = currentLang === “ar”
-? “آسف 🌹 ما فهمت طلبك بشكل واضح.”
-: “Sorry 🌹 I could not understand your request.”;
-
-chatBox.innerHTML += <div class="ai">${reply}</div>;
-
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTop =
+chatBox.scrollHeight;
 
 };
-    
-</script>
-<script>
-
-let currentLang = "ar";
-
-function toggleLanguage(){
-
-    if(currentLang === "ar"){
-
-        currentLang = "en";
-
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
-
-        document.getElementById("langBtn").innerHTML = "AR";
-
-        // HERO
-        document.querySelector(".hero h1").innerHTML =
-        "Find The Best Garages <br><span>Book Easily</span>";
-
-        document.querySelector(".hero p").innerHTML =
-        "Car repair and maintenance services in Bahrain";
-
-        // NAVBAR
-        document.querySelector(".login-btn").innerHTML =
-        "Book Service";
-
-        document.querySelector(".main-links a[href='#about']").innerHTML =
-        "About Us";
-
-        document.querySelector(".main-links a[href='#contact']").innerHTML =
-        "Contact";
-
-        document.querySelector("#guestLinks a[href='login.html']").innerHTML =
-        "Login";
-
-        document.querySelector("#guestLinks a[href='register.html']").innerHTML =
-        "Register";
-
-        // SEARCH
-        document.querySelector(".search-btn").innerHTML =
-        "🔍 Search Now";
-
-        document.querySelector(".search-item b").innerHTML =
-        "All Garages";
-
-        document.querySelector(".search-item a").innerHTML =
-        "View All";
-
-        document.querySelector("#filter option[value='all']").innerHTML =
-        "Choose Service";
-
-        document.querySelector("#filter option[value='repair']").innerHTML =
-        "Repair";
-
-        document.querySelector("#filter option[value='oil']").innerHTML =
-        "Oil Change";
-
-        document.querySelector("#filter option[value='ac']").innerHTML =
-        "AC Service";
-
-        document.querySelector("#locationFilter option[value='']").innerHTML =
-        "Choose Location";
-
-        // FEATURES
-        document.querySelector(".feature:nth-child(1) h3").innerHTML =
-        "Trusted Garages";
-
-        document.querySelector(".feature:nth-child(1) p").innerHTML =
-        "All garages are verified";
-
-        document.querySelector(".feature:nth-child(2) h3").innerHTML =
-        "Easy Booking";
-
-        document.querySelector(".feature:nth-child(2) p").innerHTML =
-        "Book in simple steps";
-
-        document.querySelector(".feature:nth-child(3) h3").innerHTML =
-        "24/7 Support";
-
-        document.querySelector(".feature:nth-child(3) p").innerHTML =
-        "Support team ready to help";
-
-        // FOOTER
-        document.querySelector(".footer h3").innerHTML =
-        "Contact Us";
-
-        // SIDE MENU
-        document.querySelector("#sideMenu a[href='index.html']").innerHTML =
-        "Home";
-
-        document.getElementById("loginMenu").innerHTML =
-        "Login";
-
-        document.getElementById("registerMenu").innerHTML =
-        "Register";
-
-        document.getElementById("myBookingsLink").innerHTML =
-        "My Bookings";
-
-        document.getElementById("garagesMenuLink").innerHTML =
-        "Garages";
-
-        document.getElementById("nearestMenu").innerHTML =
-        "Nearest Garage";
-
-        document.getElementById("notificationsMenu").innerHTML =
-        "Notifications";
-
-        document.getElementById("accountMenu").innerHTML =
-        "Account";
-
-        document.getElementById("garageDashboardLink").innerHTML =
-        "Garage Dashboard";
-
-        document.getElementById("adminDashboardLink").innerHTML =
-        "Admin Dashboard";
-
-        document.getElementById("complaintsLink").innerHTML =
-        "Complaints";
-
-        document.getElementById("logoutLink").innerHTML =
-        "Logout";
-
-    }else{
-
-        currentLang = "ar";
-
-        document.documentElement.lang = "ar";
-        document.documentElement.dir = "rtl";
-
-        document.getElementById("langBtn").innerHTML = "EN";
-
-        // HERO
-        document.querySelector(".hero h1").innerHTML =
-        'ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span>';
-
-        document.querySelector(".hero p").innerHTML =
-        "خدمات صيانة وإصلاح السيارات في البحرين بضغطة واحدة";
-
-        // NAVBAR
-        document.querySelector(".login-btn").innerHTML =
-        "احجز خدمة الآن";
-
-        document.querySelector(".main-links a[href='#about']").innerHTML =
-        "من نحن";
-
-        document.querySelector(".main-links a[href='#contact']").innerHTML =
-        "اتصل بنا";
-
-        document.querySelector("#guestLinks a[href='login.html']").innerHTML =
-        "تسجيل دخول";
-
-        document.querySelector("#guestLinks a[href='register.html']").innerHTML =
-        "إنشاء حساب";
-
-        // SEARCH
-        document.querySelector(".search-btn").innerHTML =
-        "🔍 ابحث الآن";
-
-        document.querySelector(".search-item b").innerHTML =
-        "جميع الكراجات";
-
-        document.querySelector(".search-item a").innerHTML =
-        "عرض الكل";
-
-        document.querySelector("#filter option[value='all']").innerHTML =
-        "اختر نوع الخدمة";
-
-        document.querySelector("#filter option[value='repair']").innerHTML =
-        "تصليح";
-
-        document.querySelector("#filter option[value='oil']").innerHTML =
-        "تغيير زيت";
-
-        document.querySelector("#filter option[value='ac']").innerHTML =
-        "مكيف";
-
-        document.querySelector("#locationFilter option[value='']").innerHTML =
-        "اختر موقعك";
-
-        // FEATURES
-        document.querySelector(".feature:nth-child(1) h3").innerHTML =
-        "كراجات موثوقة";
-
-        document.querySelector(".feature:nth-child(1) p").innerHTML =
-        "جميع الكراجات معتمدة ومراجعة.";
-
-        document.querySelector(".feature:nth-child(2) h3").innerHTML =
-        "حجز سريع وسهل";
-
-        document.querySelector(".feature:nth-child(2) p").innerHTML =
-        "احجز موعدك بخطوات بسيطة.";
-
-        document.querySelector(".feature:nth-child(3) h3").innerHTML =
-        "دعم متواصل";
-
-        document.querySelector(".feature:nth-child(3) p").innerHTML =
-        "فريق الدعم جاهز لمساعدتك.";
-
-        // FOOTER
-        document.querySelector(".footer h3").innerHTML =
-        "اتصل بنا";
-
-        // SIDE MENU
-        document.querySelector("#sideMenu a[href='index.html']").innerHTML =
-        "الرئيسية";
-
-        document.getElementById("loginMenu").innerHTML =
-        "تسجيل دخول";
-
-        document.getElementById("registerMenu").innerHTML =
-        "إنشاء حساب";
-
-        document.getElementById("myBookingsLink").innerHTML =
-        "حجوزاتي";
-
-        document.getElementById("garagesMenuLink").innerHTML =
-        "الكراجات";
-
-        document.getElementById("nearestMenu").innerHTML =
-        "أقرب كراج";
-
-        document.getElementById("notificationsMenu").innerHTML =
-        "الإشعارات";
-
-        document.getElementById("accountMenu").innerHTML =
-        "الحساب";
-
-        document.getElementById("garageDashboardLink").innerHTML =
-        "لوحة تحكم الكراج";
-
-        document.getElementById("adminDashboardLink").innerHTML =
-        "لوحة تحكم الأدمن";
-
-        document.getElementById("complaintsLink").innerHTML =
-        "الشكاوي";
-
-        document.getElementById("logoutLink").innerHTML =
-        "تسجيل خروج";
-
-    }
-
-}
 
 </script>
+
 </body>
 </html>
