@@ -243,9 +243,17 @@ button:hover{background:#b91c1c}
     margin-top:45px;
 }
 
+    #results{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    padding:20px;
+    scroll-behavior:smooth;
+}
+
 .garage{
-    min-width:280px;
-    max-width:280px;
+    min-width:250px;
+    max-width:250px;
     background:white;
     border-radius:18px;
     overflow:hidden;
@@ -534,29 +542,7 @@ button:hover{background:#b91c1c}
 </section>
 
 
-<div class="garage">
-    <img class="garage-img" src="images(Fit-and-fix).jpeg">
-
-    <div class="garage-info">
-        <h3>Fit and Fix</h3>
-        <p>📍 الهملة</p>
-        <p>⭐ 4.9</p>
-
-        <div class="action-row">
-            <a href="https://maps.app.goo.gl/GP1DWyPEwJMD1Fdi9?g_st=ic"
-            target="_blank"
-            class="map-btn">
-            عرض الموقع
-            </a>
-
-            <button class="book-btn">
-            احجز الآن
-            </button>
-        </div>
-    </div>
-</div>
-
-</div>
+<div id="results"></div>
 
 
 <div class="footer" id="contact">
