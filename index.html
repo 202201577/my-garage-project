@@ -135,7 +135,7 @@ body{
 
 .hero p{font-size:20px}
 
-.search-box{
+
 .search-box{
     background:white;
     max-width:1200px;
@@ -147,7 +147,6 @@ body{
     justify-content:space-between;
     gap:20px;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
 }
 
 .search-item{
@@ -567,7 +566,7 @@ button:hover{background:#b91c1c}
         <option value="وادي السيل">وادي السيل</option>
     </select>
 </div>
-    <div id="results"></div>
+   
 
 <section class="why" id="about">
 
@@ -706,7 +705,7 @@ let garages = [
 function searchGarage(){
 
     let location =
-    document.getElementById("locationSelect")
+    document.getElementById("locationFilter")
     .value
     .toLowerCase()
     .trim();
