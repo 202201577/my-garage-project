@@ -262,26 +262,63 @@ auth.onAuthStateChanged(function(user){
     if(user){
 
         let email = user.email.toLowerCase();
-        let isAdmin = adminEmails.includes(email);
-        let isGarageOwner = garageOwnerEmails.includes(email);
 
-        document.getElementById("logoutLink").style.display = "block";
-        document.getElementById("notificationsMenu").style.display = "block";
-        document.getElementById("accountMenu").style.display = "block";
+        let isAdmin =
+        adminEmails.includes(email);
 
-        if(isAdmin){
-            window.location.href = "admin-dashboard.html";
-            return;
-        }
+        let isGarageOwner =
+        garageOwnerEmails.includes(email);
 
-        if(isGarageOwner){
-            window.location.href = "garage-dashboard.html";
-            return;
-        }
+        // اخفاء روابط الزائر
 
+        // اظهار روابط العميل
         document.getElementById("myBookingsLink").style.display = "block";
         document.getElementById("nearestMenu").style.display = "block";
+        document.getElementById("notificationsMenu").style.display = "block";
+        document.getElementById("accountMenu").style.display = "block";
         document.getElementById("complaintsLink").style.display = "block";
+        document.getElementById("logoutLink").style.display = "block";
+
+        // الادمن
+        if(isAdmin){
+
+            document.getElementById("myBookingsLink").style.display = "none";
+            document.getElementById("nearestMenu").style.display = "none";
+            document.getElementById("notificationsMenu").style.display = "none";
+            document.getElementById("accountMenu").style.display = "none";
+
+            document.getElementById("garageDashboardLink").style.display = "none";
+            document.getElementById("adminDashboardLink").style.display = "block";
+
+        }
+
+        // صاحب الكراج
+        else if(isGarageOwner){
+
+            document.getElementById("myBookingsLink").style.display = "none";
+            document.getElementById("nearestMenu").style.display = "none";
+            document.getElementById("notificationsMenu").style.display = "none";
+            document.getElementById("accountMenu").style.display = "none";
+            document.getElementById("complaintsLink").style.display = "none";
+
+            document.getElementById("garageDashboardLink").style.display = "block";
+            document.getElementById("adminDashboardLink").style.display = "none";
+
+        }
+
+    }
+
+    // الزائر
+    else{
+
+        document.getElementById("myBookingsLink").style.display = "none";
+        document.getElementById("notificationsMenu").style.display = "none";
+        document.getElementById("accountMenu").style.display = "none";
+        document.getElementById("complaintsLink").style.display = "none";
+        document.getElementById("logoutLink").style.display = "none";
+
+        // هذي لازم تبين للزائر
+        document.getElementById("nearestMenu").style.display = "block";
 
     }
 
