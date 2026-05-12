@@ -14,4 +14,4 @@ const auth = firebase.auth();
 
 const db = firebase.firestore();
 
-const COMMISSION_RATE = 0.15;
+const COMMISSION_RATE = 0.10;
