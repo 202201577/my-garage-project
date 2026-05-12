@@ -11,16 +11,6 @@ body{margin:0;font-family:Arial,sans-serif;background:#f8f9fa;color:#0f172a}
 
 .navbar{background:white;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);direction:ltr;position:sticky;top:0;z-index:999}
 .logo{width:150px}
-    
-    #langBtn{
-    background:#111827;
-    color:white;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:14px;
-}
 
     
 .menu-icon{font-size:34px;cursor:pointer;color:#0f172a;font-weight:bold}
@@ -177,10 +167,6 @@ button:hover{background:#b91c1c}
 <a id="bookNowTopLink" href="garages.html" class="login-btn">احجز خدمة الآن</a>
 </div>
     
-<button onclick="toggleLanguage()" id="langBtn">
-EN
-</button>
-    
 <div class="menu-icon" onclick="openMenu()">☰</div>
 </div>
 
@@ -306,7 +292,7 @@ let currentUser = null;
 
 let bookings = [];
 
-    
+let currentLang = "ar";
 
 let garages = [
 
@@ -1317,251 +1303,6 @@ chatBox.innerHTML += `<div class="ai">${reply}</div>`;
 chatBox.scrollTop = chatBox.scrollHeight;
 
 };
-</script>
-<script>
-
-let currentLang = "ar";
-
-function toggleLanguage(){
-
-    if(currentLang === "ar"){
-
-        currentLang = "en";
-
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
-
-        document.getElementById("langBtn").innerHTML = "AR";
-
-        // HERO
-        document.querySelector(".hero h1").innerHTML =
-        "Find The Best Garages <br><span>Book Easily</span>";
-
-        document.querySelector(".hero p").innerHTML =
-        "Car repair and maintenance services in Bahrain";
-
-        // NAVBAR
-        document.querySelector(".login-btn").innerHTML =
-        "Book Service";
-
-        document.querySelector(".main-links a[href='#about']").innerHTML =
-        "About Us";
-
-        document.querySelector(".main-links a[href='#contact']").innerHTML =
-        "Contact";
-
-        document.querySelector("#guestLinks a[href='login.html']").innerHTML =
-        "Login";
-
-        document.querySelector("#guestLinks a[href='register.html']").innerHTML =
-        "Register";
-
-        // SEARCH
-        document.querySelector(".search-btn").innerHTML =
-        "🔍 Search Now";
-
-        document.querySelector(".search-item b").innerHTML =
-        "All Garages";
-
-        document.querySelector(".search-item a").innerHTML =
-        "View All";
-
-        document.querySelector("#filter option[value='all']").innerHTML =
-        "Choose Service";
-
-        document.querySelector("#filter option[value='repair']").innerHTML =
-        "Repair";
-
-        document.querySelector("#filter option[value='oil']").innerHTML =
-        "Oil Change";
-
-        document.querySelector("#filter option[value='ac']").innerHTML =
-        "AC Service";
-
-        document.querySelector("#locationFilter option[value='']").innerHTML =
-        "Choose Location";
-
-        // FEATURES
-        document.querySelector(".feature:nth-child(1) h3").innerHTML =
-        "Trusted Garages";
-
-        document.querySelector(".feature:nth-child(1) p").innerHTML =
-        "All garages are verified";
-
-        document.querySelector(".feature:nth-child(2) h3").innerHTML =
-        "Easy Booking";
-
-        document.querySelector(".feature:nth-child(2) p").innerHTML =
-        "Book in simple steps";
-
-        document.querySelector(".feature:nth-child(3) h3").innerHTML =
-        "24/7 Support";
-
-        document.querySelector(".feature:nth-child(3) p").innerHTML =
-        "Support team ready to help";
-
-        // FOOTER
-        document.querySelector(".footer h3").innerHTML =
-        "Contact Us";
-
-        // SIDE MENU
-        document.querySelector("#sideMenu a[href='index.html']").innerHTML =
-        "Home";
-
-        document.getElementById("loginMenu").innerHTML =
-        "Login";
-
-        document.getElementById("registerMenu").innerHTML =
-        "Register";
-
-        document.getElementById("myBookingsLink").innerHTML =
-        "My Bookings";
-
-        document.getElementById("garagesMenuLink").innerHTML =
-        "Garages";
-
-        document.getElementById("nearestMenu").innerHTML =
-        "Nearest Garage";
-
-        document.getElementById("notificationsMenu").innerHTML =
-        "Notifications";
-
-        document.getElementById("accountMenu").innerHTML =
-        "Account";
-
-        document.getElementById("garageDashboardLink").innerHTML =
-        "Garage Dashboard";
-
-        document.getElementById("adminDashboardLink").innerHTML =
-        "Admin Dashboard";
-
-        document.getElementById("complaintsLink").innerHTML =
-        "Complaints";
-
-        document.getElementById("logoutLink").innerHTML =
-        "Logout";
-
-    }else{
-
-        currentLang = "ar";
-
-        document.documentElement.lang = "ar";
-        document.documentElement.dir = "rtl";
-
-        document.getElementById("langBtn").innerHTML = "EN";
-
-        // HERO
-        document.querySelector(".hero h1").innerHTML =
-        'ابحث عن أفضل الكراجات <br><span>واحجز بسهولة</span>';
-
-        document.querySelector(".hero p").innerHTML =
-        "خدمات صيانة وإصلاح السيارات في البحرين بضغطة واحدة";
-
-        // NAVBAR
-        document.querySelector(".login-btn").innerHTML =
-        "احجز خدمة الآن";
-
-        document.querySelector(".main-links a[href='#about']").innerHTML =
-        "من نحن";
-
-        document.querySelector(".main-links a[href='#contact']").innerHTML =
-        "اتصل بنا";
-
-        document.querySelector("#guestLinks a[href='login.html']").innerHTML =
-        "تسجيل دخول";
-
-        document.querySelector("#guestLinks a[href='register.html']").innerHTML =
-        "إنشاء حساب";
-
-        // SEARCH
-        document.querySelector(".search-btn").innerHTML =
-        "🔍 ابحث الآن";
-
-        document.querySelector(".search-item b").innerHTML =
-        "جميع الكراجات";
-
-        document.querySelector(".search-item a").innerHTML =
-        "عرض الكل";
-
-        document.querySelector("#filter option[value='all']").innerHTML =
-        "اختر نوع الخدمة";
-
-        document.querySelector("#filter option[value='repair']").innerHTML =
-        "تصليح";
-
-        document.querySelector("#filter option[value='oil']").innerHTML =
-        "تغيير زيت";
-
-        document.querySelector("#filter option[value='ac']").innerHTML =
-        "مكيف";
-
-        document.querySelector("#locationFilter option[value='']").innerHTML =
-        "اختر موقعك";
-
-        // FEATURES
-        document.querySelector(".feature:nth-child(1) h3").innerHTML =
-        "كراجات موثوقة";
-
-        document.querySelector(".feature:nth-child(1) p").innerHTML =
-        "جميع الكراجات معتمدة ومراجعة.";
-
-        document.querySelector(".feature:nth-child(2) h3").innerHTML =
-        "حجز سريع وسهل";
-
-        document.querySelector(".feature:nth-child(2) p").innerHTML =
-        "احجز موعدك بخطوات بسيطة.";
-
-        document.querySelector(".feature:nth-child(3) h3").innerHTML =
-        "دعم متواصل";
-
-        document.querySelector(".feature:nth-child(3) p").innerHTML =
-        "فريق الدعم جاهز لمساعدتك.";
-
-        // FOOTER
-        document.querySelector(".footer h3").innerHTML =
-        "اتصل بنا";
-
-        // SIDE MENU
-        document.querySelector("#sideMenu a[href='index.html']").innerHTML =
-        "الرئيسية";
-
-        document.getElementById("loginMenu").innerHTML =
-        "تسجيل دخول";
-
-        document.getElementById("registerMenu").innerHTML =
-        "إنشاء حساب";
-
-        document.getElementById("myBookingsLink").innerHTML =
-        "حجوزاتي";
-
-        document.getElementById("garagesMenuLink").innerHTML =
-        "الكراجات";
-
-        document.getElementById("nearestMenu").innerHTML =
-        "أقرب كراج";
-
-        document.getElementById("notificationsMenu").innerHTML =
-        "الإشعارات";
-
-        document.getElementById("accountMenu").innerHTML =
-        "الحساب";
-
-        document.getElementById("garageDashboardLink").innerHTML =
-        "لوحة تحكم الكراج";
-
-        document.getElementById("adminDashboardLink").innerHTML =
-        "لوحة تحكم الأدمن";
-
-        document.getElementById("complaintsLink").innerHTML =
-        "الشكاوي";
-
-        document.getElementById("logoutLink").innerHTML =
-        "تسجيل خروج";
-
-    }
-
-}
-
 </script>
 </body>
 </html>
