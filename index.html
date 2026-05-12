@@ -92,7 +92,7 @@ button:hover{background:#b91c1c}
 <a id="garagesTopLink" href="garages.html" style="display:none;">الكراجات</a>
 <a href="#about">من نحن</a>
 <a href="#contact">اتصل بنا</a>
-<a id="bookNowTopLink" href="garages.html" class="login-btn" style="display:none;">احجز خدمة الآن</a>
+<a id="bookNowTopLink" href="login.html" class="login-btn">احجز خدمة الآن</a>
 </div>
 
 <div class="menu-icon" onclick="openMenu()">☰</div>
@@ -103,6 +103,9 @@ button:hover{background:#b91c1c}
 <img src="logo.png">
 
 <a href="index.html">الرئيسية</a>
+<a id="loginMenu" href="login.html">تسجيل دخول</a>
+<a id="registerMenu" href="register.html">إنشاء حساب</a>
+
 <a id="myBookingsLink" href="mybookings.html" style="display:none;">حجوزاتي</a>
 <a id="garagesMenuLink" href="garages.html" style="display:none;">الكراجات</a>
 <a id="nearestMenu" href="nearest-garage.html" style="display:none;">أقرب كراج</a>
@@ -400,7 +403,9 @@ document.getElementById("guestLinks").style.display = "none";
 document.getElementById("logoutLink").style.display = "block";
 document.getElementById("notificationsMenu").style.display = "block";
 document.getElementById("accountMenu").style.display = "block";
-
+document.getElementById("loginMenu").style.display = "none";
+document.getElementById("registerMenu").style.display = "none";
+  
 let email = user.email.toLowerCase();
 let isAdmin = adminEmails.includes(email);
 let isGarageOwner = garageOwnerEmails.includes(email);
@@ -451,6 +456,9 @@ document.getElementById("complaintsLink").style.display = "none";
 
 document.getElementById("garagesTopLink").style.display = "none";
 document.getElementById("bookNowTopLink").style.display = "none";
+
+document.getElementById("loginMenu").style.display = "block";
+document.getElementById("registerMenu").style.display = "block";
 }
 });
 
