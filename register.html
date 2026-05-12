@@ -1,128 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
+
 <head>
-    <title>Register - My Garage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            margin: 0;
-        }
+<title>إنشاء حساب - My Garage</title>
 
-        .navbar {
-            background: #1e293b;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 22px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        .container {
-            display: flex;
-            justify-content: center;
-            margin-top: 60px;
-            padding: 15px;
-        }
+body{
+    background:#f4f4f4;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
 
-        .box {
-            background: white;
-            width: 350px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+.login-wrapper{
+    width:100%;
+    max-width:1400px;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    display:flex;
+    direction:ltr;
+    box-shadow:0 10px 40px rgba(0,0,0,.1);
+}
 
-        input {
-            width: 90%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+.image-side{
+    width:50%;
+    min-height:950px;
+    background-image:url("garage-bg2.jpeg");
+    background-size:cover;
+    background-position:left center;
+    background-repeat:no-repeat;
+}
 
-        button {
-            padding: 12px 20px;
-            border: none;
-            background: #3b82f6;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
+.login-side{
+    width:50%;
+    padding:60px;
+    direction:rtl;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
 
-        button:hover {
-            background: #2563eb;
-        }
+.logo{
+    width:240px;
+    display:block;
+    margin:0 auto 25px;
+}
 
-        a {
-            text-decoration: none;
-            color: #3b82f6;
-        }
+h1{
+    text-align:center;
+    font-size:52px;
+    margin-bottom:15px;
+    color:#111;
+}
 
-        #msg {
-            margin-top: 15px;
-            color: red;
-        }
-    </style>
+.subtitle{
+    text-align:center;
+    color:#777;
+    font-size:20px;
+    margin-bottom:40px;
+    line-height:1.8;
+}
+
+.form-box{
+    border:1px solid #eee;
+    border-radius:24px;
+    padding:35px;
+}
+
+.form-group{
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-bottom:10px;
+    font-weight:bold;
+    color:#222;
+}
+
+input{
+    width:100%;
+    height:58px;
+    border:1px solid #ddd;
+    border-radius:15px;
+    padding:0 18px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#c4122f;
+}
+
+.login-btn{
+    width:100%;
+    height:60px;
+    border:none;
+    border-radius:16px;
+    background:#c4122f;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#a90f28;
+}
+
+.create-account{
+    text-align:center;
+    margin-top:30px;
+    font-size:18px;
+}
+
+.create-account a{
+    color:#c4122f;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+#msg{
+    margin-top:18px;
+    text-align:center;
+    font-weight:bold;
+    color:#dc2626;
+}
+
+.contact{
+    margin-top:45px;
+    text-align:center;
+}
+
+.contact h3{
+    font-size:26px;
+    margin-bottom:14px;
+    color:#222;
+}
+
+.contact p{
+    direction:ltr;
+    unicode-bidi:bidi-override;
+    font-size:22px;
+    font-weight:bold;
+    color:#444;
+}
+
+@media(max-width:768px){
+    body{
+        padding:12px;
+    }
+
+    .login-wrapper{
+        flex-direction:row;
+        border-radius:28px;
+    }
+
+    .image-side{
+        width:38%;
+        min-height:100vh;
+        background-position:72% center;
+        border-radius:30px 0 0 30px;
+    }
+
+    .login-side{
+        width:62%;
+        padding:30px 18px;
+    }
+
+    .logo{
+        width:150px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        line-height:1.7;
+        margin-bottom:25px;
+    }
+
+    .form-box{
+        padding:18px;
+        border-radius:20px;
+    }
+
+    input{
+        height:48px;
+        font-size:14px;
+    }
+
+    .login-btn{
+        height:50px;
+        font-size:15px;
+    }
+
+    .contact p{
+        font-size:14px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="navbar">My Garage</div>
+<div class="login-wrapper">
 
-<div class="container">
-    <div class="box">
+    <div class="image-side"></div>
 
-        <h2>Create Account</h2>
+    <div class="login-side">
 
-        <input type="email" id="email" placeholder="Email">
+        <img src="logo.png" class="logo">
 
-        <input type="password" id="password" placeholder="Password">
+        <h1>إنشاء حساب</h1>
 
-        <button onclick="register()">Register</button>
-
-        <p>Already have an account?
-            <a href="login.html">Login</a>
+        <p class="subtitle">
+            أنشئ حسابك الآن واحجز خدمات الكراج بسهولة
         </p>
 
-        <p id="msg"></p>
+        <div class="form-box">
+
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="ادخل بريدك الإلكتروني">
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="password" placeholder="ادخل كلمة المرور">
+            </div>
+
+            <div class="form-group">
+                <label>تأكيد كلمة المرور</label>
+                <input type="password" id="confirmPassword" placeholder="أعد كتابة كلمة المرور">
+            </div>
+
+            <button class="login-btn" onclick="register()">
+                إنشاء حساب
+            </button>
+
+            <p id="msg"></p>
+
+        </div>
+
+        <div class="create-account">
+            لديك حساب؟
+            <a href="login.html">تسجيل الدخول</a>
+        </div>
+
+        <div class="contact">
+            <h3>اتصل بنا</h3>
+            <p>+973 38202464 | +973 37171721</p>
+        </div>
 
     </div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script src="firebase.js"></script>
 
 <script>
+function register(){
 
-function register() {
-
-    let email = document.getElementById("email").value;
+    let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let msg = document.getElementById("msg");
 
-    auth.createUserWithEmailAndPassword(email, password)
+    msg.innerText = "";
 
+    if(email === "" || password === "" || confirmPassword === ""){
+        msg.innerText = "يرجى تعبئة جميع البيانات.";
+        return;
+    }
+
+    if(password.length < 6){
+        msg.innerText = "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.";
+        return;
+    }
+
+    if(password !== confirmPassword){
+        msg.innerText = "كلمة المرور غير متطابقة.";
+        return;
+    }
+
+    auth.createUserWithEmailAndPassword(email,password)
     .then(() => {
-
-        alert("Account created successfully");
-
+        alert("تم إنشاء الحساب بنجاح");
         window.location.href = "login.html";
-
     })
-
     .catch((error) => {
-
-        document.getElementById("msg").innerText = error.message;
-
+        msg.innerText = error.message;
     });
 }
-
 </script>
 
 </body>
