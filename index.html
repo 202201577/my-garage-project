@@ -494,69 +494,72 @@ let garageOwnerEmails = [
 "fitandfix@mygarage.com"
 ];
 
-if(user){
-    loadBookings();
-document.getElementById("guestLinks").style.display = "none";
-document.getElementById("logoutLink").style.display = "block";
-document.getElementById("notificationsMenu").style.display = "block";
-document.getElementById("accountMenu").style.display = "block";
+function hideAll(){
 document.getElementById("loginMenu").style.display = "none";
 document.getElementById("registerMenu").style.display = "none";
-  
+document.getElementById("myBookingsLink").style.display = "none";
+document.getElementById("garagesMenuLink").style.display = "none";
+document.getElementById("nearestMenu").style.display = "none";
+document.getElementById("notificationsMenu").style.display = "none";
+document.getElementById("accountMenu").style.display = "none";
+document.getElementById("garageDashboardLink").style.display = "none";
+document.getElementById("adminDashboardLink").style.display = "none";
+document.getElementById("complaintsLink").style.display = "none";
+document.getElementById("logoutLink").style.display = "none";
+}
+
+hideAll();
+
+if(user){
+
 let email = user.email.toLowerCase();
+
+document.getElementById("guestLinks").style.display = "none";
+document.getElementById("logoutLink").style.display = "block";
+
 let isAdmin = adminEmails.includes(email);
 let isGarageOwner = garageOwnerEmails.includes(email);
 
 if(isAdmin){
-document.getElementById("myBookingsLink").style.display = "none";
-document.getElementById("garagesMenuLink").style.display = "none";
-document.getElementById("nearestMenu").style.display = "none";
-document.getElementById("garageDashboardLink").style.display = "none";
 document.getElementById("adminDashboardLink").style.display = "block";
+document.getElementById("notificationsMenu").style.display = "block";
+document.getElementById("accountMenu").style.display = "block";
 document.getElementById("complaintsLink").style.display = "block";
-document.getElementById("garagesTopLink").style.display = "none";
 document.getElementById("bookNowTopLink").style.display = "none";
+document.getElementById("garagesTopLink").style.display = "none";
 }
+
 else if(isGarageOwner){
-document.getElementById("myBookingsLink").style.display = "none";
-document.getElementById("garagesMenuLink").style.display = "none";
-document.getElementById("nearestMenu").style.display = "none";
 document.getElementById("garageDashboardLink").style.display = "block";
-document.getElementById("adminDashboardLink").style.display = "none";
-document.getElementById("complaintsLink").style.display = "none";
-document.getElementById("garagesTopLink").style.display = "none";
+document.getElementById("notificationsMenu").style.display = "block";
+document.getElementById("accountMenu").style.display = "block";
 document.getElementById("bookNowTopLink").style.display = "none";
+document.getElementById("garagesTopLink").style.display = "none";
 }
+
 else{
-document.getElementById("myBookingsLink").style.display = "block";
 document.getElementById("garagesMenuLink").style.display = "block";
 document.getElementById("nearestMenu").style.display = "block";
-document.getElementById("garageDashboardLink").style.display = "none";
-document.getElementById("adminDashboardLink").style.display = "none";
+document.getElementById("myBookingsLink").style.display = "block";
+document.getElementById("notificationsMenu").style.display = "block";
+document.getElementById("accountMenu").style.display = "block";
 document.getElementById("complaintsLink").style.display = "block";
 document.getElementById("garagesTopLink").style.display = "block";
 document.getElementById("bookNowTopLink").style.display = "inline-block";
 }
 
 }else{
-document.getElementById("guestLinks").style.display = "flex";
-document.getElementById("logoutLink").style.display = "none";
 
-document.getElementById("myBookingsLink").style.display = "none";
+document.getElementById("guestLinks").style.display = "flex";
+document.getElementById("loginMenu").style.display = "block";
+document.getElementById("registerMenu").style.display = "block";
 document.getElementById("garagesMenuLink").style.display = "block";
 document.getElementById("nearestMenu").style.display = "block";
-document.getElementById("notificationsMenu").style.display = "none";
-document.getElementById("accountMenu").style.display = "none";
-document.getElementById("garageDashboardLink").style.display = "none";
-document.getElementById("adminDashboardLink").style.display = "none";
-document.getElementById("complaintsLink").style.display = "none";
-
 document.getElementById("garagesTopLink").style.display = "block";
 document.getElementById("bookNowTopLink").style.display = "inline-block";
 
-document.getElementById("loginMenu").style.display = "block";
-document.getElementById("registerMenu").style.display = "block";
 }
+
 });
 
 window.sendMessage = function(){
