@@ -542,6 +542,13 @@ document.getElementById("logoutLink").style.display = "block";
 let isAdmin = adminEmails.includes(email);
 let isGarageOwner = garageOwnerEmails.includes(email);
 
+    if(isAdmin || isGarageOwner){
+
+document.querySelector(".search-box").style.display = "none";
+document.getElementById("results").style.display = "none";
+
+}
+
 if(isAdmin){
 document.getElementById("adminDashboardLink").style.display = "block";
 document.getElementById("notificationsMenu").style.display = "block";
