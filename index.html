@@ -303,6 +303,8 @@ EN
 <script>
 let currentUser = null;
 
+let bookings = [];
+
 let garages = [
 
 {
@@ -457,6 +459,26 @@ let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 return R * c;
 }
 
+function loadBookings(){
+
+db.collection("bookings")
+.onSnapshot((snapshot) => {
+
+bookings = [];
+
+snapshot.forEach(doc => {
+
+bookings.push({
+id: doc.id,
+...doc.data()
+});
+
+});
+
+});
+
+}
+    
 auth.onAuthStateChanged(function(user){
 currentUser = user;
 
@@ -473,6 +495,7 @@ let garageOwnerEmails = [
 ];
 
 if(user){
+    loadBookings();
 document.getElementById("guestLinks").style.display = "none";
 document.getElementById("logoutLink").style.display = "block";
 document.getElementById("notificationsMenu").style.display = "block";
