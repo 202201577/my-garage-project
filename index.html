@@ -783,17 +783,17 @@ let selectedLocation =
         (locationMap[g.location.toLowerCase()] ||
         g.location.toLowerCase());
 
-        if(
+    if(
 
-            (location === "" ||
-            garageLocation === selectedLocation)
+(selectedLocation === "" ||
+garageLocation === selectedLocation)
 
-            &&
+&&
 
-           (service === "all" ||
-           g.service.toLowerCase() === service)
+(service === "all" ||
+g.service.toLowerCase() === service)
 
-        ){
+){
 
             result += `
 
