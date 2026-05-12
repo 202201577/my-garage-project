@@ -257,6 +257,8 @@ function logout(){
 
 auth.onAuthStateChanged(function(user){
 
+    currentUser = user;
+
     if(user){
 
         let email = user.email.toLowerCase();
@@ -281,8 +283,6 @@ auth.onAuthStateChanged(function(user){
         document.getElementById("nearestMenu").style.display = "block";
         document.getElementById("complaintsLink").style.display = "block";
 
-    } else {
-        window.location.href = "login.html";
     }
 
 });
