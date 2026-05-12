@@ -2,21 +2,98 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>الكراجات</title>
+<title>الكراجات - My Garage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body{
-    font-family:Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f8f9fa;
+    color:#0f172a;
+}
+
+.navbar{
+    background:white;
+    padding:15px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    direction:ltr;
+}
+
+.logo{width:145px}
+
+.menu-btn{
+    font-size:32px;
+    cursor:pointer;
+    color:#111827;
+    font-weight:bold;
+}
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-270px;
+    width:250px;
+    height:100%;
+    background:#07111f;
+    transition:.3s;
+    z-index:2000;
+    padding-top:70px;
+    box-shadow:-5px 0 20px rgba(0,0,0,.25);
+}
+
+.side-menu.open{right:0}
+
+.close-btn{
+    position:absolute;
+    top:18px;
+    left:22px;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.side-menu img{
+    width:140px;
+    display:block;
+    margin:0 auto 25px;
+    background:white;
+    padding:6px;
+    border-radius:12px;
+}
+
+.side-menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:18px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:18px;
+    font-weight:bold;
+}
+
+.side-menu a:hover,
+.side-menu .active{
+    background:#dc2626;
 }
 
 .title{
     text-align:center;
-    padding:40px;
+    padding:40px 20px 10px;
     font-size:40px;
     font-weight:bold;
+}
+
+.subtitle{
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:25px;
 }
 
 .garages-container{
@@ -51,6 +128,7 @@ body{
 
 .card-content p{
     color:#555;
+    line-height:1.7;
 }
 
 .btn{
@@ -61,72 +139,154 @@ body{
     padding:12px 20px;
     border-radius:10px;
     text-decoration:none;
+    font-weight:bold;
 }
 
+.btn:hover{
+    background:#b91c1c;
+}
+
+@media(max-width:800px){
+    .logo{width:120px}
+    .title{font-size:32px}
+}
 </style>
 </head>
 
 <body>
 
-<div class="title">
-الكراجات المتوفرة
+<div class="navbar">
+<img src="logo.png" class="logo">
+<div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
 </div>
+
+<div class="side-menu" id="sideMenu">
+<div class="close-btn" onclick="toggleMenu()">×</div>
+<img src="logo.png">
+
+<a href="index.html">الرئيسية</a>
+<a id="myBookingsLink" href="mybookings.html">حجوزاتي</a>
+<a href="garages.html" class="active">الكراجات</a>
+<a id="nearestMenu" href="nearest-garage.html">أقرب كراج</a>
+<a id="notificationsMenu" href="notifications.html">الإشعارات</a>
+<a id="accountMenu" href="account.html">الحساب</a>
+<a id="garageDashboardLink" href="garage-dashboard.html" style="display:none;">لوحة تحكم الكراج</a>
+<a id="adminDashboardLink" href="admin-dashboard.html" style="display:none;">لوحة تحكم الأدمن</a>
+<a id="complaintsLink" href="complaints.html">الشكاوي</a>
+<a href="index.html#contact">اتصل بنا</a>
+<a id="logoutLink" href="#" onclick="logout()">تسجيل خروج</a>
+</div>
+
+<div class="title">الكراجات المتوفرة</div>
+<div class="subtitle">اختاري الكراج المناسب واحجزي موعدك بسهولة</div>
 
 <div class="garages-container">
 
 <div class="card">
 <img src="images(blue-motor).jpeg">
-
 <div class="card-content">
-<h2>Blue Motors</h2>
+<h2>Blue Motors Auto Services</h2>
 <p>📍 سلماباد</p>
-
-<a href="booking.html" class="btn">
-احجز الآن
-</a>
+<p>🔧 تصليح عام ومكيف سيارات</p>
+<a href="booking.html" class="btn" onclick="setGarage('Blue Motors Auto Services')">احجز الآن</a>
 </div>
 </div>
 
 <div class="card">
 <img src="images(BOSCH-Service).jpeg">
-
 <div class="card-content">
 <h2>BOSCH Service</h2>
 <p>📍 توبلي</p>
-
-<a href="booking.html" class="btn">
-احجز الآن
-</a>
+<p>🔧 تغيير زيت وخدمات صيانة</p>
+<a href="booking.html" class="btn" onclick="setGarage('BOSCH Service')">احجز الآن</a>
 </div>
 </div>
 
 <div class="card">
 <img src="images(HOMS-GATE).jpeg">
-
 <div class="card-content">
 <h2>HOMS GATE</h2>
 <p>📍 الهملة</p>
-
-<a href="booking.html" class="btn">
-احجز الآن
-</a>
+<p>🔧 تصليح عام وكهرباء سيارات</p>
+<a href="booking.html" class="btn" onclick="setGarage('HOMS GATE')">احجز الآن</a>
 </div>
 </div>
 
 <div class="card">
 <img src="images(Fit-and-fix).jpeg">
-
 <div class="card-content">
 <h2>Fit and Fix</h2>
 <p>📍 الهملة</p>
-
-<a href="booking.html" class="btn">
-احجز الآن
-</a>
+<p>🔧 تصليح عام ومكيف وإطارات</p>
+<a href="booking.html" class="btn" onclick="setGarage('Fit and Fix')">احجز الآن</a>
 </div>
 </div>
 
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="firebase.js"></script>
+
+<script>
+let adminEmails = [
+    "alhanoof.t29@gmail.com",
+    "anwaralhayki55@gmail.com"
+];
+
+let garageOwnerEmails = [
+    "bluemotors@mygarage.com",
+    "bosch@mygarage.com",
+    "homsgate@mygarage.com",
+    "fitandfix@mygarage.com"
+];
+
+function toggleMenu(){
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+
+function setGarage(name){
+    localStorage.setItem("garage", name);
+}
+
+function logout(){
+    auth.signOut().then(() => {
+        window.location.href = "index.html";
+    });
+}
+
+auth.onAuthStateChanged(function(user){
+
+    if(user){
+
+        let email = user.email.toLowerCase();
+        let isAdmin = adminEmails.includes(email);
+        let isGarageOwner = garageOwnerEmails.includes(email);
+
+        document.getElementById("logoutLink").style.display = "block";
+        document.getElementById("notificationsMenu").style.display = "block";
+        document.getElementById("accountMenu").style.display = "block";
+
+        if(isAdmin){
+            window.location.href = "admin-dashboard.html";
+            return;
+        }
+
+        if(isGarageOwner){
+            window.location.href = "garage-dashboard.html";
+            return;
+        }
+
+        document.getElementById("myBookingsLink").style.display = "block";
+        document.getElementById("nearestMenu").style.display = "block";
+        document.getElementById("complaintsLink").style.display = "block";
+
+    } else {
+        window.location.href = "login.html";
+    }
+
+});
+</script>
 
 </body>
 </html>
