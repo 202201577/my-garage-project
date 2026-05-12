@@ -156,9 +156,8 @@ body{
     justify-content:center;
     gap:12px;
     padding:10px 15px;
-    border-left:1px 
+    border-left:1px solid #e5e7eb;
     min-width:220px;
-    solid #e5e7eb;
     cursor:pointer;
 }
 
@@ -737,7 +736,7 @@ function searchGarage(){
     .trim();
 
     let service =
-    document.getElementById("serviceSelect")
+    document.getElementById("filter")
     .value
     .toLowerCase()
     .trim();
@@ -878,46 +877,7 @@ function searchGarage(){
     `;
 }
 
-    filteredGarages.forEach(g => {
-
-        result += `
-        <div class="garage">
-
-            <img class="garage-img" src="${g.image}">
-
-            <div class="garage-info">
-
-                <h3>${g.name}</h3>
-
-                <p>📍 ${g.location}</p>
-
-                <p>⭐ ${g.rating}</p>
-
-                <p>📞 ${g.phone}</p>
-
-                <div class="action-row">
-
-                    <a href="${g.map}"
-                    target="_blank"
-                    class="map-btn">
-                    عرض الموقع
-                    </a>
-
-                    <button class="book-btn"
-                    onclick="book('${g.name}')">
-                    احجز الآن
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-        `;
-    });
-
-    document.getElementById("results").innerHTML = result;
-}
+    
          
 
 function book(name){
