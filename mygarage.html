@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Garage — Smart Garage Booking System</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #E63946;
+    --red2: #C1121F;
+    --black: #111111;
+    --dark: #1C1C1C;
+    --grey: #F4F4F4;
+    --grey2: #E8E8E8;
+    --white: #FFFFFF;
+    --text: #111111;
+    --text2: #555555;
+    --text3: #999999;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%;
+    height: 64px;
+    background: var(--red);
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700; font-size: 1.4rem;
+    color: var(--white); text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { opacity: 0.6; font-weight: 400; font-size: 0.7rem; display: block; letter-spacing: 0.2em; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul a { text-decoration: none; color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  nav ul a:hover { color: white; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+  .hero-left {
+    background: var(--black);
+    padding: 6rem 8% 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-tag {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--red); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before { content: ''; width: 30px; height: 2px; background: var(--red); display: inline-block; }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700; line-height: 1.0;
+    color: var(--white); margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  h1 em { color: var(--red); font-style: normal; display: block; }
+  .hero-desc {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.95rem; line-height: 1.8;
+    max-width: 400px; margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 0; }
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 16px 32px; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--red2); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 16px 32px; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: white; }
+
+  .hero-right {
+    background: var(--grey);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 4rem 6%;
+    gap: 1rem;
+  }
+  .hero-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; max-width: 380px; }
+  .hero-stat {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    border-left: 4px solid var(--red);
+  }
+  .hero-stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem; font-weight: 700;
+    color: var(--black); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-label { font-size: 0.78rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
+  .hero-stat.accent { background: var(--red); border-left-color: var(--red2); }
+  .hero-stat.accent .hero-stat-num { color: white; }
+  .hero-stat.accent .hero-stat-label { color: rgba(255,255,255,0.7); }
+  .hero-stat.dark { background: var(--black); border-left-color: var(--red); }
+  .hero-stat.dark .hero-stat-num { color: white; }
+  .hero-stat.dark .hero-stat-label { color: rgba(255,255,255,0.4); }
+
+  /* SECTIONS */
+  section { padding: 6rem 6%; }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--red); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 2px; background: var(--red); display: inline-block; }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: -0.01em; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--text2); max-width: 500px; margin-bottom: 3.5rem; font-size: 0.95rem; line-height: 1.8; }
+
+  /* ABOUT */
+  #about { background: var(--black); }
+  #about h2 { color: var(--white); }
+  #about .section-sub { color: rgba(255,255,255,0.4); }
+  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+  .about-card { background: var(--black); padding: 2.5rem 2rem; transition: background 0.2s; }
+  .about-card:hover { background: #1a1a1a; }
+  .about-num { font-family: 'Oswald', sans-serif; font-size: 3rem; font-weight: 700; color: var(--red); opacity: 0.3; line-height: 1; margin-bottom: 1rem; }
+  .about-card h3 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.75rem; }
+  .about-card p { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.8; font-weight: 300; }
+
+  /* FEATURES */
+  #features { background: var(--white); }
+  .features-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--grey2); }
+  .feat { padding: 2rem; border-right: 1px solid var(--grey2); border-bottom: 1px solid var(--grey2); transition: background 0.2s; }
+  .feat:hover { background: var(--grey); }
+  .feat-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .feat h3 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); margin-bottom: 0.5rem; }
+  .feat p { font-size: 0.82rem; color: var(--text2); line-height: 1.7; font-weight: 300; }
+  .feat-highlight { background: var(--red); }
+  .feat-highlight:hover { background: var(--red2); }
+  .feat-highlight h3 { color: white; }
+  .feat-highlight p { color: rgba(255,255,255,0.7); }
+
+  /* USERS */
+  #users { background: var(--grey); }
+  .users-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .user-card { background: var(--white); }
+  .user-card-header { background: var(--black); padding: 2rem; }
+  .user-type { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--red); margin-bottom: 0.5rem; }
+  .user-card-header h3 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: white; }
+  .user-card-body { padding: 1.5rem 2rem; }
+  .user-feature { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--grey2); font-size: 0.85rem; color: var(--text); }
+  .user-feature:last-child { border-bottom: none; }
+  .user-feature::before { content: '—'; color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .user-card.accent .user-card-header { background: var(--red); }
+  .user-card.accent .user-type { color: rgba(255,255,255,0.7); }
+
+  /* HOW IT WORKS */
+  #how { background: var(--black); }
+  #how h2 { color: var(--white); }
+  #how .section-sub { color: rgba(255,255,255,0.4); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: rgba(255,255,255,0.1); }
+  .step { padding: 0 1.5rem; text-align: center; }
+  .step-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 700; color: white; margin: 0 auto 1.5rem; position: relative; z-index: 1; }
+  .step h3 { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: white; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; }
+
+  /* TECH */
+  #tech { background: var(--white); }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--grey2); }
+  .tech-item { flex: 1; min-width: 150px; padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--grey2); transition: background 0.2s; }
+  .tech-item:last-child { border-right: none; }
+  .tech-item:hover { background: var(--grey); }
+  .tech-item-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+  .tech-item-name { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; color: var(--black); margin-bottom: 3px; }
+  .tech-item-role { font-size: 0.75rem; color: var(--text3); }
+
+  /* TEAM */
+  #team { background: var(--grey); }
+  .team-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .team-card { background: var(--white); flex: 1; min-width: 260px; display: grid; grid-template-columns: auto 1fr; }
+  .team-accent { background: var(--red); width: 8px; }
+  .team-info { padding: 2rem; }
+  .team-initial { font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--red); line-height: 1; margin-bottom: 0.75rem; }
+  .team-name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--black); margin-bottom: 3px; }
+  .team-id { font-size: 0.78rem; color: var(--text3); margin-bottom: 2px; }
+  .team-uni { font-size: 0.78rem; color: var(--red); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .supervisor-box { margin-top: 1.5rem; background: var(--black); padding: 1.25rem 2rem; display: inline-flex; align-items: center; gap: 1rem; }
+  .supervisor-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); }
+  .supervisor-name { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; color: white; text-transform: uppercase; }
+
+  /* CONTACT */
+  #contact { background: var(--red); }
+  #contact h2 { color: white; }
+  #contact .section-sub { color: rgba(255,255,255,0.7); }
+  .contact-row { display: flex; gap: 1px; background: rgba(255,255,255,0.15); flex-wrap: wrap; }
+  .contact-item { background: var(--red); flex: 1; min-width: 200px; padding: 2.5rem; transition: background 0.2s; }
+  .contact-item:hover { background: var(--red2); }
+  .contact-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; font-weight: 600; }
+  .contact-value { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: white; text-decoration: none; display: block; word-break: break-all; }
+
+  /* FOOTER */
+  footer { background: var(--black); padding: 1.5rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.1rem; color: white; letter-spacing: 0.05em; }
+  .footer-logo span { color: var(--red); }
+  footer p { font-size: 0.78rem; color: #444; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { padding: 3rem 6%; }
+    .features-wrap { grid-template-columns: repeat(2,1fr); }
+    .users-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: repeat(2,1fr); gap: 2rem; }
+    .steps::before { display: none; }
+  }
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .features-wrap { grid-template-columns: 1fr; }
+    .hero-stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    MY GARAGE
+    <span>Find · Book · Drive</span>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#users">Users</a></li>
+    <li><a href="#tech">Tech</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">University of Bahrain · Senior Project 2026</div>
+    <h1>Smart<br>Garage<br><em>Booking</em><br>System</h1>
+    <p class="hero-desc">A centralized web platform connecting vehicle owners, garage owners, and administrators in one environment — simplifying garage booking across Bahrain.</p>
+    <div class="hero-btns">
+      <a href="#features" class="btn-primary">Explore features</a>
+      <a href="#contact" class="btn-outline">Contact us</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-grid reveal">
+      <div class="hero-stat accent">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">User types</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Dashboards</div>
+      </div>
+      <div class="hero-stat dark">
+        <div class="hero-stat-num">AI</div>
+        <div class="hero-stat-label">Garage assistant</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Live</div>
+        <div class="hero-stat-label">Real-time updates</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-tag">Overview</div>
+  <h2>About the project</h2>
+  <p class="section-sub">A graduation project built to solve the real problem of disorganized garage booking in Bahrain using modern web technologies.</p>
+  <div class="about-grid reveal">
+    <div class="about-card">
+      <div class="about-num">01</div>
+      <h3>The problem</h3>
+      <p>Car owners in Bahrain face difficulties finding trusted garages. Information is scattered across Instagram, WhatsApp, and personal recommendations. Garage owners lack tools to manage bookings and payments efficiently.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-num">02</div>
+      <h3>The solution</h3>
+      <p>My Garage provides one centralized platform connecting customers, garage owners, and administrators. Customers browse, book, track, and pay — all in one place. Garage owners get a full management dashboard.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-num">03</div>
+      <h3>AI assistant</h3>
+      <p>An integrated AI Garage Assistant provides users with guidance about common vehicle problems and maintenance issues — improving the user experience without requiring human support at all times.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-num">04</div>
+      <h3>Tech foundation</h3>
+      <p>Built using HTML, CSS, JavaScript, Firebase Authentication, and Cloud Firestore — supporting secure login, real-time database operations, and a responsive interface accessible from any device.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-tag">What it does</div>
+  <h2>Key features</h2>
+  <p class="section-sub">A complete garage management platform covering everything from booking to payments to complaints.</p>
+  <div class="features-wrap reveal">
+    <div class="feat feat-highlight">
+      <span class="feat-icon">🔍</span>
+      <h3>Browse & search</h3>
+      <p>Search garages by service type, location, rating, and price range from a centralized directory.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📅</span>
+      <h3>Online booking</h3>
+      <p>Select a service, choose a date and time, and submit a booking request in just a few clicks.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📊</span>
+      <h3>Dashboards</h3>
+      <p>Separate dashboards for customers, garage owners, and admins to manage everything in one place.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔔</span>
+      <h3>Notifications</h3>
+      <p>Real-time notifications for booking confirmations, status updates, and payment changes.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">💳</span>
+      <h3>Payment tracking</h3>
+      <p>Monitor payment status for every booking with clear history and records per customer.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📝</span>
+      <h3>Complaints</h3>
+      <p>Customers submit complaints through the platform. Admins review and resolve them efficiently.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🤖</span>
+      <h3>AI assistant</h3>
+      <p>Intelligent guidance about common vehicle problems and maintenance recommendations.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📱</span>
+      <h3>Responsive</h3>
+      <p>Works seamlessly across all devices — desktop, tablet, and mobile — with a clean interface.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USERS -->
+<section id="users">
+  <div class="section-tag">Who uses it</div>
+  <h2>Three user types</h2>
+  <p class="section-sub">Each user type has a dedicated dashboard and a tailored set of features.</p>
+  <div class="users-grid reveal">
+    <div class="user-card accent">
+      <div class="user-card-header">
+        <div class="user-type">Customer</div>
+        <h3>Car owners</h3>
+      </div>
+      <div class="user-card-body">
+        <div class="user-feature">Browse and search garages</div>
+        <div class="user-feature">Book maintenance appointments</div>
+        <div class="user-feature">Track booking status online</div>
+        <div class="user-feature">Manage and monitor payments</div>
+        <div class="user-feature">Receive booking notifications</div>
+        <div class="user-feature">Submit complaints</div>
+        <div class="user-feature">Use the AI garage assistant</div>
+      </div>
+    </div>
+    <div class="user-card">
+      <div class="user-card-header">
+        <div class="user-type">Garage owner</div>
+        <h3>Service providers</h3>
+      </div>
+      <div class="user-card-body">
+        <div class="user-feature">Manage reservations dashboard</div>
+        <div class="user-feature">Update and confirm bookings</div>
+        <div class="user-feature">Monitor payment information</div>
+        <div class="user-feature">Organize customer requests</div>
+        <div class="user-feature">View full booking history</div>
+      </div>
+    </div>
+    <div class="user-card">
+      <div class="user-card-header">
+        <div class="user-type">Administrator</div>
+        <h3>System supervisors</h3>
+      </div>
+      <div class="user-card-body">
+        <div class="user-feature">Monitor the overall system</div>
+        <div class="user-feature">Manage customer complaints</div>
+        <div class="user-feature">Oversee all booking operations</div>
+        <div class="user-feature">Handle platform-level reports</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">The process</div>
+  <h2>How it works</h2>
+  <p class="section-sub">From finding a garage to confirming a booking — four simple steps.</p>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-circle">01</div>
+      <h3>Search</h3>
+      <p>Browse and filter garages by service, location, rating, and price range.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">02</div>
+      <h3>Book</h3>
+      <p>Select your service, choose a date and time, and submit your request online.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">03</div>
+      <h3>Track</h3>
+      <p>Get real-time notifications and monitor your booking status through your dashboard.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">04</div>
+      <h3>Pay</h3>
+      <p>Manage and track your payment status directly from the customer dashboard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech">
+  <div class="section-tag">Built with</div>
+  <h2>Tech stack</h2>
+  <p class="section-sub">Chosen for security, real-time performance, and scalability.</p>
+  <div class="tech-row reveal">
+    <div class="tech-item"><span class="tech-item-icon">🌐</span><div class="tech-item-name">HTML</div><div class="tech-item-role">Structure</div></div>
+    <div class="tech-item"><span class="tech-item-icon">🎨</span><div class="tech-item-name">CSS</div><div class="tech-item-role">Styling & responsive</div></div>
+    <div class="tech-item"><span class="tech-item-icon">⚡</span><div class="tech-item-name">JavaScript</div><div class="tech-item-role">Logic & interaction</div></div>
+    <div class="tech-item"><span class="tech-item-icon">🔐</span><div class="tech-item-name">Firebase Auth</div><div class="tech-item-role">Secure login</div></div>
+    <div class="tech-item"><span class="tech-item-icon">☁️</span><div class="tech-item-name">Firestore</div><div class="tech-item-role">Real-time database</div></div>
+    <div class="tech-item"><span class="tech-item-icon">🤖</span><div class="tech-item-name">AI Assistant</div><div class="tech-item-role">Vehicle guidance</div></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-tag">The people</div>
+  <h2>Meet the team</h2>
+  <p class="section-sub">Senior project students at the University of Bahrain, 2025–2026.</p>
+  <div class="team-row reveal">
+    <div class="team-card">
+      <div class="team-accent"></div>
+      <div class="team-info">
+        <div class="team-initial">AT</div>
+        <div class="team-name">Alhanoof Taha Albalooshi</div>
+        <div class="team-id">ID: 202201577</div>
+        <div class="team-uni">University of Bahrain</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-accent"></div>
+      <div class="team-info">
+        <div class="team-initial">AA</div>
+        <div class="team-name">Anwaar Abdulla Alhayki</div>
+        <div class="team-id">ID: 202005669</div>
+        <div class="team-uni">University of Bahrain</div>
+      </div>
+    </div>
+  </div>
+  <div class="supervisor-box reveal">
+    <div>
+      <div class="supervisor-label">Project supervisor</div>
+      <div class="supervisor-name">Taher Saleh Khaid Homeed</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag" style="color:rgba(255,255,255,0.7);">Get in touch</div>
+  <h2>Contact us</h2>
+  <p class="section-sub">Reach out to the team for any questions about the project.</p>
+  <div class="contact-row reveal">
+    <div class="contact-item">
+      <div class="contact-label">Email</div>
+      <a href="mailto:info@mygarages.online" class="contact-value">info@mygarages.online</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Website</div>
+      <a href="https://mygarages.online" target="_blank" class="contact-value">mygarages.online</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">University</div>
+      <div class="contact-value" style="font-size:0.95rem;">University of Bahrain</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Academic year</div>
+      <div class="contact-value">2025 — 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MY <span>GARAGE</span></div>
+  <p>© 2026 University of Bahrain Senior Project</p>
+  <p>mygarages.online</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
